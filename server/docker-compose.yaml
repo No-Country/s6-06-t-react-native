@@ -1,0 +1,18 @@
+services:
+    web:
+        build: .
+        restart: always
+        container_name: api-node
+        ports:
+            - "5000:3001"
+        links:
+            - mongo
+        volumes:
+            - ./src:/app/src
+    mongo:
+        container_name: database
+        image: mongo
+        ports:
+            - "27018:27017" 
+        logging:
+            driver: none
