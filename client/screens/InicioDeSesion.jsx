@@ -4,35 +4,37 @@ import PrimaryButton from "../components/PrimaryButton";
 import SecondaryButton from "../components/SecondaryButton";
 const InicioDeSesión = () => {
   return (
-    <SafeAreaView 
-    // style={styles.blackTop}
-    >
-      <View style={styles.container}>
-        <Image
-          source={conectedWorld}
-          style={styles.logo}
-          resizeMode="contain"
-        />
-        <Text style={styles.description}>
-          Somos una organización que busca acercar talentos IT con las
-          compañías, potenciando sus habilidades y talentos en un entorno
-          laboral real.
-        </Text>
-        <Text style={styles.title}>Fomentamos el trabajo sin fronteras.</Text>
-        <PrimaryButton text="Iniciar Sesión" />
-        <SecondaryButton text="Registrarse" />
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <Image source={conectedWorld} style={styles.logo} resizeMode="contain" />
+      <Text style={styles.description}>
+        Somos una organización que busca acercar talentos IT con las compañías,
+        potenciando sus habilidades y talentos en un entorno laboral real.
+      </Text>
+      <Text style={styles.title}>Fomentamos el trabajo sin fronteras.</Text>
+      <PrimaryButton text="Iniciar Sesión" />
+      <SecondaryButton text="Registrarse" />
+    </View>
   );
 };
 
 export default InicioDeSesión;
 const styles = StyleSheet.create({
+  container: {
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    backgroundColor: "white",
+    paddingTop: 30,
+    width: "100%",
+    height: "95%",
+    top: 30,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   logo: {
     alignSelf: "center",
     height: 280,
-    marginBottom: -10,
-    marginTop: -10,
+    marginTop: -60,
   },
   description: {
     fontWeight: "500",
@@ -44,15 +46,5 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 18,
     marginVertical: 10,
-  },
-  container: {
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    backgroundColor: "white",
-  },
-  blackTop: {
-    backgroundColor: "black",
-    height: 20,
-    width: "100%",
   },
 });
