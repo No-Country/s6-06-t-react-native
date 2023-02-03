@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const uri = 'mongodb://mongo/newdb'
 
 mongoose.connect(uri,{
-    useNewUrlParser: false,
+    useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
 mongoose.connection.on('open', _ =>{
-    console.log('Conectado a ', uri)
+    console.log('Conectado a', uri)
 })
