@@ -10,6 +10,7 @@ services:
         volumes:
             - ./src:/app/src
     mongo:
+        command: mongod --quiet --logpath /dev/null 
         container_name: database
         image: mongo
         ports:
