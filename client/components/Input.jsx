@@ -1,13 +1,12 @@
 import {
-  Dimensions,
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 
 import { useFonts } from "expo-font";
+import { useCallback } from "react";
 
 const InputComponent = ({ label, placeholder, keyboardType = 'default', requerimiento }) => {
   const [fontLoaded] = useFonts({
@@ -15,8 +14,18 @@ const InputComponent = ({ label, placeholder, keyboardType = 'default', requerim
     SFProMedium: require("../assets/fonts/SfProDisplay/SfProDisplay-Medium.otf"),
     SFProRegular: require("../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
   });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
-    <View style={styles.containerInput}>
+    <View style={styles.containerInput}  onLayout={onLayoutRootView}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         style={styles.input}
