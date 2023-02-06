@@ -71,7 +71,7 @@ const loginUser = async (req, res) => {
 };
 
 const loginLinkedIn = async (req, res) => {
-  const {code}=req.query
+  const { code } = req.query;
 
   try {
     const request = await fetch(
@@ -90,14 +90,8 @@ const loginLinkedIn = async (req, res) => {
       },
     });
 
-    const {email,given_name,family_name,picture,name} = await getProfile.json();
-
-    // return response.success(
-    //   req,
-    //   res,
-    //   "Succesfull loggin on linkedin ",
-    //   profileData
-    // );
+    const { email, given_name, family_name, picture, name } =
+      await getProfile.json();
 
     let newUser = await User.findOne({ email });
 
@@ -106,11 +100,10 @@ const loginLinkedIn = async (req, res) => {
     }
 
     newUser = new User({
-      name:given_name,
+      name: given_name,
       email,
-      password:"reghrthjfnuyu"
+      password: "reghrthjfnuyu",
     });
-
 
     await newUser.save();
 
@@ -120,18 +113,12 @@ const loginLinkedIn = async (req, res) => {
       req,
       res,
       "User registered",
-      { uid: newUser.id,  token,name,email},
+      { uid: newUser.id, token, name, email },
       201
     );
-
-
-
-
-
-
   } catch (e) {
     console.log(e);
-    return response.error(req,res,"Contact ADMIN")
+    return response.error(req, res, "Contact ADMIN");
   }
 };
 
