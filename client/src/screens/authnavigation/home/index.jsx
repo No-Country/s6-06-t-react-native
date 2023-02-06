@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Text, StatusBar, SafeAreaView, Image, ScrollView, TextInput} from 'react-native';
-import { colors } from '../constants'
-import { ScreenWidth } from '../utils/ScreenDimesions';
+import { colors } from '../../../constants'
+import { ScreenWidth } from '../../../utils/ScreenDimesions';
 import { Entypo, Feather, EvilIcons, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Home = () => {
@@ -20,14 +20,14 @@ const Home = () => {
                     />
                 </View>
                 <View>
-                    <Image source={require('../../assets/users.jpeg')} style={[styles.imgUserHeader ]} />
+                    <Image source={require('../../../../assets/users.jpeg')} style={[styles.imgUserHeader ]} />
                 </View>
             </View>
             <Text style={[styles.title]}>Hola, Camilo!</Text>
             <View style={styles.options}>
                 <View style={styles.selectComunity}>
                     <Text style={[styles.type2,styles.text]} >Pre-sel...</Text>
-                    <Image source={require('../../assets/back-to-icon.png')} style={{ width: 10, padding: 0, margin : 0 ,transform: [{rotate: '-90deg'}]}} />
+                    <Image source={require('../../../../assets/back-to-icon.png')} style={{ width: 10, padding: 0, margin : 0 ,transform: [{rotate: '-90deg'}]}} />
                 </View>
                 <Text style={[styles.type,styles.text]}>Comunidades</Text>
                 <Text style={[styles.type,styles.text, , styles.selected]}>Canales</Text>
@@ -36,10 +36,10 @@ const Home = () => {
                 <Text style={styles.subtitle}>Pre-seleccionado 7</Text>
                 
                 <View style={styles.imgsUsers}>
-                    <Image source={require('../../assets/users.jpeg')} style={[styles.imgUserComunity, { top : 0, left : 0 } ]} />
-                    <Image source={require('../../assets/users.jpeg')} style={[styles.imgUserComunity, { top : 0, left : 20 }]} />
-                    <Image source={require('../../assets/users.jpeg')} style={[styles.imgUserComunity, { top : 0, left : 40 }]} />
-                    <Image source={require('../../assets/users.jpeg')} style={[styles.imgUserComunity, { top : 0, left : 60 }]} />
+                    <Image source={require('../../../../assets/users.jpeg')} style={[styles.imgUserComunity, { top : 0, left : 0 } ]} />
+                    <Image source={require('../../../../assets/users.jpeg')} style={[styles.imgUserComunity, { top : 0, left : 40 }]} />
+                    <Image source={require('../../../../assets/users.jpeg')} style={[styles.imgUserComunity, { top : 0, left : 20 }]} />
+                    <Image source={require('../../../../assets/users.jpeg')} style={[styles.imgUserComunity, { top : 0, left : 60 }]} />
                     <Text style={[styles.bundleTotalUsers, { top : 0, left : 80 }]}>+500</Text>
                     <Text style={[styles.plusUsers, { top : 0, left : 100 }]} >+</Text>
                 </View>
@@ -54,7 +54,7 @@ const Home = () => {
                     <View style={styles.PostCard} >
                         <View style={styles.HeaderPost}>
                             <View style={{alignSelf : 'center'}}>
-                                <Image source={require('../../assets/users.jpeg')} style={[styles.imgUserPost ]}/>
+                                <Image source={require('../../../../assets/users.jpeg')} style={[styles.imgUserPost ]}/>
                                 <View style={styles.Conection}></View>
                             </View>
                             <View style={styles.TitlePostContain}>
