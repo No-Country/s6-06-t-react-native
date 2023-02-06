@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const uri = 'mongodb://127.0.0.1:27017/newdb'
+const uri = process.env.DB || 'mongodb://mongo/newdb'
+
+mongoose.set("strictQuery", false)
 
 mongoose.connect(uri,{
     useNewUrlParser: true,
