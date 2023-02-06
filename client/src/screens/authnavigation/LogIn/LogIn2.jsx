@@ -9,10 +9,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import PrimaryButton from "../../../../components/PrimaryButton";
-import conectedWorld from "../../assets/ConnectedWorld.png";
+import PrimaryButton from "../../../components/PrimaryButton";
+import conectedWorld from "../../../../assets/ConnectedWorld.png";
 import { useState } from "react";
-import LinkedinButton from "../../../../components/LinkedinButton";
+import LinkedinButton from "../../../components/LinkedinButton";
 import { AntDesign } from "@expo/vector-icons";
 const LogIn2 = () => {
   const [data, setData] = useState({ password: "", email: "" });

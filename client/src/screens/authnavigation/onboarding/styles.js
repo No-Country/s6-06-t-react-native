@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 export const styles =  StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F9F9F9',
+        backgroundColor: '#000000',
         alignItems: "center",
         justifyContent: "center",
     },

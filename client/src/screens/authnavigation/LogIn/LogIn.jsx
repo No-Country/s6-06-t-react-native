@@ -7,9 +7,9 @@ import {
   Text,
   View,
 } from "react-native";
-import conectedWorld from "../../assets/ConnectedWorld.png";
-import PrimaryButton from "../../../../components/PrimaryButton";
-import SecondaryButton from "../../../../components/SecondaryButton";
+import conectedWorld from "../../../../assets/ConnectedWorld.png"
+import PrimaryButton from "../../../components/PrimaryButton"
+import SecondaryButton from "../../../components/SecondaryButton";
 
 const LogIn = () => {
   const navigation = useNavigation();
