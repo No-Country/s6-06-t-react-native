@@ -1,53 +1,86 @@
 const { Schema, model} = require('mongoose')
 
 const userSchema = new Schema ({
-    username: String,
-    email: String,
-    password: String,
+    fullName: {
+        Type: String, 
+        required: true, 
+        unique: true
+    },
+    email: {
+        Type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        Type: String,
+        required: true
+    },
     admin: {
         type: Boolean,
         default: false 
     },
     selected: {
         type: Boolean,
-        default: false},
-        active: {
-            type: Boolean,
-            default: true
+        default: false
     },
-    availability: String,
-    technologies: [String],
-    phone: String,
-    position: String,
-    picture: {
-        Type:String,
-        default: 'https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png'  
+    active: {
+        type: Boolean,
+        default: true
     },
-    studies: String,
-    area: String,
-    profession: String,
-    pinnedpost: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'post'
+    availability: {
+        Type: String,
+        enum: [
+            'Full-Time',
+            'Mañana',
+            'Tarde'
+        ]
+    },
+    technologies: {
+        Type: String,
+        enum: [
+            
+        ]
+    },
+    phone: {
+        Type: Number
+    },
+    position: {
+        Type: String,
+        enum: [
+            'fullstack',
+            'backend',
+            'frontend',
+            'uiux'
+        ]
+    },
+    img_avatar: {
+        Type: String,
+        // default: 'https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png'  
+    },
+    // pinnedpost: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'post'
+    // }],
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Comments'
+    }],
+    posts:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Post'
+    }],
+    reactions: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Reaction'
     }]
-    // comments: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Comments'
-    // }],
-    // posts:[{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Post'
-    // }],
-    // reactions: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Reaction'
-    // }],
-
-    
-},
-{timestamps: true,
-    versionKey: false}
+}
     )
     
-const User = model('User', userSchema)
+userSchema.methods.toJSON = function idSetter() {
+    const { _id, ...User } = this.toObject();
+    User.id = uid;
+    return User;
+};
+
+const User = model('user', userSchema)
 module.exports = User
