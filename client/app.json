@@ -4,10 +4,10 @@
     "slug": "client",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/ConnectedWorld.png",
+    "icon": "./assets/Logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/ConnectedWorld.png",
+      "image": "./assets/Logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#1E1E1E"
     },
@@ -28,7 +28,7 @@
       "package": "com.s606reactnative.front"
     },
     "web": {
-      "favicon": ""
+      "favicon": "./assets/Logo.png"
     },
     "extra": {
       "eas": {
