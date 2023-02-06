@@ -6,15 +6,15 @@ import InicioDeSesion2 from "./screens/InicioDeSesion/InicioDeSesion2";
 
 const Stack = createNativeStackNavigator();
 
- import { Provider} from "react-redux";
+import { Provider } from "react-redux";
 import configureStore from "./src/redux/store";
 
-import Probando from './Probando';
-export default function App() {
+import AppNavigator from "./src/navigation/tabnavigation";
 
+export default function App() {
   return (
-    <Provider store = { configureStore }> 
-      <Probando />
+    <Provider store={configureStore}>
+      <AppNavigator />
     </Provider>
   );
 }
