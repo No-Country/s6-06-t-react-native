@@ -3,17 +3,12 @@ const { Schema, model} = require('mongoose')
 const userSchema = new Schema ({
     fullName: {
         Type: String, 
-        required: true, 
-        unique: true
     },
     email: {
-        Type: String,
-        required: true,
-        unique: true
+        Type: String
     },
     password: {
         Type: String,
-        required: true
     },
     admin: {
         type: Boolean,
@@ -38,7 +33,30 @@ const userSchema = new Schema ({
     technologies: {
         Type: String,
         enum: [
-            
+            'HTML',
+            'CSS',
+            'Figma',
+            'AdobeXD',
+            'Framer X',
+            'Photoshop',
+            'Illustrator',
+            'JavaScript',
+            'TypeScript',
+            'Python',
+            'Java',
+            'Go',
+            'Vue.js',
+            'Next.js',
+            'React',
+            'React Native',
+            'Angular',
+            'Jest',
+            'Selenium',
+            'Node.js',
+            'Express.js',
+            'Deno',
+            'GraphQL',
+            'Koa',
         ]
     },
     phone: {
@@ -83,4 +101,5 @@ userSchema.methods.toJSON = function idSetter() {
 };
 
 const User = model('user', userSchema)
+
 module.exports = User
