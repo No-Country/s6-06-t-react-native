@@ -18,9 +18,9 @@ const AuthNavigation = ({ navigation }) => {
       }}
     >
       <Stack.Screen name="OnBoarding" component={OnBoarding} />
-      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="LogIn" component={LogIn} />
       <Stack.Screen name="LogIn2" component={LogIn2} />
+      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="Transition" component={Transition} />
     </Stack.Navigator>

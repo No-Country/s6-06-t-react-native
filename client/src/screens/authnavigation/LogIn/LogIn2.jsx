@@ -14,10 +14,12 @@ import conectedWorld from "../../../../assets/ConnectedWorld.png";
 import { useState } from "react";
 import LinkedinButton from "../../../components/LinkedinButton";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 const LogIn2 = () => {
   const [data, setData] = useState({ password: "", email: "" });
   const [isFocused, setIsFocused] = useState(false);
   const [isFocused2, setIsFocused2] = useState(false);
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -69,7 +71,10 @@ const LogIn2 = () => {
             Olvidaste tu contraseña?
           </Text>
         </TouchableOpacity>
-        <PrimaryButton text="Iniciar Sesión" />
+        <PrimaryButton
+          text="Iniciar Sesión"
+          handler={() => navigation.navigate("Home")}
+        />
         <View style={styles.lineContainer}>
           <View style={styles.line}></View>
           <Text style={{ color: "#979797" }}>Ingresar con</Text>
