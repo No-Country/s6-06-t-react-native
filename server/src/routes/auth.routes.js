@@ -53,7 +53,7 @@ const { validateFields, validateLinkedin } = require("../middlewares");
 /**
  * @swagger
  * tags:
- *  name: Users 
+ *  name: Users
  *  description: Users authentication endpoint
  */
 
@@ -86,7 +86,7 @@ const { validateFields, validateLinkedin } = require("../middlewares");
 router.post(
   "/new",
   [
-    check("name", "name is required").not().isEmpty(),
+    check("fullName", "fullName is required").not().isEmpty(),
     check("email", "name is required").isEmail(),
     check("password", "password must have 6 or more characters").isLength({
       min: 6,
@@ -109,7 +109,6 @@ router.post(
 );
 
 router.get("/linkedin", (req, res) => {
-
   res.redirect(
     `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=http://localhost:5000/api/auth/linkedin/callback&state=${process.env.STATE}&scope=openid%20email%20profile`
   );

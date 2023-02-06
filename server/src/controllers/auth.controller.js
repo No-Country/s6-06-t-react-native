@@ -4,7 +4,7 @@ const { User } = require("../models");
 const response = require("../helpers/response");
 
 const createUser = async (req, res) => {
-  const {email,password} = req.body;
+  const { email, password } = req.body;
 
   try {
     let newUser = await User.findOne({ email });
@@ -15,18 +15,18 @@ const createUser = async (req, res) => {
 
     newUser = new User(req.body);
 
-    const salt = bcrypt.genSaltSync(  );
+    const salt = bcrypt.genSaltSync();
     newUser.password = bcrypt.hashSync(password.toString(), salt);
 
     await newUser.save();
 
-    const token = await generateJWT(newUser.id, newUser.name);
+    const token = await generateJWT(newUser.id, newUser.fullName);
 
     response.success(
       req,
       res,
       "User registered",
-      { uid: newUser.id, name: newUser.name, token },
+      { uid: newUser.id, name: newUser.fullName, token },
       201
     );
   } catch (error) {
