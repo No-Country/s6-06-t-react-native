@@ -1,7 +1,9 @@
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 const generateJWT = require("../helpers/generateJWT");
-const { User } = require("../models");
+const { User,Token } = require("../models");
 const response = require("../helpers/response");
+const sendEmail=require("../helpers/sendEmail")
 
 const createUser = async (req, res) => {
   const {email,password} = req.body;
@@ -127,8 +129,83 @@ const loginLinkedIn = async (req, res) => {
   }
 };
 
+
+const resetPasswordRequest=async(req,res)=>{
+const {email}= req.body
+const user = await User.findOne({ email });
+if (!user) response.error(req,res,"Email do not exist",400)
+
+let token = await Token.findOne({ userId: user._id });
+if (token) await token.deleteOne();
+
+let resetToken = crypto.randomBytes(32).toString("hex");
+const hash = await bcrypt.hash(resetToken, 10);
+
+await new Token({
+  userId: user._id,
+  token: hash,
+  createdAt: Date.now(),
+}).save();
+
+const link = `${process.env.URL}/api/auth/resetPassword?token=${resetToken}&id=${user._id}`;
+
+sendEmail(
+  user.email,
+  "Password Reset Request",
+  {
+    name: user.name,
+    link: link,
+  },
+  "./template/requestResetPassword.handlebars"
+);
+console.log(link) ;
+response.success(req,res,"succes",link,200)
+
+}
+
+const resetPassword=async(req,res)=>{
+  const {userId,token,password}=req.body
+
+  let passwordResetToken = await Token.findOne({ userId });
+
+  if (!passwordResetToken) {
+    response.error(req,res,"Invalid or expired password reset token",400);
+  }
+
+  const isValid = await bcrypt.compare(token, passwordResetToken.token);
+
+  if (!isValid) {
+   response.error(req,res,"Invalid or expired password reset token",400);
+  }
+  const hash = await bcrypt.hash(password, 10);
+
+  await User.updateOne(
+    { _id: userId },
+    { $set: { password: hash } },
+    { new: true }
+  );
+
+  const user = await User.findById({ _id: userId });
+
+  sendEmail(
+    user.email,
+    "Password Reset Successfully",
+    {
+      name: user.name,
+    },
+    "./template/resetPassword.handlebars"
+  );
+
+  await passwordResetToken.deleteOne();
+
+  response.success(req,res,"Password reset was successful",{},200);
+
+}
+
 module.exports = {
   createUser,
   loginUser,
   loginLinkedIn,
+  resetPasswordRequest,
+  resetPassword
 };
