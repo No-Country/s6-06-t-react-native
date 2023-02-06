@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const uri = 'mongodb://mongo/newdb'
+const uri = process.env.DB || 'mongodb://mongo/newdb'
 
 mongoose.set("strictQuery", false)
 

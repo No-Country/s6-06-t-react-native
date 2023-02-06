@@ -1,11 +1,10 @@
 const bcrypt = require("bcryptjs");
-const https = require("https");
 const generateJWT = require("../helpers/generateJWT");
 const { User } = require("../models");
 const response = require("../helpers/response");
 
 const createUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const {email,password} = req.body;
 
   try {
     let newUser = await User.findOne({ email });
@@ -74,10 +73,15 @@ const loginLinkedIn = async (req, res) => {
   const { code } = req.query;
 
   try {
+    const data = `code=${code}&grant_type=authorization_code&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&redirect_uri=http://localhost:5000/api/auth/linkedin/callback`;
     const request = await fetch(
-      `https://www.linkedin.com/oauth/v2/accessToken?code=${code}&grant_type=authorization_code&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&redirect_uri=http://localhost:5000/api/auth/linkedin/callback`,
+      `https://www.linkedin.com/oauth/v2/accessToken`,
       {
         method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: data,
       }
     );
 
@@ -90,19 +94,20 @@ const loginLinkedIn = async (req, res) => {
       },
     });
 
-    const { email, given_name, family_name, picture, name } =
-      await getProfile.json();
+    const { email, picture, name } = await getProfile.json();
 
     let newUser = await User.findOne({ email });
 
     if (newUser) {
-      return response.error(req, res, "User already exists ", 400);
+      //DEBE LOGUAER GENERANDO JWT????????
+      return response.error(req, res, "User email already exists ", 400);
     }
 
     newUser = new User({
-      name: given_name,
+      username: name,
       email,
-      password: "reghrthjfnuyu",
+      password: "8459*734DfhgDSFGf*4-45",
+      picture,
     });
 
     await newUser.save();

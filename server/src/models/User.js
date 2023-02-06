@@ -1,9 +1,18 @@
 const { Schema, model} = require('mongoose')
 
 const userSchema = new Schema ({
-    username: String,
-    email: String,
-    password: String,
+    username: {
+        type: String,
+        default: false 
+    },
+    email:{
+        type: String,
+        default: false 
+    },
+    password:{
+        type: String,
+        default: false 
+    },
     admin: {
         type: Boolean,
         default: false 
@@ -21,13 +30,13 @@ const userSchema = new Schema ({
     position: String,
     picture: {
         Type:String,
-        default: 'https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png'  
+       // default: 'https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png'  
     },
     studies: String,
     area: String,
     profession: String,
     pinnedpost: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'post'
     }]
     // comments: [{
@@ -49,5 +58,5 @@ const userSchema = new Schema ({
     versionKey: false}
     )
     
-const User = model('User', userSchema)
+const User=model('User', userSchema)
 module.exports = User

@@ -8,7 +8,7 @@ const jwt =require("jsonwebtoken")
       payload,
       process.env.SECRET_JWT,
       {
-        expiresIn: "30d",
+        expiresIn: "1d",
       },
       (error, token) => {
         if (error) {

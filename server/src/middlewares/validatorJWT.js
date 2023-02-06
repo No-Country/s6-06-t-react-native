@@ -1,12 +1,11 @@
 const jwt = require("jsonwebtoken");
+const response=require("../helpers/response")
 
 const validatorJwt = (req, res, next) => {
   const token = req.header("x-token");
 
   if (!token) {
-    return res.status(400).json({
-      bad: "Invalid Token",
-    });
+    return response.error(req,res,"Invalid Token",400)
   }
 
   try {
@@ -15,9 +14,7 @@ const validatorJwt = (req, res, next) => {
     req.uid = payload.uid;
     req.name = poayload.name;
   } catch (e) {
-    return res.status(500).json({
-      bad: "Contact admin",
-    });
+    return response.error(req,res,"Contact admin")
   }
 
   next();
