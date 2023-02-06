@@ -17,4 +17,6 @@ export const colors = {
     text_button: '#FFFFFF',
     facebook: '#4267B2',
     gmail: '#DD4B39',
+    title : '#4245E5',
+    subtitle : '#06087E'
 };
