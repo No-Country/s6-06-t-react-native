@@ -2,7 +2,7 @@ const express = require("express");
 const { check } = require("express-validator");
 const router = express.Router();
 const { auth } = require("../controllers");
-const { validateFields,validateLinkedin } = require("../middlewares");
+const { validateFields, validateLinkedin } = require("../middlewares");
 
 /**
  * @swagger
@@ -115,6 +115,6 @@ router.get("/linkedin", (req, res) => {
   );
 });
 
-router.get("/linkedin/callback",validateLinkedin, auth.loginLinkedIn );
+router.get("/linkedin/callback", validateLinkedin, auth.loginLinkedIn);
 
 module.exports = router;
