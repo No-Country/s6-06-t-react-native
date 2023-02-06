@@ -9,12 +9,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import PrimaryButton from "../../components/PrimaryButton";
+import PrimaryButton from "../../../../components/PrimaryButton";
 import conectedWorld from "../../assets/ConnectedWorld.png";
 import { useState } from "react";
-import LinkedinButton from "../../components/LinkedinButton";
+import LinkedinButton from "../../../../components/LinkedinButton";
 import { AntDesign } from "@expo/vector-icons";
-const InicioDeSesion2 = () => {
+const LogIn2 = () => {
   const [data, setData] = useState({ password: "", email: "" });
   const [isFocused, setIsFocused] = useState(false);
   const [isFocused2, setIsFocused2] = useState(false);
@@ -170,4 +170,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InicioDeSesion2;
+export default LogIn2;

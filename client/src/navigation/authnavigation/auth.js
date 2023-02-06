@@ -1,28 +1,29 @@
-import React from "react";  
+import React from "react";
 import OnBoarding from "../../screens/authnavigation/onboarding";
 import Home from "../../screens/authnavigation/home";
-import LogIn from "../../screens/authnavigation/login";
 import SignUp from "../../screens/authnavigation/signup";
 import Transition from "../../screens/authnavigation/transition";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import LogIn from "../../screens/authnavigation/LogIn/LogIn";
+import LogIn2 from "../../screens/authnavigation/LogIn/LogIn2";
 
 const Stack = createNativeStackNavigator();
 
-const AuthNavigation = ({navigation}) => {
-    return(
+const AuthNavigation = ({ navigation }) => {
+  return (
     <Stack.Navigator
-        initialRouteName="OnBoarding"
-        screenOptions={{
-            headerShown: false,
-          }}
+      initialRouteName="OnBoarding"
+      screenOptions={{
+        headerShown: false,
+      }}
     >
-        <Stack.Screen name="OnBoarding" component={OnBoarding} />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="LogIn" component={LogIn} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="Transition" component={Transition} /> 
+      <Stack.Screen name="OnBoarding" component={OnBoarding} />
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="LogIn" component={LogIn} />
+      <Stack.Screen name="LogIn2" component={LogIn2} />
+      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="Transition" component={Transition} />
     </Stack.Navigator>
-    )
-    
-}
-export default AuthNavigation
+  );
+};
+export default AuthNavigation;

@@ -8,10 +8,10 @@ import {
   View,
 } from "react-native";
 import conectedWorld from "../../assets/ConnectedWorld.png";
-import PrimaryButton from "../../components/PrimaryButton";
-import SecondaryButton from "../../components/SecondaryButton";
+import PrimaryButton from "../../../../components/PrimaryButton";
+import SecondaryButton from "../../../../components/SecondaryButton";
 
-const InicioDeSesion = () => {
+const LogIn = () => {
   const navigation = useNavigation();
 
   return (
@@ -32,7 +32,7 @@ const InicioDeSesion = () => {
         <PrimaryButton
           text="Iniciar Sesión"
           handler={() => {
-            navigation.navigate("InicioDeSesion2");
+            navigation.navigate("LogIn2");
           }}
         />
         <SecondaryButton text="Registrarse" />
@@ -41,7 +41,7 @@ const InicioDeSesion = () => {
   );
 };
 
-export default InicioDeSesion;
+export default LogIn;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
