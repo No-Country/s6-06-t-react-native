@@ -7,12 +7,9 @@ import { ScreenHeight, ScreenWidth } from '../../../utils/ScreenDimesions';
 
 export const styles = StyleSheet.create({
     header: {
-        paddingTop : 10,
         flexDirection : 'row',
         justifyContent : 'space-around',
         alignItems : 'center',
-        paddingBottom : 20,
-        // height : '10%'
     },
     inputContain :{
         backgroundColor : colors.input_background,
