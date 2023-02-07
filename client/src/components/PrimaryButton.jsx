@@ -6,15 +6,11 @@ import {
   View,
 } from "react-native";
 
-const PrimaryButton = ({text}) => {
-  const HandleLogin = () => {/*LOGICA LOGIN*/};
-
+const PrimaryButton = ({ text, handler }) => {
   return (
     <View>
-      <TouchableOpacity onPress={() => HandleLogin()} style={styles.signIn}>
-        <Text style={{ color: "white", fontWeight: "600" }}>
-          {text}
-        </Text>
+      <TouchableOpacity onPress={handler} style={styles.signIn}>
+        <Text style={{ color: "white", fontWeight: "600" }}>{text}</Text>
       </TouchableOpacity>
     </View>
   );

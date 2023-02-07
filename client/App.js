@@ -1,19 +1,21 @@
-import { StyleSheet, View } from "react-native";
-import Registro from "./screens/signup";
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import InicioDeSesion from "./src/screens/authnavigation/LogIn/LogIn";
+import InicioDeSesion2 from "./src/screens/authnavigation/LogIn/LogIn2";
+
+const Stack = createNativeStackNavigator();
+
+import { Provider } from "react-redux";
+import configureStore from "./src/redux/store";
+
+import AppNavigator from "./src/navigation/tabnavigation";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Registro/>
-    </View>
+    <Provider store={configureStore}>
+      <AppNavigator />
+    </Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
