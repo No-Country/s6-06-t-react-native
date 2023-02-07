@@ -132,22 +132,24 @@ const loginLinkedIn = async (req, res) => {
 
 const resetPasswordRequest=async(req,res)=>{
 const {email}= req.body
-const user = await User.findOne({ email });
-if (!user) response.error(req,res,"Email do not exist",400)
 
-let token = await Token.findOne({ userId: user._id });
+const user = await User.findOne({ email });
+if (!user) response.error(req,res,"Email not registered",400)
+
+
+let token = await Token.findOne({ uid: user.id });
 if (token) await token.deleteOne();
 
 let resetToken = crypto.randomBytes(32).toString("hex");
 const hash = await bcrypt.hash(resetToken, 10);
 
 await new Token({
-  userId: user._id,
+  uid: user._id,
   token: hash,
   createdAt: Date.now(),
 }).save();
 
-const link = `${process.env.URL}/api/auth/resetPassword?token=${resetToken}&id=${user._id}`;
+const link = `${process.env.URL}/api/auth/reset-password?token=${resetToken}&uid=${user._id}`;
 
 sendEmail(
   user.email,
@@ -158,15 +160,18 @@ sendEmail(
   },
   "./template/requestResetPassword.handlebars"
 );
-console.log(link) ;
+
+
 response.success(req,res,"succes",link,200)
 
 }
 
 const resetPassword=async(req,res)=>{
-  const {userId,token,password}=req.body
+  const {uid,token,password}=req.query
 
-  let passwordResetToken = await Token.findOne({ userId });
+  console.log(uid)
+
+  let passwordResetToken = await Token.findOne({ uid });
 
   if (!passwordResetToken) {
     response.error(req,res,"Invalid or expired password reset token",400);
@@ -180,12 +185,12 @@ const resetPassword=async(req,res)=>{
   const hash = await bcrypt.hash(password, 10);
 
   await User.updateOne(
-    { _id: userId },
+    { _id: uid },
     { $set: { password: hash } },
     { new: true }
   );
 
-  const user = await User.findById({ _id: userId });
+  const user = await User.findById({ _id: uid });
 
   sendEmail(
     user.email,

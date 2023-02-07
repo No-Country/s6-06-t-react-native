@@ -117,7 +117,7 @@ router.get("/linkedin", (req, res) => {
 
 router.get("/linkedin/callback",validateLinkedin, auth.loginLinkedIn );
 
-router.post("/requestResetPassword", auth.resetPasswordRequest);
-router.post("/resetPassword", auth.resetPassword);
+router.post("/request-reset-password", auth.resetPasswordRequest);
+router.post("/reset-password", auth.resetPassword);
 
 module.exports = router;
