@@ -7,8 +7,8 @@ import {
   Text,
   View,
 } from "react-native";
-import conectedWorld from "../../../../assets/ConnectedWorld.png"
-import PrimaryButton from "../../../components/PrimaryButton"
+import conectedWorld from "../../../../assets/ConnectedWorld.png";
+import PrimaryButton from "../../../components/PrimaryButton";
 import SecondaryButton from "../../../components/SecondaryButton";
 
 const LogIn = () => {
@@ -35,7 +35,12 @@ const LogIn = () => {
             navigation.navigate("LogIn2");
           }}
         />
-        <SecondaryButton text="Registrarse" />
+        <SecondaryButton
+          text="Registrarse"
+          handler={() => {
+            navigation.navigate("SignUp");
+          }}
+        />
       </View>
     </SafeAreaView>
   );

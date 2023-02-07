@@ -6,10 +6,10 @@ import {
   View,
 } from "react-native";
 
-const PrimaryButton = ({ text, handler }) => {
+const PrimaryButton = ({ text, handler, width }) => {
   return (
     <View>
-      <TouchableOpacity onPress={handler} style={styles.signIn}>
+      <TouchableOpacity onPress={handler} style={[styles.signIn, width && styles.width]}>
         <Text style={{ color: "white", fontWeight: "600" }}>{text}</Text>
       </TouchableOpacity>
     </View>
@@ -29,4 +29,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  width:{
+    width: '100%'
+  }
 });

@@ -86,7 +86,8 @@ const LogIn2 = () => {
             Aún no tenés cuenta?
           </Text>
           <TouchableOpacity>
-            <Text style={{ color: "#4245E5", textDecorationLine: "underline" }}>
+            <Text style={{ color: "#4245E5", textDecorationLine: "underline" }} onPress={() => {
+            navigation.navigate("SignUp")}}>
               Registrate
             </Text>
           </TouchableOpacity>
