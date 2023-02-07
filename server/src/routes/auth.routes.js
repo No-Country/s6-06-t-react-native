@@ -116,6 +116,8 @@ router.get("/linkedin", (req, res) => {
 
 router.get("/linkedin/callback", validateLinkedin, auth.loginLinkedIn);
 
+
+//añadi comprobacion de query params 
 router.post("/request-reset-password",
 [
   check("email", "name is required").isEmail(),

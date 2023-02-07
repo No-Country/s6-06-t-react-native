@@ -2,12 +2,13 @@
   <img src="/logo.png" alt="logo">
   <h1 class="reset-title">Intoduzca su nueva contraseña</h1>
 
-  <form class="reset-form" action="/api/auth/reset-password?uid={{uid}}&token={{token}}" method="post" >
+  <form name="form" class="reset-form" action="/api/auth/reset-password?uid={{uid}}&token={{token}}" method="post" >
     <label for="password">Contraseña</label><br />
     <input type="password" id="password" name="password" value="" /><br />
     <label for="validation">Re ingrese contraseña</label><br />
     <input type="password" id="validation" name="validation" value=""  />
-    <button type="submit" value="submit" id="save-reset">GUARDAR CONTRASEÑA</button>
+    <p class="error">Verifique los campos</p>
+    <button  value="save" id="save-reset">GUARDAR CONTRASEÑA</button>
 
   </form>
 </main>

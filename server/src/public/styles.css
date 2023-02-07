@@ -50,3 +50,9 @@
   background-color: #8c8edd;
   font-weight: bold;
 }
+
+.error {
+  text-align: center;
+  color: red;
+  display: none;
+}
