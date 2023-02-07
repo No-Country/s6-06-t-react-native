@@ -36,7 +36,7 @@ const sendEmail = async (email, subject, payload, template) => {
         console.log(error)
         return error;
       } else {
-        console.log(info)
+  
         return res.status(200).json({
           success: true,
         });

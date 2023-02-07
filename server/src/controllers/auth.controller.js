@@ -1,12 +1,14 @@
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
+const handlebars = require("handlebars");
 const generateJWT = require("../helpers/generateJWT");
-const { User,Token } = require("../models");
+const { User, Token } = require("../models");
 const response = require("../helpers/response");
-const sendEmail=require("../helpers/sendEmail")
+const sendEmail = require("../helpers/sendEmail");
+const { body } = require("express-validator");
 
 const createUser = async (req, res) => {
-  const {email,password} = req.body;
+  const { email, password } = req.body;
 
   try {
     let newUser = await User.findOne({ email });
@@ -129,58 +131,53 @@ const loginLinkedIn = async (req, res) => {
   }
 };
 
+const resetPasswordRequest = async (req, res) => {
+  const { email } = req.body;
 
-const resetPasswordRequest=async(req,res)=>{
-const {email}= req.body
+  const user = await User.findOne({ email });
+  if (!user) return response.error(req, res, "Email not registered", 400);
 
-const user = await User.findOne({ email });
-if (!user) response.error(req,res,"Email not registered",400)
+  let token = await Token.findOne({ uid: user.id });
+  if (token) await token.deleteOne();
 
+  let resetToken = crypto.randomBytes(32).toString("hex");
+  const hash = await bcrypt.hash(resetToken, 10);
+  console.log(user);
+  await new Token({
+    uid: user._id,
+    token: hash,
+    createdAt: Date.now(),
+  }).save();
 
-let token = await Token.findOne({ uid: user.id });
-if (token) await token.deleteOne();
+  const link = `${process.env.URL}/api/auth/reset-password?token=${resetToken}&uid=${user._id}`;
 
-let resetToken = crypto.randomBytes(32).toString("hex");
-const hash = await bcrypt.hash(resetToken, 10);
+  sendEmail(
+    user.email,
+    "Password Reset Request",
+    {
+      name: user.name,
+      link: link,
+    },
+    "./template/requestResetPassword.handlebars"
+  );
 
-await new Token({
-  uid: user._id,
-  token: hash,
-  createdAt: Date.now(),
-}).save();
+  response.success(req, res, "succes", link, 200);
+};
 
-const link = `${process.env.URL}/api/auth/reset-password?token=${resetToken}&uid=${user._id}`;
-
-sendEmail(
-  user.email,
-  "Password Reset Request",
-  {
-    name: user.name,
-    link: link,
-  },
-  "./template/requestResetPassword.handlebars"
-);
-
-
-response.success(req,res,"succes",link,200)
-
-}
-
-const resetPassword=async(req,res)=>{
-  const {uid,token,password}=req.query
-
-
+const resetPassword = async (req, res) => {
+  const { uid, token } = req.query;
+  const { password } = req.body;
 
   let passwordResetToken = await Token.findOne({ uid });
 
   if (!passwordResetToken) {
-    response.error(req,res,"Invalid or expired password reset token",400);
+    response.error(req, res, "Invalid or expired password reset token", 400);
   }
 
   const isValid = await bcrypt.compare(token, passwordResetToken.token);
 
   if (!isValid) {
-   response.error(req,res,"Invalid or expired password reset token",400);
+    response.error(req, res, "Invalid or expired password reset token", 400);
   }
   const hash = await bcrypt.hash(password, 10);
 
@@ -203,14 +200,20 @@ const resetPassword=async(req,res)=>{
 
   await passwordResetToken.deleteOne();
 
-  response.success(req,res,"Password reset was successful",{},200);
+  response.success(req, res, "Password reset was successful", {}, 200);
+};
 
-}
+const renderRecoverPassword = (req, res) => {
+  const { uid, token } = req.query;
+
+  res.render("main", { layout: "index", uid, token });
+};
 
 module.exports = {
   createUser,
   loginUser,
   loginLinkedIn,
   resetPasswordRequest,
-  resetPassword
+  resetPassword,
+  renderRecoverPassword,
 };
