@@ -2,31 +2,42 @@ const {model, Schema} = require('mongoose');
 
 const commentSchema = new Schema({
     author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        type: Schema.Types.ObjectId,
+        ref: 'user'
     },
-    body: String,
-    // post:[{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Post'
-    // }],
+    body: { 
+        type: String,
+        required: true,
+    },
+    post:[{
+        type: Schema.Types.ObjectId,
+        ref: 'post'
+    }],
     active: {
         type: Boolean,
         default: true
     },
     attached: [String],
     replies: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comment'
+        type: Schema.Types.ObjectId,
+        ref: 'comment'
     }],
     reactions: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Reaction'
+        type: Schema.Types.ObjectId,
+        ref: 'reaction'
     }]
 },
-{timestamps: true,
-versionKey: false})
+{
+    timestamps: true,
+    versionKey: false
+})
 
-const Comment = model('Comment', commentSchema);
+commentSchema.methods.toJSON = function idSetter() {
+    const { _id, ...Comment } = this.toObject();
+    Comment.id = uid;
+    return Comment;
+};
+
+const Comment = model('comment', commentSchema);
 
 module.exports = Comment
