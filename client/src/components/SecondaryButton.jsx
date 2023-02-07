@@ -6,12 +6,12 @@ import {
     View,
   } from "react-native";
   
-  const SecondaryButton = ({text}) => {
+  const SecondaryButton = ({text, handler}) => {
     const HandleLogin = () => {/*LOGICA LOGIN*/};
   
     return (
       <View>
-        <TouchableOpacity onPress={() => HandleLogin()} style={styles.signIn}>
+        <TouchableOpacity onPress={handler} style={styles.signIn}>
           <Text style={{ color: "#4245E5", fontWeight: "600" }}>
             {text}
           </Text>

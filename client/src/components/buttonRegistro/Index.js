@@ -1,15 +1,15 @@
-import { Text, TouchableHighlight, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./style";
 
-const ButtonRegistro = () => {
+const ButtonRegistro = ({onPress}) => {
   return (
-    <TouchableHighlight style={styles.mainWrapper} >
+    <TouchableOpacity style={styles.mainWrapper} onPress={onPress}>
       <View style={styles.secondaryWrapper}>
         <AntDesign name="arrowleft" size={20} color="#06087E" />
         <Text style={styles.text}>Registro</Text>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 

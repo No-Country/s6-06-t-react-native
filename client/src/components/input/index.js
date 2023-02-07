@@ -1,14 +1,9 @@
-import {
-  Text,
-  TextInput,
-  TouchableHighlight,
-  View,
-} from "react-native";
-import { useFonts } from "expo-font";
-import * as SplashScreen from 'expo-splash-screen';
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useCallback, useState } from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { styles } from './style'
+import { styles } from "./style";
+import * as SplashScreen from "expo-splash-screen";
+import { useFonts } from "expo-font"
 
 const InputComponent = ({
   label,
@@ -17,17 +12,17 @@ const InputComponent = ({
   requerimiento,
   showPass,
 }) => {
-  const [fontsLoaded] = useFonts({
-    SFProBold: require("../../assets/fonts/SfProDisplay/SfProDisplay-Bold.otf"),
-    SFProMedium: require("../../assets/fonts/SfProDisplay/SfProDisplay-Medium.otf"),
-    SFProRegular: require("../../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
-  });
   const [isFocused, setIsFocused] = useState(false);
   const [showPassState, setShowPassState] = useState(false);
+
+  const [fontsLoaded] = useFonts({
+    SFProRegular: require("./../../../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
+  });
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
+
     }
   }, [fontsLoaded]);
 
@@ -50,7 +45,7 @@ const InputComponent = ({
           onBlur={() => setIsFocused(false)}
         />
         {showPass && (
-          <TouchableHighlight
+          <TouchableOpacity
             style={styles.icon}
             onPress={() => setShowPassState(!showPassState)}
           >
@@ -59,7 +54,7 @@ const InputComponent = ({
             ) : (
               <FontAwesome5 name="eye" size={18} color="#4245E5" />
             )}
-          </TouchableHighlight>
+          </TouchableOpacity>
         )}
       </View>
       {requerimiento && (

@@ -1,9 +1,8 @@
 import { Text, TextInput, View } from "react-native";
-import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
 import { useCallback, useState } from "react";
-import { SelectList } from "react-native-dropdown-select-list";
 import { styles } from "./style";
+import * as SplashScreen from "expo-splash-screen";
+import { useFonts } from "expo-font"
 
 const InputMobileNumber = ({
   label,
@@ -11,13 +10,19 @@ const InputMobileNumber = ({
   keyboardType = "default",
   requerimiento,
 }) => {
-  const [fontsLoaded] = useFonts({
-    SFProBold: require("../../assets/fonts/SfProDisplay/SfProDisplay-Bold.otf"),
-    SFProMedium: require("../../assets/fonts/SfProDisplay/SfProDisplay-Medium.otf"),
-    SFProRegular: require("../../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
-  });
   const [isFocused, setIsFocused] = useState(false);
   // const [selected, setSelected] = useState("");
+
+  // const data = [
+  //   { key: "1", value: "+54" },
+  //   { key: "2", value: "+58" },
+  //   { key: "3", value: "+57" },
+  //   { key: "4", value: "+53" },
+  // ];
+
+  const [fontsLoaded] = useFonts({
+    SFProRegular: require("./../../../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
+  });
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
@@ -29,12 +34,6 @@ const InputMobileNumber = ({
     return null;
   }
 
-  // const data = [
-  //   { key: "1", value: "+54" },
-  //   { key: "2", value: "+58" },
-  //   { key: "3", value: "+57" },
-  //   { key: "4", value: "+53" },
-  // ];
   return (
     <View style={styles.containerInput} onLayout={onLayoutRootView}>
       <Text style={styles.label}>{label}</Text>
@@ -50,7 +49,11 @@ const InputMobileNumber = ({
           searchPlaceholder=''
         /> */}
         <TextInput
-          style={[styles.input, styles.inputRegionalNumber, isFocused && styles.outLine]}
+          style={[
+            styles.input,
+            styles.inputRegionalNumber,
+            isFocused && styles.outLine,
+          ]}
           placeholder={placeholder}
           placeholderTextColor="#626A6D"
           selectionColor="#4245E5"
@@ -76,4 +79,3 @@ const InputMobileNumber = ({
 };
 
 export default InputMobileNumber;
-

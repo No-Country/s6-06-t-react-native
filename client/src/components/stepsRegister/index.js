@@ -1,12 +1,12 @@
-import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
 import { Text, View } from "react-native";
 import { styles } from "./style";
+import * as SplashScreen from "expo-splash-screen";
+import { useFonts } from "expo-font";
 
 const StepsRegister = ({ number, active, description }) => {
   const [fontsLoaded] = useFonts({
-    SFProMedium: require("../../assets/fonts/SfProDisplay/SfProDisplay-Medium.otf"),
+    SFProMedium: require("./../../../assets/fonts/SfProDisplay/SfProDisplay-Medium.otf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -37,7 +37,14 @@ const StepsRegister = ({ number, active, description }) => {
         ]}
       >
         <Text style={styles.number}>{number}</Text>
-        <Text style={[styles.descriptionStep, !active && styles.descriptionStepInactive]}>{description}</Text>
+        <Text
+          style={[
+            styles.descriptionStep,
+            !active && styles.descriptionStepInactive,
+          ]}
+        >
+          {description}
+        </Text>
       </View>
       {number !== "3" && (
         <View
@@ -53,4 +60,3 @@ const StepsRegister = ({ number, active, description }) => {
 };
 
 export default StepsRegister;
-

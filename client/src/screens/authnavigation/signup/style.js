@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   
     },
     whiteContainer: {
-      paddingTop: 58,
+      paddingTop: 28,
       paddingBottom:50,
       backgroundColor: "#fff",
       width: "100%",
