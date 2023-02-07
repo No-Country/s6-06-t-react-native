@@ -169,7 +169,7 @@ response.success(req,res,"succes",link,200)
 const resetPassword=async(req,res)=>{
   const {uid,token,password}=req.query
 
-  console.log(uid)
+
 
   let passwordResetToken = await Token.findOne({ uid });
 

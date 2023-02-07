@@ -1,4 +1,8 @@
 const { Schema, model} = require('mongoose')
+const {Channel}=require("./Channel")
+
+
+
 
 const userSchema = new Schema ({
     username: {
@@ -19,10 +23,11 @@ const userSchema = new Schema ({
     },
     selected: {
         type: Boolean,
-        default: false},
-        active: {
-            type: Boolean,
-            default: true
+        default: false
+    },
+    active: {
+        type: Boolean,
+        default: true
     },
     availability: String,
     technologies: [String],
@@ -38,6 +43,18 @@ const userSchema = new Schema ({
     pinnedpost: [{
         type: Schema.Types.ObjectId,
         ref: 'post'
+    }],
+    favorites: [{
+        type: Schema.Types.ObjectId,
+        ref: 'post'
+    }],
+    channels: [{
+        type: Schema.Types.ObjectId,
+        ref: 'channel',
+    }],
+    job_applications:[{
+        type: Schema.Types.ObjectId,
+        ref: 'job_offer',
     }]
     // comments: [{
     //     type: mongoose.Schema.Types.ObjectId,

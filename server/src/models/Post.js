@@ -24,6 +24,10 @@ const postSchema = new Schema({
     active: {
         type: Boolean,
         default: true
+    },
+    permissions:{
+        type:Boolean,
+        default:true
     }
 },
 {timestamps: true,

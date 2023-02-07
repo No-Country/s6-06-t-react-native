@@ -4,16 +4,17 @@ const fs = require("fs");
 const path = require("path");
 
 const sendEmail = async (email, subject, payload, template) => {
-  console.log("llamada")
+
   try {
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
-      host: "gmail",
+      host: "smtp.gmail.com",
       port: 465,
       auth: {
         user: process.env.EMAIL_USERNAME,
         pass: process.env.EMAIL_PASSWORD, // naturally, replace both with your real credentials or an application-specific password
       },
+      secure:true
     });
 
     const source = fs.readFileSync(path.join(__dirname, template), "utf8");
