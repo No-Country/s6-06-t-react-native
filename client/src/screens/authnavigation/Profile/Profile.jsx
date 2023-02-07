@@ -1,16 +1,20 @@
 import React from "react";
 import { View, Text, StyleSheet} from "react-native";
+import LogOut from "./profilecomps/LogOut";
 import ProfilePicture from "./profilecomps/ProfilePicture";
 import Tabs from "./profilecomps/Tabs";
 import TopBar from "./profilecomps/TopBar";
 
-const Profile = ({navigation}) => {
+
+
+const Profile = () => {
+
     return (
         <View style={styles.container}>     
         <TopBar />
         <ProfilePicture/>
         <Tabs />
-        <Tabs />
+        <LogOut/>
         </View>
     );
     }
