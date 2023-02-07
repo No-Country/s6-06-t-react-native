@@ -6,7 +6,7 @@ import { styles } from "./style";
 
 const StepsRegister = ({ number, active, description }) => {
   const [fontsLoaded] = useFonts({
-    SFProMedium: require("../assets/fonts/SfProDisplay/SfProDisplay-Medium.otf"),
+    SFProMedium: require("../../assets/fonts/SfProDisplay/SfProDisplay-Medium.otf"),
   });
 
   const onLayoutRootView = useCallback(async () => {

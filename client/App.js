@@ -1,8 +1,10 @@
 import { StyleSheet, View } from "react-native";
+import Registro from "./screens/signup";
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <Registro/>
     </View>
   );
 }

@@ -1,9 +1,10 @@
-import { ScrollView, StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import ButtonRegistro from "../../components/buttonRegistro/Index.js";
 import InputComponent from "../../components/input/index.js";
 import InputMobileNumber from "../../components/inputMobileNumber/index.js";
 import PrimaryButton from "../../components/PrimaryButton.jsx";
 import StepsRegister from "../../components/stepsRegister/index.js";
+import { styles } from "./style.js";
 
 const Registro = () => {
   return (

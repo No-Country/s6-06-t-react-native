@@ -12,9 +12,9 @@ const InputMobileNumber = ({
   requerimiento,
 }) => {
   const [fontsLoaded] = useFonts({
-    SFProBold: require("../assets/fonts/SfProDisplay/SfProDisplay-Bold.otf"),
-    SFProMedium: require("../assets/fonts/SfProDisplay/SfProDisplay-Medium.otf"),
-    SFProRegular: require("../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
+    SFProBold: require("../../assets/fonts/SfProDisplay/SfProDisplay-Bold.otf"),
+    SFProMedium: require("../../assets/fonts/SfProDisplay/SfProDisplay-Medium.otf"),
+    SFProRegular: require("../../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
   });
   const [isFocused, setIsFocused] = useState(false);
   // const [selected, setSelected] = useState("");

@@ -8,7 +8,7 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback, useState } from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { styles } from "./style";
+import { styles } from './style'
 
 const InputComponent = ({
   label,
@@ -45,7 +45,7 @@ const InputComponent = ({
           placeholderTextColor="#626A6D"
           selectionColor="#4245E5"
           keyboardType={keyboardType}
-          secureTextEntry={!showPassState}
+          secureTextEntry={showPass ? !showPassState : false}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />
