@@ -56,6 +56,9 @@ const ModalHome = ({modalVisible, setModalVisible}) => {
 
 const styles = StyleSheet.create({
     centeredView: {
+        position : 'absolute',
+        height : '100%',
+        width : '100%',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
