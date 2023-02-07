@@ -25,7 +25,7 @@ export default PrimaryButton;
 const styles = StyleSheet.create({
   signIn: {
     backgroundColor: "#4245E5",
-    width: Dimensions.get("window").width - 25,
+    width: '100%',
     height: 45,
     marginTop: 20,
     borderRadius: 15,
