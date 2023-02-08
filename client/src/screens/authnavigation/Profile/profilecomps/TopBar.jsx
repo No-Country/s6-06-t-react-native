@@ -1,18 +1,18 @@
 import { View, Text, StyleSheet, Pressable,Image, Button } from "react-native";
-
+import Icon from "react-native-vector-icons/AntDesign";
 
 
 
 const Profile = ({ navigation }) => {
     return (
         <View style={styles.Topcontainer}>     
-            <Pressable style={styles.backButton} >
-                <Text style={styles.backButton1}>{"<"}</Text>
-            </Pressable>
+            <View style={styles.backButton} >
+                <Icon name="left" size={20} color="#4245E5"/>
+            </View>
             <Text style={styles.tittle}>Profile</Text>
-            <Pressable style={styles.backButton} onPress={() => navigation.navigate("")}>
+            <View style={styles.backButton}>
                <Image source={require("../icons/profilepicture.png")} style={{width:35, height:35}} />
-            </Pressable>
+            </View>
         </View>
     );
     }
@@ -22,26 +22,21 @@ const Profile = ({ navigation }) => {
         flexDirection: "row",
         backgroundColor: "white",
         justifyContent: "space-between",
-        width: "100%",
+        marginHorizontal: 20,
+        paddingVertical: 10,
     },
     tittle: {
         fontSize: 27,
         fontWeight: "bold",
     },
     backButton: {
-        // roudnded button grey color
         backgroundColor: "#e0e0e0",
         width: 35,
         height: 35,
         borderRadius: 25,
         justifyContent: "center",
         alignItems: "center",
-
-    },
-    backButton1: {
-        fontSize: 20,
-        color: "#000",
-    },
+    }
     });
 
     export default Profile;

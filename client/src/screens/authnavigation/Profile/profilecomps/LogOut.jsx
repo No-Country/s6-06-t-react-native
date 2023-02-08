@@ -15,11 +15,11 @@ export default LogOut;
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: 40,
-        marginLeft: 15,
+        marginLeft: 30,
         flexDirection: "row",
         padding: 10,
         alignItems: "center",
+        marginTop: 10,
     },
     txt: {
         fontSize: 15,

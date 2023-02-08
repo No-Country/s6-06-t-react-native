@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Text, Image, Pressable } from "react-native";
+import { View, Text, Image, Pressable, SafeAreaView } from "react-native";
 import { StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 
 const Tabs = () => {
   return (
-    <View style={styles.tabContainer}>
+    <SafeAreaView style={styles.tabContainer}>
       <View style={styles.tab}>
         <View
           style={{
@@ -71,7 +71,7 @@ const Tabs = () => {
         </View>
         <Icon name="right" style={styles.icon2} />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -80,7 +80,6 @@ export default Tabs;
 const styles = StyleSheet.create({
   tabContainer: {
     marginTop: 20,
-    width: "100%",
   },
   tab: {
     flexDirection: "row",
@@ -89,15 +88,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     padding: 12,
     borderRadius: 15,
-    shadowColor: "#000",
+    shadowColor: "#0d080f",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 8,
     },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
-    marginBottom: 25,
+    shadowOpacity: 0.21,
+    shadowRadius: 8.19,
+    elevation: 11,
+    marginBottom: 30,
+    marginHorizontal: 20,
   },
   tabText: {
     fontSize: 16,

@@ -6,7 +6,7 @@ const OnBoarding = ({navigation}) => {
         <View style={styles.container}>
             <Image source={Logo} style={{width: 300, height: 300}}/>
             <Text style={styles.text} onPress={() => navigation.navigate('Home')}>Sin Fronteras</Text>
-            <Button title="Get Started" onPress={() => navigation.navigate('Profile')}/>
+            <Button title="Go To Profile" onPress={() => navigation.navigate('Profile')}/>
         </View>
     )
 }

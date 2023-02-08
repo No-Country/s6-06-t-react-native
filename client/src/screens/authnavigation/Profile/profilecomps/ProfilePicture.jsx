@@ -27,7 +27,6 @@ export default ProfilePicture;
 
 const styles = StyleSheet.create({
   ppContainer: {
-    paddingVertical: 20,
     alignItems: "center",
     marginTop: 20,
     width: "100%",
@@ -42,6 +41,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 10,
     lineHeight: 30,
+    color: "#4245E5",
   },
   profession: {
     fontSize: 18,
