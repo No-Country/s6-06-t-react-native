@@ -4,7 +4,7 @@ import { styles } from './styles';
 import { Feather, EvilIcons } from '@expo/vector-icons';
 import { colors } from '../../../constants'
 
-export default function NavMenu() {
+export default function NavMenu({pathImgUser}) {
     return (
         <View style={styles.header}>
             <View >
@@ -18,7 +18,7 @@ export default function NavMenu() {
                 />
             </View>
             <View>
-                <Image source={require('../../../../assets/users.jpeg')} style={[styles.imgUserHeader]} />
+                <Image source={{uri : pathImgUser}} style={[styles.imgUserHeader]} />
             </View>
         </View>
     )

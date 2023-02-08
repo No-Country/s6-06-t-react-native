@@ -4,11 +4,15 @@ import NavMenu from './NavMenu';
 import OptionsComunity from './OptionsComunity';
 import InfoComunity from './InfoComunity';
 
-const Index = () => {
+const Index = ({pathImgUser, TypeComunity}) => {
     return (
         <>
-            <NavMenu />
-            <OptionsComunity />
+            <NavMenu 
+                pathImgUser={pathImgUser}
+            />
+            <OptionsComunity 
+                TypeComunity={TypeComunity}
+            />
             <InfoComunity />
         </>
     );
