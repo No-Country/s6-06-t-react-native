@@ -1,15 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
- import { Provider} from "react-redux";
+import { Provider} from "react-redux";
 import configureStore from "./src/redux/store";
 
-import Probando from './Probando';
+import AppNavigator from './src/navigation/tabnavigation'
+
 export default function App() {
 
   return (
     <Provider store = { configureStore }> 
-      <Probando />
+      <AppNavigator />
     </Provider>
   );
 }

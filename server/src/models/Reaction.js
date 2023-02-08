@@ -1,17 +1,32 @@
 const {model, Schema} = require('mongoose');
 
 const reactionSchema = new Schema({
-    author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
     },
-    type: String,
-    // post:[{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Post'
-    // }]
+    type__Reaction: {
+        type: String,
+        enum: [
+        'megusta',
+        'meinteresa',
+        'apoyar',
+        'hacergracia'
+        ]
+    },
+    post:[{
+        type: Schema.Types.ObjectId,
+        ref: 'post'
+    }]
 });
 
-const Reaction = model('Reaction', reactionSchema);
+reactionSchema.methods.toJSON = function idSetter() {
+    const { _id, ...Reaction } = this.toObject();
+    Reaction.id = uid;
+    return Reaction;
+};
+
+const Reaction = model('reaction', reactionSchema);
 
 module.exports = Reaction
