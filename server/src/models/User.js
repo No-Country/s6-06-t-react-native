@@ -31,7 +31,7 @@ const userSchema = new Schema(
       type: String,
       enum: ["Full-Time", "Mañana", "Tarde"],
     },
-    technologies: {
+    technologies: [{
       type: String,
       enum: [
         "HTML",
@@ -59,7 +59,7 @@ const userSchema = new Schema(
         "GraphQL",
         "Koa",
       ],
-    },
+    }],
     phone: {
       type: Number,
     },
@@ -113,10 +113,97 @@ const userSchema = new Schema(
 
 userSchema.methods.toJSON = function idSetter() {
   const { _id, ...User } = this.toObject();
-  User.id = uid;
+  User.uid = _id;
   return User;
 };
+
 
 const User = model("user", userSchema);
 
 module.exports = User;
+
+
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    User:
+ *      type: object
+ *      properties:        
+ *        fullName:
+ *          type: string
+ *          description: the name of the user
+ *        email:
+ *          type: string
+ *          description: the email of the user account
+ *        password:
+ *          type: string
+ *          description: the password of the user account
+ *        availability:
+ *          type: string
+ *          description: the shift available to work
+ *        technologies:
+ *          type: string 
+ *          description: technologies that you know
+ *        phone:
+ *          type: string
+ *          description:  the phone number
+ *        position:
+ *          type: string
+ *          description:  the rol of the dev
+ *      required:
+ *        - name
+ *        - email
+ *        - password
+ *        - availability
+ *        - technologies
+ *        - position
+ *      example:
+ *        fullName: Michael
+ *        email: foo@bar.com
+ *        password: fooBar
+ *        availability: "Mañana"
+ *        technologies: ["HTML","CSS"]
+ *        phone: "4587123656"
+ *        position: "fullstack"
+ *    Response:
+ *      type: object
+ *      example:
+ *           fullName: Foo Bar
+ *           email: foo@bar.com
+ *           admin: false
+ *           selected: false
+ *           active: true
+ *           availability: "Mañana"
+ *           technologies: ["HTML","CSS"]
+ *           phone: 124578965253
+ *           position: "fullstack"
+ *           img_avatar: "https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png"
+ *           comments: []
+ *           favorites: []
+ *           channels: []
+ *           job_applications: []
+ *           posts: []
+ *           reactions: []
+ *           createdAt: "2023-02-08T11:39:20.351Z"
+ *           updatedAt: "2023-02-08T11:39:20.351Z"
+ *           uid": "63e389e8b78b96ca44b5132d"
+ *           token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibHVjYXMgemFyYXRlIiwiaWF0IjoxNjc1ODU2MzYwLCJleHAiOjE2NzU5NDI3NjB9.86gYblfldijom9otS7xIydWLzrSo6YVvA9MVw3tRcjY"
+ *    Login:
+ *      type: object
+ *      properties:        
+ *        email:
+ *          type: string
+ *          description: the email of the user account
+ *        password:
+ *          type: string
+ *          description: the password of the user account
+ *      required:
+ *        - email
+ *        - password
+ *      example: 
+ *           email: foo@bar.com
+ *           password: "foobar"
+ *        
+ */

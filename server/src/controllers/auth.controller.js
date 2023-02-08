@@ -1,11 +1,9 @@
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
-const handlebars = require("handlebars");
 const generateJWT = require("../helpers/generateJWT");
 const { User, Token } = require("../models");
 const response = require("../helpers/response");
 const sendEmail = require("../helpers/sendEmail");
-const { body } = require("express-validator");
 
 const createUser = async (req, res) => {
   const { email, password } = req.body;
@@ -22,20 +20,16 @@ const createUser = async (req, res) => {
     const salt = bcrypt.genSaltSync();
     newUser.password = bcrypt.hashSync(password.toString(), salt);
 
-    await newUser.save();
+    const savedUser = await newUser.save();
 
-    const token = await generateJWT(newUser.id, newUser.fullName);
+    const { password: pswd, ...userData } = savedUser.toObject();
 
-    response.success(
-      req,
-      res,
-      "User registered",
-      { uid: newUser.id, name: newUser.fullName, token },
-      201
-    );
+    const token = await generateJWT(newUser.uid, newUser.fullName);
+
+    response.success(req, res, "User registered", { ...userData, token }, 201);
   } catch (error) {
     console.log(error);
-    response.error(req, res, "Contact Admin");
+    response.error(req, res, "Contact Admin", 500);
   }
 };
 
@@ -43,7 +37,7 @@ const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).lean();
 
     if (!user) {
       return response.error(req, res, "User not registered ", 400);
@@ -60,17 +54,19 @@ const loginUser = async (req, res) => {
 
     const token = await generateJWT(user.id, user.name);
 
-    response.success(
-      req,
-      res,
-      "User logged in",
-      { uid: user.id, name: user.name, token },
-      200
-    );
+    const { password: pswd, ...userData } = user;
+
+    response.success(req, res, "User logged in", { ...userData, token }, 200);
   } catch (error) {
     console.log(error);
     return response.error(req, res, "Contact Admin");
   }
+};
+
+const generateLinkedinLink = (req, res) => {
+  const url = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=http://localhost:5000/api/auth/linkedin/callback&state=${process.env.STATE}&scope=openid%20email%20profile`;
+
+  response.success(req, res, "Open the link in the browser", { url });
 };
 
 const loginLinkedIn = async (req, res) => {
@@ -103,12 +99,6 @@ const loginLinkedIn = async (req, res) => {
 
     let user = await User.findOne({ email });
 
-    const validatePassword = bcrypt.compareSync(sub.toString(), user.password);
-
-    if (user && !validatePassword) {
-      return response.error(req, res, "User email already exists ", 400);
-    }
-
     if (!user) {
       user = new User({
         fullName: name,
@@ -117,33 +107,41 @@ const loginLinkedIn = async (req, res) => {
         img_avatar: picture,
       });
 
-      await user.save();
+      const newUser= await user.save();
+      const { password: pswd, ...userData } = newUser.toObject();
       const token = await generateJWT(user.id, user.fullName);
       response.success(
         req,
         res,
         "User registered",
         {
-          uid: user.id,
-          token,
-          user: user.fullName,
-          email: user.email,
+          ...userData,
+          token
         },
         201
       );
     } else {
+      // const validatePassword = bcrypt.compareSync(
+      //   sub.toString(),
+      //   user.password
+      // );
+
+      // if (user && !validatePassword) {
+      //   return response.error(req, res, "User email already exists ", 400);
+      // }
+
+      const { password: pswd, ...userData } = user.toObject();
       const token = await generateJWT(user.id, user.fullName);
       response.success(
         req,
         res,
         "User logged in",
         {
-          uid: user.id,
-          token,
-          user: user.fullName,
-          email: user.email,
+          ...userData,
+          token
+          
         },
-        201
+        200
       );
     }
   } catch (e) {
@@ -182,16 +180,21 @@ const resetPasswordRequest = async (req, res) => {
     "./template/requestResetPassword.handlebars"
   );
 
-  response.success(req, res, "succes", link, 200);
+  response.success(req, res, "Request for Password reset was succesfull ", link, 200);
 };
 
 const resetPassword = async (req, res) => {
   const { uid, token } = req.query;
   const { password } = req.body;
-console.log(uid,token)
-if(token===""||uid===""){
-  return response.error(req,res,"There is a problem with the provided url",400)
-}
+  console.log(uid, token);
+  if (token === "" || uid === "") {
+    return response.error(
+      req,
+      res,
+      "There is a problem with the provided url",
+      400
+    );
+  }
 
   let passwordResetToken = await Token.findOne({ uid });
 
@@ -224,24 +227,23 @@ if(token===""||uid===""){
   );
 
   await passwordResetToken.deleteOne();
-  res.render("success", { layout: "index" })
-
+  res.render("success", { layout: "index" });
 };
 
 const renderRecoverPassword = (req, res) => {
   const { uid, token } = req.query;
 
-  if(uid && token ){
+  if (uid && token) {
     res.render("main", { layout: "index", uid, token });
-  }else{
-    response.error(req,res,"There is a problem with the provided url",400)
+  } else {
+    response.error(req, res, "There is a problem with the provided url", 400);
   }
-  
 };
 
 module.exports = {
   createUser,
   loginUser,
+  generateLinkedinLink,
   loginLinkedIn,
   resetPasswordRequest,
   resetPassword,

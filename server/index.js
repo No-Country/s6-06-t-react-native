@@ -17,7 +17,7 @@ app.set('view engine', 'handlebars')
 app.set("views", "./src/views");
 
 app.use(express.json());
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'));
 app.use(cors());
 

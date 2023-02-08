@@ -12,7 +12,7 @@
       },
     ],
   },
-  apis: ["./src/routes/*.js"],
+  apis: ["./src/routes/*.js","./src/models/*.js"],
 };
 
 module.exports=options
