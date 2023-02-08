@@ -1,14 +1,14 @@
 const  response  = require('../helpers/response');
 const {Channel, User} = require('../models')
+const {validateDb} = require('../helpers')
 
 
-const createChannel = async (req,res) =>{
-    const {name} = req.body
-    const existingChannel = await Channel.findOne({name})
-    if (existingChannel) {
-        return response.error(req,res,"El Canal ya existe",409)
-    }
-    
+const createChannel = async (req,res) =>{   
+    const {id} = req.params
+    const validate =  validateDb(id)
+        if (!validate) {
+            return response.error(req, res, "No valido")
+        }
     const channel = new Channel(req.body);
     await channel
         .save()
@@ -22,10 +22,20 @@ const createChannel = async (req,res) =>{
 };
 
 const updateChannel = async (req, res) => {
+    
+    const {id} = req.params;
+    console.log(id, "asdf")
+    const {name, typechannel} = req.body
+    
     try {
-        const { name, typechannel } = req.body;
+        const validate =  validateDb(id)
+        if (!validate) {
+            return response.error(req, res, "No valido")
+        }
+        console.log('llego')
+
         const updatedChannel = await Channel.findByIdAndUpdate(
-            {_id: uid},
+            {_id: id},
             { name, typechannel},
             {new: true}
         );
@@ -48,8 +58,9 @@ const updateChannel = async (req, res) => {
 }
 
 const deleteChannel =  async (req , res) => {
+    const {id} = req.params
     try {
-        const channel = await Channel.findById({_id: uid});
+        const channel = await Channel.findById({_id: id});
         if (!channel) {
         return res.status(404).json({
         success: false,
@@ -87,10 +98,10 @@ const getAllChannels = async (req, res) => {
 };
 
 const getUserChannels = async (req, res) => {
-    
+    const {id} = req.params
     try {
-        const user = await User.findById({_id: uid}).populate("channels");
-
+        const user = await User.findById(id).populate("channels");
+        console.log(user, "aa")
         if (!user) {
             return res.status(404).send({ error: "Usuario no encontrado" });
         }
@@ -110,10 +121,10 @@ const getUserChannels = async (req, res) => {
 };
 
 const getPostsChannel = async (req, res) => {
-    const channelId = req.params.id;
+    const {id} = req.params;
 
     try {
-        const channel = await Channel.findById(channelId).populate('posts');
+        const channel = await Channel.findById(id).populate('posts');
         if (!channel) return res.status(404).send({ error: 'Canal no encontrado' });
         
         const posts = channel.posts;

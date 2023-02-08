@@ -3,5 +3,6 @@ module.exports={
   validatorJWT:require("./validatorJWT"),
   validateLinkedin:require("./validateLinkedin"),
   validatePassword:require("./validatePassword"),
-  isAdmin:require('./isAdmin')
+  isAdmin:require('./isAdmin'),
+ 
 }

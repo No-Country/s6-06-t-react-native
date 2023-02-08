@@ -11,7 +11,7 @@ const postSchema = new Schema({
     },
     description: {
         Type: String,
-        required: true
+        // required: true
     },
     comments: [{
         type: Schema.Types.ObjectId,
