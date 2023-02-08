@@ -94,6 +94,18 @@ const userSchema = new Schema(
         ref: "Reaction",
       },
     ],
+    favorites: [{
+      type: Schema.Types.ObjectId,
+      ref: 'post'
+  }],
+  channels: [{
+      type: Schema.Types.ObjectId,
+      ref: 'channel',
+  }],
+  job_applications:[{
+      type: Schema.Types.ObjectId,
+      ref: 'job_offer',
+  }]
   },
   { timestamps: true, versionKey: false }
 );
