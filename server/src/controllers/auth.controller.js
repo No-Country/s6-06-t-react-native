@@ -167,6 +167,10 @@ const resetPasswordRequest = async (req, res) => {
 const resetPassword = async (req, res) => {
   const { uid, token } = req.query;
   const { password } = req.body;
+console.log(uid,token)
+if(token===""||uid===""){
+  return response.error(req,res,"There is a problem with the provided url",400)
+}
 
   let passwordResetToken = await Token.findOne({ uid });
 
@@ -199,14 +203,19 @@ const resetPassword = async (req, res) => {
   );
 
   await passwordResetToken.deleteOne();
+  res.render("success", { layout: "index" })
 
-  response.success(req, res, "Password reset was successful", {}, 200);
 };
 
 const renderRecoverPassword = (req, res) => {
   const { uid, token } = req.query;
 
-  res.render("main", { layout: "index", uid, token });
+  if(uid && token ){
+    res.render("main", { layout: "index", uid, token });
+  }else{
+    response.error(req,res,"There is a problem with the provided url",400)
+  }
+  
 };
 
 module.exports = {
