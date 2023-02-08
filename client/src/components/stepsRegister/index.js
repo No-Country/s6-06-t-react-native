@@ -38,6 +38,7 @@ const StepsRegister = ({ number, active, description }) => {
       >
         <Text style={styles.number}>{number}</Text>
         <Text
+          numberOfLines={2}
           style={[
             styles.descriptionStep,
             !active && styles.descriptionStepInactive,
