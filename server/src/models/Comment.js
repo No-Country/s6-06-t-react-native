@@ -2,10 +2,13 @@ const {model, Schema} = require('mongoose');
 
 const commentSchema = new Schema({
     author: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    body: String,
+    body: {
+        type: String
+        
+    } ,
     // post:[{
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'Post'
@@ -16,11 +19,11 @@ const commentSchema = new Schema({
     },
     attached: [String],
     replies: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Comment'
     }],
     reactions: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Reaction'
     }]
 },

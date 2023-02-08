@@ -1,22 +1,26 @@
 const {model, Schema} = require('mongoose');
 
 const postSchema = new Schema({
-    author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
     },
-    title: String,
-    body: String,
+    title: {
+        type: String
+    } ,
+    body: {
+        type: String  
+    } ,
     comments: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comments'
+        type: Schema.Types.ObjectId,
+        ref: 'comments'
     }],
     reactions: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Reaction'
+        type: Schema.Types.ObjectId,
+        ref: 'reaction'
     }],
     attached: [String],
-    // pinned: Boolean,
+
     important: {
         type:Boolean,
         default: false
@@ -33,6 +37,6 @@ const postSchema = new Schema({
 {timestamps: true,
 versionKey: false});
 
-const Post = model('Post', postSchema)
+const Post = model('post', postSchema)
 
 module.exports = Post

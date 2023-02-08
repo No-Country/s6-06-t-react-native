@@ -2,8 +2,8 @@ const {model, Schema} = require('mongoose');
 
 const reactionSchema = new Schema({
     author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        type: Schema.Types.ObjectId,
+        ref: 'user'
     },
     type: String,
     // post:[{
@@ -12,6 +12,6 @@ const reactionSchema = new Schema({
     // }]
 });
 
-const Reaction = model('Reaction', reactionSchema);
+const Reaction = model('reaction', reactionSchema);
 
 module.exports = Reaction
