@@ -1,3 +1,4 @@
 module.exports={
-  auth:require("./auth.controller")
+  auth:require("./auth.controller"),
+  channel:require('./channel.controller')
 }

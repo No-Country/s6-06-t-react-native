@@ -97,13 +97,13 @@ const userSchema = new Schema(
     posts: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Post",
+        ref: "post",
       },
     ],
     reactions: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Reaction",
+        ref: "reaction",
       },
     ],
   
