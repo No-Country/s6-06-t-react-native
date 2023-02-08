@@ -28,9 +28,9 @@ const { validateFields, validateLinkedin } = require("../middlewares");
  *        - email
  *        - password
  *      example:
- *        id: gQBOyGbxcQy6tEp0aZ78X
  *        name: Michael
  *        email: foo@bar.com
+ *        password: michael123
  *    UserNotFound:
  *      type: object
  *      properties:

@@ -26,10 +26,10 @@ const postSchema = new Schema({
         type:Boolean,
         default: false
     },
-    active: {
-        type: Boolean,
-        default: true
-    },
+    // active: {
+    //     type: Boolean,
+    //     default: true
+    // },
     permissions:{
         type:Boolean,
         default:true

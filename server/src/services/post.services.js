@@ -1,26 +1,20 @@
+const {Post} = require('../models/Post.js');
 
-const newPost = async ({ id, body }) => {
+const newPost = async ({ uid, body }) => {
     const {
         title,
         description,
-        resource,
-        date,
-        programmingL,
-        category,
-        ranking,
-        technology,
-        tag,
-        url,
+        comments,
+
     } = body;
 
     const post = new Post({
         title,
         description,
-        resource,
-        date,
-        user: id,
-        ranking,
-        url,
+        comments,
+        reactions,
+        attached,
+        user: uid,
     });
 
     const postUser = await User.findById(id);

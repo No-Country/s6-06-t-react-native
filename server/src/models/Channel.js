@@ -17,6 +17,12 @@ typechannel:{
 }
 
 })
+channelSchem.methods.toJSON = function idSetter() {
+  const { _id, ...Channel } = this.toObject();
+  Channel.id = uid;
+  return Channel;
+};
 
+const Channel = model("channel",channelSchema);
 
-module.exports=model("channel",channelSchema)
+module.exports=Channel;
