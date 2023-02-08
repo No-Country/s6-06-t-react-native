@@ -41,7 +41,9 @@ const Registro = () => {
             requerimiento="Ingresa nuevamente tu contraseña."
             showPass
           />
-          <PrimaryButton text="Siguiente" width='width: 100%'/>
+          <PrimaryButton text="Siguiente" width='width: 100%' handler={() => {
+            navigation.navigate("SignUpStepTwo");
+          }}/>
         </View>
       </View>
     </ScrollView>

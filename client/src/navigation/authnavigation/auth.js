@@ -2,6 +2,7 @@ import React from "react";
 import OnBoarding from "../../screens/authnavigation/onboarding";
 import Home from "../../screens/authnavigation/home";
 import SignUp from "../../screens/authnavigation/signup";
+import SignUpStepTwo from "../../screens/authnavigation/signupStepTwo";
 import Transition from "../../screens/authnavigation/transition";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LogIn from "../../screens/authnavigation/LogIn/LogIn";
@@ -22,6 +23,7 @@ const AuthNavigation = ({ navigation }) => {
       <Stack.Screen name="LogIn2" component={LogIn2} />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="SignUpStepTwo" component={SignUpStepTwo} />
       <Stack.Screen name="Transition" component={Transition} />
     </Stack.Navigator>
   );
