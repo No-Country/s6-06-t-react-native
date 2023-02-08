@@ -18,7 +18,7 @@ const offerSchema=new Schema({
 
 offerSchema.methods.toJSON = function idSetter() {
   const { _id, ...Offer } = this.toObject();
-  Offer.id = uid;
+  Offer.uid = _id;
   return Offer;
 };
 

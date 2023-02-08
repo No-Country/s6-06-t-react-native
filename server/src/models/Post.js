@@ -42,7 +42,7 @@ const postSchema = new Schema({
 
 postSchema.methods.toJSON = function idSetter() {
     const { _id, ...Post } = this.toObject();
-    Post.id = uid;
+    Post.uid = _id;
     return Post;
 };
 

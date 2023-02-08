@@ -1,26 +1,23 @@
+const  response  = require('../helpers/response');
 const {Channel, User} = require('../models')
 
 
-const createChannel = (req,res) =>{
-    const {name, typechannel} = req.body;
-    const channel = new Channel({
-        name,
-        typechannel
-    });
-    channel
+const createChannel = async (req,res) =>{
+    const {name} = req.body
+    const existingChannel = await Channel.findOne({name})
+    if (existingChannel) {
+        return response.error(req,res,"El Canal ya existe",409)
+    }
+    
+    const channel = new Channel(req.body);
+    await channel
         .save()
         .then((newChannel) => {
-            res.status(201).json({
-                succes:true,
-                data:newChannel
-            });
-
+            return  response.success(req, res,"Canal creado exitosamente",newChannel,201)
         })
         .catch((error) => {
-            res.status(500).json({
-                succes: false,
-                error: error.message
-            })
+            console.log(error)
+            return  response.error(req, res,error.message,500)
         })
 };
 
