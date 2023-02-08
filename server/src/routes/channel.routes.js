@@ -1,8 +1,13 @@
-
-
+const express = require("express");
+const router = express.Router();
+const channelController = require('../controllers/channel.controller');
+const {isAdmin, validatorJWT} = require('../middlewares')
 
 //crear canal
 //is admin
+router.post("/newchannel", isAdmin, validatorJWT, channelController.createChannel)
+
+
 
 
 //editar canal
