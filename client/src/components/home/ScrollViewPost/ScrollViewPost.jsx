@@ -1,25 +1,38 @@
-import React from 'react';
-import {View, Text,Image, ScrollView} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ScrollView } from 'react-native';
 import { styles } from './styles'
-import CardPost from './CardPost';
+import PostDayWrapper from './PostDayWrapper';
+import { PostsMock } from '../../../mock/post';
 
-const ScrollViewPost = () => {
-    const array = []
-    for (let index = 0; index < 15; index++) {
-        array.push('a')
-        
+const ScrollViewPost = ({NumberComunity, TypeComunity}) => {
+    const [Posts, setPosts] = useState([]);
+
+    let getPosts = async ()=>{
+        try {
+            let post = await PostsMock
+            setPosts(post)
+        } catch (error) {
+            console.error
+        }
     }
+
+    useEffect(() => {
+        getPosts()
+    }, [Posts]);
+
+    
     return (
         <>
             <ScrollView style={styles.scroll} >
-                    <View style={styles.datePublish}>
-                        <View style={styles.line}></View>
-                        <Text style={styles.date}>Lunes 10 de Enero</Text>
-                        <View style={styles.line}></View>
-                    </View>
-                    {array.map((c, i) => (<CardPost key={i} />))}
-                    
-                    
+                {
+                    Posts.map((p, i) => (
+                        <PostDayWrapper 
+                            posts={p}
+                            date={p.datePost}
+                            key={i}
+                        />
+                    ))
+                }
             </ScrollView> 
         </>
     );

@@ -7,7 +7,8 @@ import { styles } from './styles';
 const Home = () => {
     let dataUser = {
         pathImgUser : 'https://i.ibb.co/Z1ZN1kr/1636128542111.jpg',
-        TypeComunity : 'Pre-seleccionado'
+        TypeComunity : 'Pre-seleccionado',
+        NumberComunity : 7
     }
     return (
         <SafeAreaView style={styles.homeContain}>
@@ -19,7 +20,10 @@ const Home = () => {
             
             </View>
             <View style={styles.ScrollContain}>
-                <ScrollViewPost />
+                <ScrollViewPost 
+                    TypeComunity={dataUser.TypeComunity}
+                    NumberComunity={dataUser.NumberComunity}
+                />
             </View>
         </SafeAreaView>
     );
