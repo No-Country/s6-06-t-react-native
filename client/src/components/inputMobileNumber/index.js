@@ -21,12 +21,12 @@ const InputMobileNumber = ({
   // ];
 
   const [fontsLoaded] = useFonts({
-    SFProRegular: require("./../../../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
+    'SFProRegular': require("../../../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
-      await SplashScreen.hideAsync();
+        await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
 

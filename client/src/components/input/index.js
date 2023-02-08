@@ -16,7 +16,7 @@ const InputComponent = ({
   const [showPassState, setShowPassState] = useState(false);
 
   const [fontsLoaded] = useFonts({
-    SFProRegular: require("./../../../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
+    'SFProRegular': require("../../../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
