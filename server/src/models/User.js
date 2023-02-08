@@ -79,9 +79,21 @@ const userSchema = new Schema(
     comments: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Comments",
-      },
-    ],
+        ref: 'comment'
+    }],
+    favorites: [{
+        type: Schema.Types.ObjectId,
+        ref: 'post'
+    }],
+    channels: [{
+        type: Schema.Types.ObjectId,
+        ref: 'channel',
+    }],
+    job_applications:[{
+        type: Schema.Types.ObjectId,
+        ref: 'job_offer',
+    }],
+  
     posts: [
       {
         type: Schema.Types.ObjectId,
@@ -94,18 +106,7 @@ const userSchema = new Schema(
         ref: "Reaction",
       },
     ],
-    favorites: [{
-      type: Schema.Types.ObjectId,
-      ref: 'post'
-  }],
-  channels: [{
-      type: Schema.Types.ObjectId,
-      ref: 'channel',
-  }],
-  job_applications:[{
-      type: Schema.Types.ObjectId,
-      ref: 'job_offer',
-  }]
+  
   },
   { timestamps: true, versionKey: false }
 );
