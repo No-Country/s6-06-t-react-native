@@ -1,5 +1,5 @@
 const { response        } = require("../helpers/response.js")   
-import { findById, findByQuery, newPost, findByIdAndUpdate } from '../services/post.service.js';
+import { findById, newPost, } from '../services/post.service.js';
 
 const createPost = async (req, res) => {
     const { body } = req;

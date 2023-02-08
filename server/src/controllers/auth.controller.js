@@ -24,13 +24,13 @@ const createUser = async (req, res) => {
 
     await newUser.save();
 
-    const token = await generateJWT(newUser.id, newUser.name);
+    const token = await generateJWT(newUser.id, newUser.fullName);
 
     response.success(
       req,
       res,
       "User registered",
-      { uid: newUser.id, name: newUser.name, token },
+      { uid: newUser.id, name: newUser.fullName, token },
       201
     );
   } catch (error) {
@@ -63,7 +63,7 @@ const loginUser = async (req, res) => {
     response.success(
       req,
       res,
-      "User registered",
+      "User logged in",
       { uid: user.id, name: user.name, token },
       200
     );
@@ -78,53 +78,74 @@ const loginLinkedIn = async (req, res) => {
 
   try {
     const data = `code=${code}&grant_type=authorization_code&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&redirect_uri=http://localhost:5000/api/auth/linkedin/callback`;
-    const request = await fetch(
-      `https://www.linkedin.com/oauth/v2/accessToken`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: data,
-      }
-    );
+    let linkedinToken;
+    await fetch(`https://www.linkedin.com/oauth/v2/accessToken`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => (linkedinToken = data));
 
-    const obj = await request.json();
-
-    const getProfile = await fetch("https://api.linkedin.com/v2/userinfo", {
+    let linkedinProfile;
+    await fetch("https://api.linkedin.com/v2/userinfo", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${obj.access_token}`,
+        Authorization: `Bearer ${linkedinToken.access_token}`,
       },
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => (linkedinProfile = data));
 
-    const { email, picture, name } = await getProfile.json();
+    const { email, picture, name, sub } = linkedinProfile;
 
-    let newUser = await User.findOne({ email });
+    let user = await User.findOne({ email });
 
-    if (newUser) {
-      //DEBE LOGUAER GENERANDO JWT????????
+    const validatePassword = bcrypt.compareSync(sub.toString(), user.password);
+
+    if (user && !validatePassword) {
       return response.error(req, res, "User email already exists ", 400);
     }
 
-    newUser = new User({
-      username: name,
-      email,
-      password: "8459*734DfhgDSFGf*4-45",
-      picture,
-    });
+    if (!user) {
+      user = new User({
+        fullName: name,
+        email,
+        password: bcrypt.hashSync(sub.toString(), bcrypt.genSaltSync()),
+        img_avatar: picture,
+      });
 
-    await newUser.save();
-
-    const token = await generateJWT(newUser.id, newUser.name);
-
-    response.success(
-      req,
-      res,
-      "User registered",
-      { uid: newUser.id, token, name, email },
-      201
-    );
+      await user.save();
+      const token = await generateJWT(user.id, user.fullName);
+      response.success(
+        req,
+        res,
+        "User registered",
+        {
+          uid: user.id,
+          token,
+          user: user.fullName,
+          email: user.email,
+        },
+        201
+      );
+    } else {
+      const token = await generateJWT(user.id, user.fullName);
+      response.success(
+        req,
+        res,
+        "User logged in",
+        {
+          uid: user.id,
+          token,
+          user: user.fullName,
+          email: user.email,
+        },
+        201
+      );
+    }
   } catch (e) {
     console.log(e);
     return response.error(req, res, "Contact ADMIN");

@@ -3,16 +3,16 @@ const {model, Schema} = require('mongoose');
 const commentSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'user'
     },
-    body: {
-        type: String
-        
-    } ,
-    // post:[{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Post'
-    // }],
+    body: { 
+        type: String,
+        required: true,
+    },
+    post:[{
+        type: Schema.Types.ObjectId,
+        ref: 'post'
+    }],
     active: {
         type: Boolean,
         default: true
@@ -20,16 +20,24 @@ const commentSchema = new Schema({
     attached: [String],
     replies: [{
         type: Schema.Types.ObjectId,
-        ref: 'Comment'
+        ref: 'comment'
     }],
     reactions: [{
         type: Schema.Types.ObjectId,
-        ref: 'Reaction'
+        ref: 'reaction'
     }]
 },
-{timestamps: true,
-versionKey: false})
+{
+    timestamps: true,
+    versionKey: false
+})
 
-const Comment = model('Comment', commentSchema);
+commentSchema.methods.toJSON = function idSetter() {
+    const { _id, ...Comment } = this.toObject();
+    Comment.id = uid;
+    return Comment;
+};
+
+const Comment = model('comment', commentSchema);
 
 module.exports = Comment

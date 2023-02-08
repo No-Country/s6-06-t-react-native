@@ -6,11 +6,13 @@ const postSchema = new Schema({
         ref: 'user'
     },
     title: {
-        type: String
-    } ,
-    body: {
-        type: String  
-    } ,
+        type: String,
+        required: true
+    },
+    description: {
+        Type: String,
+        required: true
+    },
     comments: [{
         type: Schema.Types.ObjectId,
         ref: 'comments'
@@ -20,7 +22,6 @@ const postSchema = new Schema({
         ref: 'reaction'
     }],
     attached: [String],
-
     important: {
         type:Boolean,
         default: false
@@ -34,9 +35,17 @@ const postSchema = new Schema({
         default:true
     }
 },
-{timestamps: true,
-versionKey: false});
+{
+    timestamps: true,
+    versionKey: false
+});
+
+postSchema.methods.toJSON = function idSetter() {
+    const { _id, ...Post } = this.toObject();
+    Post.id = uid;
+    return Post;
+};
 
 const Post = model('post', postSchema)
 
-module.exports = Post
+module.exports = Post;
