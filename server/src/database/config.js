@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const uri = process.env.URLD || 'mongodb://mongo/newdb'
+require('dotenv').config
+const uri = process.env.URLDB || 'mongodb://mongo/newdb'
 
 mongoose.set("strictQuery", false)
 

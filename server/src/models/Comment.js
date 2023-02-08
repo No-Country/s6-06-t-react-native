@@ -34,7 +34,7 @@ const commentSchema = new Schema({
 
 commentSchema.methods.toJSON = function idSetter() {
     const { _id, ...Comment } = this.toObject();
-    Comment.id = uid;
+    Comment.uid = _id;
     return Comment;
 };
 

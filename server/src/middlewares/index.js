@@ -1,6 +1,8 @@
 module.exports={
   validateFields:require("./validateFields"),
-  validateJWT:require("./validatorJWT"),
+  validatorJWT:require("./validatorJWT"),
   validateLinkedin:require("./validateLinkedin"),
-  validatePassword:require("./validatePassword")
+  validatePassword:require("./validatePassword"),
+  isAdmin:require('./isAdmin'),
+ 
 }
