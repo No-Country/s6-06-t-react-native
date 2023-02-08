@@ -86,7 +86,7 @@ const { validateFields, validateLinkedin ,validatePassword} = require("../middle
 router.post(
   "/new",
   [
-    check("name", "name is required").not().isEmpty(),
+    check("fullName", "fullName is required").not().isEmpty(),
     check("email", "name is required").isEmail(),
     check("password", "password must have 6 or more characters").isLength({
       min: 6,
