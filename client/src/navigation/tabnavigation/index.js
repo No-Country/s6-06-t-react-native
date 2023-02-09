@@ -2,6 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import AuthNavigator from '../authnavigation/auth';
 import { useSelector } from 'react-redux';
+import DrawerNavegation from '../drawerNavigation/drawer';
 
 const AppNavigator = () => {
     
@@ -9,7 +10,7 @@ const AppNavigator = () => {
     return (
         <NavigationContainer>
             {!isAuthenticated && <AuthNavigator />}
-               
+            {isAuthenticated && <DrawerNavegation />}
         </NavigationContainer>
     )
 }
