@@ -8,7 +8,7 @@ services:
         links:
             - mongo
         volumes:
-            - ./src:/app/src
+            - .:/app/build
     mongo:
         command: mongod --quiet --logpath /dev/null 
         container_name: database
