@@ -27,39 +27,45 @@ const userSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    emailisvalidated: {
+      type: Boolean,
+      default: false,
+    },
     availability: {
       type: String,
       enum: ["Full-Time", "Mañana", "Tarde"],
     },
-    technologies: [{
-      type: String,
-      enum: [
-        "HTML",
-        "CSS",
-        "Figma",
-        "AdobeXD",
-        "Framer X",
-        "Photoshop",
-        "Illustrator",
-        "JavaScript",
-        "TypeScript",
-        "Python",
-        "Java",
-        "Go",
-        "Vue.js",
-        "Next.js",
-        "React",
-        "React Native",
-        "Angular",
-        "Jest",
-        "Selenium",
-        "Node.js",
-        "Express.js",
-        "Deno",
-        "GraphQL",
-        "Koa",
-      ],
-    }],
+    technologies: [
+      {
+        type: String,
+        enum: [
+          "HTML",
+          "CSS",
+          "Figma",
+          "AdobeXD",
+          "Framer X",
+          "Photoshop",
+          "Illustrator",
+          "JavaScript",
+          "TypeScript",
+          "Python",
+          "Java",
+          "Go",
+          "Vue.js",
+          "Next.js",
+          "React",
+          "React Native",
+          "Angular",
+          "Jest",
+          "Selenium",
+          "Node.js",
+          "Express.js",
+          "Deno",
+          "GraphQL",
+          "Koa",
+        ],
+      },
+    ],
     phone: {
       type: Number,
     },
@@ -79,21 +85,28 @@ const userSchema = new Schema(
     comments: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'comment'
-    }],
-    favorites: [{
+        ref: "comment",
+      },
+    ],
+    favorites: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'post'
-    }],
-    channels: [{
+        ref: "post",
+      },
+    ],
+    channels: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'channel',
-    }],
-    job_applications:[{
+        ref: "channel",
+      },
+    ],
+    job_applications: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'job_offer',
-    }],
-  
+        ref: "job_offer",
+      },
+    ],
+
     posts: [
       {
         type: Schema.Types.ObjectId,
@@ -106,23 +119,21 @@ const userSchema = new Schema(
         ref: "reaction",
       },
     ],
-  
   },
   { timestamps: true, versionKey: false }
 );
 
 userSchema.methods.toJSON = function idSetter() {
   const { _id, ...User } = this.toObject();
-  User.uid = _id;
+  User.uid = _id
   return User;
 };
+
 
 
 const User = model("user", userSchema);
 
 module.exports = User;
-
-
 
 /**
  * @swagger
@@ -130,7 +141,7 @@ module.exports = User;
  *  schemas:
  *    User:
  *      type: object
- *      properties:        
+ *      properties:
  *        fullName:
  *          type: string
  *          description: the name of the user
@@ -144,7 +155,7 @@ module.exports = User;
  *          type: string
  *          description: the shift available to work
  *        technologies:
- *          type: string 
+ *          type: string
  *          description: technologies that you know
  *        phone:
  *          type: string
@@ -192,7 +203,7 @@ module.exports = User;
  *           token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibHVjYXMgemFyYXRlIiwiaWF0IjoxNjc1ODU2MzYwLCJleHAiOjE2NzU5NDI3NjB9.86gYblfldijom9otS7xIydWLzrSo6YVvA9MVw3tRcjY"
  *    Login:
  *      type: object
- *      properties:        
+ *      properties:
  *        email:
  *          type: string
  *          description: the email of the user account
@@ -202,8 +213,8 @@ module.exports = User;
  *      required:
  *        - email
  *        - password
- *      example: 
+ *      example:
  *           email: foo@bar.com
  *           password: "foobar"
- *        
+ *
  */

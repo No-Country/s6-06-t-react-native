@@ -9,9 +9,7 @@ const {auth , channel}=require("./src/routes")
 require('./src/database/config.js');
 
 const swaggerUI =require("swagger-ui-express");
-const swaggerJsDoc =require("swagger-jsdoc");
-const options=require("./src/config/swagger");
-const specs = swaggerJsDoc(options);
+const specs=require("./src/swagger/config/config")
 
 app.set('view engine', 'handlebars')
 app.set("views", "./src/views");
@@ -33,5 +31,5 @@ layoutsDir: __dirname + '/src/views/layouts',
 }));
 
 app.listen(PORT , () =>{ 
-    console.log(`Servidor corriendo en el Puerto: ${PORT}`)
+    console.log(`Servidor corriendo en el : ${PORT}`)
 });

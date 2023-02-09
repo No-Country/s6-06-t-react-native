@@ -11,6 +11,7 @@ const validatorJWT = (req, res, next) => {
   try {
     const payload = jwt.verify(token, process.env.SECRET_JWT);
 
+
     req.uid = payload.uid;
     req.name = payload.name;
     

@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const generateJWT = require("../helpers/generateJWT");
-const { User, Token } = require("../models");
+const { User, Token,Channel } = require("../models");
 const response = require("../helpers/response");
 const sendEmail = require("../helpers/sendEmail");
 
@@ -18,18 +18,113 @@ const createUser = async (req, res) => {
     newUser = new User(req.body);
 
     const salt = bcrypt.genSaltSync();
+
     newUser.password = bcrypt.hashSync(password.toString(), salt);
+
+////////////////////////////
+    const channel=await Channel.findById("63e527334301295852cc4f4f")
+
+    newUser.channels.push(channel.id)
+////////////////////////////
 
     const savedUser = await newUser.save();
 
-    const { password: pswd, ...userData } = savedUser.toObject();
 
-    const token = await generateJWT(newUser.uid, newUser.fullName);
 
-    response.success(req, res, "User registered", { ...userData, token }, 201);
+    const token = await generateJWT(newUser.id, newUser.fullName);
+
+    let tokenVerification = await Token.findOne({ uid: savedUser.id });
+
+    if (tokenVerification) await token.deleteOne();
+
+    let resetToken = crypto.randomBytes(32).toString("hex");
+
+    const hash = await bcrypt.hash(resetToken, 10);
+
+    await new Token({
+      uid: savedUser._id,
+      token: hash,
+      createdAt: Date.now(),
+    }).save();
+
+    const link = `${process.env.URL}/api/auth/validate-account?token=${resetToken}&uid=${savedUser._id}`;
+
+    sendEmail(
+      savedUser.email,
+      "Account Verification",
+      {
+        name: savedUser.name,
+        link: link,
+      },
+      "./template/accountVerification.handlebars"
+    );
+
+    const { password: pswd, ...userData } = savedUser.toJSON();
+
+    console.log(newUser.toJSON(), "REG", userData);
+
+    response.success(
+      req,
+      res,
+      "User registered , validate account with the link provided in the email",
+      { ...userData, token },
+      201
+    );
   } catch (error) {
     console.log(error);
     response.error(req, res, "Contact Admin", 500);
+  }
+};
+
+const validateAccount = async (req, res) => {
+  const { uid, token } = req.query;
+
+  if (token === "" || uid === "") {
+    return response.error(
+      req,
+      res,
+      "There is a problem with the provided url",
+      400
+    );
+  }
+
+  try {
+    let verificationToken = await Token.findOne({ uid });
+
+    if (!verificationToken) {
+      return response.error(
+        req,
+        res,
+        "Invalid or expired activation account token",
+        400
+      );
+    }
+
+    const isValid = await bcrypt.compare(token, verificationToken.token);
+
+    if (!isValid) {
+      response.error(
+        req,
+        res,
+        "Invalid or expired activation account token",
+        400
+      );
+    }
+
+    await User.updateOne(
+      { _id: uid },
+      { $set: { emailisvalidated: true } },
+      { new: true }
+    );
+
+    await verificationToken.deleteOne();
+
+    const message = "Cuenta activada con exito";
+
+    res.render("success", { layout: "index", message });
+  } catch (e) {
+    console.log(e);
+    return response.error(req, res, "Contact Admin");
   }
 };
 
@@ -41,6 +136,15 @@ const loginUser = async (req, res) => {
 
     if (!user) {
       return response.error(req, res, "User not registered ", 400);
+    }
+
+    if (!user.emailisvalidated) {
+      return response.error(
+        req,
+        res,
+        "Must validate account with the provided email",
+        400
+      );
     }
 
     const validatePassword = bcrypt.compareSync(
@@ -107,7 +211,7 @@ const loginLinkedIn = async (req, res) => {
         img_avatar: picture,
       });
 
-      const newUser= await user.save();
+      const newUser = await user.save();
       const { password: pswd, ...userData } = newUser.toObject();
       const token = await generateJWT(user.id, user.fullName);
       response.success(
@@ -116,7 +220,7 @@ const loginLinkedIn = async (req, res) => {
         "User registered",
         {
           ...userData,
-          token
+          token,
         },
         201
       );
@@ -138,8 +242,7 @@ const loginLinkedIn = async (req, res) => {
         "User logged in",
         {
           ...userData,
-          token
-          
+          token,
         },
         200
       );
@@ -161,7 +264,7 @@ const resetPasswordRequest = async (req, res) => {
 
   let resetToken = crypto.randomBytes(32).toString("hex");
   const hash = await bcrypt.hash(resetToken, 10);
-  console.log(user);
+
   await new Token({
     uid: user._id,
     token: hash,
@@ -180,13 +283,19 @@ const resetPasswordRequest = async (req, res) => {
     "./template/requestResetPassword.handlebars"
   );
 
-  response.success(req, res, "Request for Password reset was succesfull ", link, 200);
+  response.success(
+    req,
+    res,
+    "Request for Password reset was succesfull ",
+    link,
+    200
+  );
 };
 
 const resetPassword = async (req, res) => {
   const { uid, token } = req.query;
   const { password } = req.body;
-  console.log(uid, token);
+
   if (token === "" || uid === "") {
     return response.error(
       req,
@@ -227,7 +336,9 @@ const resetPassword = async (req, res) => {
   );
 
   await passwordResetToken.deleteOne();
-  res.render("success", { layout: "index" });
+
+  const message = "Contraseña actualizada con exito";
+  res.render("success", { layout: "index", message });
 };
 
 const renderRecoverPassword = (req, res) => {
@@ -242,6 +353,7 @@ const renderRecoverPassword = (req, res) => {
 
 module.exports = {
   createUser,
+  validateAccount,
   loginUser,
   generateLinkedinLink,
   loginLinkedIn,

@@ -3,12 +3,8 @@ const {Channel, User} = require('../models')
 const {validateDb} = require('../helpers')
 
 
-const createChannel = async (req,res) =>{   
-    const {id} = req.params
-    const validate =  validateDb(id)
-        if (!validate) {
-            return response.error(req, res, "No valido")
-        }
+const createChannel = async (req,res) =>{  
+ 
     const channel = new Channel(req.body);
     await channel
         .save()
@@ -25,14 +21,8 @@ const updateChannel = async (req, res) => {
     
     const {id} = req.params;
     const {name, typechannel} = req.body
-    
-    try {
-        const validate =  validateDb(id)
-        if (!validate) {
-            return response.error(req, res, "No valido")
-        }
-        console.log('llego')
 
+    try {
         const updatedChannel = await Channel.findByIdAndUpdate(
             {_id: id},
             { name, typechannel},

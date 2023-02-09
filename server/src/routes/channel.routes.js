@@ -1,31 +1,31 @@
 const express = require("express");
 const router = express.Router();
 const {channel} = require('../controllers');
-const {isAdmin, validatorJWT}  = require('../middlewares')
+const {isAdmin, validatorJWT}  = require('../middlewares');
+const { verifyChannel } = require("../validations");
 
 //crear canal
 //is admin
-router.use(validatorJWT)
 
-router.post("/new",  isAdmin, channel.createChannel)
+router.post("/new",validatorJWT,  isAdmin, verifyChannel.create,  channel.createChannel)
 
 //editar canal 
 //isadmin
-router.put('/:id',  isAdmin, channel.updateChannel)
+router.put('/:id',validatorJWT , isAdmin,verifyChannel.edit, channel.updateChannel)
 
 //eliminar canal
 //isadmin
-router.delete('/:id',  isAdmin, channel.deleteChannel)
+router.delete('/:id',validatorJWT,  isAdmin,verifyChannel.remove, channel.deleteChannel)
 
 //get all channel > devuelve solo los nombres en los que el usuario esta participando -si es seleccionado devuelve requeriminetos
-router.get('/user/:id',  channel.getUserChannels)
+router.get('/user/:id',validatorJWT,verifyChannel.getByUser,  channel.getUserChannels)
 
-//obtener canal > devuelve toos los posteos del canal especificado
+//obtener canal > devuelve el canal con los posteos populados
 router.get('/posts/:id', channel.getPostsChannel)
 
 //get todos los canales creados 
 //PARA ADMIN?
-router.get('/all', channel.getAllChannels)
+router.get('/all',validatorJWT, channel.getAllChannels)
 
 module.exports = router;
 
