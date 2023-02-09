@@ -1,4 +1,4 @@
-import { ScrollView, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import ButtonRegistro from "../../../components/buttonRegistro/Index.js";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
 import StepsRegister from "../../../components/stepsRegister/index.js";
@@ -11,7 +11,7 @@ import { profesion } from "../../../utils/dataProfesion.js";
 import { disponibilidad } from "../../../utils/dataDisponibilidad.js";
 import { herramientas } from "../../../utils/dataHerramientas.js";
 
-const RegistroStepTwo = () => {
+const SignUpStepThree = () => {
   const navigation = useNavigation();
 
   return (
@@ -36,27 +36,30 @@ const RegistroStepTwo = () => {
           />
         </View>
         <View style={styles.formContainer}>
-          <InputComponentSelectList
-            label="Nivel de estudios"
-            data={nivelEstudio}
+          <Text style={styles.h2}>¡Casi Terminamos!</Text>
+          <Text style={styles.p}>
+            En instantes recibirás un correo electrónico con un link de
+            confirmación para terminar el proceso de registro.
+          </Text>
+          <Text style={styles.spam}>
+            *No olvides chequear tu correo no deseado.
+          </Text>
+          <View style={styles.confirmation}>
+            <Text style={styles.email}>
+              ¿No recibiste el correo electrónico de confirmación?
+            </Text>
+            <Text style={styles.click}>Hacé click aqui</Text>
+          </View>
+          <PrimaryButton
+            text="Siguiente"
+            handler={() => {
+              navigation.navigate("LogIn");
+            }}
           />
-          <InputComponentSelectList label="Área laboral" data={areaLaboral} />
-          <InputComponentSelectList label="Profesión" data={profesion} />
-          <InputComponentSelectList
-            label="Disponibilidad horaria"
-            data={disponibilidad}
-          />
-          <InputComponentSelectList
-            label="Herramientas utilizadas"
-            placeholder="Selecciona máximo 5"
-            requerimiento="Selecciona aquellas herramientas que has utilizado y queres mejorar"
-            data={herramientas}
-          />
-          <PrimaryButton text="Siguiente" width="width: 100%" handler={()=> navigation.navigate("SignUpStepThree")}/>
         </View>
       </View>
     </ScrollView>
   );
 };
 
-export default RegistroStepTwo;
+export default SignUpStepThree;
