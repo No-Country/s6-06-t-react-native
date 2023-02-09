@@ -4,7 +4,7 @@ const channelSchema=new Schema({
 name:{
   type:String,
   required:true,
-  default:"General"
+  default:"general"
 },
 posts:[{
   type:Schema.Types.ObjectId,
@@ -16,13 +16,16 @@ typechannel:{
   default:"public"
 }
 
-})
-channelSchem.methods.toJSON = function idSetter() {
+},
+{ timestamps: true, versionKey: false })
+
+channelSchema.methods.toJSON = function idSetter() {
   const { _id, ...Channel } = this.toObject();
-  Channel.id = uid;
+  Channel.uid = _id;
   return Channel;
 };
 
 const Channel = model("channel",channelSchema);
 
 module.exports=Channel;
+

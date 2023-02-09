@@ -2,7 +2,7 @@ const express = require("express");
 const { check } = require("express-validator");
 const router = express.Router();
 const { auth } = require("../controllers");
-const { validateFields, validateLinkedin } = require("../middlewares");
+const { validateFields, validateLinkedin ,validatePassword} = require("../middlewares");
 
 /**
  * @swagger
@@ -117,7 +117,6 @@ router.get("/linkedin", (req, res) => {
 router.get("/linkedin/callback", validateLinkedin, auth.loginLinkedIn);
 
 
-//añadi comprobacion de query params 
 router.post("/request-reset-password",
 [
   check("email", "name is required").isEmail(),
@@ -132,6 +131,7 @@ router.post(
     check("password", "password must have 6 or more characters").isLength({
       min: 6,
     }),
+    validatePassword,
     validateFields,
   ],
   auth.resetPassword

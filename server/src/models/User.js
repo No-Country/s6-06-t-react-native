@@ -112,9 +112,8 @@ const userSchema = new Schema(
 
 userSchema.methods.toJSON = function idSetter() {
     const { _id, ...User } = this.toObject();
-    User.id = uid;
-    return User;
-};
+    User.id = _id;
+    return User;  }
 
 const User = model("user", userSchema);
 

@@ -1,3 +1,10 @@
 module.exports={
-auth:require("./auth.routes")
+auth:require("./auth.routes"),
+channel:require('./channel.routes'),
+comment:require('./comment.routes'),
+job_offer:require('./job_offer.routes'),
+post:require('./post.routes'),
+profile:require('./profile.routes'),
+reaction:require('./reactions.routes'),
+user:require('./user.routes')
 }

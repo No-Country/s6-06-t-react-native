@@ -1,34 +1,40 @@
-const { response        } = require("../helpers/response.js")   
-import { findById, newPost, } from '../services/post.service.js';
+const { success, error  } = require('../helpers/response.js')
+const { findPostById, newPost} =require('../services/post.services.js');
 
 const createPost = async (req, res) => {
     const { body } = req;
 
-    const { uid } = req;
-
+    const uid = req.uid;
     let savedPost = {};
-
     try {
-        savedPost = await newPost({ uid, body });
+        savedPost = await newPost( uid, body );
     } catch (err) {
-        return serverError({
+        return error(
+            req,
             res,
-            message: err.message,
-        });
+            'post creation failed 1',
+        );
     }
-
+    console.log(savedPost,"ACA")
     if (Object.keys(savedPost).length > 0) {
-        const post = await findById(savedPost.uid);
+        const post = await findPostById(savedPost.id);
 
-        return success({
+        return success(
+            req,
             res,
-            message: 'post created successfully',
-            data: post,
-        });
+            'post created successfully',
+            post,
+        );
     }
 
-    return error({
+    return error(
+        req,
         res,
-        message: 'post creation failed',
-    });
+        'post creation failed 2',
+    );
 };
+
+
+module.exports = {
+    createPost
+}

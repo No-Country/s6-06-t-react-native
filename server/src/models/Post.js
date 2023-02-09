@@ -11,15 +11,19 @@ const postSchema = new Schema({
     },
     description: {
         Type: String,
-        required: true
+        // required: true
     },
     comments: [{
         type: Schema.Types.ObjectId,
-        ref: 'comments'
+        ref: 'comment'
     }],
     reactions: [{
         type: Schema.Types.ObjectId,
         ref: 'reaction'
+    }],
+    channel: [{
+        type: Schema.Types.ObjectId,
+        ref: 'channel'
     }],
     attached: [String],
     important: {
@@ -42,7 +46,7 @@ const postSchema = new Schema({
 
 postSchema.methods.toJSON = function idSetter() {
     const { _id, ...Post } = this.toObject();
-    Post.id = uid;
+    Post.uid = _id;
     return Post;
 };
 

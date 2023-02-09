@@ -1,76 +1,107 @@
-const {Post} = require('../models/Post.js');
+const { Post, Comment, Reaction, Channel } = require('../models');
 
-const newPost = async ({ uid, body }) => {
-    const {
-        title,
-        description,
-        comments,
 
-    } = body;
+const findPostById = async (id) => {
+    const post = await Post.findById(id, [
+        'title',
+        'description',
+        'attached'
+    ])
+        .populate(
+            'user', 
+            'fullName'
+        )
+        .populate(
+            'reactions',
+            'type__Reaction'
+        )
+        .populate(
+            'channel',
+            'name'
+        )
+        .populate(
+            'comments',
+            'author'
+        )
 
-    const post = new Post({
-        title,
-        description,
-        comments,
-        reactions,
-        attached,
-        user: uid,
-    });
 
-    const postUser = await User.findById(id);
-    postUser.post.push(post.id);
-    await postUser.save();
+    return post;
+};
 
-    const postLanguage = await ProgrammingL.findOneAndUpdate(
-        { name: programmingL },
-        { $set: { name: programmingL } },
-        {
-            upsert: true,
-            new: true,
-        }
-    );
-    postLanguage.post.push(post.id);
-    await postLanguage.save();
 
-    const postCategory = await Category.findOneAndUpdate(
-        { name: category },
-        { $set: { name: category } },
-        {
-            upsert: true,
-            new: true,
-        }
-    );
-    postCategory.post.push(post.id);
-    await postCategory.save();
+const newPost = async (id, body) => {
+    console.log(id, body, Post)
 
-    const postTechnology = await Technology.findOneAndUpdate(
-        { name: technology },
-        { $set: { name: technology } },
-        {
-            upsert: true,
-            new: true,
-        }
-    );
-    postTechnology.post.push(post.id);
-    await postTechnology.save();
+    try {
 
-    const postTag = await Tag.findOneAndUpdate(
-        { name: tag },
-        { $set: { name: tag } },
-        {
-            upsert: true,
-            new: true,
-        }
-    );
-    postTag.post.push(post.id);
-    await postTag.save();
 
-    post.category = postCategory.id;
-    post.programmingL = postLanguage.id;
-    post.technology = postTechnology.id;
-    post.tag = postTag.id;
+        const {
+            title,
+            description,
+            attached,
+            comments,
+            reactions,
+            channel
+        } = body
 
-    const savedPost = await post.save();
+        const post = new Post({
+            ...body,
+            user: id,
+        });
+      
 
-    return savedPost;
+        console.log(post.channel,"COMENT")
+        // const postComments = await Comment.findOneAndUpdate(
+        //     { name: comments },
+        //     { $set: { name: comments } },
+        //     {
+        //         upsert: true,
+        //         new: true,
+        //     }
+        // );
+
+        // if(!postComments)
+        // postComments.post.push(post.id);
+        // await postComments.save();
+
+        // const postReactions = await Reaction.findOneAndUpdate(
+        //     { name: reactions },
+        //     { $set: { name: reactions } },
+        //     {
+        //         upsert: true,
+        //         new: true,
+        //     }
+        // );
+        // postReactions.post.push(post.id);
+        // await postReactions.save();
+
+        const postChannel = await Channel.findOneAndUpdate(
+            { name: channel },
+            { $set: { name: channel } },
+            {
+                upsert: true,
+                new: true,
+            }
+        );
+        postChannel.post.push(post.id);
+        await postChannel.save();
+
+          // post.comments = postComments.id;
+        // post.reactions = postReactions.id;
+        //post.channel = postChannel.id;
+
+        const savedPost = await post.save();
+
+
+        return savedPost
+    }
+    catch (error) {
+        console.log("XXXXXXXXXXXX", error)
+    }
+};
+
+
+module.exports = {
+    newPost,
+    findPostById
 };
