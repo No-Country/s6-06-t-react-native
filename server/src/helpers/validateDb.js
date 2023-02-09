@@ -1,9 +1,9 @@
-const {Channel} = require('../models')
+const {Channel, Comment} = require('../models')
 
 const existInDb = async (ref) => {
     
     const element = await Channel.findOne({_id: ref})
-  
+
     if (!element) {
         // return response.error(req,res,"El Canal no existe",400
         return false
@@ -13,7 +13,16 @@ const existInDb = async (ref) => {
     
 }
 
+const existingComment = async(ref) =>{
+            const element = await Comment.findOne({_id: ref})
+            if (!element) {return false}
+            return true
+        } 
+
 // const asd = (model) => {
     
 // }
-module.exports = existInDb
+module.exports = {
+    existInDb, 
+    existingComment
+}

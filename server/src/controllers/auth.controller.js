@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
 
     const { password: pswd, ...userData } = savedUser.toObject();
 
-    const token = await generateJWT(newUser.uid, newUser.fullName);
+    const token = await generateJWT(newUser.id, newUser.fullName);
 
     response.success(req, res, "User registered", { ...userData, token }, 201);
   } catch (error) {

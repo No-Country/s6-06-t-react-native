@@ -5,7 +5,7 @@ const {validateDb} = require('../helpers')
 
 const createChannel = async (req,res) =>{   
     const {id} = req.params
-    const validate =  validateDb(id)
+    const validate =  existInDb(id)
         if (!validate) {
             return response.error(req, res, "No valido")
         }
@@ -28,7 +28,7 @@ const updateChannel = async (req, res) => {
     const {name, typechannel} = req.body
     
     try {
-        const validate =  validateDb(id)
+        const validate =  existInDb(id)
         if (!validate) {
             return response.error(req, res, "No valido")
         }

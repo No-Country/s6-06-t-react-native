@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const {channel} = require('../controllers');
 const {isAdmin, validatorJWT}  = require('../middlewares')
-const {validateDb} = require('../helpers')
-const {check} = require('express-validator')
-const {channel: modelChannel} = require('../models')
+// const {validateDb} = require('../helpers')
+// const {check} = require('express-validator')
+// const {channel: modelChannel} = require('../models')
 
 //crear canal
 //is admin

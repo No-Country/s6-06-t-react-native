@@ -10,7 +10,7 @@ const validatorJWT = (req, res, next) => {
 
   try {
     const payload = jwt.verify(token, process.env.SECRET_JWT);
-
+    console.log(payload)
     req.uid = payload.uid;
     req.name = payload.name;
     
