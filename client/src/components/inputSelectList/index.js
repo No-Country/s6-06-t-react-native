@@ -1,13 +1,19 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { useCallback, useState } from "react";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { styles } from "./style";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { SelectList } from "react-native-dropdown-select-list";
 
-const InputComponentSelectList = ({ label, data, placeholder='Selecciona tu respuesta' , requerimiento}) => {
+const InputComponentSelectList = ({
+  label,
+  data,
+  placeholder = "Selecciona tu respuesta",
+  requerimiento,
+}) => {
+
   const [isFocused, setIsFocused] = useState(false);
+  
   const [selected, setSelected] = useState([]);
 
   const [fontsLoaded] = useFonts({
@@ -23,21 +29,25 @@ const InputComponentSelectList = ({ label, data, placeholder='Selecciona tu resp
   if (!fontsLoaded) {
     return null;
   }
-
   return (
     <View style={styles.containerInput} onLayout={onLayoutRootView}>
       <Text style={styles.label}>{label}</Text>
       <View style={styles.inputWrapper}>
-        <SelectList
-          setSelected={(val) => setSelected(val)}
-          data={data}
-          save="value"
-          searchPlaceholder=''
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)} 
-          placeholder={placeholder}
-          boxStyles={styles.input}
-        />
+        <View onPress={() => setIsFocused(true)}>
+          <SelectList
+            setSelected={(val) => setSelected(val)}
+            data={data}
+            save="value"
+            searchPlaceholder=""
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            placeholder={placeholder}
+            boxStyles={[styles.input, isFocused && styles.outLine]}
+            dropdownStyles={styles.dropdownStyles}
+            search={false}
+            // dropdownShown={isFocused}
+          />
+        </View>
       </View>
       {requerimiento && (
         <Text style={styles.requerimiento}>{requerimiento}</Text>
