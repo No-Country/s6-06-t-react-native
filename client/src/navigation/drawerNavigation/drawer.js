@@ -2,7 +2,8 @@ import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigatio
 import {View, TouchableOpacity, Text, Image} from 'react-native';
 import Community from '../../screens/drawer_navegation/community';
 import GeneralChannel from '../../screens/drawer_navegation/channels/general';
-import ShortlistedChannel from '../../screens/drawer_navegation/channels/shortlisted'
+//import ShortlistedChannel from '../../screens/drawer_navegation/channels/shortlisted'
+import ShortlistedChannel from '../../screens/authnavigation/home'
 import JobsChannel from '../../screens/drawer_navegation/channels/jobs';
 import AmazonTeamChannel from '../../screens/drawer_navegation/channels/amazon_team';
 import ProjectsChannel from '../../screens/drawer_navegation/channels/projects';
@@ -21,9 +22,10 @@ const DrawerNavegation = ({navigation}) => {
       }}
       drawerContent = {(props) => <MenuInterno props={props}/>}
     >
+      <Drawer.Screen name="Shortlisted" component={ShortlistedChannel} />
       <Drawer.Screen name="Community" component={Community} />
       <Drawer.Screen name="GeneralChannel" component={GeneralChannel} />
-      <Drawer.Screen name="Shortlisted" component={ShortlistedChannel} />
+      {/* <Drawer.Screen name="Shortlisted" component={ShortlistedChannel} /> */}
       <Drawer.Screen name="Jobs" component={JobsChannel} />
       <Drawer.Screen name="AmazonTeam" component={AmazonTeamChannel} />
       <Drawer.Screen name="Projects" component={ProjectsChannel} />
@@ -35,7 +37,6 @@ const DrawerNavegation = ({navigation}) => {
 export default DrawerNavegation;
 
 const MenuInterno = ({props}) => {
-  console.log(props)
   return (
    <DrawerContentScrollView>
      {/* Parte del avatar */}

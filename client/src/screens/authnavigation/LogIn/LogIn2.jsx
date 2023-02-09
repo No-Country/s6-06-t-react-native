@@ -73,7 +73,7 @@ const LogIn2 = () => {
         </TouchableOpacity>
         <PrimaryButton
           text="Iniciar Sesión"
-          handler={() => navigation.navigate("Home")}
+          handler={() => navigation.navigate("Transition")}
         />
         <View style={styles.lineContainer}>
           <View style={styles.line}></View>
