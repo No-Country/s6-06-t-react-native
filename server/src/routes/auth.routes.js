@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 const { auth } = require("../controllers");
 const { verifyAuth } = require("../validations");
-const { validateLinkedin } = require("../middlewares");
+const { validateLinkedin,validatorJWT } = require("../middlewares");
 
 router.post("/new", verifyAuth.create, auth.createUser)
       .get("/validate-account", auth.validateAccount)
+      .get("/resend-email",validatorJWT,auth.resendEmail)
       .post("/login", verifyAuth.login, auth.loginUser)
       .get("/linkedin", auth.generateLinkedinLink)
       .get("/linkedin/callback", validateLinkedin, auth.loginLinkedIn)

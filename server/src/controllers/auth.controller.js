@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const generateJWT = require("../helpers/generateJWT");
-const { User, Token,Channel } = require("../models");
+const { User, Token, Channel, TokenRecover } = require("../models");
 const response = require("../helpers/response");
 const sendEmail = require("../helpers/sendEmail");
 
@@ -21,33 +21,32 @@ const createUser = async (req, res) => {
 
     newUser.password = bcrypt.hashSync(password.toString(), salt);
 
-////////////////////////////
-    const channel=await Channel.findById("63e527334301295852cc4f4f")
+    ////////////////////////////
+    const channel = await Channel.findById("63e527334301295852cc4f4f");
 
-    newUser.channels.push(channel.id)
-////////////////////////////
+    newUser.channels.push(channel.id);
+    ////////////////////////////
 
     const savedUser = await newUser.save();
 
-
-
     const token = await generateJWT(newUser.id, newUser.fullName);
 
-    let tokenVerification = await Token.findOne({ uid: savedUser.id });
+    let tokenVerification = await TokenRecover.findOne({ uid: savedUser.id });
 
     if (tokenVerification) await token.deleteOne();
 
     let resetToken = crypto.randomBytes(32).toString("hex");
 
     const hash = await bcrypt.hash(resetToken, 10);
+    const link = `${process.env.URL}/api/auth/validate-account?token=${resetToken}&uid=${savedUser._id}`;
 
-    await new Token({
+    await new TokenRecover({
       uid: savedUser._id,
       token: hash,
       createdAt: Date.now(),
+      email: savedUser.email,
+      name: savedUser.name,
     }).save();
-
-    const link = `${process.env.URL}/api/auth/validate-account?token=${resetToken}&uid=${savedUser._id}`;
 
     sendEmail(
       savedUser.email,
@@ -60,8 +59,6 @@ const createUser = async (req, res) => {
     );
 
     const { password: pswd, ...userData } = savedUser.toJSON();
-
-    console.log(newUser.toJSON(), "REG", userData);
 
     response.success(
       req,
@@ -78,7 +75,7 @@ const createUser = async (req, res) => {
 
 const validateAccount = async (req, res) => {
   const { uid, token } = req.query;
-
+  /////////// MOVER A VALIDATOR
   if (token === "" || uid === "") {
     return response.error(
       req,
@@ -87,9 +84,9 @@ const validateAccount = async (req, res) => {
       400
     );
   }
-
+  ///////////
   try {
-    let verificationToken = await Token.findOne({ uid });
+    let verificationToken = await TokenRecover.findOne({ uid });
 
     if (!verificationToken) {
       return response.error(
@@ -125,6 +122,48 @@ const validateAccount = async (req, res) => {
   } catch (e) {
     console.log(e);
     return response.error(req, res, "Contact Admin");
+  }
+};
+
+const resendEmail = async (req, res) => {
+  const uid = req.uid;
+  try {
+    let tokenVerification = await TokenRecover.findOne({ uid });
+
+    if (!tokenVerification) {
+      return response.error(req, res, "Invalid link", 400);
+    }
+
+    await TokenRecover.deleteOne();
+
+    let resetToken = crypto.randomBytes(32).toString("hex");
+
+    const hash = await bcrypt.hash(resetToken, 10);
+
+    const link = `${process.env.URL}/api/auth/validate-account?token=${resetToken}&uid=${uid}`;
+
+    await new TokenRecover({
+      uid,
+      token: hash,
+      createdAt: Date.now(),
+      email: tokenVerification.email,
+      name: tokenVerification.name,
+    }).save();
+
+    sendEmail(
+      tokenVerification.email,
+      "Account Verification",
+      {
+        name: tokenVerification.name,
+        link: link,
+      },
+      "./template/accountVerification.handlebars"
+    );
+
+    response.success(req, res, "Email resend succesfully , check inbox ", undefined, 200);
+  } catch (e) {
+    console.log(e);
+    response.error(req, res, "Contact Admin", 500);
   }
 };
 
@@ -259,13 +298,13 @@ const resetPasswordRequest = async (req, res) => {
   const user = await User.findOne({ email });
   if (!user) return response.error(req, res, "Email not registered", 400);
 
-  let token = await Token.findOne({ uid: user.id });
+  let token = await TokenRecover.findOne({ uid: user.id });
   if (token) await token.deleteOne();
 
   let resetToken = crypto.randomBytes(32).toString("hex");
   const hash = await bcrypt.hash(resetToken, 10);
 
-  await new Token({
+  await new TokenRecover({
     uid: user._id,
     token: hash,
     createdAt: Date.now(),
@@ -305,7 +344,7 @@ const resetPassword = async (req, res) => {
     );
   }
 
-  let passwordResetToken = await Token.findOne({ uid });
+  let passwordResetToken = await TokenRecover.findOne({ uid });
 
   if (!passwordResetToken) {
     response.error(req, res, "Invalid or expired password reset token", 400);
@@ -354,6 +393,7 @@ const renderRecoverPassword = (req, res) => {
 module.exports = {
   createUser,
   validateAccount,
+  resendEmail,
   loginUser,
   generateLinkedinLink,
   loginLinkedIn,

@@ -15,5 +15,11 @@ const tokenSchema = new Schema({
     default: Date.now,
     expires: 3600,
   },
+  email:{
+    type:String
+  },
+  name:{
+    type:String
+  }
 });
 module.exports =model("token", tokenSchema);

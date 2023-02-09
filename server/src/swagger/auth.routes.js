@@ -27,30 +27,27 @@
  *
  */
 
+
+
 /**
  * @swagger
- * /api/auth/validate-account:
+ * /api/auth/resend-email:
  *  get:
  *    parameters:
- *      - in: query
- *        name: token
+ *      - in: header
+ *        name: x-token
  *        schema:
  *          type: string
- *         
+ *          format: uuid
  *        required: true
- *        description: The user token from current session
- *      - in: query
- *        name: uid
- *        schema:
- *          type: string
- *        required: true
- *        description: The user id
- *    summary: Validate the user account when is requested
+ *        description: The token users account
+ *    
+ *    summary: Re send the email to verify the account
  *    tags: [Users]
  *    
  *    responses:
  *      200:
- *        description: Show a succes screen when the account is activated
+ *        description: Email resend succesfully , check inbox
  *     
  *
  */
@@ -148,6 +145,34 @@
  *                msg: Request for Password reset was succesfull
  *                data: http://localhost:5000/api/auth/reset-password?token=fa95483efa67bfe3cfcfb683370536c33587ceb7c8c2f8855873c66160b05d82&uid=63e40fe2aa7f165c18c0520b
  * 
+ *
+ */
+
+/**
+ * @swagger
+ * /api/auth/validate-account:
+ *  get:
+ *    parameters:
+ *      - in: query
+ *        name: token
+ *        schema:
+ *          type: string
+ *         
+ *        required: true
+ *        description: The user token from current session
+ *      - in: query
+ *        name: uid
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The user id
+ *    summary: Validate the user account when is requested  -ONLY SERVER
+ *    tags: [Users]
+ *    
+ *    responses:
+ *      200:
+ *        description: Show a succes screen when the account is activated
+ *     
  *
  */
 

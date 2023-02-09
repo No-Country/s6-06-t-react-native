@@ -1,10 +1,9 @@
 module.exports={
   User:require("./User"),
-  Token:require("./TokenRecover_model"),
   Channel:require("./Channel"),
   Comment:require("./Comment"),
   Job_offer:require('./Job_offer'),
   Post:require('./Post'),
-  TokenRecover_model:require('./TokenRecover_model'),
+  TokenRecover:require('./TokenRecover'),
   User:require('./User')
 }
