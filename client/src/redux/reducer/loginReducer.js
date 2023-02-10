@@ -24,11 +24,10 @@ export const loginReducer = (state = initialState, { type, payload }) => {
         token: null,
       };
     case LOGIN_USER_SUCCESS:
-      // REVISAR COMO VIENE EL PAYLOAD
       return {
         ...state,
         isLoading: false,
-        user: payload.user,
+        user: payload,
         token: payload.token,
         error: null,
       };
