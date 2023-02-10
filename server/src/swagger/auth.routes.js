@@ -77,6 +77,37 @@
 
 /**
  * @swagger
+ * /api/auth/renew:
+ *  get:
+ *    parameters:
+ *      - in: header
+ *        name: x-token
+ *        schema:
+ *          type: string
+ *          format: uuid
+ *        required: true
+ *        description: The token users account
+ *    
+ *    summary: Renew a token close to expiration
+ *    tags: [Users]
+ *    
+ *    responses:
+ *      200:
+ *        description: Token generated succesfully
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              example:        
+ *                token:	dflkjhf4t89yurdtndrt895nf7yh895hg89jf89h7896j78967fj89mj768jf58967hn8967hn589nhg6
+ *                
+ *               
+ *     
+ *
+ */
+
+/**
+ * @swagger
  * /api/auth/linkedin:
  *  get:
  *    summary: Request the linkedin authentication page

@@ -8,7 +8,7 @@ router.post("/new", verifyAuth.create, auth.createUser)
       .get("/validate-account",verifyAuth.validate, auth.validateAccount)
       .get("/resend-email",validatorJWT,auth.resendEmail)
       .post("/login", verifyAuth.login, auth.loginUser)
-      .get("/renew",validatorJWT,auth.renewToken)//DOCUMENTAR
+      .get("/renew",validatorJWT,auth.renewToken)
       .get("/linkedin", auth.generateLinkedinLink)
       .get("/linkedin/callback", validateLinkedin, auth.loginLinkedIn)
       .post("/request-reset-password",verifyAuth.resetPasswordRequest,auth.resetPasswordRequest)

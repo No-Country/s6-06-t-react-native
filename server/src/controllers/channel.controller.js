@@ -88,9 +88,9 @@ const getAllChannels = async (req, res) => {
 };
 
 const getUserChannels = async (req, res) => {
-    const {id} = req.params
+    const {uid} = req.params
     try {
-        const user = await User.findById(id).populate("channels","name");
+        const user = await User.findById(uid).populate("channels","name");
   
         if (!user) {
             return res.status(404).send({ error: "Usuario no encontrado" });
