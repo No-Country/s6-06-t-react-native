@@ -1,8 +1,9 @@
 const { Comment, Post, Reaction } = require("../models");
 const { response } = require("../helpers");
-const { existingComment } = require("../helpers/validateDb");
+
 
 const createComment = async (req, res) => {
+  const io=req.app.locals.io
   const uid = req.uid;
   const { body, post } = req.body;
 
@@ -27,6 +28,8 @@ const createComment = async (req, res) => {
 
     const savedComment = await comment.save();
 
+    io.emit('comment-new', { savedComment }) 
+    
     return response.success(
       req,
       res,

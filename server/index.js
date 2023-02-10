@@ -8,6 +8,14 @@ const app = express();
 const {auth , channel, post ,comment}=require("./src/routes")
 require('./src/database/config.js');
 
+const server =require("http").Server(app) 
+const io = require('socket.io')(server)
+const Sockets =require("./src/sockets/sockets") ;
+
+
+
+
+
 const swaggerUI =require("swagger-ui-express");
 const specs=require("./src/swagger/config/config")
 
@@ -32,6 +40,14 @@ app.engine('handlebars', handlebars.engine({
 layoutsDir: __dirname + '/src/views/layouts',
 }));
 
-app.listen(PORT , () =>{ 
+
+
+console.log(`Servidor corriendo en el : ${PORT}`);
+
+Sockets(io);
+
+
+server.listen(PORT , () =>{ 
     console.log(`Servidor corriendo en el : ${PORT}`)
 });
+app.locals.io = io
