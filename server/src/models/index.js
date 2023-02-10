@@ -5,5 +5,6 @@ module.exports={
   JobOffer:require('./JobOffer'),
   Post:require('./Post'),
   User:require('./User'),
-  Reaction:require("./Reaction")
+  Reaction:require("./Reaction"),
+  TokenRecover:require("./TokenRecover")
 }

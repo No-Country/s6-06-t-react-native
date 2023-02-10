@@ -8,7 +8,7 @@ const { post } = require("../controllers"             );
 // const { validateFields, validateLinkedin, validatePassword } = require("../middlewares");
 
 //crear post como usuario - validar si el post corresponde al usuario-validar JWT
-router.post('/create', validatorJWT, post.createPost )
+router.post('/create/:channel', validatorJWT, post.createPost )
 //editar post como usuario - validar si el post corresponde al usuario-validar JWT
 
 //borrar post como usuario  - validar si el post corresponde al usuario-validar JWT

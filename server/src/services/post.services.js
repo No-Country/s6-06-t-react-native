@@ -1,107 +1,66 @@
-const { Post, Comment, Reaction, Channel } = require('../models');
-
+const { Post, Comment, Reaction, Channel } = require("../models");
+const {response}=require("../helpers")
 
 const findPostById = async (id) => {
-    const post = await Post.findById(id, [
-        'title',
-        'description',
-        'attached'
-    ])
-        .populate(
-            'user', 
-            'fullName'
-        )
-        .populate(
-            'reactions',
-            'type__Reaction'
-        )
-        .populate(
-            'channel',
-            'name'
-        )
-        .populate(
-            'comments',
-            'author'
-        )
-
+    const post = await Post.findById(id, ["title", "description", "attached"])
+    .populate("user", "fullName")
+    .populate("reactions", "type__Reaction")
+    .populate("channel", "name")
+    .populate("comments", "author");
 
     return post;
 };
 
-
-const newPost = async (id, body) => {
-    console.log(id, body, Post)
-
+const newPost = async (id, body,channel) => {
     try {
+    const post = new Post({
+    ...body,
+    user: id,
+    });
+    // const postComments = await Comment.findOneAndUpdate(
+    //     { name: comments },
+    //     { $set: { name: comments } },
+    //     {
+    //         upsert: true,
+    //         new: true,
+    //     }
+    // );
 
+    // if(!postComments)
+    // postComments.post.push(post.id);
+    // await postComments.save();
 
-        const {
-            title,
-            description,
-            attached,
-            comments,
-            reactions,
-            channel
-        } = body
+    // const postReactions = await Reaction.findOneAndUpdate(
+    //     { name: reactions },
+    //     { $set: { name: reactions } },
+    //     {
+    //         upsert: true,
+    //         new: true,
+    //     }
+    // );
+    // postReactions.post.push(post.id);
+    // await postReactions.save();
 
-        const post = new Post({
-            ...body,
-            user: id,
-        });
-      
+    const postChannel = await Channel.findById(channel);
 
-        console.log(post.channel,"COMENT")
-        // const postComments = await Comment.findOneAndUpdate(
-        //     { name: comments },
-        //     { $set: { name: comments } },
-        //     {
-        //         upsert: true,
-        //         new: true,
-        //     }
-        // );
+    postChannel.posts.push(post.id);
 
-        // if(!postComments)
-        // postComments.post.push(post.id);
-        // await postComments.save();
+    await postChannel.save();
 
-        // const postReactions = await Reaction.findOneAndUpdate(
-        //     { name: reactions },
-        //     { $set: { name: reactions } },
-        //     {
-        //         upsert: true,
-        //         new: true,
-        //     }
-        // );
-        // postReactions.post.push(post.id);
-        // await postReactions.save();
+    // post.comments = postComments.id;
+    // post.reactions = postReactions.id;
+    post.channel=postChannel.id//NO CREO Q SEA NECESARIO GUARDARLO ACA
 
-        const postChannel = await Channel.findOneAndUpdate(
-            { name: channel },
-            { $set: { name: channel } },
-            {
-                upsert: true,
-                new: true,
-            }
-        );
-        postChannel.post.push(post.id);
-        await postChannel.save();
+    const savedPost = await post.save();
+    return savedPost;
 
-          // post.comments = postComments.id;
-        // post.reactions = postReactions.id;
-        //post.channel = postChannel.id;
-
-        const savedPost = await post.save();
-
-
-        return savedPost
-    }
-    catch (error) {
-        console.log("XXXXXXXXXXXX", error)
+    } catch (error) {
+    console.log("XXXXXXXXXXXX", error);
+    response.error(req,res,"CONTACT ADMIN",500)
     }
 };
 
-
 module.exports = {
     newPost,
-    findPostById
+    findPostById,
 };
