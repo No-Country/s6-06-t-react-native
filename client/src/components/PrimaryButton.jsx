@@ -1,17 +1,18 @@
 import {
   Dimensions,
+  Pressable,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
 
-const PrimaryButton = ({ text, handler, width }) => {
+const PrimaryButton = ({ text, handler, width, disabled = false }) => {
   return (
     <View>
-      <TouchableOpacity onPress={handler} style={[styles.signIn, width && styles.width]}>
+      <Pressable disabled={disabled} onPress={handler} style={[styles.signIn, width && styles.width]}>
         <Text style={{ color: "white", fontWeight: "600" }}>{text}</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };

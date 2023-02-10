@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { styles } from "./style";
 import * as SplashScreen from "expo-splash-screen";
-import { useFonts } from "expo-font"
+import { useFonts } from "expo-font";
 
 const InputComponent = ({
   label,
@@ -11,24 +11,32 @@ const InputComponent = ({
   keyboardType = "default",
   requerimiento,
   showPass,
+  onBlur,
+  onChangeText,
+  value,
+  error
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [showPassState, setShowPassState] = useState(false);
 
   const [fontsLoaded] = useFonts({
-    'SFProRegular': require("../../../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
+    SFProRegular: require("../../../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
-
     }
   }, [fontsLoaded]);
 
   if (!fontsLoaded) {
     return null;
   }
+
+  const handleOnBlur = () => { 
+    onBlur
+    setIsFocused(false)
+   }
 
   return (
     <View style={styles.containerInput} onLayout={onLayoutRootView}>
@@ -42,7 +50,9 @@ const InputComponent = ({
           keyboardType={keyboardType}
           secureTextEntry={showPass ? !showPassState : false}
           onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onBlur={handleOnBlur}
+          onChangeText={onChangeText}
+          value={value}
         />
         {showPass && (
           <TouchableOpacity
@@ -57,6 +67,7 @@ const InputComponent = ({
           </TouchableOpacity>
         )}
       </View>
+      {error && <Text style={styles.error}>{error.message}</Text>}
       {requerimiento && (
         <Text style={styles.requerimiento}>{requerimiento}</Text>
       )}
