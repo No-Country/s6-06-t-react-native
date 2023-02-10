@@ -8,10 +8,11 @@ router.post("/new", verifyAuth.create, auth.createUser)
       .get("/validate-account",verifyAuth.validate, auth.validateAccount)
       .get("/resend-email",validatorJWT,auth.resendEmail)
       .post("/login", verifyAuth.login, auth.loginUser)
+      .get("/renew",validatorJWT,auth.renewToken)//DOCUMENTAR
       .get("/linkedin", auth.generateLinkedinLink)
       .get("/linkedin/callback", validateLinkedin, auth.loginLinkedIn)
       .post("/request-reset-password",verifyAuth.resetPasswordRequest,auth.resetPasswordRequest)
       .get("/reset-password", auth.renderRecoverPassword)
       .post("/reset-password", verifyAuth.resetPassword, auth.resetPassword)
-
+      
 module.exports = router;

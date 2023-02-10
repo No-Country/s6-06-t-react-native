@@ -20,4 +20,18 @@ router.put('/delete/:id', validatorJWT, comment.deleteComment)
 router.put('/admdelete/:id', validatorJWT, isAdmin, comment.admDeleteComment)
 
 
+//responde a comentario
+router.post("/reply/new/:id",validatorJWT, comment.replyComment)
+
+//modificar respuesta-con posibilidad de "eiliminar"-solo autor 
+
+//hacer reaccion
+router.post("/reaction/:id",validatorJWT, comment.reactionToComment)
+
+
+
+
+
+
+
 module.exports = router;

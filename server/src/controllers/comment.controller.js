@@ -1,4 +1,4 @@
-const { Comment, Post } = require("../models");
+const { Comment, Post, Reaction } = require("../models");
 const { response } = require("../helpers");
 const { existingComment } = require("../helpers/validateDb");
 
@@ -127,9 +127,73 @@ const admDeleteComment = async (req, res) => {
   }
 };
 
+
+const replyComment = async (req, res) => {
+  const uid=req.uid
+  const { id } = req.params;
+  const {message}=req.body
+
+  try {
+    const comment = await Comment.findById(id);
+
+    if (!comment) {
+      return response.error(req, res, "Comentario no encontrado", 404);
+    }
+
+    const reply=await new Comment({
+      author:uid,
+      body:message
+    }).save()
+
+  
+
+    await Comment.findByIdAndUpdate(
+      id,
+      { $push: { replies: reply.id } },
+      { new: true }
+    );
+
+    return response.success(req, res, "Respuesta a comentario exitosa", 200);
+  } catch (error) {
+    return response.error(req, res, error.message, 500);
+  }
+};
+
+const reactionToComment=async(req,res)=>{
+  const uid=req.uid
+  const { id } = req.params;
+  const {reaction}=req.body
+
+  try {
+    const comment = await Comment.findById(id);
+
+    if (!comment) {
+      return response.error(req, res, "Comentario no encontrado", 404);
+    }
+
+    const newReaction=await new Reaction({
+      user:uid,
+      type__Reaction:reaction
+    }).save()
+console.log(newReaction);
+    await Comment.findByIdAndUpdate(
+      id,
+      { $push: { reactions: newReaction.id } },
+    );
+
+    return response.success(req, res, "Reaccion  exitosa", 200);
+  } catch (error) {
+    return response.error(req, res, error.message, 500);
+  }
+
+}
+
+
 module.exports = {
   createComment,
   updateComment,
   deleteComment,
   admDeleteComment,
+  replyComment,
+  reactionToComment
 };

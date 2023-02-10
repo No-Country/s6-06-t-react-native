@@ -15,6 +15,7 @@ router.put('/:id',validatorJWT , isAdmin,verifyChannel.edit, channel.updateChann
 
 //eliminar canal
 //isadmin
+////TAL VEZ  MODIFICAR LA PROP ACTIVE Y NO ELIMINAR?
 router.delete('/:id',validatorJWT,  isAdmin,verifyChannel.remove, channel.deleteChannel)
 
 //get all channel > devuelve solo los nombres en los que el usuario esta participando -si es seleccionado devuelve requeriminetos

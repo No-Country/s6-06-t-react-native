@@ -19,4 +19,11 @@ router.post('/create/:channel', validatorJWT, post.createPost )
 
 //borrar  cualquier post como admin  -validar admin-validar JWT
 
+
+
+
+//reaccion a post
+router.post("/reaction/:id",validatorJWT, post.reactionToPost)
+
+
 module.exports = router;

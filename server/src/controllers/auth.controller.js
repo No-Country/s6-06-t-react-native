@@ -21,13 +21,15 @@ const createUser = async (req, res) => {
 
     newUser.password = bcrypt.hashSync(password.toString(), salt);
 
-    ////////////////////////////
+    ////////////////////////////EL ID CORRESPONDE AL DEL CANAL GENERAL 
     const channel = await Channel.findById("63e527334301295852cc4f4f");
 
     newUser.channels.push(channel.id);
     ////////////////////////////
 
     const savedUser = await newUser.save();
+
+    ///// SACAR A FUNCION
 
     const token = await generateJWT(savedUser.id, savedUser.fullName);
 
@@ -57,6 +59,8 @@ const createUser = async (req, res) => {
       },
       "./template/accountVerification.handlebars"
     );
+///////
+
 
     const { password: pswd, ...userData } = savedUser.toJSON();
 
@@ -163,7 +167,7 @@ const loginUser = async (req, res) => {
 
   try {
     const user = await User.findOne({ email }).lean();
-
+console.log(user.id)
     if (!user) {
       return response.error(req, res, "User not registered ", 400);
     }
@@ -186,7 +190,7 @@ const loginUser = async (req, res) => {
       return response.error(req, res, "Bad Credentials", 400);
     }
 
-    const token = await generateJWT(user.id, user.name);
+    const token = await generateJWT(user._id, user.fullName);
 
     const { password: pswd, ...userData } = user;
 
@@ -196,6 +200,18 @@ const loginUser = async (req, res) => {
     return response.error(req, res, "Contact Admin");
   }
 };
+
+
+const renewToken = async(req, res) => {
+
+  const {uid,fullName}=req
+  
+  
+  const token=await generateJWT(uid,fullName)
+  
+  response.success(req,res,"Token generated succesfully ",{token},200)
+  
+  };
 
 const generateLinkedinLink = (req, res) => {
   const url = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=http://localhost:5000/api/auth/linkedin/callback&state=${process.env.STATE}&scope=openid%20email%20profile`;
@@ -385,6 +401,7 @@ module.exports = {
   createUser,
   validateAccount,
   resendEmail,
+  renewToken,
   loginUser,
   generateLinkedinLink,
   loginLinkedIn,
