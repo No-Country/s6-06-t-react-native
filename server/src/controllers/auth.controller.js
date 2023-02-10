@@ -33,7 +33,7 @@ const createUser = async (req, res) => {
 
     let tokenVerification = await TokenRecover.findOne({ uid: savedUser.id });
 
-    if (tokenVerification) await token.deleteOne();
+    if (tokenVerification) await TokenRecover.deleteOne();
 
     let resetToken = crypto.randomBytes(32).toString("hex");
 
