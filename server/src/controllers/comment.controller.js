@@ -1,11 +1,11 @@
-const {Comment, User, Post} = require('../models');
+const {Comment, Post} = require('../models');
 const {response} = require('../helpers')
 const { existingComment } = require('../helpers/validateDb');
 
 const createComment = async (req, res) => {
     try{
         const uid = req.uid;
-        console.log(uid)
+        
         const post = await Post.findById(req.body.post);
         if (!post){
             return response.error(req,res,"Post no encontrado",400)
@@ -13,10 +13,10 @@ const createComment = async (req, res) => {
     
         const comment = new Comment({
             post: req.body.post,
-            author: uid,
-            body: req.body.body
+            body: req.body.body,
+            author: uid
         });
-        console.log(Comment)
+        
 
         const savedComment = await comment.save()
         console.log(savedComment)
@@ -43,14 +43,14 @@ const updateComment = async (req, res) => {
     
         // para traer middleware
         const comment = await Comment.findById(id);
-        console.log(comment)
-        if (comment.author === uid){
+        
+        if (comment.author.toString() !== uid){
             return response.error(req, res, "No tienes permiso para actualizar este comentario", 401);
         }
         //
         const updatedComment= await Comment.findByIdAndUpdate(
             {_id: id},
-            body,
+            {body},
             {new: true}
         );
         if (!updatedComment){
@@ -66,19 +66,15 @@ const updateComment = async (req, res) => {
 const deleteComment = async (req, res) => {
     try{
         const {id} = req.params;
-        const {user} = req.body
+        const uid = req.uid
+        
         const comment = await Comment.findById(id);
-
-        const user2 = await User.findById(req.body.user);
-        if (!user2){
-            return response.error(req,res,"El usuario no existe",400)
-        }
 
         if (!comment){
             return response.error(req,res,"Comentario no encontrado", 404)    
         }
 
-        if(comment.user !== user){
+        if(comment.author.toString() !== uid){
             return response.error(req, res,"Usuario no autorizado", 401)
         }
 
@@ -93,11 +89,6 @@ const deleteComment = async (req, res) => {
 const admDeleteComment = async (req,res) => {
     try{
         const {id} = req.params;
-        const user = req.body.user
-
-        if(!user.admin){
-            return response.error(req,res,"No tienes permisos para realizar esta acción",401)
-        }
 
         const admDeleteComment = await Comment.findByIdAndRemove(id);
 
@@ -108,6 +99,7 @@ const admDeleteComment = async (req,res) => {
     }catch(error){
         return response.error(req,res,"Error al eliminar el comentario",500)
     }
+    console.log(error)
 }
 
     module.exports = {
