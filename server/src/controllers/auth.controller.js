@@ -28,8 +28,8 @@ const createUser = async (req, res) => {
     ////////////////////////////
 
     const savedUser = await newUser.save();
-
-    const token = await generateJWT(newUser.id, newUser.fullName);
+console.log(newUser);
+    const token = await generateJWT(savedUser.id, savedUser.fullName);
 
     let tokenVerification = await TokenRecover.findOne({ uid: savedUser.id });
 
@@ -41,7 +41,7 @@ const createUser = async (req, res) => {
     const link = `${process.env.URL}/api/auth/validate-account?token=${resetToken}&uid=${savedUser._id}`;
 
     await new TokenRecover({
-      uid: savedUser._id,
+      uid: savedUser.id,
       token: hash,
       createdAt: Date.now(),
       email: savedUser.email,

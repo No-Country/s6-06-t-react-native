@@ -1,6 +1,6 @@
 const  response  = require('../helpers/response');
 const {Channel, User} = require('../models')
-const {validateDb} = require('../helpers')
+
 
 
 const createChannel = async (req,res) =>{  
@@ -73,6 +73,7 @@ const getAllChannels = async (req, res) => {
 
     try {
         const channels = await Channel.find();
+
         res.status(200).json({
             success: true,
             count: channels.length,
@@ -89,18 +90,20 @@ const getAllChannels = async (req, res) => {
 const getUserChannels = async (req, res) => {
     const {id} = req.params
     try {
-        const user = await User.findById(id).populate("channels");
+        const user = await User.findById(id).populate("channels","name");
   
         if (!user) {
             return res.status(404).send({ error: "Usuario no encontrado" });
         }
         const channels = user.channels;
         const selected = user.selected;
-    
+    //// RARO
         if (selected) {
             const requerimientosChannel = channels.find((channel) => channel.name === "requerimientos");
             if (requerimientosChannel) {channels.push(requerimientosChannel)}
         }
+
+        /////
         return res.send({ channels });
 
         } catch (error) {

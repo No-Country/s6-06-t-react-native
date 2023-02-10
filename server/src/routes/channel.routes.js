@@ -21,7 +21,7 @@ router.delete('/:id',validatorJWT,  isAdmin,verifyChannel.remove, channel.delete
 router.get('/user/:id',validatorJWT,verifyChannel.getByUser,  channel.getUserChannels)
 
 //obtener canal > devuelve el canal con los posteos populados
-router.get('/posts/:id', channel.getPostsChannel)
+router.get('/:id', channel.getPostsChannel)
 
 //get todos los canales creados 
 //PARA ADMIN?
