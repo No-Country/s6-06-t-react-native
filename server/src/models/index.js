@@ -2,7 +2,7 @@ module.exports={
   User:require("./User"),
   Channel:require("./Channel"),
   Comment:require("./Comment"),
-  Job_offer:require('./Job_offer'),
+  JobOffer:require('./JobOffer'),
   Post:require('./Post'),
   TokenRecover:require('./TokenRecover'),
   User:require('./User')

@@ -1,6 +1,8 @@
-const { param, check } = require("express-validator");
+const { query } = require("express");
+const { param, check, q } = require("express-validator");
 const { validateDb } = require("../helpers");
 const {validateFields,validatePassword,} = require("../middlewares");
+const { TokenRecover } = require("../models");
 
 const create = [
   check("fullName", "fullName is required").not().isEmpty(),
@@ -32,11 +34,19 @@ const resetPassword = [
   validateFields,
 ];
 
+const validate = [
+  check('token').not().isEmpty().isLength({
+    min: 25,
+  }),
+  check("uid").isMongoId(),//.custom(async(uid)=>await validateDb(TokenRecover,"uid",uid)).not(),
+  validateFields,
+]
 
 module.exports = {
   create,
   login,
   resetPasswordRequest,
   resetPassword,
+  validate
   
 };

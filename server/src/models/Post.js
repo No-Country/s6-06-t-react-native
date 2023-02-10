@@ -15,7 +15,7 @@ const postSchema = new Schema({
     },
     comments: [{
         type: Schema.Types.ObjectId,
-        ref: 'comments'
+        ref: 'comment'
     }],
     reactions: [{
         type: Schema.Types.ObjectId,
@@ -42,7 +42,7 @@ const postSchema = new Schema({
 
 postSchema.methods.toJSON = function idSetter() {
     const { _id, ...Post } = this.toObject();
-    Post.uid = _id;
+    Post.id = _id;
     return Post;
 };
 

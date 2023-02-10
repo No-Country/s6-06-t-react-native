@@ -103,7 +103,7 @@ const userSchema = new Schema(
     job_applications: [
       {
         type: Schema.Types.ObjectId,
-        ref: "job_offer",
+        ref: "jobOffer",
       },
     ],
 

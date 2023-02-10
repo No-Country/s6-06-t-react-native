@@ -1,4 +1,4 @@
-const {model, Schema} = require('mongoose');
+const { model, Schema } = require("mongoose");
 
 const tokenSchema = new Schema({
   uid: {
@@ -15,11 +15,11 @@ const tokenSchema = new Schema({
     default: Date.now,
     expires: 3600,
   },
-  email:{
-    type:String
+  email: {
+    type: String,
   },
-  name:{
-    type:String
-  }
+  name: {
+    type: String,
+  },
 });
-module.exports =model("token", tokenSchema);
+module.exports = model("token", tokenSchema);

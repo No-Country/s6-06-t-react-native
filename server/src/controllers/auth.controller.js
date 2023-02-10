@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const generateJWT = require("../helpers/generateJWT");
-const { User, Token, Channel, TokenRecover } = require("../models");
+const { User, Channel, TokenRecover } = require("../models");
 const response = require("../helpers/response");
 const sendEmail = require("../helpers/sendEmail");
 
@@ -28,12 +28,12 @@ const createUser = async (req, res) => {
     ////////////////////////////
 
     const savedUser = await newUser.save();
-console.log(newUser);
+
     const token = await generateJWT(savedUser.id, savedUser.fullName);
 
     let tokenVerification = await TokenRecover.findOne({ uid: savedUser.id });
 
-    if (tokenVerification) await TokenRecover.deleteOne();
+    if (tokenVerification) await TokenRecover.deleteOne({ uid: savedUser.id });
 
     let resetToken = crypto.randomBytes(32).toString("hex");
 
@@ -45,7 +45,7 @@ console.log(newUser);
       token: hash,
       createdAt: Date.now(),
       email: savedUser.email,
-      name: savedUser.name,
+      name: savedUser.fullName,
     }).save();
 
     sendEmail(
@@ -75,16 +75,7 @@ console.log(newUser);
 
 const validateAccount = async (req, res) => {
   const { uid, token } = req.query;
-  /////////// MOVER A VALIDATOR
-  if (token === "" || uid === "") {
-    return response.error(
-      req,
-      res,
-      "There is a problem with the provided url",
-      400
-    );
-  }
-  ///////////
+
   try {
     let verificationToken = await TokenRecover.findOne({ uid });
 

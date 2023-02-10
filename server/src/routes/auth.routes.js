@@ -5,7 +5,7 @@ const { verifyAuth } = require("../validations");
 const { validateLinkedin,validatorJWT } = require("../middlewares");
 
 router.post("/new", verifyAuth.create, auth.createUser)
-      .get("/validate-account", auth.validateAccount)
+      .get("/validate-account",verifyAuth.validate, auth.validateAccount)
       .get("/resend-email",validatorJWT,auth.resendEmail)
       .post("/login", verifyAuth.login, auth.loginUser)
       .get("/linkedin", auth.generateLinkedinLink)
