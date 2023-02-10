@@ -46,7 +46,7 @@ const postSchema = new Schema({
 
 postSchema.methods.toJSON = function idSetter() {
     const { _id, ...Post } = this.toObject();
-    Post.uid = _id;
+    Post.id = _id;
     return Post;
 };
 
