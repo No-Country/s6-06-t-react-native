@@ -9,10 +9,10 @@ const commentSchema = new Schema({
         type: String,
         required: true,
     },
-    post:[{
+    post:{
         type: Schema.Types.ObjectId,
         ref: 'post'
-    }],
+    },
     active: {
         type: Boolean,
         default: true

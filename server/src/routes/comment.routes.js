@@ -14,10 +14,10 @@ router.post('/new', validatorJWT, comment.createComment)
 router.put('/edit/:id',validatorJWT, comment.updateComment )
 
 //delete borrar comentario--validar jwt -validar si es propio del usuario
-router.delete('/delete/:id', validatorJWT, comment.deleteComment)
+router.put('/delete/:id', validatorJWT, comment.deleteComment)
 
 //borrar  cualquier cometario como admin  -validar admin-validar JWT-validar is admin
-router.delete('/admdelete/:id', validatorJWT, isAdmin, comment.admDeleteComment)
+router.put('/admdelete/:id', validatorJWT, isAdmin, comment.admDeleteComment)
 
 
 module.exports = router;

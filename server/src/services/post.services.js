@@ -55,7 +55,7 @@ const newPost = async (id, body,channel) => {
     return savedPost;
 
     } catch (error) {
-    console.log("XXXXXXXXXXXX", error);
+    console.log( error);
     response.error(req,res,"CONTACT ADMIN",500)
     }
 };
