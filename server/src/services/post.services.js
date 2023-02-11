@@ -27,7 +27,6 @@ const newPost = async (uid, body, channel ) => {
     });
 
     const postAuthor = await User.findById(uid);
-    const postComment = await Comment.findById(comment)
     
     
     const postChannel = await Channel.findById(channel);

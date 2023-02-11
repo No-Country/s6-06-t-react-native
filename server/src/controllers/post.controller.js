@@ -68,7 +68,43 @@ const reactionToPost = async (req, res) => {
 
 }
 
+
+const updatePost = async (req, res) => {
+
+    const { id } = req.params;
+    const { title,
+        description,
+        attached } = req.body
+
+    try {
+        const updatedPost = await Post.findByIdAndUpdate(
+            { _id: id },
+            {
+                title,
+                description,
+                attached,
+            },
+            { new: true }
+        );
+        if (!updatedPost) {
+            return res.status(404).json({
+                success: false,
+                error: `Post no existe!!`,
+            });
+        }
+        res.status(200).json({
+            success: true,
+            data: updatedPost,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        })
+    }
+}
 module.exports = {
     createPost,
-    reactionToPost
+    reactionToPost,
+    updatePost
 }
