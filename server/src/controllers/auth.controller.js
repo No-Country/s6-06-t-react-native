@@ -22,9 +22,9 @@ const createUser = async (req, res) => {
     newUser.password = bcrypt.hashSync(password.toString(), salt);
 
     ////////////////////////////EL ID CORRESPONDE AL DEL CANAL GENERAL 
-    const channel = await Channel.findById("63e527334301295852cc4f4f");
+ 
 
-    newUser.channels.push(channel.id);
+    newUser.channels.push("63e527334301295852cc4f4f");
     ////////////////////////////
 
     const savedUser = await newUser.save();
@@ -35,7 +35,7 @@ const createUser = async (req, res) => {
 
     let tokenVerification = await TokenRecover.findOne({ uid: savedUser.id });
 
-    if (tokenVerification) await TokenRecover.deleteOne({ uid: savedUser.id });
+    if (tokenVerification) await tokenVerification.deleteOne();
 
     let resetToken = crypto.randomBytes(32).toString("hex");
 
@@ -129,7 +129,7 @@ const resendEmail = async (req, res) => {
       return response.error(req, res, "Invalid link", 400);
     }
 
-    await TokenRecover.deleteOne();
+    await tokenVerification.deleteOne();
 
     let resetToken = crypto.randomBytes(32).toString("hex");
 

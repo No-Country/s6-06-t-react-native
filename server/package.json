@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "docker": "docker compose up"
+    "up": "docker compose up",
+    "docker": "docker compose build && docker compose up"
   },
   "keywords": [],
   "author": "",
