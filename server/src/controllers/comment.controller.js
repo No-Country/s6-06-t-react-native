@@ -106,7 +106,7 @@ const deleteComment = async (req, res) => {
       { new: true }
     );
 
-    return response.success(req, res, "Comentario eliminado exitosamente", 200);
+    return response.success(req, res, "Comentario eliminado exitosamente",undefined, 200);
   } catch (error) {
     return response.error(req, res, error.message, 500);
   }
