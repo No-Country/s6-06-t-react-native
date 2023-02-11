@@ -1,4 +1,4 @@
-const { Post, Comment, Reaction, Channel } = require('../models');
+const { Post, Comment, Reaction, Channel, User } = require('../models');
 
 
 const findPostById = async (id) => {
@@ -8,7 +8,7 @@ const findPostById = async (id) => {
         'attached'
     ])
         .populate(
-            'user', 
+            'user',
             'fullName'
         )
         .populate(
@@ -28,76 +28,38 @@ const findPostById = async (id) => {
     return post;
 };
 
-
-const newPost = async (id, body) => {
-    console.log(id, body, Post)
-
-    try {
+const newPost = async ({ uid, body }) => {
 
 
-        const {
-            title,
-            description,
-            attached,
-            comments,
-            reactions,
-            channel
-        } = body
+    const {
+        title,
+        description,
+        attached,
+        comment
+    } = body
 
-        const post = new Post({
-            ...body,
-            user: id,
-        });
-      
+    const post = new Post({
+        title,
+        description,
+        attached,
+        user: uid,
+    });
 
-        console.log(post.channel,"COMENT")
-        // const postComments = await Comment.findOneAndUpdate(
-        //     { name: comments },
-        //     { $set: { name: comments } },
-        //     {
-        //         upsert: true,
-        //         new: true,
-        //     }
-        // );
-
-        // if(!postComments)
-        // postComments.post.push(post.id);
-        // await postComments.save();
-
-        // const postReactions = await Reaction.findOneAndUpdate(
-        //     { name: reactions },
-        //     { $set: { name: reactions } },
-        //     {
-        //         upsert: true,
-        //         new: true,
-        //     }
-        // );
-        // postReactions.post.push(post.id);
-        // await postReactions.save();
-
-        const postChannel = await Channel.findOneAndUpdate(
-            { name: channel },
-            { $set: { name: channel } },
-            {
-                upsert: true,
-                new: true,
-            }
-        );
-        postChannel.post.push(post.id);
-        await postChannel.save();
-
-          // post.comments = postComments.id;
-        // post.reactions = postReactions.id;
-        //post.channel = postChannel.id;
-
-        const savedPost = await post.save();
+    const postUser = await User.findById(uid);
+    postUser.posts.push(post.uid);
+    await postUser.save();
+ 
 
 
-        return savedPost
-    }
-    catch (error) {
-        console.log("XXXXXXXXXXXX", error)
-    }
+    postComment.post.push(post.uid);
+    await postComment.save();
+
+
+
+    console.log(uid, body, Comment, postComment)
+
+    const savedPost = await post.save();
+    return savedPost
 };
 
 
