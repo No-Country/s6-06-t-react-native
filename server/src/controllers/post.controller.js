@@ -4,6 +4,7 @@ const { Post, Reaction } = require('../models');
 const { findPostById, newPost} =require('../services/post.services.js');
 
 const createPost = async (req, res) => {
+    const io=req.app.locals.io
     const { body } = req;
     const uid = req.uid;
     const {channel}=req.params
@@ -26,6 +27,8 @@ const createPost = async (req, res) => {
 
         //Con esta funcion lo busca y lo popula
         const post = await findPostById(savedPost.id);
+        
+        io.emit('post-new', { post }) 
 
         return success(
             req,
@@ -47,6 +50,7 @@ const createPost = async (req, res) => {
 
 
 const reactionToPost=async(req,res)=>{
+    const io=req.app.locals.io
     const uid=req.uid
     const { id } = req.params;
     const {reaction}=req.body
@@ -63,12 +67,12 @@ const reactionToPost=async(req,res)=>{
         type__Reaction:reaction
       }).save()
  
-      await Post.findByIdAndUpdate(
+     const updatedPost=await Post.findByIdAndUpdate(
         id,
-        { $push: { reactions: newReaction.id } },
+        { $push: { reactions: newReaction.id } },{new:true}
       );
-  
-      return response.success(req, res, "Reaccion  exitosa",undefined, 201);
+      io.emit('reaction-new-in-post', { post:updatedPost }) 
+      return response.success(req, res, "Reaccion  exitosa", 200);
     } catch (error) {
       return response.error(req, res, error.message, 500);
     }

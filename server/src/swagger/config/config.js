@@ -1,9 +1,5 @@
 const swaggerJsDoc =require("swagger-jsdoc");
 
-
-  
-  
-  
   const options = {
   definition: {
     openapi: "3.0.0",
@@ -14,7 +10,7 @@ const swaggerJsDoc =require("swagger-jsdoc");
     },
     servers: [
       {
-        url: process.env.URL , ///COLOCAR URL DE DEPLOY
+        url: process.env.URL ,
       },
     ],
   },
