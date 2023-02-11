@@ -5,17 +5,17 @@ const { response } = require("../helpers");
 const createComment = async (req, res) => {
   const io=req.app.locals.io
   const uid = req.uid;
-  const { body, post } = req.body;
-
+  const {body} = req.body;
+  const {id} = req.params;
   try {
     //NO ES MEJOR ENVIAR ID X PARAM?
-    const postComment = await Post.findById(req.body.post);
+    const postComment = await Post.findById(id);
     if (!postComment) {
       return response.error(req, res, "Post no encontrado", 400);
     }
 
     const comment = new Comment({
-      post,
+      post: id,
       body,
       author: uid,
     });

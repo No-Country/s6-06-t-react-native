@@ -4,7 +4,7 @@ const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
 const handlebars = require('express-handlebars');
-const {auth , channel, post ,comment}=require("./src/routes")
+const {auth , channel, post ,comment, jobOffer }=require("./src/routes")
 const swaggerUI =require("swagger-ui-express");
 const specs=require("./src/swagger/config/config")
 require('./src/database/config.js');
@@ -27,6 +27,7 @@ app.use("/api/auth",auth )
 app.use("/api/post", post)
 app.use("/api/channel", channel)
 app.use("/api/comment", comment)
+app.use("/api/job-offer", jobOffer)
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 

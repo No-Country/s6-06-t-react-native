@@ -25,6 +25,10 @@ const commentSchema = new Schema({
     reactions: [{
         type: Schema.Types.ObjectId,
         ref: 'reaction'
+    }],
+    job_offer: [{
+        type:Schema.Types.ObjectId,
+        ref: 'JobOffer'
     }]
 },
 {
