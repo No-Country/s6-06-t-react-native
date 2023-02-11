@@ -18,22 +18,42 @@ const Registro = () => {
     .object({
       fullName: yup
         .string()
-        .min(5, "Ingresa al menos 5 carácteres ")
-        .max(30, "Ingresa como máximo 30 carácteres")
-        .required("Campo requerido"),
+        .min(5, "Ingresa al menos 5 carácteres.")
+        .max(30, "Ingresa como máximo 30 carácteres.")
+        .required("Campo requerido."),
       email: yup
         .string()
-        .email("Ingrese un e-maul válido")
-        .required("Campo requerido"),
+        .email("Ingrese un e-mail válido.")
+        .max(50, "Ingresa hasta 50 carácteres.")
+        .required("Campo requerido."),
+      prefix: yup
+        .string()
+        .matches(/^[0-9 ()+-]+$/, 'Solo números y simcolos "+" y "-"')
+        .max(6, "Ingresa hasta 6 carácteres.")
+        .required("Campo requerido."),
       phone: yup
         .number()
-        .typeError("Por favor ingrese su número")
+        .typeError("Por favor ingrese su número.")
+        .max(
+          999999999999999,
+          "Ingresa hasta 15 carácteres, no ingrese espacios."
+        )
         .required("Campo requerido"),
-      password: yup.string().required("Campo requerido"),
+      password: yup
+        .string()
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{6,}$/,
+          "Ingresa una contraseña de mínimo 6 caracteres y contenga 1 mayúscula."
+        )
+        .required("Campo requerido."),
+      confirmPass: yup
+        .string()
+        .required()
+        .oneOf([yup.ref("password")], "Su contraseña no coincide.")
+        .required("Campo requerido."),
     })
     .required();
   const [errorMessage, setErrorMessage] = useState(null);
-  const [phone, setPhone] = useState();
 
   const {
     control,
@@ -41,17 +61,11 @@ const Registro = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const onSubmit = (data) => {
-    alert(data.phone);
-    // navigation.navigate('SignUpStepTwo')
+    navigation.navigate("SignUpStepTwo");
   };
 
   const handleOnChange = () => {
     setErrorMessage(null);
-  };
-
-  const handleOnChangePhone = (num) => {
-    setErrorMessage(null);
-    setPhone(num)
   };
 
   return (
@@ -79,7 +93,6 @@ const Registro = () => {
           <Controller
             control={control}
             onChange={handleOnChange}
-            value={phone}
             render={({ field: { onChange, onBlur } }) => (
               <InputComponent
                 label="Nombre y apellido"
@@ -107,24 +120,14 @@ const Registro = () => {
             name="email"
           />
 
-          <Controller
+          <InputMobileNumber
+            label="Celular"
+            placeholderPrefix="54"
+            placeholderPhoneNumber="3815577221"
+            keyboardType="phone-pad"
             control={control}
-            onChange={(handleOnChange => handleOnChangePhone([value]))}
-            value={phone}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <InputMobileNumber
-                label="Celular"
-                placeholder="4564674"
-                keyboardType="numeric"
-                onBlur={onBlur}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                error={errors.phone}
-              />
-            )}
-            name="phone"
+            errors={errors}
           />
-          <Text>{phone}</Text>
 
           <Controller
             control={control}
@@ -133,7 +136,11 @@ const Registro = () => {
               <InputComponent
                 label="Contraseña"
                 placeholder="Ingresa una contraseña"
-                requerimiento="Ingresa una contraseña de mínimo 6 caracteres y contenga 1 mayúscula."
+                requerimiento={
+                  !errors.password
+                    && "Ingresa una contraseña de mínimo 6 caracteres y contenga 1 mayúscula."
+                  
+                }
                 showPass
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
@@ -144,12 +151,24 @@ const Registro = () => {
             name="password"
           />
 
-          <InputComponent
-            label="Confirmar contraseña"
-            placeholder="Ingresa nuevamente tu contraseña"
-            requerimiento="Ingresa nuevamente tu contraseña."
-            showPass
+          <Controller
+            control={control}
+            onChange={handleOnChange}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <InputComponent
+                abel="Confirmar contraseña"
+                placeholder="Ingresa nuevamente tu contraseña"
+                requerimiento="Ingresa nuevamente tu contraseña."
+                showPass
+                onBlur={onBlur}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+                error={errors.confirmPass}
+              />
+            )}
+            name="confirmPass"
           />
+
           <PrimaryButton
             text="Siguiente"
             width="width: 100%"

@@ -26,20 +26,10 @@ export const styles = StyleSheet.create({
     flex: 3,
     marginBottom: 5,
     color: "#000",
-    zIndex: -1,
-    elevation: -1,
   },
   inputRegionalNumber: {
     marginRight: 11,
-    flex: 1,
-  },
-  dropdown: {
-    position: "absolute",
-    width: 100,
-    top: "90%",
-    zIndex: 100010112,
-    elevation: 3333,
-    backgroundColor: "#DEE3E5",
+    flex:1
   },
   outLine: {
     borderColor: "#4245E5",
@@ -52,4 +42,14 @@ export const styles = StyleSheet.create({
   error: {
     color: "red",
   },
+  wrapperErrors: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  wrapperErrorPrefix: {
+    flex: 4
+  },
+  wrapperErrorPhone:{
+    flex: 8
+  }
 });

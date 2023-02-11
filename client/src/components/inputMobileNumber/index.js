@@ -3,16 +3,16 @@ import { useCallback, useState } from "react";
 import { styles } from "./style";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
+import { Controller } from "react-hook-form";
 
 const InputMobileNumber = ({
   label,
-  placeholder,
+  placeholderPrefix,
+  placeholderPhoneNumber,
   keyboardType = "default",
   requerimiento,
-  onBlur,
-  onChangeText,
-  value,
-  error,
+  control,
+  errors,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -20,7 +20,7 @@ const InputMobileNumber = ({
     SFProRegular: require("../../../assets/fonts/SfProDisplay/SfProDisplay-Regular.otf"),
   });
 
-  const handleOnBlur = () => {
+  const handleOnBlur = (onBlur) => {
     onBlur;
     setIsFocused(false);
   };
@@ -39,33 +39,54 @@ const InputMobileNumber = ({
     <View style={styles.containerInput} onLayout={onLayoutRootView}>
       <Text style={styles.label}>{label}</Text>
       <View style={styles.inputMobileWrapper}>
-        <TextInput
-          style={[
-            styles.input,
-            styles.inputRegionalNumber,
-            isFocused && styles.outLine,
-          ]}
-          placeholder={placeholder}
-          placeholderTextColor="#626A6D"
-          selectionColor="#4245E5"
-          keyboardType={keyboardType}
-          onFocus={() => setIsFocused(true)}
-          onBlur={handleOnBlur}
-          onChangeText={onChangeText}
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur } }) => (
+            <TextInput
+              style={[
+                styles.input,
+                styles.inputRegionalNumber,
+                isFocused && styles.outLine,
+              ]}
+              placeholder={placeholderPrefix}
+              placeholderTextColor="#626A6D"
+              selectionColor="#4245E5"
+              keyboardType={keyboardType}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => handleOnBlur(onBlur)}
+              onChangeText={(value) => onChange(value)}
+            />
+          )}
+          name="prefix"
         />
-        <TextInput
-          style={[styles.input, isFocused && styles.outLine]}
-          placeholder={placeholder}
-          placeholderTextColor="#626A6D"
-          selectionColor="#4245E5"
-          keyboardType={keyboardType}
-          onFocus={() => setIsFocused(true)}
-          onBlur={handleOnBlur}
-          onChangeText={onChangeText}
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur } }) => (
+            <TextInput
+              style={[
+                styles.input,                
+                isFocused && styles.outLine,
+              ]}
+              placeholder={placeholderPhoneNumber}
+              placeholderTextColor="#626A6D"
+              selectionColor="#4245E5"
+              keyboardType={keyboardType}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => handleOnBlur(onBlur)}
+              onChangeText={(value) => onChange(value)}
+            />
+          )}
+          name="phone"
         />
       </View>
-      <Text>{value}</Text>
-      {error && <Text style={styles.error}>{error.message}</Text>}
+        <View style={styles.wrapperErrors}>
+          {errors?.prefix && (
+            <Text style={[styles.error, styles.wrapperErrorPrefix]}>{errors?.prefix?.message}</Text>
+          )}
+          {errors?.phone && (
+            <Text style={[styles.error, styles.wrapperErrorPhone]}>{errors?.phone?.message}</Text>
+          )}
+        </View>
       {requerimiento && (
         <Text style={styles.requerimiento}>{requerimiento}</Text>
       )}
