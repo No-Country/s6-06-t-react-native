@@ -14,7 +14,7 @@ const processFormData = (e) => {
     document.form.submit();
   } else {
     error.setAttribute("style", "display:block")
-    console.log("error");
+   
   }
 };
 

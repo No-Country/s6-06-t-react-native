@@ -21,7 +21,7 @@ typechannel:{
 
 channelSchema.methods.toJSON = function idSetter() {
   const { _id, ...Channel } = this.toObject();
-  Channel.uid = _id;
+  Channel.id = _id;
   return Channel;
 };
 

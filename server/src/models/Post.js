@@ -1,7 +1,7 @@
 const {model, Schema} = require('mongoose');
 
 const postSchema = new Schema({
-    user: {
+    author: {
         type: Schema.Types.ObjectId,
         ref: 'user'
     },
@@ -10,8 +10,8 @@ const postSchema = new Schema({
         required: true
     },
     description: {
-        Type: String,
-        // required: true
+        type: String,
+        //required: true
     },
     comments: [{
         type: Schema.Types.ObjectId,
@@ -30,10 +30,10 @@ const postSchema = new Schema({
         type:Boolean,
         default: false
     },
-    // active: {
-    //     type: Boolean,
-    //     default: true
-    // },
+    active: {
+        type: Boolean,
+        default: true
+    },
     permissions:{
         type:Boolean,
         default:true
@@ -46,7 +46,7 @@ const postSchema = new Schema({
 
 postSchema.methods.toJSON = function idSetter() {
     const { _id, ...Post } = this.toObject();
-    Post.uid = _id;
+    Post.id = _id;
     return Post;
 };
 

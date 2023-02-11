@@ -23,7 +23,7 @@ const reactionSchema = new Schema({
 
 reactionSchema.methods.toJSON = function idSetter() {
     const { _id, ...Reaction } = this.toObject();
-    Reaction.uid = _id;
+    Reaction.id = _id;
     return Reaction;
 };
 

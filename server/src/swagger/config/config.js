@@ -1,3 +1,5 @@
+const swaggerJsDoc =require("swagger-jsdoc");
+
   const options = {
   definition: {
     openapi: "3.0.0",
@@ -8,11 +10,12 @@
     },
     servers: [
       {
-        url: "http://localhost:5000", ///COLOCAR URL DE DEPLOY
+        url: process.env.URL ,
       },
     ],
   },
-  apis: ["./src/routes/*.js"],
+  apis: ["./src/swagger/*.js","./src/models/*.js"],
 };
 
-module.exports=options
+const specs = swaggerJsDoc(options);
+module.exports=specs

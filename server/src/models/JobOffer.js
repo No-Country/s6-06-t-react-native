@@ -18,11 +18,11 @@ const offerSchema=new Schema({
 
 offerSchema.methods.toJSON = function idSetter() {
   const { _id, ...Offer } = this.toObject();
-  Offer.uid = _id;
+  Offer.id = _id;
   return Offer;
 };
 
-const Offer = model("Offer", offerSchema);
+const Offer = model("jobOffer", offerSchema);
 
 
 module.exports=Offer

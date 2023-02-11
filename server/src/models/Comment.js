@@ -8,10 +8,10 @@ const commentSchema = new Schema({
     body: { 
         type: String, 
     },
-    post:[{
+    post:{
         type: Schema.Types.ObjectId,
         ref: 'post'
-    }],
+    },
     active: {
         type: Boolean,
         default: true
@@ -33,7 +33,7 @@ const commentSchema = new Schema({
 
 commentSchema.methods.toJSON = function idSetter() {
     const { _id, ...Comment } = this.toObject();
-    Comment.uid = _id;
+    Comment.id = _id;
     return Comment;
 };
 

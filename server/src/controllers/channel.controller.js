@@ -1,14 +1,10 @@
 const  response  = require('../helpers/response');
 const {Channel, User} = require('../models')
-const {validateDb} = require('../helpers')
 
 
-const createChannel = async (req,res) =>{   
-    const {id} = req.params
-    const validate =  validateDb(id)
-        if (!validate) {
-            return response.error(req, res, "No valido")
-        }
+
+const createChannel = async (req,res) =>{  
+ 
     const channel = new Channel(req.body);
     await channel
         .save()
@@ -24,16 +20,9 @@ const createChannel = async (req,res) =>{
 const updateChannel = async (req, res) => {
     
     const {id} = req.params;
-    console.log(id, "asdf")
     const {name, typechannel} = req.body
-    
-    try {
-        const validate =  validateDb(id)
-        if (!validate) {
-            return response.error(req, res, "No valido")
-        }
-        console.log('llego')
 
+    try {
         const updatedChannel = await Channel.findByIdAndUpdate(
             {_id: id},
             { name, typechannel},
@@ -84,6 +73,7 @@ const getAllChannels = async (req, res) => {
 
     try {
         const channels = await Channel.find();
+
         res.status(200).json({
             success: true,
             count: channels.length,
@@ -98,20 +88,22 @@ const getAllChannels = async (req, res) => {
 };
 
 const getUserChannels = async (req, res) => {
-    const {id} = req.params
+    const {uid} = req.params
     try {
-        const user = await User.findById(id).populate("channels");
-        console.log(user, "aa")
+        const user = await User.findById(uid).populate("channels","name");
+  
         if (!user) {
             return res.status(404).send({ error: "Usuario no encontrado" });
         }
         const channels = user.channels;
         const selected = user.selected;
-    
+    //// RARO
         if (selected) {
             const requerimientosChannel = channels.find((channel) => channel.name === "requerimientos");
             if (requerimientosChannel) {channels.push(requerimientosChannel)}
         }
+
+        /////
         return res.send({ channels });
 
         } catch (error) {
