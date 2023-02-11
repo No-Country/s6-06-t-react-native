@@ -153,7 +153,7 @@ const replyComment = async (req, res) => {
       { new: true }
     );
 
-    return response.success(req, res, "Respuesta a comentario exitosa", 200);
+    return response.success(req, res, "Respuesta a comentario exitosa",undefined, 201);
   } catch (error) {
     return response.error(req, res, error.message, 500);
   }
@@ -181,7 +181,7 @@ console.log(newReaction);
       { $push: { reactions: newReaction.id } },
     );
 
-    return response.success(req, res, "Reaccion  exitosa", 200);
+    return response.success(req, res, "Reaccion  exitosa",undefined, 201);
   } catch (error) {
     return response.error(req, res, error.message, 500);
   }

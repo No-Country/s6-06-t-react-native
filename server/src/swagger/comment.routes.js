@@ -178,3 +178,91 @@
  *                
  *
  */
+
+
+/**
+ * @swagger
+ * /api/comment/reply/new/{id}:
+ *  post:
+ *    parameters:
+ *      - in: header
+ *        name: x-token
+ *        schema:
+ *          type: string
+ *          format: uuid
+ *        required: true
+ *        description: The token users account
+ *      - in: params
+ *        name: id
+ *        schema:
+ *          type: string
+ *          format: id
+ *        required: true
+ *        description: The id of the comment to reply
+ *    summary: Create a new reply to specific comment
+ *    tags: [Comments]
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            example:
+ *              "message": "NO ME GUSTA LO QUE DECIS"
+ *              
+ *    responses:
+ *      201:
+ *        description: Respuesta a comentario exitosa
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              example:
+ *                msg: Respuesta a comentario exitosa
+ *                
+ *
+ */
+
+
+/**
+ * @swagger
+ * /api/comment/reaction/{id}:
+ *  post:
+ *    parameters:
+ *      - in: header
+ *        name: x-token
+ *        schema:
+ *          type: string
+ *          format: uuid
+ *        required: true
+ *        description: The token users account
+ *      - in: params
+ *        name: id
+ *        schema:
+ *          type: string
+ *          format: id
+ *        required: true
+ *        description: The id of the comment to react
+ *    summary: Create a new reaction to specific comment
+ *    tags: [Comments]
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            example:
+ *               "reaction": "megusta"
+ *              
+ *    responses:
+ *      201:
+ *        description: "Reaccion  exitosa"
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              example:
+ *                msg: "Reaccion  exitosa"
+ *                
+ *
+ */
