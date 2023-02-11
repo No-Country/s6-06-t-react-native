@@ -19,13 +19,17 @@ export const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     avatar: {
-        width: 150,
-        height: 150,
+        width: 100,
+        height: 100,
         
     },
     avatarContainer: {
         alignItems: 'center',
         marginTop: 20,
+    },
+    backDrawerIcon: {
+        position: 'relative',
+        left: 100,
     },
     name: {
         fontSize: 20,
@@ -61,7 +65,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     menuText: {
-        fontSize: 17,
+        fontSize: 15,
         marginLeft: 10,
         fontWeight: '500',
         // paddingRight: 50,
@@ -76,16 +80,18 @@ export const styles = StyleSheet.create({
         left: 26,
     },
     menuTextChannels: {
-        fontSize: 15,
+        fontSize: 13,
         fontWeight: '600'
     },
     extra: {
         position:'relative',
-        bottom: 15,
+        // bottom: 15, para el dezplegado está bien
+        //bottom: 15,
+        //marginTop: 160,
         left: 60,
     },
     menuTextExtra: {
-        fontSize: 17,
+        fontSize: 15,
         marginLeft: 10,
         fontWeight: '500',
         color: '#626A6D',

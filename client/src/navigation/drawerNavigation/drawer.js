@@ -1,5 +1,6 @@
 import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
 import {View, TouchableOpacity, Text, Image} from 'react-native';
+import { useState } from 'react';
 import Community from '../../screens/drawer_navegation/community';
 import GeneralChannel from '../../screens/drawer_navegation/channels/general';
 //import ShortlistedChannel from '../../screens/drawer_navegation/channels/shortlisted'
@@ -17,6 +18,7 @@ import helpIcon from '../../../assets/helpIcon.png'
 import rightDrawer from '../../../assets/rightDrawer.png'
 import downDrawer from '../../../assets/downDrawer.png'
 import Face from '../../../assets/Face.png'
+import backDrawer from '../../../assets/backDrawer.png'
 import {styles} from './styles';
 
 const Drawer = createDrawerNavigator();
@@ -44,11 +46,15 @@ const DrawerNavegation = ({navigation}) => {
 export default DrawerNavegation;
 
 const MenuInterno = ({props}) => {
+  const [state, setState] = useState(true);
   return (
     <DrawerContentScrollView >
      {/* Parte del avatar */}
       <View style={styles.avatarContainer}>
-        <Image 
+        <TouchableOpacity  onPress={() => props.navigation.closeDrawer()}>
+          <Image source={backDrawer} style={styles.backDrawerIcon}/>  
+        </TouchableOpacity>
+        <Image
           source={Face}
           style={styles.avatar}
         />
@@ -71,20 +77,20 @@ const MenuInterno = ({props}) => {
         <View>
           <TouchableOpacity
             style={styles.menuBottom}
-            onPress={() => {}}
+            onPress={() => {setState(e=> !e)}}
           >
             <View style={styles.menuBottomOption}>
               <Image source={channel_Icon} />
               <Text style={styles.menuText}>Canales</Text>
             </View>
-            <Image source={rightDrawer} />
+            {state ? <Image source={downDrawer}/> : <Image source={rightDrawer} />}
           </TouchableOpacity>
         </View>
 
         
 
         {/* CANALES DESPLEGABLES */}
-        {true && <View>
+        {state && <View>
           <TouchableOpacity
             style={styles.channels}
             onPress={() => {props.navigation.navigate("GeneralChannel")}}
@@ -133,7 +139,7 @@ const MenuInterno = ({props}) => {
         </TouchableOpacity>
 
      </View>
-        <View style={styles.extra}>
+        <View style={[styles.extra, state ? {bottom: 15} : {marginTop: 154 }]}>
           <TouchableOpacity
               style={styles.menuBottom}
               onPress={() => {}}
