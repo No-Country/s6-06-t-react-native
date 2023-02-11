@@ -1,7 +1,7 @@
 import { LOG_IN ,SIGN_IN , SIGN_OUT,} from "../actions/actionsTypes";
 
 const initialState = {
-    stateGlobal: false,
+    stateGlobal: true,
 }
 const rootReducer = (state = initialState, action) => {
     switch(action.type) {
