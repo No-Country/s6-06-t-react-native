@@ -13,11 +13,11 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
+      required: true,//TODO:CAMBIAR EN PRODUCCION
     },
     admin: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     selected: {
       type: Boolean,
@@ -27,9 +27,15 @@ const userSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    educationalLevel: {
+      type:String
+    },
+    jobTitle:{
+      type:String
+    },
     emailisvalidated: {
       type: Boolean,
-      default: false,
+      default: true,//TODO:CAMBIAR EN PRODUCCION
     },
     availability: {
       type: String,
@@ -106,6 +112,8 @@ const userSchema = new Schema(
         ref: "jobOffer",//???
       },
     ],
+
+   
 
     posts: [
       {

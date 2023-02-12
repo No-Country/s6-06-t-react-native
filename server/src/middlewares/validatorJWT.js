@@ -13,7 +13,7 @@ const validatorJWT = (req, res, next) => {
 
     req.uid = payload.uid;
     req.name = payload.name;
-    
+
   } catch (e) {
     console.log(e)
     return response.error(req,res,"Contact admin")

@@ -5,6 +5,7 @@ const cors = require('cors');
 const handlebars = require('express-handlebars');
 const PORT = process.env.PORT || 3001;
 const app = express();
+const fileUpload=require("express-fileupload")
 const {auth , channel, post ,comment,profile}=require("./src/routes")
 require('./src/database/config.js');
 
@@ -18,6 +19,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'));
 app.use(cors());
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
 
 
 app.use(express.static(__dirname + '/src/public'))
