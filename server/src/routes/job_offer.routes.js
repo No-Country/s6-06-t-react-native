@@ -11,8 +11,10 @@ router.get('/alloffers', validatorJWT, jobOffer.getJobOffers)
 
 
 //put edita oferta---Como admin 
+router.put('/:id/edit', validatorJWT, isAdmin, verifyOffer.edit, jobOffer.updateJobOffer)
 
 //delete borra oferta -como admin
+router.put('/:id/delete', validatorJWT,isAdmin,verifyOffer.remove, jobOffer.deleteJobOffer)
 
 //post crea una oferta -como admin
 router.post('/new', validatorJWT, isAdmin, verifyOffer.create, jobOffer.createPostulation)

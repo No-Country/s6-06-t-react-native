@@ -114,9 +114,45 @@ const createComment = async (req,res) => {
     }
 }
 
+const updateJobOffer = async (req,res) => {
+    const {id} = req.params;
+    const {title, description} = req.body
+    try{
+        const updatedJobOffer = await JobOffer.findByIdAndUpdate(
+            {_id: id},
+            {title,description},
+            {new: true}
+        );
+        if(!updatedJobOffer){
+            return response.error(req,res,"Oferta no encontrado",updatedJobOffer,404)
+        }
+        return response.success(req,res,"Oferta modificada con éxito",updatedJobOffer,200)
+    }catch(error) {
+        return response.error(req, res, error.message, 500);
+    }
+}
+
+const deleteJobOffer = async (req,res) => {
+        const { id } = req.params;
+    
+    try {
+        const deleteOffer = await JobOffer.findByIdAndUpdate(id,{$set:{active:false}},{new:true});
+    
+        if (!deleteOffer) {
+            return response.error(req, res, "Oferta no encontrado", 404);
+        }
+        return response.success(req, res, "Oferta eliminada exitosamente", 200);
+    } catch (error) {
+        return response.error(req, res, "Error al eliminar el comentario", 500);
+    }
+};
+
+
 
 module.exports = {
     getJobOffers,
     createComment,
-    createPostulation
+    createPostulation,
+    updateJobOffer,
+    deleteJobOffer
 }

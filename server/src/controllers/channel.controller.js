@@ -29,20 +29,11 @@ const updateChannel = async (req, res) => {
             {new: true}
         );
         if (!updatedChannel) {
-            return res.status(404).json({
-            success: false,
-            error: `El canal no se ha encontrado`,
-            });
+            return response.error(req,res,"Canal no encontrado",updatedChannel,404)
         }
-        res.status(200).json({
-            success: true,
-            data: updatedChannel,
-        });
+        return response.success(req,res,"Canal actualizado",updatedChannel, 200)
         } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error.message,
-        })
+            return response.error(req,res,error.message,500)
         }
 }
 
