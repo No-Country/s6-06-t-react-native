@@ -4,7 +4,6 @@ const channelSchema=new Schema({
 name:{
   type:String,
   required:true,
-  default:"general"
 },
 posts:[{
   type:Schema.Types.ObjectId,

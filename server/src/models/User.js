@@ -13,11 +13,11 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,//TODO:CAMBIAR EN PRODUCCION
+      required: true,
     },
     admin: {
       type: Boolean,
-      default: true,
+      default: true,//TODO:CAMBIAR EN PRODUCCION
     },
     selected: {
       type: Boolean,
@@ -88,12 +88,12 @@ const userSchema = new Schema(
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'post'
     // }],
-    comments: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "comment",
-      },
-    ],
+    // comments: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "comment",
+    //   },
+    // ],
     favorites: [
       {
         type: Schema.Types.ObjectId,
@@ -112,21 +112,18 @@ const userSchema = new Schema(
         ref: "jobOffer",//???
       },
     ],
-
-   
-
-    posts: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "post",
-      },
-    ],
-    reactions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "reaction",
-      },
-    ],
+    // posts: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "post",
+    //   },
+    // ],
+    // reactions: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "reaction",
+    //   },
+    // ],
   },
   { timestamps: true, versionKey: false }
 );
