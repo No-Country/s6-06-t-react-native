@@ -1,13 +1,27 @@
-//siempre verifica que corresponda al usuario
+const express = require("express");
+const router = express.Router();
+const { profile } = require("../controllers");
+const { validatorJWT } = require("../middlewares");
 
-// get obtiene toda la info del propio usuario  
 
-//put actualiza datos perosnales
+router.use(validatorJWT)
 
-//put actualiza datos profesionales
+router.get("/",  profile.getUser)
+      //.put("/edit/:scope",  profile.updateUser)  
+      .put("/edit/remove",  profile.remove)
+      .put("/edit/personal",  profile.personal)
+      .put("/edit/professional",  profile.professional)
+      .put("/edit/applications",  profile.applications)
+      .put("/edit/post-saved",  profile.postSaved)
+      .put("/edit/profile-pic",  profile.profilePic)
 
-//put modifica postulaciones
+module.exports = router;
 
-//put actualiza post guardados 
 
-//put actualiza foto de perfil
+
+
+
+
+
+
+

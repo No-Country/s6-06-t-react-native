@@ -17,7 +17,7 @@ const userSchema = new Schema(
     },
     admin: {
       type: Boolean,
-      default: false,
+      default: true,//TODO:CAMBIAR EN PRODUCCION
     },
     selected: {
       type: Boolean,
@@ -27,9 +27,15 @@ const userSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    educationalLevel: {
+      type:String
+    },
+    jobTitle:{
+      type:String
+    },
     emailisvalidated: {
       type: Boolean,
-      default: false,
+      default: true,//TODO:CAMBIAR EN PRODUCCION
     },
     availability: {
       type: String,
@@ -82,12 +88,12 @@ const userSchema = new Schema(
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'post'
     // }],
-    comments: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "comment",
-      },
-    ],
+    // comments: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "comment",
+    //   },
+    // ],
     favorites: [
       {
         type: Schema.Types.ObjectId,
@@ -103,22 +109,21 @@ const userSchema = new Schema(
     job_applications: [
       {
         type: Schema.Types.ObjectId,
-        ref: "jobOffer",
+        ref: "jobOffer",//???
       },
     ],
-
-    posts: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "post",
-      },
-    ],
-    reactions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "reaction",
-      },
-    ],
+    // posts: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "post",
+    //   },
+    // ],
+    // reactions: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "reaction",
+    //   },
+    // ],
   },
   { timestamps: true, versionKey: false }
 );

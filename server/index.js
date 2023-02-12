@@ -4,7 +4,10 @@ const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
 const handlebars = require('express-handlebars');
-const {auth , channel, post ,comment}=require("./src/routes")
+const fileUpload=require("express-fileupload")
+const {auth , channel, post ,comment,profile}=require("./src/routes")
+require('./src/database/config.js');
+
 const swaggerUI =require("swagger-ui-express");
 const specs=require("./src/swagger/config/config")
 require('./src/database/config.js');
@@ -22,11 +25,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'));
 app.use(cors());
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
+
+
 app.use(express.static(__dirname + '/src/public'))
 app.use("/api/auth",auth )
 app.use("/api/post", post)
 app.use("/api/channel", channel)
 app.use("/api/comment", comment)
+app.use("/api/profile", profile)
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 

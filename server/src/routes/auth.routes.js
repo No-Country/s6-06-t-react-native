@@ -9,7 +9,7 @@ router.post("/new", verifyAuth.create, auth.createUser)
       .get("/resend-email",validatorJWT,auth.resendEmail)
       .post("/login", verifyAuth.login, auth.loginUser)
       .get("/renew",validatorJWT,auth.renewToken)
-      .get("/linkedin", auth.generateLinkedinLink)
+      .get("/linkedin", auth.generateLinkedinLink)//SE PODRIA OMITIR
       .get("/linkedin/callback", validateLinkedin, auth.loginLinkedIn)
       .post("/request-reset-password",verifyAuth.resetPasswordRequest,auth.resetPasswordRequest)
       .get("/reset-password", auth.renderRecoverPassword)
