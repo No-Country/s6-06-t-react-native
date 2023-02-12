@@ -17,10 +17,10 @@ const commentSchema = new Schema({
         default: true
     },
     attached: [String],
-    replies: [{
+    replieOf: {
         type: Schema.Types.ObjectId,
         ref: 'comment'
-    }],
+    },
     // reactions: [{
     //     type: Schema.Types.ObjectId,
     //     ref: 'reaction'

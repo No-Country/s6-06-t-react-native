@@ -8,7 +8,7 @@ const createPost = async (req, res) => {
     const { body } = req;
     const { channel } = req.params;
     const { uid } = req
-    console.log(req.uid, req.body)
+  
     let savedPost = {};
 
     savedPost = await newPost(uid, body, channel);
@@ -53,14 +53,12 @@ const reactionToPost = async (req, res) => {
 
         const newReaction = await new Reaction({
             user: uid,
-            type__Reaction: reaction
+            type__Reaction: reaction,
+            post:id
         }).save()
 
-        const updatedPost = await Post.findByIdAndUpdate(
-            id,
-            { $push: { reactions: newReaction.id } }, { new: true }
-        );
-        io.emit('reaction-new-in-post', { post: updatedPost })
+        
+        io.emit('reaction-new-in-post', { reaction: newReaction })
         return response.success(req, res, "Reaccion  exitosa", 200);
     } catch (error) {
         return response.error(req, res, error.message, 500);

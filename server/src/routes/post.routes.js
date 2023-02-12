@@ -10,7 +10,7 @@ const { post } = require("../controllers"             );
 //crear post como usuario - validar si el post corresponde al usuario-validar JWT
 router.post('/create/:channel', validatorJWT, post.createPost )
 //editar post como usuario - validar si el post corresponde al usuario-validar JWT
-router.post('/update/:id',  post.updatePost)
+router.put('/update/:id',  post.updatePost)
 //borrar post como usuario  - validar si el post corresponde al usuario-validar JWT
 
 //añadir a favorits
@@ -21,7 +21,7 @@ router.post('/update/:id',  post.updatePost)
 
 
 
-
+///MOVER A OTRA RUTA
 //reaccion a post
 router.post("/reaction/:id",validatorJWT, post.reactionToPost)
 

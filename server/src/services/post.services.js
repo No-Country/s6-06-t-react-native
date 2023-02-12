@@ -4,9 +4,9 @@ const {response}=require("../helpers");
 const findPostById = async (id) => {
     const post = await Post.findById(id, ["title", "description", "attached"])
     .populate("author", "fullName")
-    .populate("reactions", "type__Reaction")
+   // .populate("reactions", "type__Reaction")
     .populate("channel", "name")
-    .populate("comments", "author");
+    //.populate("comments", "author");
 
     return post;
 };
