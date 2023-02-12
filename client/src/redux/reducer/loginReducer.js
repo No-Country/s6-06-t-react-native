@@ -1,3 +1,5 @@
+import { LOGIN_USER_PENDING, LOGIN_USER_REJECTED, LOGIN_USER_SUCCESS } from "../types/loginTypes";
+
 const initialState = {
   isLoading: false,
   user: null,
