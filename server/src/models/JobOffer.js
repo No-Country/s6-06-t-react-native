@@ -10,10 +10,10 @@ const offerSchema=new Schema({
     type:String,
     required:true
   },
-  comments:[{
+  channel:{
     type:Schema.Types.ObjectId,
-    ref: 'comment'
-  }]
+    ref: 'channel'
+  }
 });
 
 offerSchema.methods.toJSON = function idSetter() {

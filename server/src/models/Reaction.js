@@ -15,10 +15,14 @@ const reactionSchema = new Schema({
         'hacergracia'
         ]
     },
-    post:[{
+    post:{
         type: Schema.Types.ObjectId,
         ref: 'post'
-    }]
+    },
+    comment:{
+        type: Schema.Types.ObjectId,
+        ref: 'comment'
+    },
 });
 
 reactionSchema.methods.toJSON = function idSetter() {

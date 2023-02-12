@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const { Post, User, Channel, TokenRecover } = require('../models');
+const {  User, Channel, TokenRecover } = require('../models');
 const { handleEmailToken, generateJWT, sendEmail } = require('../helpers');
 const validateLink = `${process.env.URL}/api/auth/validate-account`;
 const resetLink = `${process.env.URL}/api/auth/reset-password`;

@@ -13,14 +13,14 @@ const postSchema = new Schema({
         Type: String,
         // required: true
     },
-    comments: [{
-        type: Schema.Types.ObjectId,
-        ref: 'comment'
-    }],
-    reactions: [{
-        type: Schema.Types.ObjectId,
-        ref: 'reaction'
-    }],
+    // comments: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'comment'
+    // }],
+    // reactions: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'reaction'
+    // }],
     channel: [{
         type: Schema.Types.ObjectId,
         ref: 'channel'

@@ -1,9 +1,5 @@
-const bcrypt = require('bcryptjs');
-const crypto = require('crypto');
 const generateJWT = require('../helpers/generateJWT');
-const { User, Channel, TokenRecover } = require('../models');
 const response = require('../helpers/response');
-const sendEmail = require('../helpers/sendEmail');
 const { authServices } = require('../services');
 
 const createUser = async (req, res) => {

@@ -13,6 +13,10 @@ const commentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'post'
     },
+    offer:{
+        type: Schema.Types.ObjectId,
+        ref: 'jobOffer'
+    },
     active: {
         type: Boolean,
         default: true
@@ -22,10 +26,11 @@ const commentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'comment'
     }],
-    reactions: [{
-        type: Schema.Types.ObjectId,
-        ref: 'reaction'
-    }]
+
+    // reactions: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'reaction'
+    // }]
 },
 {
     timestamps: true,
