@@ -5,7 +5,7 @@ const cors = require('cors');
 const handlebars = require('express-handlebars');
 const PORT = process.env.PORT || 3001;
 const app = express();
-const {auth , channel, post ,comment}=require("./src/routes")
+const {auth , channel, post ,comment,profile}=require("./src/routes")
 require('./src/database/config.js');
 
 const swaggerUI =require("swagger-ui-express");
@@ -25,6 +25,7 @@ app.use("/api/auth",auth )
 app.use("/api/post", post)
 app.use("/api/channel", channel)
 app.use("/api/comment", comment)
+app.use("/api/profile", profile)
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 

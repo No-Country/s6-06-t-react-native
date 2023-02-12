@@ -13,7 +13,7 @@ router.post('/create/:channel', validatorJWT, post.createPost )
 
 //borrar post como usuario  - validar si el post corresponde al usuario-validar JWT
 
-
+//añadir a favorits
 
 //editar cualquier post como admin -validar admin-validar JWT
 
