@@ -5,6 +5,7 @@ const {verifyOffer} = require('../validations');
 const {jobOffer} = require('../controllers')
 
 
+//PAGINADO
 //get obtiene todas las ofertas con cantidad de postulaciones y comentarios -validate jwt -si es seleccionado
 router.get('/all', validatorJWT, jobOffer.getJobOffers)
 //post se postula a una oferta 

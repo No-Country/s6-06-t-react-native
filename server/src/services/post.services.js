@@ -1,43 +1,43 @@
-const { Post, Comment, Reaction, Channel, User } = require("../models");
-const {response}=require("../helpers");
+const { Post, Comment, Reaction, Channel, User } = require('../models');
+const { response } = require('../helpers');
+const { uploadIMG } = require('../helpers/cloudinary');
 
 const findPostById = async (id) => {
-    const post = await Post.findById(id, ["title", "description", "attached"])
-    .populate("author", "fullName")
-   // .populate("reactions", "type__Reaction")
-    .populate("channel", "name")
+    const post = await Post.findById(id, ['title', 'description', 'attached'])
+        .populate('author', 'fullName')
+        // .populate("reactions", "type__Reaction")
+        .populate('channel', 'name');
     //.populate("comments", "author");
 
     return post;
 };
 
-const newPost = async (uid, body, channel ) => {
-
-    const {
-        title,
-        description,
-        attached,
-    } = body
+const newPost = async (uid, body, channel, files) => {
+    const { title, description } = body;
 
     const post = new Post({
         title,
         description,
-        attached,
-        author: uid,
+        author: uid
     });
-
-    const postAuthor = await User.findById(uid);
-    
-    
     const postChannel = await Channel.findById(channel);
 
     post.channel = postChannel.id;
-    post.user = postAuthor.uid;
+
+    if (files) {
+
+        await Promise.all(
+        files.map(async (file) => {
+        return await uploadIMG(post, file);
+        }))
+    
+}
+
     const savedPost = await post.save();
-    return savedPost
+    return savedPost;
 };
 
 module.exports = {
     newPost,
-    findPostById,
+    findPostById
 };

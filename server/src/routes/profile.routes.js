@@ -5,7 +5,7 @@ const { validatorJWT } = require("../middlewares");
 
 
 router.use(validatorJWT)
-
+//PAGINAR POST QUE CREO O COMENTARIOS
 router.get("/",  profile.getUser)
       //.put("/edit/:scope",  profile.updateUser)  
       .put("/edit/remove",  profile.remove)

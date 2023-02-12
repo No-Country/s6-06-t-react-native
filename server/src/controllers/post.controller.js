@@ -4,105 +4,104 @@ const { Post, Reaction } = require('../models');
 const { findPostById, newPost } = require('../services/post.services.js');
 
 const createPost = async (req, res) => {
-    const io = req.app.locals.io
+    const io = req.app.locals.io;
     const { body } = req;
     const { channel } = req.params;
-    const { uid } = req
-  
+    const { uid } = req;
+    const attached = req.files;
+    const attachedFiles = Object.entries(attached).map((i) => i[1]);
+
     let savedPost = {};
 
-    savedPost = await newPost(uid, body, channel);
+    savedPost = await newPost(uid, body, channel, attachedFiles);
     if (Object.keys(savedPost).length > 0) {
-
         //Con esta funcion lo busca y lo popula
         const post = await findPostById(savedPost.id);
 
-        io.emit('post-new', { post })
+        io.emit('post-new', { post });
 
-        return success(
-            req,
-            res,
-            'post created successfully',
-            post,
-            201
-        );
+        return success(req, res, 'post created successfully', post, 201);
     }
 
-    return error(
-        req,
-        res,
-        'post creation failed ',
-        400
-    );
+    return error(req, res, 'post creation failed ', 400);
 };
 
-
-
 const reactionToPost = async (req, res) => {
-    const io = req.app.locals.io
-    const uid = req.uid
+    const io = req.app.locals.io;
+    const uid = req.uid;
     const { id } = req.params;
-    const { reaction } = req.body
+    const { reaction } = req.body;
 
     try {
         const post = await Post.findById(id);
 
         if (!post) {
-            return response.error(req, res, "Post no encontrado", 404);
+            return response.error(req, res, 'Post no encontrado', 404);
         }
 
         const newReaction = await new Reaction({
             user: uid,
             type__Reaction: reaction,
-            post:id
-        }).save()
+            post: id
+        }).save();
 
-        
-        io.emit('reaction-new-in-post', { reaction: newReaction })
-        return response.success(req, res, "Reaccion  exitosa", 200);
+        io.emit('reaction-new-in-post', { reaction: newReaction });
+        return response.success(req, res, 'Reaccion  exitosa', 200);
     } catch (error) {
         return response.error(req, res, error.message, 500);
     }
-
-}
-
+};
 
 const updatePost = async (req, res) => {
-
     const { id } = req.params;
-    const { title,
-        description,
-        attached } = req.body
+    const { title, description } = req.body;
+    const attached = req.files;
+    const attachedFiles = Object.entries(attached).map((i) => i[1]);
 
     try {
-        const updatedPost = await Post.findByIdAndUpdate(
-            { _id: id },
-            {
-                title,
-                description,
-                attached,
-            },
-            { new: true }
-        );
-        if (!updatedPost) {
+        const post = await Post.findById(id);
+        //TAL VER RUTA DISTINTA ACTUALIZAR ADJUNTOS?
+
+        // const updatedPost = await Post.findByIdAndUpdate(
+        //     { _id: id },
+        //     {
+        //         title,
+        //         description,
+        //         attached
+        //     },
+        //     { new: true }
+        // );
+        if (!post) {
             return res.status(404).json({
                 success: false,
-                error: `Post no existe!!`,
+                error: `Post no existe!!`
             });
         }
+        post.attached = [];
+        if (attachedFiles.length > 0) {
+            await Promise.all(
+                attachedFiles.map(async (file) => {
+                    return await updatePost(post, file);
+                })
+            );
+        }
+        post.title = title;
+        post.description = description;
+
         res.status(200).json({
             success: true,
-            data: updatedPost,
+            data: post
         });
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             success: false,
-            error: error.message,
-        })
+            error: error.message
+        });
     }
-}
+};
 module.exports = {
     createPost,
     reactionToPost,
     updatePost
-}
+};

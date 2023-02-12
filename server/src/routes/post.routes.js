@@ -27,3 +27,5 @@ router.post("/reaction/:id",validatorJWT, post.reactionToPost)
 
 
 module.exports = router;
+
+//DEBE CONTAR LA CANTIDA DE REACCIONES Y DEVOLVERLAS

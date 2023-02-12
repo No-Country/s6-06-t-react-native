@@ -6,13 +6,13 @@ const {response} = require('../helpers');
 const getJobOffers = async (req,res) => {
     
     try{
-        const allOffers=await JobOffer.find({})
+        const allOffers=await JobOffer.find({active:true})
 
         const offers = await Promise.all(
             allOffers.map( async(off)=>{
             const candidates=await User.find({postulations:off.id})
             const comments=await Comment.find({job_offer:off.id})
-            //console.log(`cantidad:${candidates.length},oferta:${off.title}`);
+            
             return {
                 ...off.toJSON(),
                 candidates:{
@@ -27,12 +27,7 @@ const getJobOffers = async (req,res) => {
         }
         )
     )
-
-
-
-   // const a = offers.map(off=>  off.populate("candidates").populate("comments")    )
-//console.log(offers);
-
+    
         // const selectedUsers = await User.find({ selected: true });
         // const selectedUsersIds = selectedUsers.map(user => user.id);
         
