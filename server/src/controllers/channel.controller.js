@@ -1,10 +1,10 @@
 const  response  = require('../helpers/response');
-const {Channel, User} = require('../models')
+const {Channel, User, Post} = require('../models')
 
 
 
 const createChannel = async (req,res) =>{  
- 
+ //TODO:AGREGAR USUARIOS SI ES PRIVADO O TODOS SI ES PUBLICO
     const channel = new Channel(req.body);
     await channel
         .save()
@@ -73,13 +73,13 @@ const getAllChannels = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            error: error.message
+            error: "dsd"
         });
     }
 };
 
 const getUserChannels = async (req, res) => {
-    const {uid} = req.params
+    const uid =req.uid
     try {
         const user = await User.findById(uid).populate("channels","name");
   
@@ -104,13 +104,15 @@ const getUserChannels = async (req, res) => {
 };
 
 const getPostsChannel = async (req, res) => {
+
     const {id} = req.params;
 
     try {
-        const channel = await Channel.findById(id).populate('posts');
-        if (!channel) return res.status(404).send({ error: 'Canal no encontrado' });
-        
-        const posts = channel.posts;
+const channel=await Channel.findById(id)
+
+if(!channel) response.error(req,res,"Canal invalido",400)
+
+        const posts = await Post.find({channel:id})
 
         return res.status(200).send({ posts });
     } catch (error) {

@@ -21,18 +21,14 @@ const create=[
     validateFields,
   ]
 
-  const getByUser=[
-    param('id').isMongoId(),
-    validateFields,
-  ]
-
+ 
 
 
 module.exports={
   create,
   edit,
   remove,
-  getByUser
+
 }
 
 

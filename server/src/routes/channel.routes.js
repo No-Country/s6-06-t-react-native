@@ -17,17 +17,17 @@ router.put('/:id',validatorJWT , isAdmin,verifyChannel.edit, channel.updateChann
 //isadmin
 ////TAL VEZ  MODIFICAR LA PROP ACTIVE Y NO ELIMINAR?
 router.delete('/:id',validatorJWT,  isAdmin,verifyChannel.remove, channel.deleteChannel)
-
+//get todos los canales creados 
+//PARA ADMIN?
+router.get('/all',validatorJWT, channel.getAllChannels)
 //get all channel > devuelve solo los nombres en los que el usuario esta participando -si es seleccionado devuelve requeriminetos
 //SE PODRIA USAR EL UID QUE PROVIENE DEL REQ
-router.get('/user/:uid',validatorJWT,verifyChannel.getByUser,  channel.getUserChannels)
+router.get('/user',validatorJWT,  channel.getUserChannels)
 
 //obtener canal > devuelve el canal con los posteos populados
 router.get('/:id',validatorJWT, channel.getPostsChannel)
 
-//get todos los canales creados 
-//PARA ADMIN?
-router.get('/all',validatorJWT, channel.getAllChannels)
+
 
 module.exports = router;
 
