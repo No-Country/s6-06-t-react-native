@@ -124,6 +124,10 @@ const userSchema = new Schema(
     //     ref: "reaction",
     //   },
     // ],
+    postulations: [{
+      type: Schema.Types.ObjectId,
+      ref: "JobOffer"
+    }]
   },
   { timestamps: true, versionKey: false }
 );

@@ -1,19 +1,32 @@
 const {Schema,model}=require("mongoose")
 
 const offerSchema=new Schema({
-  name:{
-    type:String,
-    required:true,
-    default:"Sin Fronteras"
+  candidates: [{
+    type: Schema.Types.ObjectId,
+    ref: 'user'
+  }],
+  title: {
+      type: String,
+      required: true
   },
-  description:{
-    type:String,
-    required:true
+  description: {
+      type: String,
+      //required: true
   },
-  channel:{
-    type:Schema.Types.ObjectId,
-    ref: 'channel'
-  }
+  comments: [{
+      type: Schema.Types.ObjectId,
+      ref: 'comment'
+  }],
+  channel: [{
+      type: Schema.Types.ObjectId,
+      ref: 'channel'
+  }],
+  attached: [String],
+  active: {
+      type: Boolean,
+      default: true
+  },
+  
 });
 
 offerSchema.methods.toJSON = function idSetter() {

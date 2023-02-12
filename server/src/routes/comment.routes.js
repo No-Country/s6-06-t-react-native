@@ -7,7 +7,7 @@ const {comment} = require('../controllers');
 
 
 //post crear cometario -validar jwt (!!!!comentarios anidados-charlarcon front)
-router.post('/new', validatorJWT, comment.createComment)
+router.post('/:id/new', validatorJWT, comment.createComment)
 
 
 //put editar comentario--validar jwt -validar si es propio del usuario

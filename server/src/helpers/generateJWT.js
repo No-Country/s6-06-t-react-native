@@ -8,7 +8,7 @@ const jwt =require("jsonwebtoken")
       payload,
       process.env.SECRET_JWT,
       {
-        expiresIn: "1d",
+        expiresIn: "30d", //CAMBIAR EN PRODUCCIÓN A 1 Día!!
       },
       (error, token) => {
         if (error) {
