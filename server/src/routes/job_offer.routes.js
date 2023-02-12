@@ -19,6 +19,9 @@ router.put('/:id/delete', validatorJWT,isAdmin,verifyOffer.remove, jobOffer.dele
 //post crea una oferta -como admin
 router.post('/new', validatorJWT, isAdmin, verifyOffer.create, jobOffer.createPostulation)
 
+//Ruta para el front, para postularse
+router.post('/postulate', validatorJWT, jobOffer.postulateOffer)
+
 router.post('/:id/newcomment', validatorJWT, jobOffer.createComment)
 
 module.exports = router;

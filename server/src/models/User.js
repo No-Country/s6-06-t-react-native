@@ -100,13 +100,6 @@ const userSchema = new Schema(
         ref: "channel",
       },
     ],
-    job_applications: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "jobOffer",
-      },
-    ],
-
     posts: [
       {
         type: Schema.Types.ObjectId,
@@ -119,6 +112,10 @@ const userSchema = new Schema(
         ref: "reaction",
       },
     ],
+    postulations: [{
+      type: Schema.Types.ObjectId,
+      ref: "JobOffer"
+    }]
   },
   { timestamps: true, versionKey: false }
 );
