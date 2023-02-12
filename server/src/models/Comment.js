@@ -6,8 +6,7 @@ const commentSchema = new Schema({
         ref: 'user'
     },
     body: { 
-        type: String,
-        required: true,
+        type: String, 
     },
     post:{
         type: Schema.Types.ObjectId,
