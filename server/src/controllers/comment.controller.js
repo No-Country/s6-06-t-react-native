@@ -1,4 +1,4 @@
-const { Comment, Post, Reaction } = require('../models');
+const { Comment, Post, Reaction, JobOffer } = require('../models');
 const { response } = require('../helpers');
 
 const createComment = async (req, res) => {
@@ -8,10 +8,12 @@ const createComment = async (req, res) => {
     const { id, place } = req.params;
     try {
 
-      //VALIDAR POST O COMENTARIO
+
+//CONDICIONAR BUSQUEDAS EN DB para no hacer las 3 peticiones juntas
         const isInPost = await Post.findById(id);
         const isInComment = await Comment.findById(id);
-        if (!isInPost && !isInComment) {
+        const isInJobOffer=await JobOffer.findById(id)
+        if (!isInPost && !isInComment && !isInJobOffer) {
             return response.error(req, res, 'Post no encontrado', 400);
         }
 
@@ -24,6 +26,8 @@ const createComment = async (req, res) => {
             comment.post = id;
         } else if (place === 'comment') {
             comment.replieOf = id;
+        }else if (place === 'job-offer') {
+            comment.job_offer = id;
         }
 
         const savedComment = await comment.save();

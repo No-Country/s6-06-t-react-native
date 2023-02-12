@@ -1,10 +1,11 @@
 const {Schema,model}=require("mongoose")
 
 const offerSchema=new Schema({
-  candidates: [{
+  author:{
     type: Schema.Types.ObjectId,
     ref: 'user'
-  }],
+},
+ 
   title: {
       type: String,
       required: true
@@ -13,10 +14,7 @@ const offerSchema=new Schema({
       type: String,
       //required: true
   },
-  comments: [{
-      type: Schema.Types.ObjectId,
-      ref: 'comment'
-  }],
+
   channel: [{
       type: Schema.Types.ObjectId,
       ref: 'channel'

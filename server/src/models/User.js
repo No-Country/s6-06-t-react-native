@@ -21,7 +21,7 @@ const userSchema = new Schema(
     },
     selected: {
       type: Boolean,
-      default: false,
+      default: true,//TODO:CAMBIAR EN PRODUCCION
     },
     active: {
       type: Boolean,
@@ -106,12 +106,7 @@ const userSchema = new Schema(
         ref: "channel",
       },
     ],
-    job_applications: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "jobOffer",//???
-      },
-    ],
+    
     // posts: [
     //   {
     //     type: Schema.Types.ObjectId,

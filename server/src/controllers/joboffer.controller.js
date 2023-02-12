@@ -1,4 +1,4 @@
-const { User, JobOffer, Comment} = require('../models');
+const { User, JobOffer, Comment, Channel} = require('../models');
 const {response} = require('../helpers');
 
 
@@ -6,25 +6,53 @@ const {response} = require('../helpers');
 const getJobOffers = async (req,res) => {
     
     try{
-    
-        const selectedUsers = await User.find({ selected: true });
-        const selectedUsersIds = selectedUsers.map(user => user.id);
-        
-        const jobOffers = await JobOffer.find({
-            candidates: { $in: selectedUsersIds }
-        })
-            .populate({ path: 'candidates', select: 'selected' })
-            .populate({ path: 'comments', select: '_id' });
-    
-        const result = jobOffers.map(offer => {
-        const offerCandidates = offer.candidates.filter(candidate => candidate.selected);
+        const allOffers=await JobOffer.find({})
+
+        const offers = await Promise.all(
+            allOffers.map( async(off)=>{
+            const candidates=await User.find({postulations:off.id})
+            const comments=await Comment.find({job_offer:off.id})
+            //console.log(`cantidad:${candidates.length},oferta:${off.title}`);
             return {
-                ...offer.toObject(),
-                postulationsCount: offerCandidates.length,
-                commentsCount: offer.comments.length
-            };
-        });
-        return response.success(req,res, "offertas obtenidas con éxito",result, 200)
+                ...off.toJSON(),
+                candidates:{
+                    count:candidates.length,
+                    data:candidates.map(item=>item.id)
+                },
+                comments:{
+                        count:comments.length,
+                        data:comments
+                } 
+            } 
+        }
+        )
+    )
+
+
+
+   // const a = offers.map(off=>  off.populate("candidates").populate("comments")    )
+//console.log(offers);
+
+        // const selectedUsers = await User.find({ selected: true });
+        // const selectedUsersIds = selectedUsers.map(user => user.id);
+        
+        // const jobOffers = await JobOffer.find({
+        //     candidates: { $in: selectedUsersIds }
+        // })
+        //     .populate({ path: 'candidates', select: 'selected' })
+        //     .populate({ path: 'comments', select: '_id' });
+    
+        // const result = jobOffers.map(offer => {
+        // const offerCandidates = offer.candidates.filter(candidate => candidate.selected);
+        //     return {
+        //         ...offer.toObject(),
+        //         postulationsCount: offerCandidates.length,
+        //         commentsCount: offer.comments.length
+        //     };
+        // });
+
+
+        return response.success(req,res, "ofertas obtenidas con éxito",offers, 200)
     }catch(error){
         console.log(error)
     return response.error(req,res,"error en el servidor",500)
@@ -33,14 +61,17 @@ const getJobOffers = async (req,res) => {
 
 
 const createPostulation = async (req, res) => {
-
-    const { body, title } = req.body;
+const uid =req.uid
+    const { description, title } = req.body;
     
     try{
+        const channel = await Channel.findOne({ name: 'Requerimientos' });
 
         const offer = new JobOffer({
+            channel:channel.id,
             title,
-            body           
+            description  ,
+            author:uid         
         });
     
         await offer.save()
@@ -48,7 +79,7 @@ const createPostulation = async (req, res) => {
         return response.success(req,res,"postulación creada con éxito",offer,201)
 
     }catch(error){
-        
+        console.log(error);
         return response.error(req,res,"error en el servidor",500)
     }
 
@@ -124,12 +155,14 @@ const deleteJobOffer = async (req,res) => {
 
 const postulateOffer = async (req,res) => {
     
+    const uid = req.uid
+    const {id}=req.params
     try{
-        const uid = req.uid; //esto sería lo mismo que const userId = req.user._id?? si pueden me comentan en discord porfas.. todavía no termino de entenderle bien jaja
-        const offerId = req.body.offerId;
-        
-        const user = User.findById(uid);
-        const offer = JobOffer.findById(offerId)
+        ; //esto sería lo mismo que const userId = req.user._id?? si pueden me comentan en discord porfas.. todavía no termino de entenderle bien jaj
+
+        const user =await  User.findById(uid);
+        const offer =await  JobOffer.findById(id)
+        console.log(user);
 
         if(!user){
             return response.error(req,res,"usuario no encontrado",404)
@@ -141,12 +174,13 @@ const postulateOffer = async (req,res) => {
             return response.error(req,res,"no puedes postularte",400)
         }
 
-        user.postulations.push(offerId)
-        offer.candidates.push(uid)
+        user.postulations.push(id)
+        
         await user.save()
-        await offer.save()
+     
         return response.success(req,res,"postulación exitosa",200)
     }catch(error){
+        console.log(error);
         return response.error(req,res,"error en el servidor",500)
     }
 }
