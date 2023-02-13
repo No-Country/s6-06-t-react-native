@@ -71,7 +71,7 @@ const uid =req.uid
     
         await offer.save()
 
-        return response.success(req,res,"postulación creada con éxito",offer,201)
+        return response.success(req,res,"Oferta creada con éxito",offer,201)
 
     }catch(error){
         console.log(error);
