@@ -1,4 +1,9 @@
-import { LOGIN_USER_PENDING, LOGIN_USER_REJECTED, LOGIN_USER_SUCCESS } from "../types/loginTypes";
+import {
+  LOGIN_USER_PENDING,
+  LOGIN_USER_REJECTED,
+  LOGIN_USER_SUCCESS,
+  LOGOUT_USER,
+} from "../types/loginTypes";
 
 const initialState = {
   isLoading: false,
@@ -31,6 +36,15 @@ export const loginReducer = (state = initialState, { type, payload }) => {
         isLoading: false,
         user: payload,
         token: payload.token,
+        error: null,
+      };
+
+    case LOGOUT_USER:
+      return {
+        ...state,
+        isLoading: false,
+        user: null,
+        token: null,
         error: null,
       };
     default:
