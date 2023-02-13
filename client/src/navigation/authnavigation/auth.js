@@ -8,13 +8,19 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LogIn from "../../screens/authnavigation/LogIn/LogIn";
 import LogIn2 from "../../screens/authnavigation/LogIn/LogIn2";
 import SignUpStepThree from "../../screens/authnavigation/signUpStepThree";
+import Profile from "../../screens/authnavigation/Profile/Profile";
+import PerfilProfesional from "../../screens/authnavigation/Profile/PerfilProfesional";
+
+
+
+
 
 
 const AuthNavigation = ({ navigation }) => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator
-      initialRouteName="OnBoarding"
+      initialRouteName="Profile"
       screenOptions={{
         headerShown: false,
       }}
@@ -27,6 +33,11 @@ const AuthNavigation = ({ navigation }) => {
       <Stack.Screen name="SignUpStepTwo" component={SignUpStepTwo} />
       <Stack.Screen name="SignUpStepThree" component={SignUpStepThree} />
       <Stack.Screen name="Transition" component={Transition} />
+
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="PerfilProfesional" component={PerfilProfesional} />
+
+    
     </Stack.Navigator>
   );
 };
