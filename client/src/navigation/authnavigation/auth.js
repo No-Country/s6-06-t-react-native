@@ -9,9 +9,9 @@ import LogIn from "../../screens/authnavigation/LogIn/LogIn";
 import LogIn2 from "../../screens/authnavigation/LogIn/LogIn2";
 import SignUpStepThree from "../../screens/authnavigation/signUpStepThree";
 
-const Stack = createNativeStackNavigator();
 
 const AuthNavigation = ({ navigation }) => {
+  const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator
       initialRouteName="OnBoarding"

@@ -15,11 +15,40 @@ import { useState } from "react";
 import LinkedinButton from "../../../components/LinkedinButton";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { loginUser } from "../../../redux/actions/loginActions";
+import { useDispatch } from "react-redux";
+import { AsyncStorage } from "@react-native-async-storage/async-storage";
+
 const LogIn2 = () => {
   const [data, setData] = useState({ password: "", email: "" });
   const [isFocused, setIsFocused] = useState(false);
   const [isFocused2, setIsFocused2] = useState(false);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const handleSubmit = () => {
+    let isValid = true;
+
+    if (!data.email) {
+      isValid = false;
+      alert("Email es un campo requerido.");
+    } else if (
+      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email)
+    ) {
+      isValid = false;
+      alert("Email no válido.");
+    }
+
+    if (!data.password) {
+      isValid = false;
+      alert("Contraseña es un campo requerido.");
+    }
+
+    if (isValid) {
+      dispatch(loginUser(data));
+      navigation.navigate("Transition");
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -71,10 +100,7 @@ const LogIn2 = () => {
             Olvidaste tu contraseña?
           </Text>
         </TouchableOpacity>
-        <PrimaryButton
-          text="Iniciar Sesión"
-          handler={() => navigation.navigate("Transition")}
-        />
+        <PrimaryButton text="Iniciar Sesión" handler={() => handleSubmit()} />
         <View style={styles.lineContainer}>
           <View style={styles.line}></View>
           <Text style={{ color: "#979797" }}>Ingresar con</Text>
@@ -86,8 +112,12 @@ const LogIn2 = () => {
             Aún no tenés cuenta?
           </Text>
           <TouchableOpacity>
-            <Text style={{ color: "#4245E5", textDecorationLine: "underline" }} onPress={() => {
-            navigation.navigate("SignUp")}}>
+            <Text
+              style={{ color: "#4245E5", textDecorationLine: "underline" }}
+              onPress={() => {
+                navigation.navigate("SignUp");
+              }}
+            >
               Registrate
             </Text>
           </TouchableOpacity>
