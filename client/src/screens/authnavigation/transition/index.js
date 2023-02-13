@@ -1,28 +1,27 @@
-import { View, Text,StyleSheet, useWindowDimensions, Image } from "react-native";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { styles } from './styles'
-import LottieView from 'lottie-react-native'
-import Logo from '../../../../assets/Logo.png'
+import { View, Text, StyleSheet, Image } from "react-native";
+import { styles } from "./styles";
+import Logo from "../../../../assets/Logo.png";
+import { useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
-const Transition = ({navigation}) => {
-    const {width} = useWindowDimensions();
-    const {height} = useWindowDimensions();
-    const dispatch = useDispatch();
-    useEffect(() => {
-        setTimeout(() => {
-            dispatch({type: "LOG_IN", payload: true})
-        }, 2000)
-    }, [])
+const Transition = () => {
+  const { isLoading, token } = useSelector((state) => state.login);
+  const navigation = useNavigation();
+  if (isLoading) {
     return (
-        <View style={[styles.container, StyleSheet.absoluteFillObject]}>
-            {/* <View style={{backgroundColor: 'white',opacity: .25, height: 22, width: width, position:'absolute', top: 0}}></View> */}
-            <View style={styles.main}>
-                <Image source={Logo} style={{width: 350, height: 350}}/>
-                <Text style={[styles.text]}>Iniciando sesión...</Text>
-            </View>
-            {/* <Text style={[styles.Text, {position: 'absolute', top: height/2+50, color: 'white'}]}>Cargando Mapas</Text> */}
-        </View>  
-    )
-}
+      <View style={[styles.container, StyleSheet.absoluteFillObject]}>
+        <View style={styles.main}>
+          <Image source={Logo} style={{ width: 350, height: 350 }} />
+          <Text style={[styles.text]}>Iniciando sesión...</Text>
+        </View>
+      </View>
+    );
+  }
+  if (token) {
+    navigation.navigate("Home");
+  } else {
+    alert("Usuario o contraseña inválidos");
+    navigation.navigate("LogIn2");
+  }
+};
 export default Transition;
