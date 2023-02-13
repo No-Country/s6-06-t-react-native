@@ -31,7 +31,7 @@ const SignUpStepThree = () => {
           />
           <StepsRegister
             number="3"
-            active={false}
+            active={true}
             description="Confirmación vía email"
           />
         </View>
