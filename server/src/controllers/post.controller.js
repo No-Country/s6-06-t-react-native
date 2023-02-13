@@ -1,6 +1,7 @@
 const { response } = require('../helpers');
 const { success, error } = require('../helpers/response.js');
 const { Post, Reaction } = require('../models');
+const { postsServices } = require('../services');
 const { findPostById, newPost } = require('../services/post.services.js');
 
 const createPost = async (req, res) => {
@@ -107,8 +108,29 @@ const updatePost = async (req, res) => {
         });
     }
 };
+
+const PostsRemove = async (req, res) => {
+    const {id} = req.params;
+
+    try {
+        const removePost = await postsServices.remove(id);
+        if (!removePost)
+            return response.error(
+                req,
+                res,
+                'Hay un problema con el post que quiere remover!!',
+                400
+            );
+
+        return response.success(req, res, 'Post deleted', removePost.id, 200);
+    } catch (error) {
+        console.log(error);
+        return response.error(req, res, 'Post no encontrado', 500);
+    }
+};
 module.exports = {
     createPost,
     reactionToPost,
-    updatePost
+    updatePost,
+    PostsRemove
 };

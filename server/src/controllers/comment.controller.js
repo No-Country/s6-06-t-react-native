@@ -6,28 +6,32 @@ const createComment = async (req, res) => {
     const uid = req.uid;
     const { body } = req.body;
     const { id, place } = req.params;
+    let isInPost;
+    let isInComment;
+    let isInJobOffer;
     try {
 
 
 //CONDICIONAR BUSQUEDAS EN DB para no hacer las 3 peticiones juntas
-        const isInPost = await Post.findById(id);
-        const isInComment = await Comment.findById(id);
-        const isInJobOffer=await JobOffer.findById(id)
-        if (!isInPost && !isInComment && !isInJobOffer) {
-            return response.error(req, res, 'Post no encontrado', 400);
-        }
-
-        let comment = new Comment({
+        
+        const comment = new Comment({
             body,
             author: uid
         });
 
+            
         if (place === 'post') {
+            isInPost = await Post.findById(id),
             comment.post = id;
         } else if (place === 'comment') {
+            isInComment = await Comment.findById(id);
             comment.replieOf = id;
         }else if (place === 'job-offer') {
+            isInJobOffer = await JobOffer.findById(id)
             comment.job_offer = id;
+        }
+        if (!isInPost && !isInComment && !isInJobOffer) {
+            return response.error(req, res, 'Post no encontrado', 400);
         }
 
         const savedComment = await comment.save();

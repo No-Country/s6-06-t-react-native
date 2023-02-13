@@ -13,14 +13,6 @@ const postSchema = new Schema({
         type: String,
         //required: true
     },
-    // comments: [{
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'comment'
-    // }],
-    // reactions: [{
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'reaction'
-    // }],
     channel: [{
         type: Schema.Types.ObjectId,
         ref: 'channel'
@@ -62,6 +54,6 @@ postSchema.methods.toJSON = function idSetter() {
     return Post;
 };
 
-const Post = model('post', postSchema,'post')
+const Post = model('post', postSchema)
 
 module.exports = Post;
