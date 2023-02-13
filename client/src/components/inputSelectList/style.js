@@ -39,9 +39,23 @@ export const styles = StyleSheet.create({
   outLine: {
     borderColor: "#4245E5",
     borderWidth: 1,
+    borderBottomRightRadius: 0,
+    borderBottomLeftRadius: 0,
+    borderBottomWidth: 0,
+    backgroundColor: '#fff'
   },
   requerimiento: {
     color: "#37474F",
     fontSize: 12,
   },
+  dropdownStyles:{
+    position: 'relative',
+    marginTop: -5,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+    borderTopWidth: 0,
+    borderColor: '#4245E5'
+  }
 });

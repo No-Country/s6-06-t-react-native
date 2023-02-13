@@ -45,4 +45,7 @@ export const styles = StyleSheet.create({
     color: "#37474F",
     fontSize: 12,
   },
+  error:{
+    color: 'red'
+  }
 });
