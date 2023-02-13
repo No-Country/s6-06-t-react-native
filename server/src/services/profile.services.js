@@ -1,5 +1,13 @@
 const { updateIMG } = require("../helpers/cloudinary");
-const { User, JobOffer } = require("../models");
+const { User } = require("../models");
+
+const get=async(uid)=>{
+  const user = await User.findById(uid).populate("favorites").populate("postulations")
+
+  if (!user) return "error"
+const {password:_ ,...userData}=user.toJSON()
+    return userData
+}
 
 const remove = async (uid) => {
   const user = await User.findById(uid);
@@ -37,11 +45,11 @@ const applications = async (uid, body) => {
 
   const user = await User.findById(uid);
 
-  const newList = user.job_applications.filter((jobOffer) => {
-    return remove.indexOf(jobOffer) == -1;
+  const newList = user.postulations.filter((jobOffer) => {
+    return remove.indexOf(jobOffer.toHexString()) == -1;
   });
 
-  user.job_applications = newList;
+  user.postulations = newList;
 
   return await user.save();
 };
@@ -52,7 +60,7 @@ const savedPost = async (uid, body) => {
   const user = await User.findById(uid);
 
   const newList = user.favorites.filter((post) => {
-    return remove.indexOf(post) == -1;
+    return remove.indexOf(post.toHexString()) == -1;
   });
 
   user.favorites = newList;
@@ -69,6 +77,7 @@ const profilePic = async (uid, file) => {
 };
 
 module.exports = {
+  get,
   remove,
   personal,
   professional,

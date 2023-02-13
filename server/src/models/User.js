@@ -84,16 +84,6 @@ const userSchema = new Schema(
       default:
         "https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png",
     },
-    // pinnedpost: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'post'
-    // }],
-    // comments: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "comment",
-    //   },
-    // ],
     favorites: [
       {
         type: Schema.Types.ObjectId,
@@ -106,6 +96,20 @@ const userSchema = new Schema(
         ref: "channel",
       },
     ],
+    postulations: [{
+      type: Schema.Types.ObjectId,
+      ref: "jobOffer"
+    }]
+     // pinnedpost: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'post'
+    // }],
+    // comments: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "comment",
+    //   },
+    // ],
     
     // posts: [
     //   {
@@ -119,10 +123,7 @@ const userSchema = new Schema(
     //     ref: "reaction",
     //   },
     // ],
-    postulations: [{
-      type: Schema.Types.ObjectId,
-      ref: "JobOffer"
-    }]
+   
   },
   { timestamps: true, versionKey: false }
 );
