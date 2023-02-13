@@ -11,10 +11,10 @@ const createPost = async (req, res) => {
     const { uid } = req;
     const attached = req.files;
     let attachedFiles
-    if(attached){
-         attachedFiles = Object.entries(attached).map((i) => i[1]);
+    if (attached) {
+        attachedFiles = Object.entries(attached).map((i) => i[1]);
     }
-    
+
 
     let savedPost = {};
 
@@ -31,31 +31,6 @@ const createPost = async (req, res) => {
     return error(req, res, 'post creation failed ', 400);
 };
 
-const reactionToPost = async (req, res) => {
-    const io = req.app.locals.io;
-    const uid = req.uid;
-    const { id } = req.params;
-    const { reaction } = req.body;
-
-    try {
-        const post = await Post.findById(id);
-
-        if (!post) {
-            return response.error(req, res, 'Post no encontrado', 404);
-        }
-
-        const newReaction = await new Reaction({
-            user: uid,
-            type__Reaction: reaction,
-            post: id
-        }).save();
-
-        io.emit('reaction-new-in-post', { reaction: newReaction });
-        return response.success(req, res, 'Reaccion  exitosa', 200);
-    } catch (error) {
-        return response.error(req, res, error.message, 500);
-    }
-};
 
 const updatePost = async (req, res) => {
     const { id } = req.params;
@@ -63,7 +38,7 @@ const updatePost = async (req, res) => {
     const attached = req.files;
     let attachedFiles
 
-    
+
     try {
         const post = await Post.findById(id);
         //TAL VER RUTA DISTINTA ACTUALIZAR ADJUNTOS?
@@ -85,7 +60,7 @@ const updatePost = async (req, res) => {
         }
         post.attached = [];
 
-        if(attached){
+        if (attached) {
             attachedFiles = Object.entries(attached).map((i) => i[1]);
             if (attachedFiles.length > 0) {
                 await Promise.all(
@@ -94,12 +69,12 @@ const updatePost = async (req, res) => {
                     })
                 );
             }
-       }
-        
+        }
+
         post.title = title;
         post.description = description;
 
-        response.success(req,res,"Post updated",post,200)
+        response.success(req, res, "Post updated", post, 200)
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -110,7 +85,7 @@ const updatePost = async (req, res) => {
 };
 
 const PostsRemove = async (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
 
     try {
         const removePost = await postsServices.remove(id);
@@ -130,7 +105,6 @@ const PostsRemove = async (req, res) => {
 };
 module.exports = {
     createPost,
-    reactionToPost,
     updatePost,
     PostsRemove
 };

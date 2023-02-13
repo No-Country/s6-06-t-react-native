@@ -1,4 +1,4 @@
-const { Comment, Post, Reaction, JobOffer } = require('../models');
+const { Comment, Post, JobOffer } = require('../models');
 const { response } = require('../helpers');
 
 const createComment = async (req, res) => {
@@ -12,21 +12,21 @@ const createComment = async (req, res) => {
     try {
 
 
-//CONDICIONAR BUSQUEDAS EN DB para no hacer las 3 peticiones juntas
-        
+        //CONDICIONAR BUSQUEDAS EN DB para no hacer las 3 peticiones juntas
+
         const comment = new Comment({
             body,
             author: uid
         });
 
-            
+
         if (place === 'post') {
             isInPost = await Post.findById(id),
-            comment.post = id;
+                comment.post = id;
         } else if (place === 'comment') {
             isInComment = await Comment.findById(id);
             comment.replieOf = id;
-        }else if (place === 'job-offer') {
+        } else if (place === 'job-offer') {
             isInJobOffer = await JobOffer.findById(id)
             comment.job_offer = id;
         }
@@ -188,35 +188,11 @@ const replyComment = async (req, res) => {
     }
 };
 
-const reactionToComment = async (req, res) => {
-    const uid = req.uid;
-    const { id } = req.params;
-    const { reaction } = req.body;
-
-    try {
-        const comment = await Comment.findById(id);
-
-        if (!comment) {
-            return response.error(req, res, 'Comentario no encontrado', 404);
-        }
-
-        const newReaction = await new Reaction({
-            user: uid,
-            type__Reaction: reaction,
-            comment:id
-        }).save();
-       
-        return response.success(req, res, 'Reaccion  exitosa', undefined, 201);
-    } catch (error) {
-        return response.error(req, res, error.message, 500);
-    }
-};
 
 module.exports = {
     createComment,
     updateComment,
     deleteComment,
     admDeleteComment,
-    replyComment,
-    reactionToComment
+    replyComment
 };
