@@ -48,10 +48,9 @@ const deleteChannel =  async (req , res) => {
         });
         }
         await channel.remove();
-        res.status(200).json({
-        success: true,
-        data: {},
-        });
+        return response.success(req,res,"Canal eliminado",{
+            name: channel.name
+        })
     } catch (error) {
         res.status(500).json({
         success: false,
@@ -65,11 +64,14 @@ const getAllChannels = async (req, res) => {
     try {
         const channels = await Channel.find();
 
-        res.status(200).json({
-            success: true,
-            count: channels.length,
-            data: channels
-        });
+        const data={
+            count:channels.length,
+            channels
+        }
+
+        return response.success(req,res,"Canales encontrados",
+           data,200
+        )
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -95,7 +97,9 @@ const getUserChannels = async (req, res) => {
         }
 
         /////
-        return res.send({ channels });
+        return response.success(req,res,"Canales encontrados",
+           channels,200
+        )
 
         } catch (error) {
             console.error(error);
@@ -113,6 +117,8 @@ const channel=await Channel.findById(id)
 if(!channel) response.error(req,res,"Canal invalido",400)
 
         const posts = await Post.find({channel:id})
+                                .populate({ path: 'comments', select: 'body attached createdAt' })
+
 
         return res.status(200).send({ posts });
     } catch (error) {

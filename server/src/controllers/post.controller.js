@@ -9,7 +9,11 @@ const createPost = async (req, res) => {
     const { channel } = req.params;
     const { uid } = req;
     const attached = req.files;
-    const attachedFiles = Object.entries(attached).map((i) => i[1]);
+    let attachedFiles
+    if(attached){
+         attachedFiles = Object.entries(attached).map((i) => i[1]);
+    }
+    
 
     let savedPost = {};
 
@@ -56,8 +60,9 @@ const updatePost = async (req, res) => {
     const { id } = req.params;
     const { title, description } = req.body;
     const attached = req.files;
-    const attachedFiles = Object.entries(attached).map((i) => i[1]);
+    let attachedFiles
 
+    
     try {
         const post = await Post.findById(id);
         //TAL VER RUTA DISTINTA ACTUALIZAR ADJUNTOS?
@@ -78,20 +83,22 @@ const updatePost = async (req, res) => {
             });
         }
         post.attached = [];
-        if (attachedFiles.length > 0) {
-            await Promise.all(
-                attachedFiles.map(async (file) => {
-                    return await updatePost(post, file);
-                })
-            );
-        }
+
+        if(attached){
+            attachedFiles = Object.entries(attached).map((i) => i[1]);
+            if (attachedFiles.length > 0) {
+                await Promise.all(
+                    attachedFiles.map(async (file) => {
+                        return await updatePost(post, file);
+                    })
+                );
+            }
+       }
+        
         post.title = title;
         post.description = description;
 
-        res.status(200).json({
-            success: true,
-            data: post
-        });
+        response.success(req,res,"Post updated",post,200)
     } catch (error) {
         console.log(error);
         res.status(500).json({

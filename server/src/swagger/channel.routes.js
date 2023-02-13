@@ -38,7 +38,7 @@
  *                msg: Canal creado exitosamente
  *                data: { 
  *                  "name": Nuevo Canal,
- *                  "posts": [],
+ *                  
  *                  "typechannel": "public",
  *                  "createdAt": "2023-02-10T13:04:02.218Z",
  *                  "updatedAt": "2023-02-10T13:04:02.218Z",
@@ -74,7 +74,7 @@
  *          schema:
  *            type: object
  *            example:
- *              name: Nuevo Canal,
+ *              name: Nuevo Nombre
  *              typechannel: private
  *    responses:
  *      201:
@@ -86,11 +86,8 @@
  *              example:
  *                msg: Canal actualizado exitosamente
  *                data: { 
- *                  "name": "zaz",
- *                  "posts": [
- *                      "63e640d1b4895ce97338ca63",
- *                      "63e640d3b4895ce97338ca6a",
- *                      "63e640d4b4895ce97338ca71"],
+ *                  "name": "Nuevo Nombre",
+ *                  
  *                  "typechannel": "private",
  *                  "createdAt": "2023-02-10T13:04:02.218Z",
  *                  "updatedAt": "2023-02-10T18:32:17.954Z",
@@ -170,13 +167,13 @@
  *              type: object
  *              example:
  *                msg: Canales encontrados
- *                data: { 
- *                   "channels": [
+ *                data:  
+ *                  [
  *                      {
  *                          "name": "General",
  *                          "id": "63e527334301295852cc4f4f"
  *                      }
- *                      ]}
+ *                      ]
  *
  */
 
@@ -231,18 +228,22 @@
  *                             "user": "63e5b75334de3305d0198a5f",
  *                             "title": "post",
  *                             "comments": [
- *                                 "63e641d2b4895ce97338ca86",
- *                                 "63e68823434ebfc2b51e73fa",
- *                                 "63e6882a434ebfc2b51e73ff",
- *                                 "63e688c83a34c0301bbe8d15",
- *                                 "63e688d43a34c0301bbe8d1a",
- *                                 "63e688e84430ed2e2f43508a",
- *                                 "63e688f24430ed2e2f43508f"
+ *                                 {
+ *                                 "_id": "63ea3c64481c880aedc97678",
+ *                                 "body": "Generasl2",
+ *                                 "attached": [],
+ *                                 "post": "63ea3abb2058e8310c6b1e0d",
+ *                                 "createdAt": "2023-02-13T13:34:28.419Z"
+ *                             }
  *                             ],
  *                             "reactions": [
- *                                 "63e64bddaeb2f49113cc3c39",
- *                                 "63e64c0504892f5cdecb3518",
- *                                 "63e6851897afce3a513118b0"
+ *                                 {
+ *                   "_id": "63ea3c64481c880aedc97678",
+ *                   "type_reaction": "megusta",
+ *                   
+ *                   "post": "63ea3abb2058e8310c6b1e0d",
+ *                   
+ *               }
  *                             ],
  *                             "channel": [
  *                                 "63e527334301295852cc4f4f"
@@ -287,7 +288,8 @@
  *              example:
  *                msg: Canales encontrados
  *                data: { 
- *                   "channels": [
+ *                    count: 3,
+ *                    channels: [
  *                      {
  *                          "name": "General",
  *                          "id": "63e527334301295852cc4f4f"

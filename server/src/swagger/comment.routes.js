@@ -7,7 +7,7 @@
 
 /**
  * @swagger
- * /api/comment/new:
+ * /api/comment/new/:id/:scope:
  *  post:
  *    parameters:
  *      - in: header
@@ -17,7 +17,22 @@
  *          format: uuid
  *        required: true
  *        description: The token users account
- *    summary: Create a new comment is specific post
+ *      - in: params
+ *        name: id
+ *        schema:
+ *          type: string
+ *          format: id
+ *        required: true
+ *        description: The mongo id of the document where will make a comment
+ * 
+ *      - in: params
+ *        name: scope
+ *        schema:
+ *          type: string
+ *          "enum": [ "job-offer", "post","comment"]
+ *        required: true
+ *        description: The place where will make a comment
+ *    summary: Create a new comment is specific post, job offer or reply another comment
  *    tags: [Comments]
  *    requestBody:
  *      required: true
@@ -27,7 +42,7 @@
  *            type: object
  *            example:
  *               "body": "Hola"
- *               "post": "63e64162b4895ce97338ca7d"
+ *               
  *    responses:
  *      201:
  *        description: Comentario creado con éxito
@@ -43,8 +58,6 @@
  *                  "post": "63e64162b4895ce97338ca7d",
  *                  "active": true,
  *                  "attached": [],
- *                  "replies": [],
- *                  "reactions": [],
  *                  "createdAt": "2023-02-10T18:12:02.770Z",
  *                  "updatedAt": "2023-02-10T18:12:02.770Z",
  *                  "id": "63e688f24430ed2e2f43508f" }
@@ -98,8 +111,6 @@
  *                 "post": "63e64162b4895ce97338ca7d",
  *                 "active": true,
  *                 "attached": [],
- *                 "replies": [],
- *                 "reactions": [],
  *                 "createdAt": "2023-02-11T00:00:20.105Z",
  *                 "updatedAt": "2023-02-11T00:00:30.784Z",
  *                 "id": "63e6da94fad021aab55a1bf2"
@@ -180,48 +191,48 @@
  */
 
 
-/**
- * @swagger
- * /api/comment/reply/new/{id}:
- *  post:
- *    parameters:
- *      - in: header
- *        name: x-token
- *        schema:
- *          type: string
- *          format: uuid
- *        required: true
- *        description: The token users account
- *      - in: params
- *        name: id
- *        schema:
- *          type: string
- *          format: id
- *        required: true
- *        description: The id of the comment to reply
- *    summary: Create a new reply to specific comment
- *    tags: [Comments]
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            example:
- *              "message": "NO ME GUSTA LO QUE DECIS"
- *              
- *    responses:
- *      201:
- *        description: Respuesta a comentario exitosa
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              example:
- *                msg: Respuesta a comentario exitosa
- *                
- *
- */
+// /**
+//  * @swagger
+//  * /api/comment/reply/new/{id}:
+//  *  post:
+//  *    parameters:
+//  *      - in: header
+//  *        name: x-token
+//  *        schema:
+//  *          type: string
+//  *          format: uuid
+//  *        required: true
+//  *        description: The token users account
+//  *      - in: params
+//  *        name: id
+//  *        schema:
+//  *          type: string
+//  *          format: id
+//  *        required: true
+//  *        description: The id of the comment to reply
+//  *    summary: Create a new reply to specific comment
+//  *    tags: [Comments]
+//  *    requestBody:
+//  *      required: true
+//  *      content:
+//  *        application/json:
+//  *          schema:
+//  *            type: object
+//  *            example:
+//  *              "message": "NO ME GUSTA LO QUE DECIS"
+//  *              
+//  *    responses:
+//  *      201:
+//  *        description: Respuesta a comentario exitosa
+//  *        content:
+//  *          application/json:
+//  *            schema:
+//  *              type: object
+//  *              example:
+//  *                msg: Respuesta a comentario exitosa
+//  *                
+//  *
+//  */
 
 
 /**

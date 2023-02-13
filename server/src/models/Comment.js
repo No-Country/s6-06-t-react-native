@@ -25,10 +25,10 @@ const commentSchema = new Schema({
     //     type: Schema.Types.ObjectId,
     //     ref: 'reaction'
     // }],
-    job_offer: [{
+    job_offer: {
         type:Schema.Types.ObjectId,
         ref: 'JobOffer'
-    }]
+    }
 },
 {
     timestamps: true,

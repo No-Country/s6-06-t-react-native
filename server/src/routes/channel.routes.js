@@ -6,7 +6,7 @@ const { verifyChannel } = require("../validations");
 
 //crear canal
 //is admin
-
+//PROBAR SI SE PUEDE CREAR EN PRIVADO
 router.post("/new",validatorJWT,  isAdmin, verifyChannel.create,  channel.createChannel)
 
 //editar canal 

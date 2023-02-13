@@ -18,6 +18,7 @@ typechannel:{
 },
 { timestamps: true, versionKey: false })
 
+
 channelSchema.methods.toJSON = function idSetter() {
   const { _id, ...Channel } = this.toObject();
   Channel.id = _id;

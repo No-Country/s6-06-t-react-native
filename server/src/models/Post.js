@@ -39,10 +39,22 @@ const postSchema = new Schema({
         default:true
     }
 },
-{
+{   toObject: { virtuals: true },
+    toJSON: { virtuals: true },
     timestamps: true,
     versionKey: false
 });
+postSchema.virtual('comments', {
+    ref: 'comment',
+    localField: '_id',
+    foreignField: 'post'
+});
+
+// postSchema.virtual('reactions', {
+//     ref: 'reaction',
+//     localField: '_id',
+//     foreignField: 'post'
+// });
 
 postSchema.methods.toJSON = function idSetter() {
     const { _id, ...Post } = this.toObject();
@@ -50,6 +62,6 @@ postSchema.methods.toJSON = function idSetter() {
     return Post;
 };
 
-const Post = model('post', postSchema)
+const Post = model('post', postSchema,'post')
 
 module.exports = Post;

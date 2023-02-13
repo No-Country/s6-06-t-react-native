@@ -136,7 +136,7 @@
  *   
  *    responses:
  *      200:
- *        description: logged with a prevoius account
+ *        description: Logged with a prevoius account
  *        content:
  *          application/json:
  *            schema:

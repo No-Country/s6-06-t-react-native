@@ -150,9 +150,6 @@ module.exports = User;
  *        email:
  *          type: string
  *          description: the email of the user account
- *        password:
- *          type: string
- *          description: the password of the user account
  *        availability:
  *          type: string
  *          description: the shift available to work
@@ -188,17 +185,15 @@ module.exports = User;
  *           admin: false
  *           selected: false
  *           active: true
+ *           emailisvalidated: false
  *           availability: "Mañana"
  *           technologies: ["HTML","CSS"]
- *           phone: 124578965253
+ *           phone: "124578965253"
  *           position: "fullstack"
  *           img_avatar: "https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png"
- *           comments: []
+ *           channels: [63e8ec9ec08f1c72e0d40a05]
+ *           postulations: []
  *           favorites: []
- *           channels: []
- *           job_applications: []
- *           posts: []
- *           reactions: []
  *           createdAt: "2023-02-08T11:39:20.351Z"
  *           updatedAt: "2023-02-08T11:39:20.351Z"
  *           uid": "63e389e8b78b96ca44b5132d"
