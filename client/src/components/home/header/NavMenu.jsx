@@ -17,9 +17,15 @@ export default function NavMenu({ pathImgUser }) {
         <EvilIcons name="search" size={24} color={colors.lightGrey} />
         <TextInput type="text" placeholder="Buscar en Sin Fronteras" />
       </View>
-      <TouchableOpacity onPress={navigation.navigate("Profile")}>
-        <Image source={{ uri: pathImgUser }} style={[styles.imgUserHeader]} />
-      </TouchableOpacity>
+      <View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Profile");
+          }}
+        >
+          <Image source={{ uri: pathImgUser }} style={[styles.imgUserHeader]} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
