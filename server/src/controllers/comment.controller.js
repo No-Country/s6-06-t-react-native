@@ -1,4 +1,4 @@
-const { Comment } = require('../models');
+const { Comment, User } = require('../models');
 const { response } = require('../helpers');
 const { commentServices } = require('../services');
 
@@ -77,7 +77,9 @@ const deleteComment = async (req, res) => {
             return response.error(req, res, 'Comentario no encontrado', 404);
         }
 
-        if (comment.author.toString() !== uid) {
+        const user=await User.findById(uid)
+
+        if (comment.author.toString() !== uid && !user.admin) {
             return response.error(req, res, 'Usuario no autorizado', 401);
         }
 

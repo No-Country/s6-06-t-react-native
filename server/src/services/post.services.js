@@ -37,9 +37,16 @@ const newPost = async (uid, body, channel, files) => {
     return savedPost;
 };
 
-const remove = async (id) => {
+const remove = async (id,uid) => {
+
     const post = await Post.findById(id);
-    console.log(post.id)
+
+    const user=await User.findById(uid)
+
+    if (post.author.toString() !== uid && !user.admin) {
+        throw new Error("no-priviligies")
+    }
+
     post.active = false;
     return await post.save();
 };

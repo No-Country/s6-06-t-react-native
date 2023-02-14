@@ -1,6 +1,6 @@
 const { response } = require('../helpers');
 const { success, error } = require('../helpers/response.js');
-const { Post, Reaction } = require('../models');
+const { Post, Reaction, User } = require('../models');
 const { postsServices } = require('../services');
 const { findPostById, newPost } = require('../services/post.services.js');
 
@@ -10,11 +10,10 @@ const createPost = async (req, res) => {
     const { channel } = req.params;
     const { uid } = req;
     const attached = req.files;
-    let attachedFiles
-    if(attached){
+    let attachedFiles;
+    if (attached) {
         attachedFiles = Object.entries(attached).map((i) => i[1]);
     }
-
 
     let savedPost = {};
 
@@ -24,15 +23,13 @@ const createPost = async (req, res) => {
         const post = await findPostById(savedPost.id);
 
         io.emit('post-new', { post });
-        
-        const emitCountPost = async (model,channel,uid) => {
 
-
-        const posts = await model.find({channel});
-        io.emit("post-count", posts.length);
+        const emitCountPost = async (model, channel, uid) => {
+            const posts = await model.find({ channel });
+            io.emit('post-count', posts.length);
         };
 
-        await emitCountPost(Post,channel,uid);
+        await emitCountPost(Post, channel, uid);
 
         return success(req, res, 'post created successfully', post, 201);
     }
@@ -40,13 +37,12 @@ const createPost = async (req, res) => {
     return error(req, res, 'post creation failed ', 400);
 };
 
-
 const updatePost = async (req, res) => {
+    const uid = req.uid;
     const { id } = req.params;
     const { title, description } = req.body;
     const attached = req.files;
-    let attachedFiles
-
+    let attachedFiles;
 
     try {
         const post = await Post.findById(id);
@@ -67,6 +63,13 @@ const updatePost = async (req, res) => {
                 error: `Post no existe!!`
             });
         }
+
+        const user = await User.findById(uid);
+
+        if (post.author.toString() !== uid && !user.admin) {
+            return response.error(req, res, 'Usuario no autorizado', 401);
+        }
+
         post.attached = [];
 
         if (attached) {
@@ -83,7 +86,7 @@ const updatePost = async (req, res) => {
         post.title = title;
         post.description = description;
 
-        response.success(req, res, "Post updated", post, 200)
+        response.success(req, res, 'Post updated', post, 200);
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -94,10 +97,11 @@ const updatePost = async (req, res) => {
 };
 
 const PostsRemove = async (req, res) => {
+    const uid = req.uid;
     const { id } = req.params;
 
     try {
-        const removePost = await postsServices.remove(id);
+        const removePost = await postsServices.remove(id, uid);
         if (!removePost)
             return response.error(
                 req,
@@ -109,6 +113,9 @@ const PostsRemove = async (req, res) => {
         return response.success(req, res, 'Post deleted', removePost.id, 200);
     } catch (error) {
         console.log(error);
+        if (error.message === 'no-priviligies'){
+            return response.error(req, res, 'Usuario no autorizado', 401)}
+
         return response.error(req, res, 'Post no encontrado', 500);
     }
 };
