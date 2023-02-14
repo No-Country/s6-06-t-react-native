@@ -6,34 +6,27 @@ import {
   TouchableOpacity,
   Image,
   Pressable,
-  ActivityIndicator,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BackButton from "../../../components/BackButton";
 import { AntDesign } from "@expo/vector-icons";
-import { useSelector } from "react-redux";
 import { AsyncStorage } from "react-native";
 
 const DatosPersonales = () => {
-  const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const isLoggedIn = async () => {
-    setIsLoading(true);
     try {
       let userData = await AsyncStorage.getItem("userData");
       userData = JSON.parse(userData);
       if (userData) {
         setUserInfo(userData);
       }
-      setIsLoading(false);
     } catch (e) {
       console.log("Is logged in error : " + e);
     }
   };
-  console.log(userInfo);
+
   useEffect(() => {
     isLoggedIn();
   }, []);
@@ -70,20 +63,20 @@ const DatosPersonales = () => {
             {userInfo ? userInfo.fullName : "Camilo Vargas"}
           </Text>
           <Text style={styles.profession}>
-            {" "}
-            {userInfo.position === "fullstack"
+            {userInfo && userInfo.position === "fullstack"
               ? "Full-Stack Developer"
               : "Software Developer"}
           </Text>
           <Text style={styles.phone}>
-            {" "}
-            Teléfono: {userInfo && userInfo.phone}
+            Teléfono: {userInfo ? userInfo.phone : ""}
           </Text>
-          <Text style={styles.phone}> Email: {userInfo && userInfo.email}</Text>
           <Text style={styles.phone}>
             {" "}
+            Email: {userInfo ? userInfo.phone : ""}
+          </Text>
+          <Text style={styles.phone}>
             Posts:{" "}
-            {userInfo.posts.length > 0
+            {userInfo && userInfo.posts.length > 0
               ? userInfo.posts
               : "No has publicado aún"}
           </Text>
