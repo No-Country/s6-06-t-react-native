@@ -8,12 +8,12 @@ export const styles = StyleSheet.create({
         
     },
     HeaderContain : {
-        flex : 1,
-        maxHeight : 140,
+        paddingTop : 10,
+        // flex : 1,
         paddingBottom : 5
     },
     ScrollContain : {
-        flex : ScreenWidth <= 360 ? 2 : 3,
+        flex : ScreenWidth <= 360 ? 5 : 7,
         paddingVertical : 10
     },
 

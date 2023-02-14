@@ -7,7 +7,7 @@ import { styles } from './styles';
 const Home = () => {
     let dataUser = {
         pathImgUser : 'https://i.ibb.co/Z1ZN1kr/1636128542111.jpg',
-        TypeComunity : 'Pre-seleccionado',
+        Channel : 'General',
         NumberComunity : 7
     }
     return (
@@ -15,9 +15,9 @@ const Home = () => {
             <View style={styles.HeaderContain}>
                 <HeaderHome 
                     pathImgUser={dataUser.pathImgUser}
-                    TypeComunity={dataUser.TypeComunity}
+                    Channel={dataUser.Channel}
                 />
-            
+
             </View>
             <View style={styles.ScrollContain}>
                 <ScrollViewPost 

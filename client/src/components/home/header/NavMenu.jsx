@@ -1,10 +1,10 @@
-import { View, TextInput, Image } from 'react-native'
+import { View, TextInput, Image, Text } from 'react-native'
 import React from 'react'
 import { styles } from './styles';
 import { Feather, EvilIcons } from '@expo/vector-icons';
 import { colors } from '../../../constants'
 
-export default function NavMenu({pathImgUser}) {
+export default function NavMenu() {
     return (
         <View style={styles.header}>
             <View >
@@ -15,10 +15,11 @@ export default function NavMenu({pathImgUser}) {
                 <TextInput
                     type='text'
                     placeholder='Buscar en Sin Fronteras'
+                    style={{width : '100%'}}
                 />
             </View>
-            <View>
-                <Image source={{uri : pathImgUser}} style={[styles.imgUserHeader]} />
+            <View style={styles.profileButton}>
+                <Text style={styles.textCV}>CV</Text>
             </View>
         </View>
     )
