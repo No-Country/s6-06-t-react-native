@@ -10,6 +10,7 @@ import LogIn2 from "../../screens/authnavigation/LogIn/LogIn2";
 import SignUpStepThree from "../../screens/authnavigation/signUpStepThree";
 import Profile from "../../screens/authnavigation/Profile/Profile";
 import PerfilProfesional from "../../screens/authnavigation/Profile/PerfilProfesional";
+import DatosPersonales from "../../screens/authnavigation/Profile/DatosPersonales";
 
 
 
@@ -36,6 +37,7 @@ const AuthNavigation = ({ navigation }) => {
 
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="PerfilProfesional" component={PerfilProfesional} />
+      <Stack.Screen name="DatosPersonales" component={DatosPersonales} />
 
     
     </Stack.Navigator>
