@@ -1,51 +1,28 @@
-const { Comment, Post, JobOffer } = require('../models');
+const { Comment } = require('../models');
 const { response } = require('../helpers');
+const { commentServices } = require('../services');
 
 const createComment = async (req, res) => {
     const io = req.app.locals.io;
     const uid = req.uid;
     const { body } = req.body;
     const { id, place } = req.params;
-    let isInPost;
-    let isInComment;
-    let isInJobOffer;
+
     try {
+        
+        const comment=await commentServices.make(body,place,id,uid)
 
-
-        //CONDICIONAR BUSQUEDAS EN DB para no hacer las 3 peticiones juntas
-
-        const comment = new Comment({
-            body,
-            author: uid
-        });
-
-
-        if (place === 'post') {
-            isInPost = await Post.findById(id),
-                comment.post = id;
-        } else if (place === 'comment') {
-            isInComment = await Comment.findById(id);
-            comment.replieOf = id;
-        } else if (place === 'job-offer') {
-            isInJobOffer = await JobOffer.findById(id)
-            comment.job_offer = id;
-        }
-        if (!isInPost && !isInComment && !isInJobOffer) {
-            return response.error(req, res, 'Post no encontrado', 400);
-        }
-
-        const savedComment = await comment.save();
-
-        io.emit('comment-new', { savedComment });
+        io.emit('comment-new', { comment });
 
         return response.success(
             req,
             res,
             'Comentario creado con éxito',
-            savedComment,
+            comment,
             201
         );
     } catch (error) {
+        if(error.message==="no-doc") return response.error(req, res, 'Documento no encontrado', 404);
         return response.error(req, res, error.message, 500);
     }
 };

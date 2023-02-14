@@ -70,7 +70,7 @@ const getAllChannels = async (req, res) => {
         };
 
         return response.success(req,res,"Canales encontrados",
-           data,200
+        data,200
         )
     } catch (error) {
         res.status(500).json({
@@ -84,7 +84,6 @@ const getUserChannels = async (req, res) => {
     const uid =req.uid
     try {
         const user = await User.findById(uid).populate("channels","name");
-  
         if (!user) {
             return res.status(404).send({ error: 'Usuario no encontrado' });
         }
@@ -98,7 +97,7 @@ const getUserChannels = async (req, res) => {
 
         /////
         return response.success(req,res,"Canales encontrados",
-           channels,200
+        channels,200
         )
 
         } catch (error) {
@@ -108,9 +107,8 @@ const getUserChannels = async (req, res) => {
 };
 
 const getPostsChannel = async (req, res) => {
-    const { id } = req.params;
-    const { from, to } = req.query;
 
+    const { from, to } = req.query;
     const {id} = req.params;
 
     try {
@@ -118,8 +116,7 @@ const channel=await Channel.findById(id)
 
 if(!channel) response.error(req,res,"Canal invalido",400)
 
-        const posts = await Post.find({channel:id})
-                                .populate({ path: 'comments', select: 'body attached createdAt' })
+       
 
         const posts = await Post.find(query)
             .skip(Number(from))

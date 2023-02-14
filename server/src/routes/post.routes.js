@@ -1,5 +1,5 @@
-const router = express.Router();
 const express = require("express");
+const router = express.Router();
 const {validatorJWT, isAdmin} = require('../middlewares')
 const { post } = require("../controllers");
 
