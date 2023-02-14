@@ -4,5 +4,6 @@ module.exports={
   post:require('./post.controller'),
   comment:require('./comment.controller'),
   profile:require('./profile.controller'),
-  jobOffer: require('./joboffer.controller')
+  jobOffer: require('./joboffer.controller'),
+  reaction: require('./reactions.controller')
 }

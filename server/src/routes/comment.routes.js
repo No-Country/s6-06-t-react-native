@@ -27,11 +27,6 @@ router.put('/admdelete/:id', validatorJWT, isAdmin, comment.admDeleteComment)
 
 //modificar respuesta-con posibilidad de "eiliminar"-solo autor 
 
-//hacer reaccion
-router.post("/reaction/:id",validatorJWT, comment.reactionToComment)
-
-
-
 
 
 

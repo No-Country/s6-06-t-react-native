@@ -37,7 +37,16 @@ const newPost = async (uid, body, channel, files) => {
     return savedPost;
 };
 
+const remove = async (id) => {
+    const post = await Post.findById(id);
+    console.log(post.id)
+    post.active = false;
+    return await post.save();
+};
+
+
 module.exports = {
     newPost,
-    findPostById
+    findPostById,
+    remove
 };
