@@ -24,7 +24,40 @@ const offerSchema=new Schema({
       type: Boolean,
       default: true
   },
+  type: {
+    type: String,
+    enum: ["front","back","ui"]
+}
   
+},{
+  timestamps: true,
+        versionKey: false,
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
+});
+
+offerSchema.virtual('candidates', {
+  ref: 'user',
+  localField: '_id',
+  foreignField: 'postulations'
+});
+offerSchema.virtual('countCandidates', {
+  ref: 'user',
+  localField: '_id',
+  foreignField: 'postulations',
+  count:true
+});
+
+offerSchema.virtual('comments', {
+  ref: 'comment',
+  localField: '_id',
+  foreignField: 'job_offer'
+});
+offerSchema.virtual('countComments', {
+  ref: 'comment',
+  localField: '_id',
+  foreignField: 'job_offer',
+  count:true
 });
 
 offerSchema.methods.toJSON = function idSetter() {

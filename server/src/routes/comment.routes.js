@@ -5,6 +5,8 @@ const {isAdmin, validatorJWT}  = require('../middlewares');
 const {comment} = require('../controllers');
 
 
+//Obtiene cometarios de post especifico con repliesy reacciones 
+
 
 //post crear cometario -validar jwt (!!!!comentarios anidados-charlarcon front)
 router.post('/new/:id/:place', validatorJWT, comment.createComment)

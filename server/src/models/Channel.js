@@ -16,8 +16,14 @@ typechannel:{
 }
 
 },
-{ timestamps: true, versionKey: false })
+{ toObject: { virtuals: true },
+toJSON: { virtuals: true },timestamps: true, versionKey: false })
 
+channelSchema.virtual('users', {
+  ref: 'user',
+  localField: '_id',
+  foreignField: 'channels'
+});
 
 channelSchema.methods.toJSON = function idSetter() {
   const { _id, ...Channel } = this.toObject();

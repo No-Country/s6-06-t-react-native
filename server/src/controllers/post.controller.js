@@ -11,7 +11,7 @@ const createPost = async (req, res) => {
     const attached = req.files;
     let attachedFiles
     if(attached){
-         attachedFiles = Object.entries(attached).map((i) => i[1]);
+        attachedFiles = Object.entries(attached).map((i) => i[1]);
     }
     
 
@@ -23,6 +23,15 @@ const createPost = async (req, res) => {
         const post = await findPostById(savedPost.id);
 
         io.emit('post-new', { post });
+        
+        const emitCountPost = async (model,channel,uid) => {
+
+
+        const posts = await model.find({channel});
+        io.emit("post-count", posts.length);
+        };
+
+        await emitCountPost(Post,channel,uid);
 
         return success(req, res, 'post created successfully', post, 201);
     }

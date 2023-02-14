@@ -30,6 +30,18 @@ socket.on('post-new', (payload) => {
     console.log( payload,"NEW POST" )
 })
 
+
+socket.on('post-count', (payload) => {
+    console.log( payload,"COUNT" )
+})
+
+
+const emitCountPost = async (model,channel) => {
+    const posts = await model.find(channel);
+    socket.emit("server:loadnotes", posts.length);
+    };
+    
+
 socket.on('reaction-new-in-post', (payload) => {
     console.log( payload,"NEW REACTION" )
 })
