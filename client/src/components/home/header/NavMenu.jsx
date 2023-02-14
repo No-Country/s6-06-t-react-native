@@ -1,9 +1,8 @@
-import { View, TextInput, Image } from "react-native";
+import { View, TextInput, Image, Text, Pressable } from "react-native";
 import React from "react";
 import { styles } from "./styles";
 import { Feather, EvilIcons } from "@expo/vector-icons";
 import { colors } from "../../../constants";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 export default function NavMenu({ pathImgUser }) {
@@ -18,13 +17,13 @@ export default function NavMenu({ pathImgUser }) {
         <TextInput type="text" placeholder="Buscar en Sin Fronteras" />
       </View>
       <View>
-        <TouchableOpacity
+        <Pressable
           onPress={() => {
             navigation.navigate("Profile");
           }}
         >
           <Image source={{ uri: pathImgUser }} style={[styles.imgUserHeader]} />
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );
