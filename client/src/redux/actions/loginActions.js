@@ -13,9 +13,8 @@ export const loginUser = (payload) => {
   return async function (dispatch) {
     dispatch({ type: LOGIN_USER_PENDING });
     try {
-      const json = await axios.post(`${URL_BACK}/auth/login`, payload);
       // console.log("LOGIN: entró al try");
-      // console.log("LOGIN: entró al SUCCESS");
+      const json = await axios.post(`${URL_BACK}/auth/login`, payload);
       AsyncStorage.setItem("userData", JSON.stringify(json.data.data));
       return dispatch({ type: LOGIN_USER_SUCCESS, payload: json.data.data });
     } catch (e) {
