@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Community from '../../screens/drawer_navegation/community';
 import GeneralChannel from '../../screens/drawer_navegation/channels/general';
 //import ShortlistedChannel from '../../screens/drawer_navegation/channels/shortlisted'
-import ShortlistedChannel from '../../screens/authnavigation/home'
+import ShortlistedChannel from '../../screens/drawer_navegation/channels/general'
 import JobsChannel from '../../screens/drawer_navegation/channels/jobs';
 import AmazonTeamChannel from '../../screens/drawer_navegation/channels/amazon_team';
 import ProjectsChannel from '../../screens/drawer_navegation/channels/projects';

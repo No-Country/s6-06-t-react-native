@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, SafeAreaView } from 'react-native';
-import ScrollViewPost from '../../../components/home/ScrollViewPost/ScrollViewPost';
-import HeaderHome from '../../../components/home/header/Index';
+import ScrollViewPost from '../../../../components/home/ScrollViewPost/ScrollViewPost';
+import HeaderHome from '../../../../components/home/header/Index';
 import { styles } from './styles';
 
 const Home = () => {
