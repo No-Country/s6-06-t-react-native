@@ -13,6 +13,9 @@ typechannel:{
   type:String,
   enum:["private","public"],
   default:"public"
+},active:{
+  type:Boolean,
+  default:true
 }
 
 },

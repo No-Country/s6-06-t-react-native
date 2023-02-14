@@ -28,18 +28,11 @@ const createComment = async (req, res) => {
 };
 
 const updateComment = async (req, res) => {
-    const { body } = req.body;
+    const  body  = req.body;
     const { id } = req.params;
     const uid = req.uid;
 
     try {
-        ////SACAR A VALIDATOR
-        // const validate = existingComment(id);
-        // if (!validate) {
-        //   return response.error(req, res, "No válido");
-        // }
-
-        // para traer middleware
         const comment = await Comment.findById(id);
 
         if (!comment) {
@@ -57,7 +50,7 @@ const updateComment = async (req, res) => {
 
         const updatedComment = await Comment.findByIdAndUpdate(
             { _id: id },
-            { body },
+            {...body },
             { new: true }
         );
 

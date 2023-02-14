@@ -21,12 +21,12 @@ const createChannel = async (req,res) =>{
 const updateChannel = async (req, res) => {
     
     const {id} = req.params;
-    const {name, typechannel} = req.body
+    const {name, typechannel,active} = req.body
 
     try {
         const updatedChannel = await Channel.findByIdAndUpdate(
             { _id: id },
-            { name, typechannel },
+            { name, typechannel,active },
             { new: true }
         );
         if (!updatedChannel) {

@@ -10,6 +10,9 @@ const make = async (payload, place, docId, uid) => {
 
     if (!doc) throw new Error('no-doc');
 
+    const reaction=await Reaction.findOne({user:uid,[place]:docId})
+    if(reaction) await reaction.deleteOne()
+
     const newReaction = await new Reaction({
         user: uid,
         type__Reaction: payload,
@@ -19,6 +22,20 @@ const make = async (payload, place, docId, uid) => {
     return newReaction;
 };
 
+const remove = async ( place, docId, uid) => {
+    const doc = await models[place].findById(docId);
+
+    if (!doc) throw new Error('no-doc');
+
+    const reaction=await Reaction.findOne({user:uid,[place]:docId})
+
+
+    if(reaction) await reaction.deleteOne()
+
+    return 
+};
+
 module.exports = {
-    make
+    make,
+    remove
 };
