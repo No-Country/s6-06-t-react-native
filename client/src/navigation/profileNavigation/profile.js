@@ -1,12 +1,9 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Profile from "../../screens/profile_navigation/profile/index";
-import PersonalInformation2 from "../../screens/profile_navigation/personal_information/index";
-import ProfessionalProfile from "../../screens/profile_navigation/professional_profile/index";
-import MyAplications from "../../screens/profile_navigation/my_aplications/index";
-import Saved from "../../screens/profile_navigation/saved/index";
-import Setting from "../../screens/profile_navigation/setting/index";
+import DatosPersonales from "../../screens/profile_navigation/personal_information/DatosPersonales";
+import PerfilProfesional from "../../screens/profile_navigation/professional_profile/PerfilProfesional";
+import Profile from "../../screens/profile_navigation/profile/Profile";
 
-const ProfileNavigation = ({ navigation }) => {
+const ProfileNavigation = () => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator
@@ -16,11 +13,11 @@ const ProfileNavigation = ({ navigation }) => {
       }}
     >
       <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="PersonalInformation" component={PersonalInformation2} />
-      <Stack.Screen name="ProfessionalProfile" component={ProfessionalProfile} />
-      <Stack.Screen name="MyAplications" component={MyAplications} />
+      <Stack.Screen name="DatosPersonales" component={DatosPersonales} />
+      <Stack.Screen name="PerfilProfesional" component={PerfilProfesional} />
+      {/* <Stack.Screen name="MyAplications" component={MyAplications} />
       <Stack.Screen name="Saved" component={Saved} />
-      <Stack.Screen name="Setting" component={Setting} />
+      <Stack.Screen name="Setting" component={Setting} /> */}
     </Stack.Navigator>
   );
 };
