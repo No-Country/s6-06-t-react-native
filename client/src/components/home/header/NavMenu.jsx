@@ -20,7 +20,7 @@ export default function NavMenu() {
                 />
             </View>
             <View style={styles.profileButton}>
-                <Text style={styles.textCV} onPress={()=> navigation.navigate('Profile')}>CV</Text>
+                <Text style={styles.textCV} onPress={()=> navigation.navigate('ProfileStack')}>CV</Text>
             </View>
         </View>
     )
