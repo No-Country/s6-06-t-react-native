@@ -3,7 +3,6 @@ export const trasformDateADateString = (d) =>{
     let numberDay = date.getDay()
     let day = date.getDate()
     let month = date.getMonth()
-
     switch (numberDay) {
         case 0:
             numberDay = 'Domingo' 

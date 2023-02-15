@@ -3,9 +3,7 @@ import { ScreenWidth } from '../../../../utils/ScreenDimesions';
 
 export const styles = StyleSheet.create({
     homeContain : {
-        flex : 1,
-        paddingTop : StatusBar.currentHeight,
-        
+        flex : 1 
     },
     HeaderContain : {
         paddingTop : 10,

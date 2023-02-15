@@ -49,8 +49,8 @@ export const styles = StyleSheet.create({
         alignItems : 'flex-end'
     },
     UserName:{
-        fontWeight : '700',
-        fontSize : ScreenWidth <= 360 ? 15: 20,
+        fontWeight : '600',
+        fontSize : ScreenWidth <= 360 ? 15: 18,
         letterSpacing : ScreenWidth <= 360 ? 0.4: 0.7   
     },
     HoursPost :{
