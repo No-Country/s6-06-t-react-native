@@ -6,7 +6,8 @@ import { styles } from './styles';
 import { useSelector } from 'react-redux'
 import { usePost } from '../../../../hooks/usePost';
 
-const Home = () => {
+const Home = ({ navigation }) => {
+    
     const state = useSelector((state) => state.login.user);
     // console.log(state.token)
     let idChannelGeneral = "63e3dc46a5dd297fac1ca2a2"

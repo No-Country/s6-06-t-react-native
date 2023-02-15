@@ -3,7 +3,7 @@ import React from 'react';
 import NavMenu from './NavMenu';
 import InfoComunity from './InfoComunity';
 
-const Index = ({Channel}) => {
+const Index = ({ navigation ,Channel}) => {
     return (
         <>
             <NavMenu />
