@@ -5,5 +5,6 @@ module.exports={
   comment:require('./comment.controller'),
   profile:require('./profile.controller'),
   jobOffer: require('./joboffer.controller'),
-  reaction: require('./reactions.controller')
+  reaction: require('./reactions.controller'),
+  search: require('./search.controller')
 }

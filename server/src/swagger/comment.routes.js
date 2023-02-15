@@ -14,7 +14,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *   
  *        required: true
  *        description: The token users account
  *      - in: params
@@ -75,7 +75,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *     
  *        required: true
  *        description: The token users account
  *      - in: params
@@ -127,7 +127,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *   
  *        required: true
  *        description: The token users account
  *      - in: params
@@ -163,7 +163,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *    
  *        required: true
  *        description: The token users account
  *      - in: params

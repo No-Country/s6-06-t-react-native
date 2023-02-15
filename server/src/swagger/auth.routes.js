@@ -38,7 +38,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *     
  *        required: true
  *        description: The token users account
  *    
@@ -84,7 +84,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *    
  *        required: true
  *        description: The token users account
  *    

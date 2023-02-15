@@ -14,7 +14,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *     
  *        required: true
  *        description: The token users account
  *      
@@ -62,7 +62,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *         
  *        required: true
  *        description: The token users account
  * 
@@ -119,7 +119,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *      
  *        required: true
  *        description: The token users account
  * 
@@ -161,14 +161,14 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *   
  *        required: true
  *        description: The token users account
  *      - in: params
  *        name: id
  *        schema:
  *          type: string
- *          format: uuid
+ *
  *        required: true
  *        description: the id of offer to postulate 
  *    summary: Create a new job offer
@@ -200,7 +200,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ * 
  *        required: true
  *        description: The token users account
  *      
@@ -301,7 +301,7 @@
 //  *        name: x-token
 //  *        schema:
 //  *          type: string
-//  *          format: uuid
+//  
 //  *        required: true
 //  *        description: The token users account
 //  *      - in: params

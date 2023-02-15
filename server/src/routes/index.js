@@ -6,5 +6,6 @@ jobOffer:require('./job_offer.routes'),
 post:require('./post.routes'),
 profile:require('./profile.routes'),
 reaction:require('./reactions.routes'),
-user:require('./user.routes')
+user:require('./user.routes'),
+search:require('./search.routes')
 }
