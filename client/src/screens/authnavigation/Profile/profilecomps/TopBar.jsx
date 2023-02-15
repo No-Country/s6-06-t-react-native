@@ -10,12 +10,9 @@ const Profile = ({ navigation }) => {
       {/* <View style={styles.backButton} >
                 <AntDesign name="left" size={20} color="black" onPress={() => navigation.goBack()} />
             </View> */}
-      <Text style={styles.tittle}>Profile</Text>
-      <View style={styles.backButton}>
-        <Image
-          source={require("../icons/profilepicture.png")}
-          style={{ width: 35, height: 35 }}
-        />
+      <Text style={styles.tittle}>Perfil</Text>
+      <View>
+        <Text style={styles.hidden}>aaaaa</Text>
       </View>
     </View>
   );
@@ -25,9 +22,9 @@ const styles = StyleSheet.create({
   Topcontainer: {
     flexDirection: "row",
     backgroundColor: "white",
-    justifyContent: "space-between",
     marginHorizontal: 20,
-    paddingVertical: 10,
+    paddingTop: 10,
+    justifyContent: "space-between",
   },
   tittle: {
     fontSize: 27,
@@ -40,6 +37,9 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
+  },
+  hidden: {
+    color: "white",
   },
 });
 

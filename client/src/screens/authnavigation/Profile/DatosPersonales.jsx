@@ -26,7 +26,7 @@ const DatosPersonales = () => {
       console.log("Is logged in error : " + e);
     }
   };
-
+  console.log(userInfo);
   useEffect(() => {
     isLoggedIn();
   }, []);
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     left: 70,
   },
   name: {
-    fontSize: 30,
+    fontSize: 27,
     fontWeight: "bold",
     marginTop: 10,
     lineHeight: 30,
