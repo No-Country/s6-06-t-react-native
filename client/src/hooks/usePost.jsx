@@ -15,8 +15,9 @@ export const usePost = (url, token)=>{
             let data = await reqResApi.get( url , {
                 headers : {'x-token' : token }
             })
+            console.log(data.data.data.posts)
             if (data.status == 200) {
-                setPost(data.data.posts)
+                setPost(data.data.data.posts)
             }
         } catch (error) {
             console.log(error)

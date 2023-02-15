@@ -15,7 +15,7 @@ const Home = ({ navigation }) => {
         Channel : 'General',
     }
     let { Post } = usePost(`/channel/${idChannelGeneral}`, state.token);
-    if (Post.length === 0) {
+    if (Post?.length === 0) {
         return (
             <View>
                 <Text>Cargando...</Text>
