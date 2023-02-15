@@ -60,6 +60,7 @@ const Registro = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
   const onSubmit = (data) => {
     navigation.navigate("SignUpStepTwo");
   };
