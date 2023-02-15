@@ -16,14 +16,14 @@ const remove = async (uid) => {
 };
 
 const personal = async (uid, body) => {
-  const { fullName, email, phone } = body; //Para password una ruta distinta ya que el cliente no va a tener esa informarcaion para mandarla x body
+  const { password,active,admin,selected,emailisvalidated,favorites,channels,postulations,...other } = body; //Para password una ruta distinta ya que el cliente no va a tener esa informarcaion para mandarla x body
 
-  const user = await User.findById(uid);
-  if (fullName) user.fullName = fullName;
-  if (email) user.email = email; //?:VOLVER A VERIFICAR EMAIL?
-  if (phone) user.phone = phone;
+  const user = await User.findByIdAndUpdate(uid,{...other},{new:true});//?:VOLVER A VERIFICAR EMAIL?
+  // if (fullName) user.fullName = fullName;
+  // if (email) user.email = email; 
+  // if (phone) user.phone = phone;
 
-  return await user.save();
+  return  user
 };
 
 const professional = async (uid, body) => {

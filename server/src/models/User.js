@@ -1,140 +1,190 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema(
-  {
-    fullName: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    admin: {
-      type: Boolean,
-      default: true,//TODO:CAMBIAR EN PRODUCCION
-    },
-    selected: {
-      type: Boolean,
-      default: true,//TODO:CAMBIAR EN PRODUCCION
-    },
-    active: {
-      type: Boolean,
-      default: true,
-    },
-    educationalLevel: {
-      type:String
-    },
-    jobTitle:{
-      type:String
-    },
-    emailisvalidated: {
-      type: Boolean,
-      default: true,//TODO:CAMBIAR EN PRODUCCION
-    },
-    availability: {
-      type: String,
-      enum: ["Full-Time", "Mañana", "Tarde"],
-    },
-    technologies: [
-      {
-        type: String,
-        enum: [
-          "HTML",
-          "CSS",
-          "Figma",
-          "AdobeXD",
-          "Framer X",
-          "Photoshop",
-          "Illustrator",
-          "JavaScript",
-          "TypeScript",
-          "Python",
-          "Java",
-          "Go",
-          "Vue.js",
-          "Next.js",
-          "React",
-          "React Native",
-          "Angular",
-          "Jest",
-          "Selenium",
-          "Node.js",
-          "Express.js",
-          "Deno",
-          "GraphQL",
-          "Koa",
+    {
+        fullName: {
+            type: String,
+            required: true
+        },
+        isOnline:{
+            type:Boolean,
+            default:true
+        },
+        lastSeen:{
+            type:Number,
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        password: {
+            type: String,
+            required: true
+        },
+        admin: {
+            type: Boolean,
+            default: true //TODO:CAMBIAR EN PRODUCCION
+        },
+        selected: {
+            type: Boolean,
+            default: true //TODO:CAMBIAR EN PRODUCCION
+        },
+        active: {
+            type: Boolean,
+            default: true
+        },
+        emailisvalidated: {
+            type: Boolean,
+            default: true //TODO:CAMBIAR EN PRODUCCION
+        },
+        ///////////////////////////////////////////////////////////////////////
+        position: {
+            type: String,
+            enum: ['fullstack', 'backend', 'frontend', 'uiux']
+        },
+        img_avatar: {
+            type: String,
+            default:
+                'https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png'
+        },
+        availability: {
+            type: String,
+            enum: ['Full-Time', 'Mañana', 'Tarde']
+        },
+        jobArea: {
+            type: String,
+            enum: [
+                'Diseño',
+                'Programación',
+                'Datos',
+                'Recursos humanos',
+                'Otros'
+            ]
+        },
+        aboutme: {
+            type: String
+        },
+        workExperience: [
+            {
+                jobTitle: {
+                    type: String
+                }
+            }
         ],
-      },
-    ],
-    phone: {
-      type: Number,
+        education: [
+            {
+                educationalLevel: {
+                    type: String,
+                    enum: [
+                        'Secundario completo',
+                        'Secundario incompleto',
+                        'Universitario completo',
+                        'Universitario en curso',
+                        'Estudiante autodidacta',
+                        'Otros'
+                    ]
+                },
+                educationTitle: {
+                    type: String
+                },
+                institute: {
+                    type: String
+                },
+                educationStatus: {
+                    type: String
+                },
+                inCourse: {
+                    type: Boolean
+                },
+
+                year_in: {
+                    type: String
+                },
+                year_out: {
+                    type: String
+                }
+            }
+        ],
+        languages: [
+            {
+                type: String
+            }
+        ],
+        technologies: [
+            {
+                type: String,
+                enum: [
+                    'HTML',
+                    'CSS',
+                    'Figma',
+                    'AdobeXD',
+                    'Framer X',
+                    'Photoshop',
+                    'Illustrator',
+                    'JavaScript',
+                    'TypeScript',
+                    'Python',
+                    'Java',
+                    'Go',
+                    'Vue.js',
+                    'Next.js',
+                    'React',
+                    'React Native',
+                    'Angular',
+                    'Jest',
+                    'Selenium',
+                    'Node.js',
+                    'Express.js',
+                    'Deno',
+                    'GraphQL',
+                    'Koa'
+                ]
+            }
+        ],
+        softSkills: [
+            {
+                type: String
+            }
+        ],
+        phone: {
+            type: String
+        },
+/////////////////////////////////////////////////////////////////////////
+        favorites: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'post'
+            }
+        ],
+        channels: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'channel'
+            }
+        ],
+        postulations: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'jobOffer'
+            }
+        ]
     },
-    position: {
-      type: String,
-      enum: ["fullstack", "backend", "frontend", "uiux"],
-    },
-    img_avatar: {
-      type: String,
-      default:
-        "https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png",
-    },
-    favorites: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "post",
-      },
-    ],
-    channels: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "channel",
-      },
-    ],
-    postulations: [{
-      type: Schema.Types.ObjectId,
-      ref: "jobOffer"
-    }]
-     // pinnedpost: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'post'
-    // }],
-    // comments: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "comment",
-    //   },
-    // ],
-    
-    // posts: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "post",
-    //   },
-    // ],
-    // reactions: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "reaction",
-    //   },
-    // ],
-   
-  },
-  { timestamps: true, versionKey: false }
+    {
+        toObject: { virtuals: true },
+        toJSON: { virtuals: true },
+        timestamps: true,
+        versionKey: false
+    }
 );
 
 userSchema.methods.toJSON = function idSetter() {
-  const { _id, ...User } = this.toObject();
-  User.uid = _id;
-  return User;
+    const { _id, ...User } = this.toObject();
+    User.uid = _id;
+    return User;
 };
 
-const User = model("user", userSchema);
+const User = model('user', userSchema);
 
 module.exports = User;
 

@@ -14,14 +14,6 @@ const postSchema = new Schema(
             type: String
             //required: true
         },
-        // comments: [{
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'comment'
-        // }],
-        // reactions: [{
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'reaction'
-        // }],
         channel: [
             {
                 type: Schema.Types.ObjectId,
@@ -55,7 +47,7 @@ postSchema.virtual('comments', {
     foreignField: 'post'
 });
 
-postSchema.virtual("countComments", {
+postSchema.virtual('countComments', {
     ref: 'comment',
     localField: '_id',
     foreignField: 'post',
@@ -69,7 +61,7 @@ postSchema.virtual('reactions', {
 
 const reactions = ['megusta', 'meinteresa', 'apoyar', 'hacergracia'];
 
-reactions.forEach(reaction=> {
+reactions.forEach((reaction) => {
     postSchema.virtual(reaction, {
         ref: 'reaction',
         localField: '_id',
@@ -77,8 +69,7 @@ reactions.forEach(reaction=> {
         match: { type__Reaction: reaction },
         count: true
     });
-})
-
+});
 
 postSchema.methods.toJSON = function idSetter() {
     const { _id, ...Post } = this.toObject();

@@ -14,7 +14,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *       
  *        required: true
  *        description: The token users account
  * 
@@ -81,7 +81,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *          
  *        required: true
  *        description: The token users account
  *      
@@ -105,18 +105,18 @@
 
 /**
  * @swagger
- * /api/profile/edit/personal:
+ * /api/profile/edit/information:
  *  put:
  *    parameters:
  *      - in: header
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *        
  *        required: true
  *        description: The token users account
  * 
- *    summary: Edit the personal info in the user profile
+ *    summary: Edit the  info about  the user profile
  *    tags: [Profile]
  *    requestBody:
  *      required: true
@@ -128,85 +128,10 @@
  *              fullName: otro nombre
  *              email: barFoo@foo.com
  *              phone: "123456687"
- *    
- *            
- *    responses:
- *      201:
- *        description: Updated profile
- *        content:
- *          application/json:
- *            schema:
- *              example:
- *                "msg": 'Updated profile'
- *                "data": {
- *                     "fullName": otro nombre,
- *                     "email": barFoo@foo.com,
- *                     "admin": true,
- *                     "selected": true,
- *                     "active": true,
- *                     "emailisvalidated": true,
- *                     "availability": "Mañana",
- *                     "technologies": [
- *                         "HTML",
- *                         "CSS"
- *                     ],
- *                     "phone": "123456687",
- *                     "position": "fullstack",
- *                     "img_avatar": "https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png",
- *                     "favorites": [],
- *                     "channels": [
- *                         "63e8ec9ec08f1c72e0d40a05"
- *                     ],
- *                     "postulations": [
- *                        {
- *                           "_id": "63ea5e31a132a300064cedf8",
- *                           "author": "63ea5aef35e5b43ca136e786",
- *                           "title": "General2",
- *                           "description": "Guuuenerauuuul2",
- *                           "channel": [
- *                               "63e8ec9ec08f1c72e0d40a07"
- *                           ],
- *                           "attached": [],
- *                           "active": true,
- *                           "__v": 0
- *                       }
- *                      ],
- *                     "createdAt": "2023-02-13T15:44:47.915Z",
- *                     "updatedAt": "2023-02-13T15:44:47.915Z",
- *                     "uid": "63ea5aef35e5b43ca136e786"
- *                 }
- *
- */
-
-
-
-/**
- * @swagger
- * /api/profile/edit/professional:
- *  put:
- *    parameters:
- *      - in: header
- *        name: x-token
- *        schema:
- *          type: string
- *          format: uuid
- *        required: true
- *        description: The token users account
- * 
- *    summary: Edit the professional info in the user profile
- *    tags: [Profile]
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            example:
  *              availability: Tarde
  *              technologies: ["AdobeXD","Photoshop"]
- *              educationalLevel: ""
  *              position: "fontend"
- *              jobTitle: ""
+ *             
  *    
  *            
  *    responses:
@@ -225,9 +150,12 @@
  *                     "active": true,
  *                     "emailisvalidated": true,
  *                     "availability": "Tarde",
- *                     "technologies": ["AdobeXD","Photoshop"],
- *                     "phone": "123456687",
+ *                     "technologies": [
+ *                      "AdobeXD","Photoshop"
+ *                      ],
+ *                  
  *                     "position": "fontend",
+ *                     "phone": "123456687",
  *                     "img_avatar": "https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png",
  *                     "favorites": [],
  *                     "channels": [
@@ -255,6 +183,82 @@
  */
 
 
+
+// /**
+//  * @swagger
+//  * /api/profile/edit/professional:
+//  *  put:
+//  *    parameters:
+//  *      - in: header
+//  *        name: x-token
+//  *        schema:
+//  *          type: string
+//  *        
+//  *        required: true
+//  *        description: The token users account
+//  * 
+//  *    summary: Edit the professional info in the user profile
+//  *    tags: [Profile]
+//  *    requestBody:
+//  *      required: true
+//  *      content:
+//  *        application/json:
+//  *          schema:
+//  *            type: object
+//  *            example:
+//  *              availability: Tarde
+//  *              technologies: ["AdobeXD","Photoshop"]
+//  *              educationalLevel: ""
+//  *              position: "fontend"
+//  *              jobTitle: ""
+//  *    
+//  *            
+//  *    responses:
+//  *      201:
+//  *        description: Updated profile
+//  *        content:
+//  *          application/json:
+//  *            schema:
+//  *              example:
+//  *                "msg": 'Updated profile'
+//  *                "data": {
+//  *                     "fullName": otro nombre,
+//  *                     "email": barFoo@foo.com,
+//  *                     "admin": true,
+//  *                     "selected": true,
+//  *                     "active": true,
+//  *                     "emailisvalidated": true,
+//  *                     "availability": "Tarde",
+//  *                     "technologies": ["AdobeXD","Photoshop"],
+//  *                     "phone": "123456687",
+//  *                     "position": "fontend",
+//  *                     "img_avatar": "https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png",
+//  *                     "favorites": [],
+//  *                     "channels": [
+//  *                         "63e8ec9ec08f1c72e0d40a05"
+//  *                     ],
+//  *                     "postulations": [
+//  *                        {
+//  *                           "_id": "63ea5e31a132a300064cedf8",
+//  *                           "author": "63ea5aef35e5b43ca136e786",
+//  *                           "title": "General2",
+//  *                           "description": "Guuuenerauuuul2",
+//  *                           "channel": [
+//  *                               "63e8ec9ec08f1c72e0d40a07"
+//  *                           ],
+//  *                           "attached": [],
+//  *                           "active": true,
+//  *                           "__v": 0
+//  *                       }
+//  *                      ],
+//  *                     "createdAt": "2023-02-13T15:44:47.915Z",
+//  *                     "updatedAt": "2023-02-13T15:44:47.915Z",
+//  *                     "uid": "63ea5aef35e5b43ca136e786"
+//  *                 }
+//  *
+//  */
+
+
 /**
  * @swagger
  * /api/profile/edit/applications:
@@ -264,7 +268,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *       
  *        required: true
  *        description: The token users account
  * 
@@ -326,7 +330,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *       
  *        required: true
  *        description: The token users account
  * 
@@ -382,14 +386,14 @@
 
 /**
  * @swagger
- * /api/post/profile/edit/profile-pic:
+ * /api/profile/edit/profile-pic:
  *  put:
  *    parameters:
  *      - in: header
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *        
  *        required: true
  *        description: The token users account
  *     

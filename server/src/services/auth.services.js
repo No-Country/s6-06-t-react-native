@@ -74,7 +74,7 @@ const resendEmail = async (uid) => {
 const login = async (body) => {
     const { email, password } = body;
 
-    const user = await User.findOne({ email }).lean();
+    const user = await User.findOne({ email,active:true }).lean();
 
     if (!user) return 'not-registered';
     if (!user.emailisvalidated) return 'validate';

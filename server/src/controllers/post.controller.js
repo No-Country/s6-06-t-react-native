@@ -70,9 +70,10 @@ const updatePost = async (req, res) => {
             return response.error(req, res, 'Usuario no autorizado', 401);
         }
 
-        post.attached = [];
+       
 
         if (attached) {
+            post.attached = [];
             attachedFiles = Object.entries(attached).map((i) => i[1]);
             if (attachedFiles.length > 0) {
                 await Promise.all(

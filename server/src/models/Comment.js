@@ -1,39 +1,39 @@
-const {model, Schema} = require('mongoose');
+const { model, Schema } = require('mongoose');
 
-const commentSchema = new Schema({
-    author: {
-        type: Schema.Types.ObjectId,
-        ref: 'user'
+const commentSchema = new Schema(
+    {
+        author: {
+            type: Schema.Types.ObjectId,
+            ref: 'user'
+        },
+        body: {
+            type: String
+        },
+        post: {
+            type: Schema.Types.ObjectId,
+            ref: 'post'
+        },
+        active: {
+            type: Boolean,
+            default: true
+        },
+        attached: [String],
+        replieOf: {
+            type: Schema.Types.ObjectId,
+            ref: 'comment'
+        },
+        job_offer: {
+            type: Schema.Types.ObjectId,
+            ref: 'JobOffer'
+        }
     },
-    body: { 
-        type: String, 
-    },
-    post:{
-        type: Schema.Types.ObjectId,
-        ref: 'post'
-    },
-    active: {
-        type: Boolean,
-        default: true
-    },
-    attached: [String],
-    replieOf: {
-        type: Schema.Types.ObjectId,
-        ref: 'comment'
-    },
-    // reactions: [{
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'reaction'
-    // }],
-    job_offer: {
-        type:Schema.Types.ObjectId,
-        ref: 'JobOffer'
+    {
+        toObject: { virtuals: true },
+        toJSON: { virtuals: true },
+        timestamps: true,
+        versionKey: false
     }
-},
-{
-    timestamps: true,
-    versionKey: false
-})
+);
 
 commentSchema.methods.toJSON = function idSetter() {
     const { _id, ...Comment } = this.toObject();

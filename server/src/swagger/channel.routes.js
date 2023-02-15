@@ -14,7 +14,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *          
  *        required: true
  *        description: The token users account
  *    summary: Create a new Channel , only for admin users
@@ -55,14 +55,15 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *         
  *        required: true
  *        description: The token users account
+ * 
  *      - in: params
  *        name: id
  *        schema:
  *          type: string
- *          format: id
+ *       
  *        required: true
  *        description: the id of channel to update
  *    summary: Edit name of Channel and privacity , only for admin users
@@ -105,7 +106,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *       
  *        required: true
  *        description: The token users account
  *      - in: params
@@ -138,23 +139,17 @@
 
 /**
  * @swagger
- * /api/channel/user/{uid}:
+ * /api/channel/user:
  *  get:
  *    parameters:
  *      - in: header
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *         
  *        required: true
  *        description: The token users account
- *      - in: params
- *        name: uid
- *        schema:
- *          type: string
- *          format: uid
- *        required: true
- *        description: the uid of the user
+ *      
  *    summary: Gets the channel where the user is joined
  *    tags: [Channels]
  *    
@@ -186,7 +181,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *       
  *        required: true
  *        description: The token users account
  *      - in: params
@@ -271,7 +266,7 @@
  *        name: x-token
  *        schema:
  *          type: string
- *          format: uuid
+ *        
  *        required: true
  *        description: The token users account
  *      

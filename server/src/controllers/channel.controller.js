@@ -116,11 +116,10 @@ const channel=await Channel.findById(id)
 
 if(!channel) response.error(req,res,"Canal invalido",400)
 
-       
-
-        const posts = await Post.find(query)
+        const posts = await Post.find({channel:id})
             .skip(Number(from))
             .limit(Number(to))
+            .populate({path:"author",select:"fullName position isOnline img_avatar"})
             .populate('countComments')
             // .populate({ path: 'comments', select: 'body attached createdAt' })
             .populate('megusta')
@@ -129,7 +128,7 @@ if(!channel) response.error(req,res,"Canal invalido",400)
             .populate('hacergracia');
         //.populate({ path: 'reactions', select: 'type__Reaction -_id -post' })
 
-        return res.status(200).send({ countUsers: users.length, users, posts });
+        return res.status(200).send({posts});
     } catch (error) {
         console.log(error);
         return res
