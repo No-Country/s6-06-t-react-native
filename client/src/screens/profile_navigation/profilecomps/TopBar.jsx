@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet, Pressable, Image, Button } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { AntDesign } from "@expo/vector-icons";
-import BackButton from "../../../../components/BackButton";
+import BackButton from "../../../components/BackButton";
 
-const Profile = ({ navigation }) => {
+const Profile = () => {
   return (
     <View style={styles.Topcontainer}>
       <BackButton />

@@ -83,7 +83,7 @@ const DatosPersonales = () => {
               source={
                 userInfo
                   ? { uri: userInfo.img_avatar }
-                  : require("./icons/profilepicture.png")
+                  : require("../icons/profilepicture.png")
               }
               style={{ width: 100, height: 100 }}
             />

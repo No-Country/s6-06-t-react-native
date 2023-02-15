@@ -2,8 +2,8 @@ import { View, Text, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../../../../redux/actions/loginActions";
 import { useNavigation } from "@react-navigation/native";
+import { logoutUser } from "../../../redux/actions/loginActions";
 
 const LogOut = () => {
   const dispatch = useDispatch();

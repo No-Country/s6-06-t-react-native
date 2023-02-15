@@ -9,14 +9,12 @@ import {
   SafeAreaViewBase,
   ScrollView,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { TopBar } from "../profilecomps/TopBar";
 import { ProfilePicture } from "../profilecomps/ProfilePicture";
 import { LogOut } from "../profilecomps/LogOut";
 import { Tabs } from "../profilecomps/Tabs";
 
-const Profile = () => {
-  const navigation = useNavigation();
+const Perfil = () => {
 
   return (
     <ScrollView style={styles.container}>
@@ -36,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default Perfil;

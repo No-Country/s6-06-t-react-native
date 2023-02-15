@@ -19,7 +19,7 @@ export default function NavMenu({ pathImgUser }) {
       <View>
         <Pressable
           onPress={() => {
-            navigation.navigate("Profile");
+            navigation.navigate("ProfileStack", { screen: "Perfil" });
           }}
         >
           <Image source={{ uri: pathImgUser }} style={[styles.imgUserHeader]} />
