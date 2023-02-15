@@ -191,6 +191,20 @@
  *          format: id
  *        required: true
  *        description: the id of the channel
+ *      - in: query
+ *        name: from
+ *        schema:
+ *          type: string
+ *          format: id
+ *        
+ *        description: Select the first post
+ *      - in: query
+ *        name: to
+ *        schema:
+ *          type: string
+ *          format: id
+ *        
+ *        description: Select the last post
  *    summary: Gets all posts  specific channel 
  *    tags: [Channels]
  *    

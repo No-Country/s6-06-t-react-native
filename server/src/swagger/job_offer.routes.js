@@ -203,6 +203,20 @@
  * 
  *        required: true
  *        description: The token users account
+ *      - in: query
+ *        name: from
+ *        schema:
+ *          type: string
+ *          format: id
+ *        
+ *        description: Select the first offer
+ *      - in: query
+ *        name: to
+ *        schema:
+ *          type: string
+ *          format: id
+ *        
+ *        description: Select the last offer
  *      
  *    summary: Gets all offers
  *    tags: [Job-Offer]
