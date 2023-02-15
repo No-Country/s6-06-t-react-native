@@ -20,7 +20,7 @@ const AuthNavigation = ({ navigation }) => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="OnBoarding"
       screenOptions={{
         headerShown: false,
       }}
