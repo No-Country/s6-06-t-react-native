@@ -1,5 +1,5 @@
 const  response  = require('../helpers/response');
-const {Channel, User, Post} = require('../models')
+const {Channel, User, Post, IsRead} = require('../models')
 
 const reactions = ['megusta', 'meinteresa', 'apoyar', 'hacergracia'];
 
@@ -107,7 +107,7 @@ const getUserChannels = async (req, res) => {
 };
 
 const getPostsChannel = async (req, res) => {
-
+    const {uid}=req
     const { from, to } = req.query;
     const {id} = req.params;
 
@@ -119,6 +119,7 @@ if(!channel) response.error(req,res,"Canal invalido",400)
         const posts = await Post.find({channel:id})
             .skip(Number(from))
             .limit(Number(to))
+            
             .populate({path:"author",select:"fullName position isOnline img_avatar"})
             .populate('countComments')
             // .populate({ path: 'comments', select: 'body attached createdAt' })
@@ -127,13 +128,16 @@ if(!channel) response.error(req,res,"Canal invalido",400)
             .populate('meinteresa')
             .populate('hacergracia');
         //.populate({ path: 'reactions', select: 'type__Reaction -_id -post' })
+            //const postsId=posts.map(a=>a.id)
 
-        return res.status(200).send({posts});
+        const readPost=await IsRead.find({uid,doc:{$in: posts}}).select("doc -_id")
+        
+
+        return response.success(req,res,"Posts de canal : ",{areRead:readPost,posts})
+
     } catch (error) {
         console.log(error);
-        return res
-            .status(500)
-            .send({ error: 'Error al obtener los posts del canal' });
+        return response.error(req,res,'Error al obtener los posts del canal',500)
     }
 };
 

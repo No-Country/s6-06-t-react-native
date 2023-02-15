@@ -6,5 +6,6 @@ module.exports={
   Post:require('./Post'),
   User:require('./User'),
   Reaction:require("./Reaction"),
-  TokenRecover:require("./TokenRecover")
+  TokenRecover:require("./TokenRecover"),
+  IsRead:require("./IsRead")
 }

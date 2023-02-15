@@ -4,7 +4,7 @@ const { uploadIMG } = require('../helpers/cloudinary');
 
 const findPostById = async (id) => {
     const post = await Post.findById(id, ['title', 'description', 'attached'])
-        .populate('author', 'fullName')
+        .populate('author', 'fullName position isOnline img_avatar')
         // .populate("reactions", "type__Reaction")
         .populate('channel', 'name');
     //.populate("comments", "author");

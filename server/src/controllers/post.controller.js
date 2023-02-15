@@ -1,6 +1,6 @@
 const { response } = require('../helpers');
 const { success, error } = require('../helpers/response.js');
-const { Post, Reaction, User } = require('../models');
+const { Post, Reaction, User, IsRead } = require('../models');
 const { postsServices } = require('../services');
 const { findPostById, newPost } = require('../services/post.services.js');
 
@@ -20,16 +20,13 @@ const createPost = async (req, res) => {
     savedPost = await newPost(uid, body, channel, attachedFiles);
     if (Object.keys(savedPost).length > 0) {
         //Con esta funcion lo busca y lo popula
-        const post = await findPostById(savedPost.id);
+        const post = await findPostById(savedPost.id)
 
-        io.emit('post-new', { post });
+        const totalPosts = await Post.find({ channel });
+        const readPost=await IsRead.find({uid,doc:{$in: totalPosts}})
+         const count=(totalPosts.length-readPost.length)
 
-        const emitCountPost = async (model, channel, uid) => {
-            const posts = await model.find({ channel });
-            io.emit('post-count', posts.length);
-        };
-
-        await emitCountPost(Post, channel, uid);
+        io.emit(`${channel}-posts`, { post,count });
 
         return success(req, res, 'post created successfully', post, 201);
     }

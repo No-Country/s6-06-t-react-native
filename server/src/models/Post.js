@@ -14,12 +14,10 @@ const postSchema = new Schema(
             type: String
             //required: true
         },
-        channel: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'channel'
-            }
-        ],
+        channel: {
+            type: Schema.Types.ObjectId,
+            ref: 'channel'
+        },
         attached: [String],
         important: {
             type: Boolean,
@@ -58,6 +56,7 @@ postSchema.virtual('reactions', {
     localField: '_id',
     foreignField: 'post'
 });
+
 
 const reactions = ['megusta', 'meinteresa', 'apoyar', 'hacergracia'];
 
