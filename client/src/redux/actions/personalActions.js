@@ -1,8 +1,12 @@
+import axios from "axios";
+import { URL_BACK } from "../../config";
 import {
   EDIT_PERSONAL_INFO_PENDING,
   EDIT_PERSONAL_INFO_REJECTED,
   EDIT_PERSONAL_INFO_SUCCESS,
 } from "../types/personalTypes";
+import { AsyncStorage } from "react-native";
+
 
 export const editPersonalInfo = (payload, token) => {
   return async function (dispatch) {
@@ -10,20 +14,19 @@ export const editPersonalInfo = (payload, token) => {
     try {
       console.log("EDIT PERSONAL TRY");
       const { data } = await axios.put(
-        `${URL_BACK}/profile/edit/personal`,
+        `${URL_BACK}/profile/edit/information`,
+        payload,
         {
           headers: {
             "x-token": `${token}`,
-            "Content-Type": "application/json",
           },
-        },
-        payload
+        }
       );
       console.log("EDIT PERSONAL SUCCESS");
-
+      AsyncStorage.mergeItem("userData", JSON.stringify(data.data));
       return dispatch({ type: EDIT_PERSONAL_INFO_SUCCESS, payload: data.data });
     } catch (e) {
-      console.log("EDIT PERSONAL REJECTED");
+      console.log("EDIT PERSONAL REJECTED  " + e);
 
       return dispatch({ type: EDIT_PERSONAL_INFO_REJECTED, payload: e });
     }

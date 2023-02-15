@@ -1,17 +1,9 @@
 import React from "react";
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { FontAwesome5 } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons'; 
-
-
-
+import { FontAwesome5 } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const Tabs = () => {
   const navigation = useNavigation();
@@ -33,7 +25,7 @@ const Tabs = () => {
         onPress={() => navigation.navigate("PerfilProfesional")}
       >
         <View style={styles.tabinfo}>
-        <FontAwesome5 name="user" style={styles.icon} />
+          <FontAwesome5 name="user" style={styles.icon} />
           <Text style={styles.tabText}>Perfil Profesional</Text>
         </View>
         <AntDesign name="right" style={styles.icon2} />
@@ -44,7 +36,7 @@ const Tabs = () => {
         onPress={() => navigation.navigate("MisPostulacions")}
       >
         <View style={styles.tabinfo}>
-        <FontAwesome5 name="user" style={styles.icon} />
+          <FontAwesome5 name="user" style={styles.icon} />
           <Text style={styles.tabText}>Mis Postulaciones</Text>
         </View>
         <AntDesign name="right" style={styles.icon2} />
@@ -55,7 +47,7 @@ const Tabs = () => {
         onPress={() => navigation.navigate("Guardados")}
       >
         <View style={styles.tabinfo}>
-        <FontAwesome5 name="user" style={styles.icon} />
+          <FontAwesome5 name="user" style={styles.icon} />
           <Text style={styles.tabText}>Guardados</Text>
         </View>
         <AntDesign name="right" style={styles.icon2} />
@@ -66,7 +58,7 @@ const Tabs = () => {
         onPress={() => navigation.navigate("Configuracion")}
       >
         <View style={styles.tabinfo}>
-        <FontAwesome5 name="user" style={styles.icon} />
+          <FontAwesome5 name="user" style={styles.icon} />
           <Text style={styles.tabText}>Configuracion</Text>
         </View>
         <AntDesign name="right" style={styles.icon2} />
@@ -92,7 +84,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     elevation: 5,
     shadowOffset: { width: 0, height: 5 },
-    shadowColor: 'rgba(117, 101, 123, 0.26)',
+    shadowColor: "rgba(117, 101, 123, 0.26)",
     shadowOpacity: 1,
     shadowRadius: 20,
   },
