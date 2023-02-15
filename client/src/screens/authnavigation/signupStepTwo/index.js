@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { ScrollView, Text, TextInput, TextInputBase, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import ButtonRegistro from "../../../components/buttonRegistro/Index.js";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
 import StepsRegister from "../../../components/stepsRegister/index.js";
@@ -8,13 +7,14 @@ import { useNavigation } from "@react-navigation/native";
 import InputComponentSelectList from "../../../components/inputSelectList/index.js";
 import { nivelEstudio } from "../../../utils/dataNivelStudio.js";
 import { areaLaboral } from "../../../utils/dataAreaLaboral.js";
-import { profesion } from "../../../utils/dataProfesion.js";
+import { dataPuestoLaboral } from "../../../utils/dataPuestoLaboral.js";
 import { disponibilidad } from "../../../utils/dataDisponibilidad.js";
 import { herramientas } from "../../../utils/dataHerramientas.js";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import InputMultipleComponentSelectList from "../../../components/inputMultipleSelectList/index.js";
 
 const RegistroStepTwo = () => {
   const navigation = useNavigation();
@@ -37,8 +37,10 @@ const RegistroStepTwo = () => {
         .typeError("Elige una opción.")
         .required("Campo requerido."),
       technologies: yup
-        .string()
-        .typeError("Elige una opción.")
+        .array()
+        .ensure()
+        .min(1, "Elige como minimo 1")
+        .max(5, "Elige como máximo 5.")
         .required("Campo requerido."),
     })
     .required();
@@ -51,7 +53,7 @@ const RegistroStepTwo = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    alert(data);
+    alert(data.educationalLevel);
     navigation.navigate("SignUpStepThree");
   };
 
@@ -95,11 +97,12 @@ const RegistroStepTwo = () => {
           />
           <InputComponentSelectList
             label="Profesión"
-            data={profesion}
+            data={dataPuestoLaboral}
             name="position"
             control={control}
             error={errors.position}
             setValue={setValue}
+            lastList
           />
           <InputComponentSelectList
             label="Disponibilidad horaria"
@@ -109,7 +112,7 @@ const RegistroStepTwo = () => {
             error={errors.availability}
             setValue={setValue}
           />
-          <InputComponentSelectList
+          <InputMultipleComponentSelectList
             label="Herramientas utilizadas"
             placeholder="Selecciona máximo 5"
             requerimiento="Selecciona aquellas herramientas que has utilizado y queres mejorar"
@@ -118,12 +121,12 @@ const RegistroStepTwo = () => {
             control={control}
             error={errors.technologies}
             setValue={setValue}
+            lastList
           />
           <PrimaryButton
             text="Siguiente"
             width="width: 100%"
             handler={handleSubmit(onSubmit)}
-            //handler={() => navigation.navigate("SignUpStepThree")}
           />
         </View>
       </View>
