@@ -33,7 +33,7 @@ const Tabs = () => {
 
       <TouchableOpacity
         style={styles.tab}
-        onPress={() => navigation.navigate("MisPostulacions")}
+        onPress={() => navigation.navigate("MisPostulaciones")}
       >
         <View style={styles.tabinfo}>
           <FontAwesome5 name="user" style={styles.icon} />
