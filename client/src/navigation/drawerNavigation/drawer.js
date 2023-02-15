@@ -3,12 +3,14 @@ import {View, TouchableOpacity, Text, Image} from 'react-native';
 import { useState } from 'react';
 import Community from '../../screens/drawer_navegation/community';
 import GeneralChannel from '../../screens/drawer_navegation/channels/general';
-//import ShortlistedChannel from '../../screens/drawer_navegation/channels/shortlisted'
-import ShortlistedChannel from '../../screens/authnavigation/home'
+import ShortlistedChannel from '../../screens/drawer_navegation/channels/shortlisted'
+// import ShortlistedChannel from '../../screens/authnavigation/home' ESTE NO ERA SOLO PARA PRENSETACION (MARCOS NECESITA TRANSLADAR SU COMPONENTE AL DE SCREENS/DRAWER_NAVEGATION)
 import JobsChannel from '../../screens/drawer_navegation/channels/jobs';
 import AmazonTeamChannel from '../../screens/drawer_navegation/channels/amazon_team';
 import ProjectsChannel from '../../screens/drawer_navegation/channels/projects';
 import DirectMessages from '../../screens/drawer_navegation/direct_messages';
+
+import Profile from '../profileNavigation/profile.js';
 
 import communityIcon from '../../../assets/communityIcon.png'
 import channel_Icon from '../../../assets/channel_Icon.png'
@@ -26,19 +28,21 @@ const Drawer = createDrawerNavigator();
 const DrawerNavegation = ({navigation}) => {
   return (
     <Drawer.Navigator
+      initialRouteName="GeneralChannel"
       screenOptions={{
         headerShown: false
       }}
       drawerContent = {(props) => <MenuInterno props={props}/>}
     >
-      <Drawer.Screen name="Shortlisted" component={ShortlistedChannel} />
       <Drawer.Screen name="Community" component={Community} />
       <Drawer.Screen name="GeneralChannel" component={GeneralChannel} />
-      {/* <Drawer.Screen name="Shortlisted" component={ShortlistedChannel} /> */}
+      <Drawer.Screen name="Shortlisted" component={ShortlistedChannel} />
       <Drawer.Screen name="Jobs" component={JobsChannel} />
       <Drawer.Screen name="AmazonTeam" component={AmazonTeamChannel} />
       <Drawer.Screen name="Projects" component={ProjectsChannel} />
       <Drawer.Screen name="DirectMessages" component={DirectMessages} />
+
+      <Drawer.Screen name="ProfileStack" component={Profile} />
     </Drawer.Navigator>
   );
 }
