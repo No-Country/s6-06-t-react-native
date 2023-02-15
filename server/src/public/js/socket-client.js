@@ -8,8 +8,6 @@ const send  = document.querySelector('#btnEnviar');
 
 const socket = io();
 
-
-
 socket.on('connect', () => {
     lblOffline.style.display = 'none';
     lblOnline.style.display  = '';
@@ -19,7 +17,15 @@ socket.on('connect', () => {
 socket.on('disconnect', () => {
     lblOnline.style.display  = 'none';
     lblOffline.style.display = '';
+
 });
+
+
+
+//REMPLAZAR POR EL DEL USUSARIO REAL -INDICA QUE EL USER ESTA EN LINEA
+socket.emit( 'online-client', {
+    uid:"63ece8b4c731b6a03ab8c7c6"
+} )
 
 
 socket.on('enviar-mensaje', (payload) => {
@@ -36,10 +42,10 @@ socket.on('post-count', (payload) => {
 })
 
 
-const emitCountPost = async (model,channel) => {
-    const posts = await model.find(channel);
-    socket.emit("server:loadnotes", posts.length);
-    };
+// const emitCountPost = async (model,channel) => {
+//     const posts = await model.find(channel);
+//     socket.emit("server:loadnotes", posts.length);
+//     };
     
 
 socket.on('reaction-new-in-post', (payload) => {
@@ -63,3 +69,5 @@ send.addEventListener( 'click', () => {
     });
 
 });
+
+

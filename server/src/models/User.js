@@ -6,12 +6,15 @@ const userSchema = new Schema(
             type: String,
             required: true
         },
-        isOnline:{
-            type:Boolean,
-            default:true
+        isOnline: {
+            type: Boolean,
+            default: true
         },
-        lastSeen:{
-            type:Number,
+        lastSeen: {
+            type: Number
+        },
+        socketId: {
+            type: String
         },
         email: {
             type: String,
@@ -150,7 +153,7 @@ const userSchema = new Schema(
         phone: {
             type: String
         },
-/////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////
         favorites: [
             {
                 type: Schema.Types.ObjectId,
