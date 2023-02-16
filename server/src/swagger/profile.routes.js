@@ -33,7 +33,7 @@
  *                "data": {
  *                     "fullName": "Michael",
  *                     "email": "f@bar.com",
- *                     "admin": true,
+ *                     "admin": false,
  *                     "selected": true,
  *                     "active": true,
  *                     "emailisvalidated": true,
@@ -145,7 +145,7 @@
  *                "data": {
  *                     "fullName": otro nombre,
  *                     "email": barFoo@foo.com,
- *                     "admin": true,
+ *                  "admin": false,
  *                     "selected": true,
  *                     "active": true,
  *                     "emailisvalidated": true,
@@ -224,7 +224,7 @@
 //  *                "data": {
 //  *                     "fullName": otro nombre,
 //  *                     "email": barFoo@foo.com,
-//  *                     "admin": true,
+//  *                     "admin": false,
 //  *                     "selected": true,
 //  *                     "active": true,
 //  *                     "emailisvalidated": true,
@@ -296,7 +296,7 @@
  *                "data": {
  *                     "fullName": otro nombre,
  *                     "email": barFoo@foo.com,
- *                     "admin": true,
+ *                     "admin": false,
  *                     "selected": true,
  *                     "active": true,
  *                     "emailisvalidated": true,
@@ -358,7 +358,7 @@
  *                "data": {
  *                     "fullName": otro nombre,
  *                     "email": barFoo@foo.com,
- *                     "admin": true,
+ *                     "admin": false,
  *                     "selected": true,
  *                     "active": true,
  *                     "emailisvalidated": true,
@@ -428,7 +428,7 @@
  *                   "fullName": "zaz",
  *                   "email": "ddsds64@fd.com",
  *                   "password": "$2a$10$jXRNAxsJYSLB6aQIwNWK9uvSTg6Nv91GAqajb8dzAdPrNfO9qE15y",
- *                   "admin": true,
+ *                   "admin": false,
  *                   "selected": true,
  *                   "active": false,
  *                   "emailisvalidated": true,

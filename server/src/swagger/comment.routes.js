@@ -174,7 +174,7 @@
  *        required: true
  *        description: the id of comment to delete
  *    summary: Delete any comment  -Only for admin
- *    tags: [Comments]
+ *    tags: [Admin]
  *    
  *              
  *    responses:

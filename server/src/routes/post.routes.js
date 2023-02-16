@@ -14,5 +14,7 @@ router.put('/favorite/:id', post.postFavoriteUser)
 
 //FALTA:Obtiene cometarios de post especifico con repliesy reacciones 
 
+//FALTA:Obtiene todos los post -Paginado-ADMIN
+
 
 module.exports = router;

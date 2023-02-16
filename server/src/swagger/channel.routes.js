@@ -18,7 +18,7 @@
  *        required: true
  *        description: The token users account
  *    summary: Create a new Channel , only for admin users
- *    tags: [Channels]
+ *    tags: [Admin]
  *    requestBody:
  *      required: true
  *      content:
@@ -67,7 +67,7 @@
  *        required: true
  *        description: the id of channel to update
  *    summary: Edit name of Channel and privacity , only for admin users
- *    tags: [Channels]
+ *    tags: [Admin]
  *    requestBody:
  *      required: true
  *      content:
@@ -117,7 +117,7 @@
  *        required: true
  *        description: the id of channel to update
  *    summary: Delete a  Channel  , only for admin users
- *    tags: [Channels]
+ *    tags: [Admin]
  *    
  *    responses:
  *      200:
@@ -285,7 +285,7 @@
  *        description: The token users account
  *      
  *    summary: Gets all the channels , only for admins
- *    tags: [Channels]
+ *    tags: [Admin]
  *    
  *    responses:
  *      200:
