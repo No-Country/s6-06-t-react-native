@@ -4,12 +4,6 @@ import PrimaryButton from "../../../components/PrimaryButton.jsx";
 import StepsRegister from "../../../components/stepsRegister/index.js";
 import { styles } from "./style.js";
 import { useNavigation } from "@react-navigation/native";
-import InputComponentSelectList from "../../../components/inputSelectList/index.js";
-import { nivelEstudio } from "../../../utils/dataNivelStudio.js";
-import { areaLaboral } from "../../../utils/dataAreaLaboral.js";
-import { profesion } from "../../../utils/dataProfesion.js";
-import { disponibilidad } from "../../../utils/dataDisponibilidad.js";
-import { herramientas } from "../../../utils/dataHerramientas.js";
 
 const SignUpStepThree = () => {
   const navigation = useNavigation();

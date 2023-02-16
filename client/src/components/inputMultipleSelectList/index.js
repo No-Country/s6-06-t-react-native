@@ -3,12 +3,12 @@ import { useCallback, useEffect, useState } from "react";
 import { styles } from "./style";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import SelectDropdown from "react-native-select-dropdown";
+import { MultipleSelectList } from "react-native-dropdown-select-list";
 import { Controller } from "react-hook-form";
-import { Ionicons } from '@expo/vector-icons'; 
-import { AntDesign } from '@expo/vector-icons'; 
+import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
-const InputComponentSelectList = ({
+const InputMultipleComponentSelectList = ({
   label,
   data,
   placeholder = "Selecciona tu respuesta",
@@ -21,7 +21,7 @@ const InputComponentSelectList = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
-  const [selected, setSelected] = useState();
+  const [selected, setSelected] = useState([]);
 
   useEffect(() => {
     setValue(name, selected);
@@ -58,30 +58,23 @@ const InputComponentSelectList = ({
         control={control}
         onChange={handleOnChange}
         render={({ field: { onChange, onBlur } }) => (
-          <SelectDropdown
+          <MultipleSelectList
             data={data}
-            defaultButtonText={placeholder}
-            buttonStyle={
-              !isFocused
-                ? styles.input
-                : lastList
-                ? styles.lastInputSelected
-                : styles.inputSelected
+            setSelected={(val) => setSelected(val)}
+            placeholder={placeholder}
+            boxStyles={[styles.input, selected.length > 1 && styles.inputWithSelected]}
+            inputStyles={styles.inputStyles}
+            badgeStyles={styles.badgeStyles}
+            dropdownStyles={styles.dropdownStyles}
+            arrowicon={
+              <Ionicons
+                name="md-chevron-down-outline"
+                size={24}
+                color="black"
+              />
             }
-            buttonTextStyle={styles.defaultTextInput}
-            dropdownStyle={
-              lastList ? styles.lastDropdownStyles : styles.dropdownStyles
-            }
-            rowTextStyle={styles.optionText}
-            selectedRowStyle={styles.selectedOption}
-            dropdownOverlayColor={"rgba(0, 0,0, 0)"}
-            onSelect={setSelected}
-            onFocus={() => setIsFocused(!isFocused)}
-            onChangeSearchInputText={(value) => onChange(value)}
-            renderDropdownIcon={(isOpened) => {
-              return isOpened ? <AntDesign name="close" size={24} color="black" /> : <Ionicons name="md-chevron-down-outline" size={24} color="black" />;
-            }}
-            onBlur={() => handleOnBlur(onBlur)}
+            closeicon={<AntDesign name="close" size={24} color="black" />}
+            search={false}
           />
         )}
         name={name}
@@ -89,9 +82,9 @@ const InputComponentSelectList = ({
       {requerimiento && (
         <Text style={styles.requerimiento}>{requerimiento}</Text>
       )}
-      {!selected && error && <Text style={styles.error}>{error?.message}</Text>}
+      {error && <Text style={styles.error}>{error?.message}</Text>}
     </TouchableOpacity>
   );
 };
 
-export default InputComponentSelectList;
+export default InputMultipleComponentSelectList;

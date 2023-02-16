@@ -17,7 +17,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { loginUser } from "../../../redux/actions/loginActions";
 import { useDispatch } from "react-redux";
-import { AsyncStorage } from "@react-native-async-storage/async-storage";
+import { AsyncStorage } from "react-native";
 
 const LogIn2 = () => {
   const [data, setData] = useState({ password: "", email: "" });
