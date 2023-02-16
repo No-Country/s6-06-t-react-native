@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MisPostulaciones from "../../screens/profile_navigation/my_aplications/MisPostulaciones";
 import DatosPersonales from "../../screens/profile_navigation/personal_information/DatosPersonales";
-import PerfilProfesional from "../../screens/profile_navigation/professional_profile/PerfilProfesional";
+import PerfilProfesional from "../../screens/profile_navigation/professional_profile copy/PerfilProfesional";
 import Perfil from "../../screens/profile_navigation/profile/Profile";
 import Guardados from "../../screens/profile_navigation/saved/Guardados";
 import Configuracion from "../../screens/profile_navigation/setting/Configuracion";
@@ -21,6 +21,8 @@ const ProfileNavigation = ({ navigation }) => {
       <Stack.Screen name="MisPostulaciones" component={MisPostulaciones} />
       <Stack.Screen name="Guardados" component={Guardados} />
       <Stack.Screen name="Configuracion" component={Configuracion} />
+
+
     </Stack.Navigator>
   );
 };

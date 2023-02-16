@@ -7,6 +7,8 @@ import { AntDesign } from "@expo/vector-icons";
 
 const Tabs = () => {
   const navigation = useNavigation();
+
+
   return (
     <SafeAreaView style={styles.tabContainer}>
       <TouchableOpacity
@@ -22,7 +24,9 @@ const Tabs = () => {
 
       <TouchableOpacity
         style={styles.tab}
-        onPress={() => navigation.navigate('PerfilProfesional')}
+        onPress={() => 
+          navigation.navigate('PerfilProfesional')
+        }
       >
         <View style={styles.tabinfo}>
           <FontAwesome5 name="user" style={styles.icon} />

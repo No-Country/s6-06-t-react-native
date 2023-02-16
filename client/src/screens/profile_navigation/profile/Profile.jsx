@@ -16,18 +16,20 @@ import Tabs from "../profilecomps/Tabs";
 const Perfil = () => {
 
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <TopBar />
       <ProfilePicture />
       <Tabs />
       <LogOut />
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  container: {  
     flex: 1,
     backgroundColor: "#fff",
   },

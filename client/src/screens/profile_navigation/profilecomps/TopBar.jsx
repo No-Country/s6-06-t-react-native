@@ -7,9 +7,6 @@ const TopBar = () => {
   return (
     <View style={styles.Topcontainer}>
       <BackButton />
-      {/* <View style={styles.backButton} >
-                <AntDesign name="left" size={20} color="black" onPress={() => navigation.goBack()} />
-            </View> */}
       <Text style={styles.tittle}>Perfil</Text>
       <View>
         <Text style={styles.hidden}>aaaaa</Text>
