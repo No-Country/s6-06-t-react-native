@@ -1,25 +1,22 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { trasformDateADateString } from '../../../utils/Date';
+import { Text } from 'react-native';
 import CardPost from './CardPost';
-import { styles } from './styles';
+import DateTitle from './DateTitle';
 
-const PostDayWrapper = ({posts, date}) => {
 
+const PostDayWrapper = ({group}) => {
+    if (!group) {
+        return <Text>Cargando...</Text>
+    }
     return (
         <>
-            <View style={styles.datePublish}>
-                <View style={styles.line}></View>
-                <Text style={styles.date}>{trasformDateADateString(date)}</Text>
-                <View style={styles.line}></View>
-            </View>
+            <DateTitle d={group.date} />
+            {
+                group.posts.map((p, i)=>(
+                    <CardPost key={i}data={p} />
 
-            {posts.listPosts.map((p, i) => {
-                return p.pinned.status && <CardPost key={i} data={p} />
-            })}
-            {posts.listPosts.map((p, i) => {
-                return !p.pinned.status && <CardPost key={i} data={p} />
-            })}
+                ))
+            }
         </>
     );
 }

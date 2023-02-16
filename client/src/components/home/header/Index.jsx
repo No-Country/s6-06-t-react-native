@@ -1,19 +1,15 @@
 
 import React from 'react';
 import NavMenu from './NavMenu';
-import OptionsComunity from './OptionsComunity';
 import InfoComunity from './InfoComunity';
 
-const Index = ({pathImgUser, TypeComunity}) => {
+const Index = ({ navigation ,Channel}) => {
     return (
         <>
-            <NavMenu 
-                pathImgUser={pathImgUser}
+            <NavMenu />
+            <InfoComunity 
+                Channel={Channel}
             />
-            <OptionsComunity 
-                TypeComunity={TypeComunity}
-            />
-            <InfoComunity />
         </>
     );
 }

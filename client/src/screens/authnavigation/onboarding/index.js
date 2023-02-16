@@ -4,7 +4,7 @@ import Logo from "../../../../assets/Logo.png";
 const OnBoarding = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate("SignUpStepTwo")}>
+      <TouchableOpacity onPress={() => navigation.navigate("LogIn")}>
         <Image source={Logo} style={{ width: 300, height: 300 }} />
       </TouchableOpacity>
     </View>

@@ -39,7 +39,7 @@ const RegistroStepTwo = () => {
       technologies: yup
         .array()
         .ensure()
-        .min(1, "Elige como minimo 1")
+        .min(1, "Campo requerido.")
         .max(5, "Elige como máximo 5.")
         .required("Campo requerido."),
     })
@@ -53,7 +53,6 @@ const RegistroStepTwo = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    alert(data.educationalLevel);
     navigation.navigate("SignUpStepThree");
   };
 
@@ -102,7 +101,6 @@ const RegistroStepTwo = () => {
             control={control}
             error={errors.position}
             setValue={setValue}
-            lastList
           />
           <InputComponentSelectList
             label="Disponibilidad horaria"
