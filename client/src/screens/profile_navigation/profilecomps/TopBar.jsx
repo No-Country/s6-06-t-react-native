@@ -3,7 +3,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 import { AntDesign } from "@expo/vector-icons";
 import BackButton from "../../../components/BackButton";
 
-const Profile = () => {
+const TopBar = () => {
   return (
     <View style={styles.Topcontainer}>
       <BackButton />
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default TopBar;

@@ -9,11 +9,10 @@ import {
   SafeAreaViewBase,
   ScrollView,
 } from "react-native";
-import { TopBar } from "../profilecomps/TopBar";
-import { ProfilePicture } from "../profilecomps/ProfilePicture";
-import { LogOut } from "../profilecomps/LogOut";
-import { Tabs } from "../profilecomps/Tabs";
-
+import TopBar  from "../profilecomps/TopBar";
+import ProfilePicture  from "../profilecomps/ProfilePicture";
+import LogOut from "../profilecomps/LogOut";
+import Tabs from "../profilecomps/Tabs";
 const Perfil = () => {
 
   return (
