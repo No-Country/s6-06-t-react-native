@@ -31,14 +31,14 @@ const Drawer = createDrawerNavigator();
 const DrawerNavegation = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="ProfileStack"
+      initialRouteName="GeneralChannel"
       screenOptions={{
         headerShown: false,
       }}
       drawerContent={(props) => <MenuInterno props={props} />}
     >
-      <Drawer.Screen name="Community" component={Community} />
       <Drawer.Screen name="GeneralChannel" component={GeneralChannel} />
+      <Drawer.Screen name="Community" component={Community} />
       <Drawer.Screen name="Shortlisted" component={ShortlistedChannel} />
       <Drawer.Screen name="Jobs" component={JobsChannel} />
       <Drawer.Screen name="AmazonTeam" component={AmazonTeamChannel} />
