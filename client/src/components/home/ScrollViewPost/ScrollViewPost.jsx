@@ -1,39 +1,53 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import { styles } from './styles'
 import PostDayWrapper from './PostDayWrapper';
-import { PostsMock } from '../../../mock/post';
 
-const ScrollViewPost = ({NumberComunity, TypeComunity}) => {
-    const [Posts, setPosts] = useState([]);
 
-    let getPosts = async ()=>{
-        try {
-            let post = await PostsMock
-            setPosts(post)
-        } catch (error) {
-            console.error
-        }
+const ScrollViewPost = ({ post }) => {
+    const [group, setgroup] = useState();
+    let GroupByDatePost = (post)=>{
+        let dates = []
+        post.forEach( p=> {
+            let d = new Date(p.createdAt)
+            dates.push(d.toDateString())
+        });
+        dates = new Set(dates)
+        dates = [...dates]
+
+        dates.forEach((dat, i) =>{
+            dates[i] = {
+                date : dat,
+                posts : []
+            }
+            post.forEach((p, j)=>{
+                if(new Date(p.createdAt).toDateString() === dat){
+                   dates[i].posts.push(p) 
+                }
+            })
+        })
+        setgroup(dates)
     }
-
     useEffect(() => {
-        getPosts()
-    }, [Posts]);
-
-    
+        GroupByDatePost(post)
+    }, []);
+    if (!group) {
+        return <Text>Cargando...</Text>
+    }
     return (
         <>
+
             <ScrollView style={styles.scroll} >
+
                 {
-                    Posts.map((p, i) => (
-                        <PostDayWrapper 
-                            posts={p}
-                            date={p.datePost}
+                    group.map((p, i) => (
+                        <PostDayWrapper
+                            group={p}
                             key={i}
-                        />
-                    ))
+                        />))
+
                 }
-            </ScrollView> 
+            </ScrollView>
         </>
     );
 }
