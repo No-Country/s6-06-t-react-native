@@ -18,12 +18,12 @@ const PerfilProfesional = () => {
       <View style={styles.ppContainer}>
         <View>
           <Image
-            source={require("./icons/profilepicture.png")}
+            source={require("../icons/profilepicture.png")}
             style={{ width: 100, height: 100 }}
           />
           <Pressable style={styles.ppButton}>
             <Image
-                source={require("./icons/changepicture.png")}
+                source={require("../icons/changepicture.png")}
               style={{ width: 30, height: 30 }}
             />
           </Pressable>

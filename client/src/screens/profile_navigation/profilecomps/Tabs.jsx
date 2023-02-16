@@ -1,17 +1,9 @@
 import React from "react";
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { FontAwesome5 } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons'; 
-
-
-
+import { FontAwesome5 } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const Tabs = () => {
   const navigation = useNavigation();
@@ -19,7 +11,7 @@ const Tabs = () => {
     <SafeAreaView style={styles.tabContainer}>
       <TouchableOpacity
         style={styles.tab}
-        onPress={() => navigation.navigate("DatosPersonales")}
+        onPress={() => navigation.navigate('ProfileStack',{screen: "DatosPersonales"})}
       >
         <View style={styles.tabinfo}>
           <FontAwesome5 name="user" style={styles.icon} />
@@ -30,10 +22,10 @@ const Tabs = () => {
 
       <TouchableOpacity
         style={styles.tab}
-        onPress={() => navigation.navigate("PerfilProfesional")}
+        onPress={() => navigation.navigate('ProfileStack', {screen: "PerfilProfesional"})}
       >
         <View style={styles.tabinfo}>
-        <FontAwesome5 name="user" style={styles.icon} />
+          <FontAwesome5 name="user" style={styles.icon} />
           <Text style={styles.tabText}>Perfil Profesional</Text>
         </View>
         <AntDesign name="right" style={styles.icon2} />
@@ -41,10 +33,10 @@ const Tabs = () => {
 
       <TouchableOpacity
         style={styles.tab}
-        onPress={() => navigation.navigate("MisPostulacions")}
+        onPress={() => navigation.navigate('ProfileStack', {screen:"MisPostulaciones"})}
       >
         <View style={styles.tabinfo}>
-        <FontAwesome5 name="user" style={styles.icon} />
+          <FontAwesome5 name="user" style={styles.icon} />
           <Text style={styles.tabText}>Mis Postulaciones</Text>
         </View>
         <AntDesign name="right" style={styles.icon2} />
@@ -55,7 +47,7 @@ const Tabs = () => {
         onPress={() => navigation.navigate("Guardados")}
       >
         <View style={styles.tabinfo}>
-        <FontAwesome5 name="user" style={styles.icon} />
+          <FontAwesome5 name="user" style={styles.icon} />
           <Text style={styles.tabText}>Guardados</Text>
         </View>
         <AntDesign name="right" style={styles.icon2} />
@@ -66,7 +58,7 @@ const Tabs = () => {
         onPress={() => navigation.navigate("Configuracion")}
       >
         <View style={styles.tabinfo}>
-        <FontAwesome5 name="user" style={styles.icon} />
+          <FontAwesome5 name="user" style={styles.icon} />
           <Text style={styles.tabText}>Configuracion</Text>
         </View>
         <AntDesign name="right" style={styles.icon2} />
@@ -88,16 +80,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     padding: 12,
     borderRadius: 15,
-    shadowColor: "#0d080f",
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.21,
-    shadowRadius: 8.19,
-    elevation: 11,
-    marginBottom: 30,
+    marginBottom: 20,
     marginHorizontal: 20,
+    elevation: 5,
+    shadowOffset: { width: 0, height: 5 },
+    shadowColor: "rgba(117, 101, 123, 0.26)",
+    shadowOpacity: 1,
+    shadowRadius: 20,
   },
   tabinfo: {
     flexDirection: "row",
