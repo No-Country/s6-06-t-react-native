@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import { StyleSheet } from "react-native";
+import { getUserData } from "../../../redux/actions/personalActions";
 
 const ProfilePicture = () => {
+  const [userInfo, setUserInfo] = useState(null);
+
+  
+  useEffect(() => {
+    getUserData(setUserInfo);
+  }, []);
+
+  const profileImage = userInfo
+    ? userInfo.img_avatar
+    : "../icons/profilepicture.png";
+
   return (
     <View style={styles.ppContainer}>
       <View>
         <Image
-          source={require("../icons/profilepicture.png")}
+          source={{ uri: profileImage }}
           style={{ width: 100, height: 100 }}
         />
         <Pressable style={styles.ppButton}>
@@ -17,7 +29,9 @@ const ProfilePicture = () => {
           />
         </Pressable>
       </View>
-      <Text style={styles.name}>Camilo Vargas</Text>
+      <Text style={styles.name}>
+        {userInfo ? userInfo.fullName : "Camilo Vargas"}
+      </Text>
       <Text style={styles.profession}> Software Developer</Text>
     </View>
   );

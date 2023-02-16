@@ -17,7 +17,7 @@ const Home = ({ navigation }) => {
   if (Post?.length === 0) {
     return (
       <View>
-            <ActivityIndicator size="large"/>
+        <ActivityIndicator size="large" />
       </View>
     );
   }

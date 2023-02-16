@@ -22,7 +22,6 @@ export default function NavMenu({ pathImgUser }) {
     }
   };
 
-  
   useEffect(() => {
     getImgProfile();
   }, []);

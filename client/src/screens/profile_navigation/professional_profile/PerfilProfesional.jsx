@@ -1,13 +1,28 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image, Pressable } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Pressable,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BackButton from "../../../components/BackButton";
 import { AntDesign } from "@expo/vector-icons";
-
-
+import { getUserData } from "../../../redux/actions/personalActions";
+import defaultImg from "../icons/profilepicture.png";
 const PerfilProfesional = () => {
   const navigation = useNavigation();
+  const [userInfo, setUserInfo] = useState(null);
+
+  useEffect(() => {
+    getUserData(setUserInfo);
+  }, []);
+
+  const profileImg = userInfo ? userInfo.img_avatar : defaultImg;
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
@@ -18,28 +33,24 @@ const PerfilProfesional = () => {
       <View style={styles.ppContainer}>
         <View>
           <Image
-            source={require("../icons/profilepicture.png")}
+            source={{ uri: profileImg }}
             style={{ width: 100, height: 100 }}
           />
           <Pressable style={styles.ppButton}>
             <Image
-                source={require("../icons/changepicture.png")}
+              source={require("../icons/changepicture.png")}
               style={{ width: 30, height: 30 }}
             />
           </Pressable>
         </View>
         <TouchableOpacity style={styles.editButton}>
-            <AntDesign
-                name="edit"
-                size={25}
-                color="black"
-            />
+          <AntDesign name="edit" size={25} color="black" />
         </TouchableOpacity>
-        <Text style={styles.name}>Camilo Vargas</Text>
+        <Text style={styles.name}>
+          {userInfo ? userInfo.fullName : "Camilo Vargas"}
+        </Text>
         <Text style={styles.profession}> Software Developer</Text>
       </View>
-
-
     </SafeAreaView>
   );
 };
@@ -63,34 +74,33 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
-    ppContainer: {
+  ppContainer: {
     alignItems: "center",
     marginTop: 20,
     width: "100%",
-    },
-    ppButton: {
+  },
+  ppButton: {
     position: "absolute",
     top: 70,
     left: 70,
-    },
-    name: {
+  },
+  name: {
     fontSize: 30,
     fontWeight: "bold",
     marginTop: 10,
     lineHeight: 30,
     color: "#4245E5",
-    },
-    profession: {
+  },
+  profession: {
     fontSize: 18,
     color: "#a9a9a9",
     lineHeight: 30,
-    },
-    editButton: {
+  },
+  editButton: {
     position: "absolute",
     top: 115,
     right: 40,
-    },
-
+  },
 });
 
 export default PerfilProfesional;

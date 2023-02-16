@@ -25,6 +25,7 @@ import downDrawer from "../../../assets/downDrawer.png";
 import Face from "../../../assets/Face.png";
 import backDrawer from "../../../assets/backDrawer.png";
 import { styles } from "./styles";
+import { useDispatch } from "react-redux";
 
 const Drawer = createDrawerNavigator();
 
@@ -51,8 +52,15 @@ const DrawerNavegation = () => {
 
 export default DrawerNavegation;
 
-const MenuInterno = ({ props }) => {
+export const MenuInterno = ({ props }) => {
   const [state, setState] = useState(true);
+  const dispatch = useDispatch();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logoutUser());
+    // navigation.navigate("LogIn");
+  };
   return (
     <DrawerContentScrollView>
       {/* Parte del avatar */}
@@ -173,7 +181,10 @@ const MenuInterno = ({ props }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.menuBottom} onPress={() => {}}>
+        <TouchableOpacity
+          style={styles.menuBottom}
+          onPress={(e) => handleLogout(e)}
+        >
           <View style={styles.menuBottomOption}>
             <Image source={helpIcon} />
             <Text style={styles.menuTextExtra}>Ayuda</Text>
