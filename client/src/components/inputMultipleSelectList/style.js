@@ -16,12 +16,26 @@ export const styles = StyleSheet.create({
     outlineColor: "#4245E5",
     backgroundColor: "#DEE3E5",
     paddingHorizontal: 15,
+    paddingHorizontal: 15,
     paddingVertical: 16,
+    paddingTop: 16,
     borderRadius: 15,
     width: "100%",
     marginBottom: 5,
     color: "#000",
     borderWidth: 0,
+    fontSize: 19
+  },
+  inputWithSelected:{
+    paddingTop: 0
+  },
+  inputStyles:{
+    fontSize: 18,
+    color: '#626A6D',
+    marginLeft: 5
+  },
+  badgeStyles:{
+    backgroundColor: "#4245E5"
   },
   inputSelected: {
     width: "100%",
@@ -49,7 +63,6 @@ export const styles = StyleSheet.create({
     color: "#626A6D",
     fontSize: 15,
     textAlign: "left",
-    padding:0
   },
   optionText: {
     textAlign: "left",
@@ -64,7 +77,7 @@ export const styles = StyleSheet.create({
   },
   dropdownStyles: {
     position: "relative",
-    marginTop: -32,
+    marginTop: -10,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
     borderBottomLeftRadius: 15,
@@ -72,15 +85,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderTopWidth: 0,
     borderColor: "#4245E5",
-    backgroundColor: "#fff",
-    shadowColor: "rgba(0, 0, 0, 0.2)",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowRadius: 5,
-    shadowOpacity: 1,
-    borderRadius: 8,
+    backgroundColor: "#fff",   
   },
   lastDropdownStyles: {
     position: "relative",
@@ -93,14 +98,6 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 0,
     borderColor: "#4245E5",
     backgroundColor: "#fff",
-    shadowColor: "rgba(0, 0, 0, 0.2)",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowRadius: 5,
-    shadowOpacity: 1,
-    borderRadius: 8,
   },
   error: {
     color: "red",

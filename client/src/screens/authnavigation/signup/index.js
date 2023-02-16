@@ -60,6 +60,7 @@ const Registro = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
   const onSubmit = (data) => {
     navigation.navigate("SignUpStepTwo");
   };
@@ -137,9 +138,8 @@ const Registro = () => {
                 label="Contraseña"
                 placeholder="Ingresa una contraseña"
                 requerimiento={
-                  !errors.password
-                    && "Ingresa una contraseña de mínimo 6 caracteres y contenga 1 mayúscula."
-                  
+                  !errors.password &&
+                  "Ingresa una contraseña de mínimo 6 caracteres y contenga 1 mayúscula."
                 }
                 showPass
                 onBlur={onBlur}
