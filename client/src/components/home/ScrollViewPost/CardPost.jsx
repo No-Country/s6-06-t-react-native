@@ -7,7 +7,7 @@ import { useState } from 'react';
 import AmountCommentsAndReactions from './AmountCommentsAndReactions';
 
 export default function CardPost({data}) {
-    let shorDataBody = data.description.length >=150 && data.description(0, 150)
+    let shorDataBody = data.description.length >=150 && data.description.slice(0, 150)
     const [short, setShort] = useState(false);
     console.log(data)
     return (
