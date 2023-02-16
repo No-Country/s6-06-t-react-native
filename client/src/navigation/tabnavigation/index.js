@@ -24,8 +24,8 @@ const AppNavigator = () => {
   const { token } = useSelector((state) => state.login);
   return (
     <NavigationContainer>
-      {!token && !asyncToken && <AuthNavigator />}
-      {(token || asyncToken) && <DrawerNavegation />}
+      {!token && <AuthNavigator />}
+      {token && <DrawerNavegation />}
     </NavigationContainer>
   );
 };
