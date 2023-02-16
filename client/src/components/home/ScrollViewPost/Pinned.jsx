@@ -8,7 +8,7 @@ export default function Pinned({data}) {
     return (
         <View style={styles.PushPin}>
             <AntDesign name="pushpin" size={16} color={colors.danger} />
-            <Text style={styles.TextPushPin}>{`Publicación fijada por ${data.forPinned} - ${data.rolUserPinned}`}</Text>
+            <Text style={styles.TextPushPin}>{`Publicación fijada por ${data.fullName} - ${data.position}`}</Text>
         </View>
     )
 }

@@ -2,10 +2,10 @@ import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { styles } from './styles'
 
-export default function InfoComunity() {
+export default function InfoComunity({Channel}) {
     return (
         <View style={styles.typeComunity}>
-            <Text style={styles.subtitle}>Pre-seleccionado 7</Text>
+            <Text style={styles.subtitle}>Canal {Channel}</Text>
             <View style={styles.imgsUsers}>
                 <Image source={require('../../../../assets/users.jpeg')} style={[styles.imgUserComunity, { top: 0, left: 0 }]} />
                 <Image source={require('../../../../assets/users.jpeg')} style={[styles.imgUserComunity, { top: 0, left: 40 }]} />
