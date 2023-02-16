@@ -9,16 +9,17 @@ export default function HeaderCard({data, date}) {
     return (
         <View style={styles.HeaderPost}>
             <View style={{ alignSelf: 'center' }}>
-                <Image source={{uri : data.imgUser}} style={[styles.imgUserPost]} />
-                <View style={styles.Conection}></View>
+                <Image source={{uri : data.img_avatar}} style={[styles.imgUserPost]} />
+                {data.isOnline && <View style={styles.Conection}></View>}
+                
             </View>
             <View style={styles.TitlePostContain}>
                 <View style={styles.TitlePost}>
-                    <Text style={styles.UserName}>{data.NameUser}</Text>
+                    <Text style={styles.UserName}>{data.fullName}</Text>
                     <Text style={styles.HoursPost}>{ObtainHourDate(date)}</Text>
                 </View>
                 <View>
-                    <Text style={styles.SubtitlePost}>{`${data.RolUser} de ${data.Organization}`}</Text>
+                    <Text style={styles.SubtitlePost}>{`${data.position}`}</Text>
                 </View>
             </View>
 

@@ -6,11 +6,12 @@ import DrawerNavegation from '../drawerNavigation/drawer';
 
 const AppNavigator = () => {
     
-     const isAuthenticated = useSelector(state => state.stateGlobal);
+    //  const isAuthenticated = useSelector(state => state.stateGlobal);
+     const { token } = useSelector((state) => state.login);
     return (
         <NavigationContainer>
-            {!isAuthenticated && <AuthNavigator />}
-            {isAuthenticated && <DrawerNavegation />}
+            {!token && <AuthNavigator />}
+            {token && <DrawerNavegation />}
         </NavigationContainer>
     )
 }

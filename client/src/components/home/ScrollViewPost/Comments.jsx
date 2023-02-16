@@ -9,15 +9,15 @@ export default function Comments() {
         <View style={styles.ActionPostContain}>
             <View style={[styles.ActionPost, styles.borderRight]}>
                 <MaterialIcons name="insert-emoticon" size={24} color="black" />
-                <Text>Reaccionar</Text>
+                <Text style={styles.descriptionComment}>Reaccionar</Text>
             </View>
             <View style={[styles.ActionPost, styles.borderRight]}>
                 <MaterialCommunityIcons name="comment-text-outline" size={24} color="black" />
-                <Text>Comentar</Text>
+                <Text style={styles.descriptionComment}>Comentar</Text>
             </View>
             <View style={styles.ActionPost}>
                 <Feather name="send" size={24} color="black" />
-                <Text>Enviar</Text>
+                <Text style={styles.descriptionComment}>Enviar</Text>
             </View>
         </View>
     )
