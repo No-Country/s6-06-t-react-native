@@ -17,7 +17,10 @@ import { AsyncStorage } from "react-native";
 import PrimaryButton from "../../../components/PrimaryButton";
 import SecondaryButton from "../../../components/SecondaryButton";
 import { useDispatch } from "react-redux";
-import { editPersonalInfo } from "../../../redux/actions/personalActions";
+import {
+  editPersonalInfo,
+  getUserData,
+} from "../../../redux/actions/personalActions";
 
 const DatosPersonales = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -37,9 +40,12 @@ const DatosPersonales = () => {
     email: email,
   };
 
-  const handleSave = () => {
-    dispatch(editPersonalInfo(editedUser, userInfo.token));
-    setIsModalVisible(false);
+  const handleSave = (e) => {
+    e.preventDefault();
+    dispatch(editPersonalInfo(editedUser, userInfo.token))
+      .then(() => getUserData(setUserInfo))
+      .then(() => isLoggedIn())
+      .then(() => setIsModalVisible(false));
   };
 
   const isLoggedIn = async () => {
@@ -176,7 +182,10 @@ const DatosPersonales = () => {
                 onBlur={() => setIsFocused3(false)}
               />
             </View>
-            <PrimaryButton text="Guardar cambios" handler={handleSave} />
+            <PrimaryButton
+              text="Guardar cambios"
+              handler={(e) => handleSave(e)}
+            />
             <SecondaryButton
               text="Cancelar"
               handler={() => setIsModalVisible(false)}

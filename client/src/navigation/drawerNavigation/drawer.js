@@ -25,20 +25,21 @@ import downDrawer from "../../../assets/downDrawer.png";
 import Face from "../../../assets/Face.png";
 import backDrawer from "../../../assets/backDrawer.png";
 import { styles } from "./styles";
+import { useDispatch } from "react-redux";
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavegation = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="ProfileStack"
+      initialRouteName="GeneralChannel"
       screenOptions={{
         headerShown: false,
       }}
       drawerContent={(props) => <MenuInterno props={props} />}
     >
-      <Drawer.Screen name="Community" component={Community} />
       <Drawer.Screen name="GeneralChannel" component={GeneralChannel} />
+      <Drawer.Screen name="Community" component={Community} />
       <Drawer.Screen name="Shortlisted" component={ShortlistedChannel} />
       <Drawer.Screen name="Jobs" component={JobsChannel} />
       <Drawer.Screen name="AmazonTeam" component={AmazonTeamChannel} />
@@ -51,8 +52,15 @@ const DrawerNavegation = () => {
 
 export default DrawerNavegation;
 
-const MenuInterno = ({ props }) => {
+export const MenuInterno = ({ props }) => {
   const [state, setState] = useState(true);
+  const dispatch = useDispatch();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logoutUser());
+    // navigation.navigate("LogIn");
+  };
   return (
     <DrawerContentScrollView>
       {/* Parte del avatar */}
@@ -173,7 +181,10 @@ const MenuInterno = ({ props }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.menuBottom} onPress={() => {}}>
+        <TouchableOpacity
+          style={styles.menuBottom}
+          onPress={(e) => handleLogout(e)}
+        >
           <View style={styles.menuBottomOption}>
             <Image source={helpIcon} />
             <Text style={styles.menuTextExtra}>Ayuda</Text>
