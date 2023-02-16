@@ -33,7 +33,7 @@ const postSchema = new Schema(
         }
     },
     {
-        toObject: { virtuals: true },
+        toObject: { virtuals: false },
         toJSON: { virtuals: true },
         timestamps: true,
         versionKey: false
@@ -76,6 +76,6 @@ postSchema.methods.toJSON = function idSetter() {
     return Post;
 };
 
-const Post = model('post', postSchema, 'post');
+const Post = model('post', postSchema);
 
 module.exports = Post;

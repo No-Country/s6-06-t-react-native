@@ -2,7 +2,8 @@ const { updateIMG } = require("../helpers/cloudinary");
 const { User } = require("../models");
 
 const get=async(uid)=>{
-  const user = await User.findById(uid).populate("favorites").populate("postulations")
+  const user = await User.findById(uid)
+  // .populate("favorites").populate("postulations")
 
   if (!user) return "error"
 const {password:_ ,...userData}=user.toJSON()

@@ -10,6 +10,7 @@ router.put('/update/:id', isAdmin,  post.updatePost)
 router.put('/remove/:id', isAdmin,  post.PostsRemove)
 
 //FALTA:añadir a favorits
+router.put('/favorite/:id', post.postFavoriteUser)
 
 //FALTA:Obtiene cometarios de post especifico con repliesy reacciones 
 
