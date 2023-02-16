@@ -9,6 +9,7 @@ import AmountCommentsAndReactions from './AmountCommentsAndReactions';
 export default function CardPost({data}) {
     let shorDataBody = data.description.length >=150 && data.description(0, 150)
     const [short, setShort] = useState(false);
+    console.log(data)
     return (
         <View style={styles.PostCard} >
             { data.important &&  <Pinned data={data.author} />}
@@ -23,7 +24,14 @@ export default function CardPost({data}) {
                 }
             
             </View>
-            <AmountCommentsAndReactions />
+            <AmountCommentsAndReactions 
+                countComments={data.countComments}
+                apoyar={data.apoyar}
+                hacergracia={data.hacergracia}
+                important={data.important}
+                like={data.megusta}
+                meinteresa={data.meinteresa}
+             />
             <Comments /> 
         </View>
     )

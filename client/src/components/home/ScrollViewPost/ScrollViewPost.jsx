@@ -37,8 +37,9 @@ const ScrollViewPost = ({ post }) => {
     return (
         <>
 
-            <ScrollView style={styles.scroll} >
-
+            <ScrollView style={styles.scroll} 
+                contentOffset={{x: 0, y: 1000}}
+            >
                 {
                     group.map((p, i) => (
                         <PostDayWrapper
