@@ -8,8 +8,10 @@ router.use(validatorJWT)
 
 router.get('/all', jobOffer.getJobOffers)
       .put('/edit/:id',  isAdmin, verifyOffer.edit, jobOffer.updateJobOffer)
-      .put('/delete/:id', isAdmin,verifyOffer.remove, jobOffer.deleteJobOffer)
+      .delete('/:id', isAdmin,verifyOffer.remove, jobOffer.deleteJobOffer)
       .post('/new',  isAdmin, verifyOffer.create, jobOffer.createPostulation)
       .post('/postulate/:id',  jobOffer.postulateOffer)
+
+      //FALTA:Obtiene cometarios de joboffer especifico con repliesy reacciones 
 
 module.exports = router;

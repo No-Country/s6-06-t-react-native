@@ -44,7 +44,16 @@ const userSchema = new Schema(
         ///////////////////////////////////////////////////////////////////////
         position: {
             type: String,
-            enum: ['fullstack', 'backend', 'frontend', 'uiux']
+            enum: [
+                'Desarrollador/a Back-end',
+                'Desarrollador/a Front-end',
+                'Diseñador/a UX UI',
+                'Diseñador/a UI',
+                'Project Manager',
+                'Team Leader',
+                'Tester',
+                'Otro'
+            ]
         },
         img_avatar: {
             type: String,
@@ -58,10 +67,10 @@ const userSchema = new Schema(
         jobArea: {
             type: String,
             enum: [
+                'Análisis de datos',
+                'Desarrollo de Software  - Front / Back',
                 'Diseño',
-                'Programación',
-                'Datos',
-                'Recursos humanos',
+                'Testing',
                 'Otros'
             ]
         },
@@ -174,8 +183,8 @@ const userSchema = new Schema(
         ]
     },
     {
-        toObject: { virtuals: false },//console
-        toJSON: { virtuals: true },//res
+        toObject: { virtuals: false }, //console
+        toJSON: { virtuals: true }, //res
         timestamps: true,
         versionKey: false
     }

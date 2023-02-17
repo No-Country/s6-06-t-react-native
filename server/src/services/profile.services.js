@@ -65,7 +65,7 @@ const savedPost = async (uid, body) => {
   });
 
   user.favorites = newList;
-
+console.log(remove,newList);
   return await user.save();
 };
 

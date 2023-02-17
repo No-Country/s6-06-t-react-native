@@ -144,7 +144,7 @@ const postSaved = async (req, res) => {
     const uid = req.uid;
     const body = req.body;
     try {
-        const updatedUser = await profileServices.postSaved(uid, body);
+        const updatedUser = await profileServices.savedPost(uid, body);
 
         if (!updatedUser)
             return response.error(
@@ -162,6 +162,7 @@ const postSaved = async (req, res) => {
 };
 
 const profilePic = async (req, res) => {
+    //console.log(req.files);
     const { pic } = req.files;
     const uid = req.uid;
 

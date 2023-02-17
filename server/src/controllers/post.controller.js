@@ -39,21 +39,9 @@ const updatePost = async (req, res) => {
     const uid = req.uid;
     const { id } = req.params;
     const { title, description } = req.body;
-    const attached = req.files;
-    let attachedFiles;
 
     try {
         const post = await Post.findById(id);
-        //TAL VER RUTA DISTINTA ACTUALIZAR ADJUNTOS?
-        // const updatedPost = await Post.findByIdAndUpdate(
-        //     { _id: id },
-        //     {
-        //         title,
-        //         description,
-        //         attached
-        //     },
-        //     { new: true }
-        // );
         if (!post) {
             return res.status(404).json({
                 success: false,
@@ -67,17 +55,19 @@ const updatePost = async (req, res) => {
             return response.error(req, res, 'Usuario no autorizado', 401);
         }
 
-        if (attached) {
-            post.attached = [];
-            attachedFiles = Object.entries(attached).map((i) => i[1]);
-            if (attachedFiles.length > 0) {
-                await Promise.all(
-                    attachedFiles.map(async (file) => {
-                        return await updatePost(post, file);
-                    })
-                );
-            }
-        }
+        // if (attached) {
+        //     post.attached = [];
+        //     attachedFiles = Object.entries(attached).map((i) => i[1]);
+        //     if (attachedFiles.length > 0) {
+        //         await Promise.all(
+        //             attachedFiles.map(async (file) => {
+        //                 return await updatePost(post, file);
+        //             })
+        //         );
+        //     }
+        // }
+
+        user.updateOne()
 
         post.title = title;
         post.description = description;
@@ -106,14 +96,14 @@ const PostsRemove = async (req, res) => {
                 400
             );
 
-        return response.success(req, res, 'Post deleted', removePost.id, 200);
+        return response.success(req, res, 'Post deleted', removePost, 200);
     } catch (error) {
         console.log(error);
         if (error.message === 'no-priviligies') {
             return response.error(req, res, 'Usuario no autorizado', 401);
         }
 
-        return response.error(req, res, 'Post no encontrado', 500);
+        return response.error(req, res, 'CONTACT ADMIN', 500);
     }
 };
 
@@ -128,6 +118,7 @@ const postFavoriteUser = async (req, res) => {
             return response.error(req, res, 'No exite tu post', 400);
         }
         user.favorites.push(id);
+        await user.save()
         return response.success(req, res, 'Post Favorite saved', user);
     } catch (error) {
         return response.error(req, res, 'Post no encontrado', 500);

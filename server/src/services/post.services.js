@@ -43,12 +43,10 @@ const remove = async (id,uid) => {
 
     const user=await User.findById(uid)
 
-    if (post.author.toString() !== uid && !user.admin) {
-        throw new Error("no-priviligies")
-    }
+    await post.deleteOne()
 
-    post.active = false;
-    return await post.save();
+    
+    return  post.id
 };
 
 
