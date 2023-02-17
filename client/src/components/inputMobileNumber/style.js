@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
     flex: 3,
     marginBottom: 5,
     color: "#000",
+    textAlign: 'center'
   },
   inputRegionalNumber: {
     marginRight: 11,

@@ -69,8 +69,8 @@ const RegistroStepTwo = () => {
         availability: allData?.availability,
         technologies: allData?.technologies,
         phone: telefonoCompleto,
-        position: "fullstack",
-        jobArea: 'Diseño',
+        position: allData.position,
+        jobArea: allData.jobArea,
         education: [{educationalLevel: allData.educationalLevel}]
       });
       console.log(response);

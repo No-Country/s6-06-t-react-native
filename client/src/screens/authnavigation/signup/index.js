@@ -123,7 +123,7 @@ const Registro = () => {
 
           <InputMobileNumber
             label="Celular"
-            placeholderPrefix="54"
+            placeholderPrefix="+54"
             placeholderPhoneNumber="3815577221"
             keyboardType="phone-pad"
             control={control}
