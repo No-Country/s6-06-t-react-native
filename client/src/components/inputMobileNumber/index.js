@@ -4,6 +4,7 @@ import { styles } from "./style";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { Controller } from "react-hook-form";
+import { colors } from "../../constants/colors";
 
 const InputMobileNumber = ({
   label,
@@ -50,7 +51,7 @@ const InputMobileNumber = ({
               ]}
               placeholder={placeholderPrefix}
               placeholderTextColor="#626A6D"
-              selectionColor="#4245E5"
+              selectionColor={colors.primary}
               keyboardType={keyboardType}
               onFocus={() => setIsFocused(true)}
               onBlur={() => handleOnBlur(onBlur)}
@@ -69,7 +70,7 @@ const InputMobileNumber = ({
               ]}
               placeholder={placeholderPhoneNumber}
               placeholderTextColor="#626A6D"
-              selectionColor="#4245E5"
+              selectionColor={colors.primary}
               keyboardType={keyboardType}
               onFocus={() => setIsFocused(true)}
               onBlur={() => handleOnBlur(onBlur)}

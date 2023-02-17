@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { colors } from "../../../constants";
 
 const Tabs = () => {
   const navigation = useNavigation();
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 20,
-    color: "#4245E5",
+    color: colors.primary,
   },
   icon2: {
     fontSize: 20,

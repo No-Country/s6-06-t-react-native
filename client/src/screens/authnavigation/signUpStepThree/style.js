@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
+import { colors } from "../../../constants";
 
 export const styles = StyleSheet.create({
   blackContainer: {
@@ -58,7 +59,7 @@ export const styles = StyleSheet.create({
     fontWeight: "500",
   },
   click:{
-    color:"#4245E5",
+    color:colors.primary,
     textDecorationLine:"underline",
     fontWeight:"700",
     fontSize:16,

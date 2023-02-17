@@ -26,6 +26,7 @@ import Face from "../../../assets/Face.png";
 import backDrawer from "../../../assets/backDrawer.png";
 import { styles } from "./styles";
 import { useDispatch } from "react-redux";
+import { colors } from "../../constants";
 
 const Drawer = createDrawerNavigator();
 
@@ -115,7 +116,7 @@ export const MenuInterno = ({ props }) => {
                 props.navigation.navigate("GeneralChannel");
               }}
             >
-              <Text style={[styles.menuTextChannels, { color: "#4245E5" }]}>
+              <Text style={[styles.menuTextChannels, { color: colors.primary }]}>
                 #General
               </Text>
             </TouchableOpacity>
