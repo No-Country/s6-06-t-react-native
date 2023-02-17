@@ -1,20 +1,17 @@
 const  response  = require('../helpers/response');
 const {Channel, User, Post, IsRead} = require('../models')
 
-const reactions = ['megusta', 'meinteresa', 'apoyar', 'hacergracia'];
-
-
 const createChannel = async (req,res) =>{  
  //TODO:AGREGAR USUARIOS SI ES PRIVADO O TODOS SI ES PUBLICO
     const channel = new Channel(req.body);
     await channel
         .save()
         .then((newChannel) => {
-            return  response.success(req, res,"Canal creado exitosamente",newChannel,201)
+            return  response.success(req, res,"Channel created successfully",newChannel,201)
         })
         .catch((error) => {
             console.log(error)
-            return  response.error(req, res,error.message,500)
+            return  response.error(req, res,"CONTACT ADMIN",500)
         })
 };
 
@@ -34,7 +31,7 @@ const updateChannel = async (req, res) => {
         }
         return response.success(req,res,"Canal actualizado",updatedChannel, 200)
         } catch (error) {
-            return response.error(req,res,error.message,500)
+            return response.error(req,res,'CONTACT ADMIN',500)
         }
 }
 
@@ -42,21 +39,16 @@ const deleteChannel =  async (req , res) => {
     const {id} = req.params
     try {
         const channel = await Channel.findById({ _id: id });
-        if (!channel) {
-        return res.status(404).json({
-        success: false,
-        error: "Channel not found",
-        });
-        }
+        
+        if (!channel) {return response.error(req,res,"Channel not found",404)}
+        
         await channel.remove();
-        return response.success(req,res,"Canal eliminado",{
+
+        return response.success(req,res,"Channel removed successfully",{
             name: channel.name
         });
     } catch (error) {
-        res.status(500).json({
-        success: false,
-        error: error.message,
-        });
+        return response.error(req,res,'CONTACT ADMIN',500)
     }
 };
 
@@ -69,14 +61,9 @@ const getAllChannels = async (req, res) => {
             channels
         };
 
-        return response.success(req,res,"Canales encontrados",
-        data,200
-        )
+        return response.success(req,res, "Channels found successfully",data,200)
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: 'dsd'
-        });
+        return response.error(req,res, "CONTACT ADMIN",500)
     }
 };
 
@@ -85,24 +72,15 @@ const getUserChannels = async (req, res) => {
     try {
         const user = await User.findById(uid).populate("channels","name");
         if (!user) {
-            return res.status(404).send({ error: 'Usuario no encontrado' });
+            return response.error(req,res,"User not found", 404)
         }
-        const channels = user.channels;
-        const selected = user.selected;
-        //// RARO
-        if (selected) {
-            const requerimientosChannel = channels.find((channel) => channel.name === "requerimientos");
-            if (requerimientosChannel) {channels.push(requerimientosChannel)}
-        }
-
-        /////
-        return response.success(req,res,"Canales encontrados",
+        return response.success(req,res,"Channels found successfullys",
         channels,200
         )
 
         } catch (error) {
             console.error(error);
-            return res.status(500).send({ error: "Ha ocurrido un error" });
+            return res.status(500).send({ error: "An error has occurred" });
         }
 };
 
@@ -114,7 +92,7 @@ const getPostsChannel = async (req, res) => {
     try {
 const channel=await Channel.findById(id)
 
-if(!channel) response.error(req,res,"Canal invalido",400)
+if(!channel) response.error(req,res,"invalid channel",400)
 
         const posts = await Post.find({channel:id})
             .skip(Number(from))
@@ -122,22 +100,20 @@ if(!channel) response.error(req,res,"Canal invalido",400)
             
             .populate({path:"author",select:"fullName position isOnline img_avatar"})
             .populate('countComments')
-            // .populate({ path: 'comments', select: 'body attached createdAt' })
             .populate('megusta')
             .populate('apoyar')
             .populate('meinteresa')
             .populate('hacergracia');
-        //.populate({ path: 'reactions', select: 'type__Reaction -_id -post' })
-            //const postsId=posts.map(a=>a.id)
+
+
 
         const readPost=await IsRead.find({uid,doc:{$in: posts}}).select("doc -_id")
         
-
-        return response.success(req,res,"Posts de canal : ",{areRead:readPost,posts})
+        return response.success(req,res,"Channel post:",{areRead:readPost,posts})
 
     } catch (error) {
         console.log(error);
-        return response.error(req,res,'Error al obtener los posts del canal',500)
+        return response.error(req,res,'CONTACT ADMIN',500)
     }
 };
 

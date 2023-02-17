@@ -14,15 +14,10 @@ const createComment = async (req, res) => {
 
         io.emit('comment-new', { comment });
 
-        return response.success(
-            req,
-            res,
-            'Comentario creado con éxito',
-            comment,
-            201
-        );
+        return response.success(req,res,'Comment created successfully',comment,201);
+
     } catch (error) {
-        if(error.message==="no-doc") return response.error(req, res, 'Documento no encontrado', 404);
+        if(error.message==="no-doc") return response.error(req, res, 'Document not found', 404);
         return response.error(req, res, error.message, 500);
     }
 };
@@ -36,16 +31,11 @@ const updateComment = async (req, res) => {
         const comment = await Comment.findById(id);
 
         if (!comment) {
-            return response.error(req, res, 'Comentario no encontrado');
+            return response.error(req, res, 'Comment not found', 404);
         }
 
         if (comment.author.toString() !== uid) {
-            return response.error(
-                req,
-                res,
-                'No tienes permiso para actualizar este comentario',
-                401
-            );
+            return response.error(req,res,'You dont have permission to update this comment',401);
         }
 
         const updatedComment = await Comment.findByIdAndUpdate(
@@ -54,15 +44,9 @@ const updateComment = async (req, res) => {
             { new: true }
         );
 
-        return response.success(
-            req,
-            res,
-            'comentario modificado exitosamente',
-            updatedComment,
-            201
-        );
+        return response.success(req,res,'Comment modified successfully',updatedComment,201);
     } catch (error) {
-        return response.error(req, res, error.message, 500);
+        return response.error(req, res, "CONTACT ADMIN", 500);
     }
 };
 
@@ -74,13 +58,13 @@ const deleteComment = async (req, res) => {
         const comment = await Comment.findById(id);
 
         if (!comment) {
-            return response.error(req, res, 'Comentario no encontrado', 404);
+            return response.error(req, res, 'Coment not found', 404);
         }
 
         const user=await User.findById(uid)
 
         if (comment.author.toString() !== uid && !user.admin) {
-            return response.error(req, res, 'Usuario no autorizado', 401);
+            return response.error(req, res, 'User not authorized', 401);
         }
 
         await Comment.findByIdAndUpdate(
@@ -89,13 +73,7 @@ const deleteComment = async (req, res) => {
             { new: true }
         );
 
-        return response.success(
-            req,
-            res,
-            'Comentario eliminado exitosamente',
-            undefined,
-            200
-        );
+        return response.success(req,res,'Comment modified successfully',undefined,200);
     } catch (error) {
         return response.error(req, res, error.message, 500);
     }
@@ -110,16 +88,11 @@ const admDeleteComment = async (req, res) => {
         );
 
         if (!admDeleteComment) {
-            return response.error(req, res, 'Comentario no encontrado', 404);
+            return response.error(req, res, 'Comment not found', 404);
         }
-        return response.success(
-            req,
-            res,
-            'Comentario eliminado exitosamente',
-            200
-        );
+        return response.success(req,res,'Comentario eliminado exitosamente',200);
     } catch (error) {
-        return response.error(req, res, 'Error al eliminar el comentario', 500);
+        return response.error(req, res, 'CONTACT ADMIN', 500);
     }
 };
 
@@ -132,7 +105,7 @@ const replyComment = async (req, res) => {
         const comment = await Comment.findById(id);
 
         if (!comment) {
-            return response.error(req, res, 'Comentario no encontrado', 404);
+            return response.error(req, res, 'Comment not found', 404);
         }
 
         const reply = await new Comment({
@@ -146,15 +119,9 @@ const replyComment = async (req, res) => {
             { new: true }
         );
 
-        return response.success(
-            req,
-            res,
-            'Respuesta a comentario exitosa',
-            undefined,
-            201
-        );
+        return response.success(req,res,'reply to comment successful',undefined,201);
     } catch (error) {
-        return response.error(req, res, error.message, 500);
+        return response.error(req, res, "CONTACT ADMIN", 500);
     }
 };
 

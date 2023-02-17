@@ -44,7 +44,7 @@ const userSchema = new Schema(
         ///////////////////////////////////////////////////////////////////////
         position: {
             type: String,
-            enum: ['fullstack', 'backend', 'frontend', 'uiux']
+            enum: ['Desarrollador/a Back-end', 'Desarrollador/a Front-end', 'Diseñador/a UX UI', 'Diseñador/a UI', 'Project Manager', 'Team Leader', 'Tester', 'Otro']
         },
         img_avatar: {
             type: String,
