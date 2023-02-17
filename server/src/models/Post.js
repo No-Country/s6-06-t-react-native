@@ -76,6 +76,6 @@ postSchema.methods.toJSON = function idSetter() {
     return Post;
 };
 
-const Post = model('post', postSchema, 'post');
+const Post = model('post', postSchema);
 
 module.exports = Post;

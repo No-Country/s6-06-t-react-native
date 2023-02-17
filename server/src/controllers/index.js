@@ -6,5 +6,6 @@ module.exports={
   profile:require('./profile.controller'),
   jobOffer: require('./joboffer.controller'),
   reaction: require('./reactions.controller'),
-  search: require('./search.controller')
+  search: require('./search.controller'),
+  user: require('./user.controller')
 }

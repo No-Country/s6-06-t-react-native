@@ -115,7 +115,7 @@ const getPostsChannel = async (req, res) => {
 const channel=await Channel.findById(id)
 
 if(!channel) response.error(req,res,"Canal invalido",400)
-
+        const users=await User.find({channels:id}).select("_id")
         const posts = await Post.find({channel:id})
             .skip(Number(from))
             .limit(Number(to))
@@ -133,7 +133,7 @@ if(!channel) response.error(req,res,"Canal invalido",400)
         const readPost=await IsRead.find({uid,doc:{$in: posts}}).select("doc -_id")
         
 
-        return response.success(req,res,"Posts de canal : ",{areRead:readPost,posts})
+        return response.success(req,res,"Posts de canal : ",{areRead:readPost,users,posts})
 
     } catch (error) {
         console.log(error);

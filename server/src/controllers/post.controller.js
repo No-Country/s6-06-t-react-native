@@ -18,6 +18,7 @@ const createPost = async (req, res) => {
     let savedPost = {};
 
     savedPost = await newPost(uid, body, channel, attachedFiles);
+    
     if (Object.keys(savedPost).length > 0) {
         //Con esta funcion lo busca y lo popula
         const post = await findPostById(savedPost.id);
