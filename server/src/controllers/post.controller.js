@@ -142,9 +142,33 @@ const postFavoriteUser = async (req, res) => {
         }
 
 }
+
+const getAll = async (req, res) => {
+    const { from, to } = req.query;
+
+    try {
+        const post = await Post.find()
+            .skip(Number(from))
+            .limit(Number(to))
+            .populate({
+                path: 'author',
+                select: 'fullName'
+            })
+            .populate({
+                path: 'channel',
+                select: 'name'
+            })
+
+        return response.success(req, res, 'All post :', post, 200);
+    } catch (e) {
+        console.log(e);
+        return response.error(req, res, 'error de servidor', 500);
+    }
+};
 module.exports = {
     createPost,
     updatePost,
     PostsRemove,
-    postFavoriteUser
+    postFavoriteUser,
+    getAll
 };
