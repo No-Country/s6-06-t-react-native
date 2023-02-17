@@ -105,10 +105,8 @@ const admDeleteComment = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const admDeleteComment = await Comment.findByIdAndUpdate(
-            id,
-            { $set: { active: false } },
-            { new: true }
+        const admDeleteComment = await Comment.findByIdAndDelete(
+            id
         );
 
         if (!admDeleteComment) {

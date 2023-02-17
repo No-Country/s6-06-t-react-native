@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const handlebars = require('express-handlebars');
 const fileUpload=require("express-fileupload")
-const {auth , channel, post ,comment,profile,jobOffer,reaction,search}=require("./src/routes")
+const {auth , channel, post ,comment,profile,jobOffer,reaction,search, user}=require("./src/routes")
 require('./src/database/config.js');
 
 const swaggerUI =require("swagger-ui-express");
@@ -17,6 +17,7 @@ const PORT = process.env.PORT || 3001;
 const server =require("http").Server(app) 
 const io = require('socket.io')(server)
 const Sockets =require("./src/sockets/sockets") ;
+
 
 app.set('view engine', 'handlebars')
 app.set("views", "./src/views");
@@ -32,6 +33,7 @@ app.use(fileUpload({
 
 
 app.use(express.static(__dirname + '/src/public'))
+app.use("/api/user", user)
 app.use("/api/auth",auth )
 app.use("/api/post", post)
 app.use("/api/channel", channel)

@@ -36,7 +36,7 @@ const offerSchema = new Schema(
         timestamps: true,
         versionKey: false,
         toJSON: { virtuals: true },
-        toObject: { virtuals: true }
+        toObject: { virtuals: false }
     }
 );
 

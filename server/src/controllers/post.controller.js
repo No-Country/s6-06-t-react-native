@@ -1,6 +1,6 @@
 const { response } = require('../helpers');
 const { success, error } = require('../helpers/response.js');
-const { Post, Reaction, User, IsRead } = require('../models');
+const { Post, User, IsRead } = require('../models');
 const { postsServices } = require('../services');
 const { findPostById, newPost } = require('../services/post.services.js');
 
@@ -116,8 +116,60 @@ const PostsRemove = async (req, res) => {
         return response.error(req, res, 'Post no encontrado', 500);
     }
 };
+
+
+const postFavoriteUser = async (req, res) => {
+        const uid = req.uid;
+        const { id } = req.params;
+        try {
+
+        const user = await User.findById(uid)
+        const post = await Post.findById(id)
+
+        if(!post) {
+        return response.error(
+            req,
+            res,
+            'No exite tu post',
+            400
+        )
+        
+        }  
+        user.favorites.push(id)
+        return response.success(req, res, 'Post Favorite saved', user )
+            
+        } catch (error) {
+            return response.error(req, res, 'Post no encontrado', 500);
+        }
+
+}
+
+const getAll = async (req, res) => {
+    const { from, to } = req.query;
+
+    try {
+        const post = await Post.find()
+            .skip(Number(from))
+            .limit(Number(to))
+            .populate({
+                path: 'author',
+                select: 'fullName'
+            })
+            .populate({
+                path: 'channel',
+                select: 'name'
+            })
+
+        return response.success(req, res, 'All post :', post, 200);
+    } catch (e) {
+        console.log(e);
+        return response.error(req, res, 'error de servidor', 500);
+    }
+};
 module.exports = {
     createPost,
     updatePost,
-    PostsRemove
+    PostsRemove,
+    postFavoriteUser,
+    getAll
 };
