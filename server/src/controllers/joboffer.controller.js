@@ -3,13 +3,7 @@ const { response } = require('../helpers');
 
 const getJobOffers = async (req, res) => {
     const { type, from, to } = req.query;
-
-    const prequery = {
-        active: true,
-        type
-    };
-    const query = !type ? { active: true } : prequery;
-    ///VERIFICAR QUE SEA ORDEN DESCENDENTE
+    const query = type? type : {}
     try {
         const allOffers = await JobOffer.find(query)
             .skip(Number(from))
@@ -19,24 +13,24 @@ const getJobOffers = async (req, res) => {
             .populate('countComments')
             .populate({ path: 'comments', select: 'body -job_offer' });
 
-        const offers = await Promise.all(
-            allOffers.map(async (off) => {
-                const candidates = await User.find({ postulations: off.id });
-                const comments = await Comment.find({ job_offer: off.id });
+        // const offers = await Promise.all(
+        //     allOffers.map(async (off) => {
+        //         const candidates = await User.find({ postulations: off.id });
+        //         const comments = await Comment.find({ job_offer: off.id });
 
-                return {
-                    ...off.toJSON(),
-                    candidates: {
-                        count: candidates.length,
-                        data: candidates.map((item) => item.id)
-                    },
-                    comments: {
-                        count: comments.length,
-                        data: comments
-                    }
-                };
-            })
-        );
+        //         return {
+        //             ...off.toJSON(),
+        //             candidates: {
+        //                 count: candidates.length,
+        //                 data: candidates.map((item) => item.id)
+        //             },
+        //             comments: {
+        //                 count: comments.length,
+        //                 data: comments
+        //             }
+        //         };
+        //     })
+        // );
 
         // const selectedUsers = await User.find({ selected: true });
         // const selectedUsersIds = selectedUsers.map(user => user.id);
@@ -136,11 +130,11 @@ const createComment = async (req, res) => {
 
 const updateJobOffer = async (req, res) => {
     const { id } = req.params;
-    const { title, description } = req.body;
+    const {...data} = req.body;
     try {
         const updatedJobOffer = await JobOffer.findByIdAndUpdate(
             { _id: id },
-            { title, description },
+            { ...data },
             { new: true }
         );
         if (!updatedJobOffer) {
