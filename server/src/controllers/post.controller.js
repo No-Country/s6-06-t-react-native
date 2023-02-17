@@ -1,6 +1,6 @@
 const { response } = require('../helpers');
 const { success, error } = require('../helpers/response.js');
-const { Post, User, IsRead } = require('../models');
+const { Post, User, IsRead, Comment } = require('../models');
 const { postsServices } = require('../services');
 const { findPostById, newPost } = require('../services/post.services.js');
 
@@ -18,7 +18,7 @@ const createPost = async (req, res) => {
     let savedPost = {};
 
     savedPost = await newPost(uid, body, channel, attachedFiles);
-    
+
     if (Object.keys(savedPost).length > 0) {
         //Con esta funcion lo busca y lo popula
         const post = await findPostById(savedPost.id);
@@ -117,32 +117,22 @@ const PostsRemove = async (req, res) => {
     }
 };
 
-
 const postFavoriteUser = async (req, res) => {
-        const uid = req.uid;
-        const { id } = req.params;
-        try {
+    const uid = req.uid;
+    const { id } = req.params;
+    try {
+        const user = await User.findById(uid);
+        const post = await Post.findById(id);
 
-        const user = await User.findById(uid)
-        const post = await Post.findById(id)
-
-        if(!post) {
-        return response.error(
-            req,
-            res,
-            'No exite tu post',
-            400
-        )
-        
-        }  
-        user.favorites.push(id)
-        return response.success(req, res, 'Post Favorite saved', user )
-            
-        } catch (error) {
-            return response.error(req, res, 'Post no encontrado', 500);
+        if (!post) {
+            return response.error(req, res, 'No exite tu post', 400);
         }
-
-}
+        user.favorites.push(id);
+        return response.success(req, res, 'Post Favorite saved', user);
+    } catch (error) {
+        return response.error(req, res, 'Post no encontrado', 500);
+    }
+};
 
 const getAll = async (req, res) => {
     const { from, to } = req.query;
@@ -158,7 +148,7 @@ const getAll = async (req, res) => {
             .populate({
                 path: 'channel',
                 select: 'name'
-            })
+            });
 
         return response.success(req, res, 'All post :', post, 200);
     } catch (e) {
@@ -166,10 +156,48 @@ const getAll = async (req, res) => {
         return response.error(req, res, 'error de servidor', 500);
     }
 };
+
+const getComments = async (req, res) => {
+    const { from, to } = req.query;
+    const { id } = req.params;
+
+    try {
+        const comments = await Comment.find({ active: true, post: id })
+            .populate({ path: 'author', select: 'fullName' })
+            //.populate("reactions", "type__Reaction -comment")
+            .populate('megusta')
+            .populate('apoyar')
+            .populate('meinteresa')
+            .populate('hacergracia')
+            .populate("reply", "author body -replieOf")
+
+        const commentsPopulated = comments.map((c) => {
+            const { megusta, apoyar, meinteresa, hacergracia, ...data }=c.toJSON();
+
+            const obj = {
+                reactions: {
+                    megusta,
+                    apoyar,
+                    meinteresa,
+                    hacergracia
+                },
+                ...data
+            };
+
+            return obj;
+        });
+console.log(commentsPopulated);
+        return response.success(req, res, 'Comments :', commentsPopulated, 200);
+    } catch (e) {
+        console.log(e);
+        return response.error(req, res, 'CONTACT ADMIN', 500);
+    }
+};
 module.exports = {
     createPost,
     updatePost,
     PostsRemove,
     postFavoriteUser,
-    getAll
+    getAll,
+    getComments
 };

@@ -13,6 +13,7 @@ router.put('/remove/:id', isAdmin,  post.PostsRemove)
 router.put('/favorite/:id', post.postFavoriteUser)
 
 //FALTA:Obtiene cometarios de post especifico con repliesy reacciones 
+router.get('/comments/:id', post.getComments)
 
 //FALTA:Obtiene todos los post -Paginado-ADMIN
 router.get('/', isAdmin ,post.getAll)
