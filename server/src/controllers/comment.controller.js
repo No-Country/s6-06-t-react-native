@@ -1,4 +1,4 @@
-const { Comment, User } = require('../models');
+const { Comment, User, Reaction } = require('../models');
 const { response } = require('../helpers');
 const { commentServices } = require('../services');
 
@@ -105,6 +105,14 @@ const admDeleteComment = async (req, res) => {
     const { id } = req.params;
 
     try {
+
+        const comment=await Comment.findById(id)
+
+        if(comment) {
+            //PROBAR SI FUNCIONA !!!
+            await Comment.deleteMany({replieOf:comment.id})
+            await Reaction.deleteMany({comment:comment.id})
+    }
         const admDeleteComment = await Comment.findByIdAndDelete(
             id
         );

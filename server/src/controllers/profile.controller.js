@@ -6,6 +6,8 @@ const response = require('../helpers/response');
 const sendEmail = require('../helpers/sendEmail');
 const { profileServices } = require('../services');
 
+
+
 const getUser = async (req, res) => {
     const uid = req.uid;
 
@@ -97,26 +99,26 @@ const personal = async (req, res) => {
     }
 };
 
-const professional = async (req, res) => {
-    const uid = req.uid;
-    const body = req.body;
-    try {
-        const updatedUser =await profileServices.professional(uid, body);
+// const professional = async (req, res) => {
+//     const uid = req.uid;
+//     const body = req.body;
+//     try {
+//         const updatedUser =await profileServices.professional(uid, body);
 
-        if (!updatedUser)
-            return response.error(
-                req,
-                res,
-                'There is a problem with the token provided',
-                400
-            );
+//         if (!updatedUser)
+//             return response.error(
+//                 req,
+//                 res,
+//                 'There is a problem with the token provided',
+//                 400
+//             );
 
-        return response.success(req, res, 'Updated profile', updatedUser, 200);
-    } catch (error) {
-        console.log(error);
-        return response.error(req, res, 'CONTACT ADMIN', 500);
-    }
-};
+//         return response.success(req, res, 'Updated profile', updatedUser, 200);
+//     } catch (error) {
+//         console.log(error);
+//         return response.error(req, res, 'CONTACT ADMIN', 500);
+//     }
+// };
 
 const applications = async (req, res) => {
     const uid = req.uid;
@@ -195,7 +197,7 @@ module.exports = {
     //updateUser,
     remove,
     personal,
-    professional,
+    //professional,
     applications,
     postSaved,
     profilePic

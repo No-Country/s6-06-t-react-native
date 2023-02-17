@@ -38,7 +38,7 @@ const createPost = async (req, res) => {
 const updatePost = async (req, res) => {
     const uid = req.uid;
     const { id } = req.params;
-    const { title, description } = req.body;
+    const { ...data } = req.body;
 
     try {
         const post = await Post.findById(id);
@@ -54,23 +54,7 @@ const updatePost = async (req, res) => {
         if (post.author.toString() !== uid && !user.admin) {
             return response.error(req, res, 'Usuario no autorizado', 401);
         }
-
-        // if (attached) {
-        //     post.attached = [];
-        //     attachedFiles = Object.entries(attached).map((i) => i[1]);
-        //     if (attachedFiles.length > 0) {
-        //         await Promise.all(
-        //             attachedFiles.map(async (file) => {
-        //                 return await updatePost(post, file);
-        //             })
-        //         );
-        //     }
-        // }
-
-        user.updateOne()
-
-        post.title = title;
-        post.description = description;
+        post.updateOne({ id }, { ...data });
 
         response.success(req, res, 'Post updated', post, 200);
     } catch (error) {
@@ -87,7 +71,8 @@ const PostsRemove = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const removePost = await postsServices.remove(id, uid);
+      
+        const removePost = await postsServices.remove(id);
         if (!removePost)
             return response.error(
                 req,
@@ -107,23 +92,23 @@ const PostsRemove = async (req, res) => {
     }
 };
 
-const postFavoriteUser = async (req, res) => {
-    const uid = req.uid;
-    const { id } = req.params;
-    try {
-        const user = await User.findById(uid);
-        const post = await Post.findById(id);
+// const postFavoriteUser = async (req, res) => {
+//     const uid = req.uid;
+//     const { id } = req.params;
+//     try {
+//         const user = await User.findById(uid);
+//         const post = await Post.findById(id);
 
-        if (!post) {
-            return response.error(req, res, 'No exite tu post', 400);
-        }
-        user.favorites.push(id);
-        await user.save()
-        return response.success(req, res, 'Post Favorite saved', user);
-    } catch (error) {
-        return response.error(req, res, 'Post no encontrado', 500);
-    }
-};
+//         if (!post) {
+//             return response.error(req, res, 'No exite tu post', 400);
+//         }
+//         user.favorites.push(id);
+//         await user.save()
+//         return response.success(req, res, 'Post Favorite saved', user);
+//     } catch (error) {
+//         return response.error(req, res, 'Post no encontrado', 500);
+//     }
+// }
 
 const getAll = async (req, res) => {
     const { from, to } = req.query;
@@ -160,10 +145,11 @@ const getComments = async (req, res) => {
             .populate('apoyar')
             .populate('meinteresa')
             .populate('hacergracia')
-            .populate("reply", "author body -replieOf")
+            .populate('reply', 'author body -replieOf');
 
         const commentsPopulated = comments.map((c) => {
-            const { megusta, apoyar, meinteresa, hacergracia, ...data }=c.toJSON();
+            const { megusta, apoyar, meinteresa, hacergracia, ...data } =
+                c.toJSON();
 
             const obj = {
                 reactions: {
@@ -177,7 +163,7 @@ const getComments = async (req, res) => {
 
             return obj;
         });
-console.log(commentsPopulated);
+        console.log(commentsPopulated);
         return response.success(req, res, 'Comments :', commentsPopulated, 200);
     } catch (e) {
         console.log(e);
@@ -188,7 +174,7 @@ module.exports = {
     createPost,
     updatePost,
     PostsRemove,
-    postFavoriteUser,
+    //postFavoriteUser,
     getAll,
     getComments
 };

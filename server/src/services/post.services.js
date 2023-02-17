@@ -37,11 +37,16 @@ console.log(channel);
     return savedPost;
 };
 
-const remove = async (id,uid) => {
+const remove = async (id) => {
 
     const post = await Post.findById(id);
 
-    const user=await User.findById(uid)
+    if (post) {
+        //PROBAR SI FUNCIONA !!!
+        await Comment.deleteMany({ post: post.id });
+        await Reaction.deleteMany({ post: post.id });
+    }
+
 
     await post.deleteOne()
 
