@@ -62,7 +62,7 @@ const Registro = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    navigation.navigate("SignUpStepTwo");
+    navigation.navigate("SignUpStepTwo", data);
   };
 
   const handleOnChange = () => {

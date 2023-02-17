@@ -3,18 +3,20 @@ import ButtonRegistro from "../../../components/buttonRegistro/Index.js";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
 import StepsRegister from "../../../components/stepsRegister/index.js";
 import { styles } from "./style.js";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import InputComponentSelectList from "../../../components/inputSelectList/index.js";
 import { nivelEstudio } from "../../../utils/dataNivelStudio.js";
 import { areaLaboral } from "../../../utils/dataAreaLaboral.js";
 import { dataPuestoLaboral } from "../../../utils/dataPuestoLaboral.js";
 import { disponibilidad } from "../../../utils/dataDisponibilidad.js";
 import { herramientas } from "../../../utils/dataHerramientas.js";
+import axios from "axios";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import InputMultipleComponentSelectList from "../../../components/inputMultipleSelectList/index.js";
+import { URL_BACK } from "../../../config/index.js";
 
 const RegistroStepTwo = () => {
   const navigation = useNavigation();
@@ -24,7 +26,7 @@ const RegistroStepTwo = () => {
         .string()
         .typeError("Elige una opción.")
         .required("Campo requerido."),
-      jobTitle: yup
+      jobArea: yup
         .string()
         .typeError("Elige una opción.")
         .required("Campo requerido."),
@@ -40,7 +42,7 @@ const RegistroStepTwo = () => {
         .array()
         .ensure()
         .min(1, "Campo requerido.")
-        .max(5, "Elige como máximo 5.")
+        .max(6, "Elige como máximo 6.")
         .required("Campo requerido."),
     })
     .required();
@@ -52,8 +54,30 @@ const RegistroStepTwo = () => {
     setValue,
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data) => {
-    navigation.navigate("SignUpStepThree");
+  const { params } = useRoute();
+
+  const { phone, prefix, ...rest } = params;
+  const telefonoCompleto = prefix + phone;
+
+  const onSubmit = async (data) => {
+    const allData = {...data, ...rest}
+    try {
+      const response = await axios.post(`${URL_BACK}/auth/new`, {
+        fullName: allData?.fullName,
+        email: allData?.email,
+        password: allData?.password,
+        availability: allData?.availability,
+        technologies: allData?.technologies,
+        phone: telefonoCompleto,
+        position: "fullstack",
+        jobArea: 'Diseño',
+        education: [{educationalLevel: allData.educationalLevel}]
+      });
+      console.log(response);
+      navigation.navigate("SignUpStepThree");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -87,15 +111,15 @@ const RegistroStepTwo = () => {
             setValue={setValue}
           />
           <InputComponentSelectList
-            label="Área laboral"
+            label="Área laboral a la que querés pertenecer"
             data={areaLaboral}
-            name="jobTitle"
+            name="jobArea"
             control={control}
-            error={errors.jobTitle}
+            error={errors.jobArea}
             setValue={setValue}
           />
           <InputComponentSelectList
-            label="Profesión"
+            label="Puesto laboral"
             data={dataPuestoLaboral}
             name="position"
             control={control}
@@ -112,7 +136,7 @@ const RegistroStepTwo = () => {
           />
           <InputMultipleComponentSelectList
             label="Herramientas utilizadas"
-            placeholder="Selecciona máximo 5"
+            placeholder="Selecciona máximo 6"
             requerimiento="Selecciona aquellas herramientas que has utilizado y queres mejorar"
             data={herramientas}
             name="technologies"
