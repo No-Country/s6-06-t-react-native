@@ -26,8 +26,9 @@ export const styles = StyleSheet.create({
   },
   icon: {
     position: 'absolute',
-    right: 18,
-    top: 20
+    right: 0,
+    top: 0,
+    padding: 20
   },
   dropdown:{
     position: 'absolute',
