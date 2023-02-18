@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../constants/colors";
 
 export const styles = StyleSheet.create({
   stepWrapper: {
@@ -16,7 +17,7 @@ export const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#4245E5",
+    backgroundColor: colors.primary,
     borderRadius: 1000,
     marginLeft: 3,
     marginRight: 3,
@@ -32,7 +33,7 @@ export const styles = StyleSheet.create({
   lineStep: {
     height: 2,
     width: 5,
-    backgroundColor: "#4245E5",
+    backgroundColor: colors.primary,
     flex: 4,
   },
   lineStepTwo: {
@@ -46,7 +47,7 @@ export const styles = StyleSheet.create({
     bottom: -34,
     width: '250%',
     textAlign: 'center',
-    color: "#4245E5"
+    color: colors.primary
   },
   descriptionStepInactive: {
     color: "#504E4E"

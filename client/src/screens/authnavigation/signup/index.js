@@ -58,8 +58,8 @@ const Registro = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+    formState: { errors, isValid },
+  } = useForm({ resolver: yupResolver(schema) },{ defaultValues: {fullName: '', email:'', prefix:'', phone:'',password:'', confirmPass:''}});
 
   const onSubmit = (data) => {
     navigation.navigate("SignUpStepTwo", data);
@@ -123,8 +123,8 @@ const Registro = () => {
 
           <InputMobileNumber
             label="Celular"
-            placeholderPrefix="+54"
-            placeholderPhoneNumber="3815577221"
+            placeholderPrefix="EX: +54"
+            placeholderPhoneNumber="Cod. Área + teléfono"
             keyboardType="phone-pad"
             control={control}
             errors={errors}
@@ -173,7 +173,7 @@ const Registro = () => {
             text="Siguiente"
             width="width: 100%"
             handler={handleSubmit(onSubmit)}
-            disabled={!errors}
+            disabledColor={!isValid}
           />
         </View>
       </View>

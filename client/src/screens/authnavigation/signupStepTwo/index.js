@@ -50,7 +50,7 @@ const RegistroStepTwo = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     setValue,
   } = useForm({ resolver: yupResolver(schema) });
 
@@ -60,7 +60,7 @@ const RegistroStepTwo = () => {
   const telefonoCompleto = prefix + phone;
 
   const onSubmit = async (data) => {
-    const allData = {...data, ...rest}
+    const allData = { ...data, ...rest };
     try {
       const response = await axios.post(`${URL_BACK}/auth/new`, {
         fullName: allData?.fullName,
@@ -71,7 +71,7 @@ const RegistroStepTwo = () => {
         phone: telefonoCompleto,
         position: allData.position,
         jobArea: allData.jobArea,
-        education: [{educationalLevel: allData.educationalLevel}]
+        education: [{ educationalLevel: allData.educationalLevel }],
       });
       console.log(response);
       navigation.navigate("SignUpStepThree");
@@ -117,7 +117,7 @@ const RegistroStepTwo = () => {
             control={control}
             error={errors.jobArea}
             setValue={setValue}
-          />
+            />
           <InputComponentSelectList
             label="Puesto laboral"
             data={dataPuestoLaboral}
@@ -125,6 +125,7 @@ const RegistroStepTwo = () => {
             control={control}
             error={errors.position}
             setValue={setValue}
+            lastList
           />
           <InputComponentSelectList
             label="Disponibilidad horaria"
@@ -149,6 +150,7 @@ const RegistroStepTwo = () => {
             text="Siguiente"
             width="width: 100%"
             handler={handleSubmit(onSubmit)}
+            disabledColor={!isValid}
           />
         </View>
       </View>

@@ -13,6 +13,7 @@ import BackButton from "../../../components/BackButton";
 import { AntDesign } from "@expo/vector-icons";
 import { getUserData } from "../../../redux/actions/personalActions";
 import defaultImg from "../icons/profilepicture.png";
+import { colors } from "../../../constants";
 const PerfilProfesional = () => {
   const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState(null);
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 10,
     lineHeight: 30,
-    color: "#4245E5",
+    color: colors.primary,
   },
   profession: {
     fontSize: 18,

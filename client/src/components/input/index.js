@@ -4,6 +4,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { styles } from "./style";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
+import { colors } from "../../constants/colors";
 
 const InputComponent = ({
   label,
@@ -40,13 +41,13 @@ const InputComponent = ({
 
   return (
     <View style={styles.containerInput} onLayout={onLayoutRootView}>
-      <Text style={styles.label}>{label}</Text>
+      {label && <Text style={styles.label}>{label}</Text>}
       <View style={styles.inputWrapper}>
         <TextInput
           style={[styles.input, isFocused && styles.outLine]}
           placeholder={placeholder}
           placeholderTextColor="#626A6D"
-          selectionColor="#4245E5"
+          selectionColor={colors.primary}
           keyboardType={keyboardType}
           secureTextEntry={showPass ? !showPassState : false}
           onFocus={() => setIsFocused(true)}
@@ -60,9 +61,9 @@ const InputComponent = ({
             onPress={() => setShowPassState(!showPassState)}
           >
             {!showPassState ? (
-              <FontAwesome5 name="eye-slash" size={18} color="#4245E5" />
+              <FontAwesome5 name="eye-slash" size={18} color={colors.primary} />
             ) : (
-              <FontAwesome5 name="eye" size={18} color="#4245E5" />
+              <FontAwesome5 name="eye" size={18} color={colors.primary} />
             )}
           </TouchableOpacity>
         )}
