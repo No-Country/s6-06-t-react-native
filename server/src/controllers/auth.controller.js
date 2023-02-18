@@ -13,10 +13,7 @@ const createUser = async (req, res) => {
 
         if (!newUser) response.error(req, res, 'There is a problem in DB', 500);
 
-        response.success(
-            req,
-            res,
-            'User registered , validate account with the link provided in the email',
+        response.success(req,res,'User registered , validate account with the link provided in the email',
             { ...newUser },
             201
         );
@@ -33,12 +30,7 @@ const validateAccount = async (req, res) => {
         const validate = await authServices.validate(query);
 
         if (validate === 'invalid-token') {
-            return response.error(
-                req,
-                res,
-                'Invalid or expired activation account token',
-                400
-            );
+            return response.error(req,res,'Invalid or expired activation account token',400);
         }
 
         res.render('success', { layout: 'index', message: validate });
@@ -53,13 +45,7 @@ const resendEmail = async (req, res) => {
     try {
         await authServices.resendEmail(uid);
 
-        response.success(
-            req,
-            res,
-            'Email resend succesfully , check inbox ',
-            undefined,
-            200
-        );
+        response.success(req,res,'Email resend succesfully , check inbox ',undefined,200);
     } catch (e) {
         console.log(e);
         response.error(req, res, 'Contact Admin', 500);
@@ -75,9 +61,7 @@ const loginUser = async (req, res) => {
         if (user === 'not-registered')
             return response.error(req, res, 'User not registered ', 400);
         if (user === 'validate')
-            return response.error(
-                req,
-                res,
+            return response.error(req,res,
                 'Must validate account with the provided email',
                 400
             );
@@ -96,7 +80,7 @@ const renewToken = async (req, res) => {
 
     const token = await generateJWT(uid, fullName);
 
-    response.success(req, res, 'Token generated succesfully ', { token }, 200);
+    response.success(req, res, 'Token generated successfully ', { token }, 200);
 };
 
 const generateLinkedinLink = (req, res) => {
@@ -130,16 +114,10 @@ const resetPasswordRequest = async (req, res) => {
         if (request === 'no-user')
             return response.error(req, res, 'Email not registered', 400);
 
-        response.success(
-            req,
-            res,
-            'Request for Password reset was succesfull,Check email ',
-            null,
-            200
-        );
+        response.success(req,res,'Request for Password reset was successfully,Check email ',null,200);
     } catch (e) {
         console.log(e);
-        return response.error(req, res, 'Contact ADMIN');
+        return response.error(req, res, 'Contact Admin');
     }
 };
 
@@ -150,12 +128,7 @@ const resetPassword = async (req, res) => {
     try {
         const reset = await authServices.reset(password, query);
         if (reset === 'invalid')
-            return response.error(
-                req,
-                res,
-                'Invalid or expired password reset token',
-                400
-            );
+            return response.error(req,res,'Invalid or expired password reset token',400            );
 
         res.render('success', { layout: 'index', message: reset });
     } catch (e) {
@@ -170,12 +143,7 @@ const renderRecoverPassword = (req, res) => {
     if (uid && token) {
         res.render('main', { layout: 'index', uid, token });
     } else {
-        response.error(
-            req,
-            res,
-            'There is a problem with the provided url',
-            400
-        );
+        response.error(req,res,'There is a problem with the provided url',400);
     }
 };
 

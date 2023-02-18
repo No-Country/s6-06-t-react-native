@@ -9,21 +9,20 @@ const createComment = async (req, res) => {
     const { id, place } = req.params;
 
     try {
-        
-        const comment=await commentServices.make(body,place,id,uid)
+        const comment = await commentServices.make(body, place, id, uid);
 
         io.emit('comment-new', { comment });
 
         return response.success(req,res,'Comment created successfully',comment,201);
-
     } catch (error) {
-        if(error.message==="no-doc") return response.error(req, res, 'Document not found', 404);
+        if (error.message === 'no-doc')
+            return response.error(req, res, 'Document not found', 404);
         return response.error(req, res, error.message, 500);
     }
 };
 
 const updateComment = async (req, res) => {
-    const  body  = req.body;
+    const body = req.body;
     const { id } = req.params;
     const uid = req.uid;
 
@@ -35,18 +34,18 @@ const updateComment = async (req, res) => {
         }
 
         if (comment.author.toString() !== uid) {
-            return response.error(req,res,'You dont have permission to update this comment',401);
+            return response.error(req,res, 'You dont have permission to update this comment',401);
         }
 
         const updatedComment = await Comment.findByIdAndUpdate(
             { _id: id },
-            {...body },
+            { ...body },
             { new: true }
         );
 
         return response.success(req,res,'Comment modified successfully',updatedComment,201);
     } catch (error) {
-        return response.error(req, res, "CONTACT ADMIN", 500);
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
@@ -58,13 +57,13 @@ const deleteComment = async (req, res) => {
         const comment = await Comment.findById(id);
 
         if (!comment) {
-            return response.error(req, res, 'Coment not found', 404);
+            return response.error(req, res, 'Comment not found', 404);
         }
 
-        const user=await User.findById(uid)
+        const user = await User.findById(uid);
 
         if (comment.author.toString() !== uid && !user.admin) {
-            return response.error(req, res, 'User not authorized', 401);
+            return response.error(req, res, 'Unauthorized User', 401);
         }
 
         await Comment.findByIdAndUpdate(
@@ -98,9 +97,9 @@ const admDeleteComment = async (req, res) => {
         if (!admDeleteComment) {
             return response.error(req, res, 'Comment not found', 404);
         }
-        return response.success(req,res,'Comentario eliminado exitosamente',200);
+        return response.success(req, res, 'Comment deleted successfully', 200);
     } catch (error) {
-        return response.error(req, res, 'CONTACT ADMIN', 500);
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
@@ -127,12 +126,11 @@ const replyComment = async (req, res) => {
             { new: true }
         );
 
-        return response.success(req,res,'reply to comment successful',undefined,201);
+        return response.success(req, res,'Reply to comment successfully',undefined,201);
     } catch (error) {
-        return response.error(req, res, "CONTACT ADMIN", 500);
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
-
 
 module.exports = {
     createComment,
