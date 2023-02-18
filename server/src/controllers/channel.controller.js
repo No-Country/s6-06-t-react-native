@@ -38,13 +38,22 @@ const deleteChannel = async (req, res) => {
     const { id } = req.params;
     try {
         const channel = await Channel.findById({ _id: id });
-
         if (!channel) {
             return response.error(req, res, 'Channel not found', 404);
         }
 
-        await channel.remove();
+        //PROBAR SI FUNCIONA !!!
+        await Post.deleteMany({ channel: channel.id });
+        await User.updateMany(
+            { channels: channel.id },
+            {
+                $pop: {
+                    channels: channel.id
+                }
+            }
+        );
 
+        await channel.remove();
         return response.success(req, res, 'Channel removed successfully', {
             name: channel.name
         });
@@ -91,7 +100,7 @@ const getPostsChannel = async (req, res) => {
         const channel = await Channel.findById(id);
 
         if (!channel) response.error(req, res, 'invalid channel', 400);
-
+        const users = await User.find({ channels: id }).select('_id');
         const posts = await Post.find({ channel: id })
             .skip(Number(from))
             .limit(Number(to))
@@ -110,13 +119,10 @@ const getPostsChannel = async (req, res) => {
             'doc -_id'
         );
 
-        return response.success(req, res, 'Channel post:', {
-            areRead: readPost,
-            posts
-        });
+        return response.success(req, res, 'Channel post:', {areRead: readPost,users,posts});
     } catch (error) {
         console.log(error);
-        return response.error(req, res, 'Contact Admin', 500);
+        return response.error(req, res, 'CONTACT ADMIN', 500);
     }
 };
 

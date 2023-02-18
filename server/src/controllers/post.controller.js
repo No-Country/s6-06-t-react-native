@@ -1,6 +1,6 @@
 const { response } = require('../helpers');
 const { success, error } = require('../helpers/response.js');
-const { Post, User, IsRead } = require('../models');
+const { Post, User, IsRead, Comment } = require('../models');
 const { postsServices } = require('../services');
 const { findPostById, newPost } = require('../services/post.services.js');
 
@@ -18,6 +18,7 @@ const createPost = async (req, res) => {
     let savedPost = {};
 
     savedPost = await newPost(uid, body, channel, attachedFiles);
+
     if (Object.keys(savedPost).length > 0) {
         const post = await findPostById(savedPost.id);
 
@@ -36,9 +37,7 @@ const createPost = async (req, res) => {
 const updatePost = async (req, res) => {
     const uid = req.uid;
     const { id } = req.params;
-    const { title, description } = req.body;
-    const attached = req.files;
-    let attachedFiles;
+    const { ...data } = req.body;
 
     try {
         const post = await Post.findById(id);
@@ -51,21 +50,7 @@ const updatePost = async (req, res) => {
         if (post.author.toString() !== uid && !user.admin) {
             return response.error(req, res, 'Unauthorized user', 401);
         }
-
-        if (attached) {
-            post.attached = [];
-            attachedFiles = Object.entries(attached).map((i) => i[1]);
-            if (attachedFiles.length > 0) {
-                await Promise.all(
-                    attachedFiles.map(async (file) => {
-                        return await updatePost(post, file);
-                    })
-                );
-            }
-        }
-
-        post.title = title;
-        post.description = description;
+        post.updateOne({ id }, { ...data });
 
         return response.success(req, res, 'Post updated', post, 200);
     } catch (error) {
@@ -78,11 +63,12 @@ const PostsRemove = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const removePost = await postsServices.remove(id, uid);
+    
+        const removePost = await postsServices.remove(id);
         if (!removePost)
             return response.error(req,res,'There is a problem with the post that you want to remove!!',400);
 
-        return response.success(req, res, 'Post deleted', removePost.id, 200);
+        return response.success(req, res, 'Post deleted', removePost, 200);
     } catch (error) {
         console.log(error);
         if (error.message === 'no-privileges') {
@@ -132,10 +118,49 @@ const getAll = async (req, res) => {
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
+
+const getComments = async (req, res) => {
+    const { from, to } = req.query;
+    const { id } = req.params;
+
+    try {
+        const comments = await Comment.find({ active: true, post: id })
+            .populate({ path: 'author', select: 'fullName' })
+            //.populate("reactions", "type__Reaction -comment")
+            .populate('megusta')
+            .populate('apoyar')
+            .populate('meinteresa')
+            .populate('hacergracia')
+            .populate('reply', 'author body -replieOf');
+
+        const commentsPopulated = comments.map((c) => {
+            const { megusta, apoyar, meinteresa, hacergracia, ...data } =
+                c.toJSON();
+
+            const obj = {
+                reactions: {
+                    megusta,
+                    apoyar,
+                    meinteresa,
+                    hacergracia
+                },
+                ...data
+            };
+
+            return obj;
+        });
+        console.log(commentsPopulated);
+        return response.success(req, res, 'Comments :', commentsPopulated, 200);
+    } catch (e) {
+        console.log(e);
+        return response.error(req, res, 'Contact Admin', 500);
+    }
+};
 module.exports = {
     createPost,
     updatePost,
     PostsRemove,
-    postFavoriteUser,
-    getAll
+    //postFavoriteUser,
+    getAll,
+    getComments
 };

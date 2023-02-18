@@ -8,6 +8,6 @@ router.use(validatorJWT)
 router.post('/new/:id/:place',  comment.createComment)
       .put('/edit/:id', comment.updateComment )
       .put('/delete/:id', comment.deleteComment)
-      .delete('/admdelete/:id',  isAdmin, comment.admDeleteComment)
+      .delete('/:id',  isAdmin, comment.admDeleteComment)
 
 module.exports = router;

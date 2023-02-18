@@ -19,7 +19,7 @@ socket.on('disconnect', () => {
 //-INDICA QUE EL USER ESTA EN LINEA
 //REMPLAZAR POR EL DEL USUSARIO REAL
 socket.emit('online-client', {
-    uid: '63ed427cd971ddc453a953fb'
+    uid: '63ed97dc7f7939e67f02f46d'
 });
 
 socket.on('enviar-mensaje', (payload) => {
@@ -31,7 +31,7 @@ socket.on('post-new', (payload) => {
 });
 //-ESCUCHA NUEVOS POST EN CANAL QUE PARTICIPA
 ///REMPLAZAR POR LOS USUARIO
-const channels = ['63ed42abd971ddc453a95403', '63ece8a8c731b6a03ab8c7c1'];
+const channels = ['63e3dc46a5dd297fac1ca2a2', '63ece8a8c731b6a03ab8c7c1'];
 
 channels.map((channel, i) => {
     socket.on(`${channel}-posts`, (payload) => {
@@ -39,13 +39,14 @@ channels.map((channel, i) => {
     });
 });
 
+
 //-CON UN INTERSECCION OBSERBER DEBERIAN EMITIR QUE ipost.id ESTA LEIDO
 //REEMPLAZAR UID
-const id = '63ed1bc5cd8eb54c3c35b113';
+const id = '63ed98982b71f3a166bbbdf8';
 
 socket.emit('post-read-client', {
     postRead: id,
-    uid: '63ed427cd971ddc453a953fb'
+    uid: '63ed97dc7f7939e67f02f46d'
 });
 
 socket.on('reaction-new-in-post', (payload) => {

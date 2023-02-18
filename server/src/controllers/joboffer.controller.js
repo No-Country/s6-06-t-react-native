@@ -9,9 +9,9 @@ const getJobOffers = async (req, res) => {
             .skip(Number(from))
             .limit(Number(to))
             .populate('countCandidates')
-            .populate({ path: 'candidates', select: 'fullName -postulations' })
+            //.populate({ path: 'candidates', select: 'fullName -postulations' })
             .populate('countComments')
-            .populate({ path: 'comments', select: 'body -job_offer' });
+           // .populate({ path: 'comments', select: 'body -job_offer' });
 
         return response.success(req,res,'Offers obtained successfully',allOffers,200);
     } catch (error) {
@@ -95,10 +95,8 @@ const deleteJobOffer = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const deleteOffer = await JobOffer.findByIdAndUpdate(
-            id,
-            { $set: { active: false } },
-            { new: true }
+        const deleteOffer = await JobOffer.findByIdAndDelete(
+            id
         );
 
         if (!deleteOffer) {

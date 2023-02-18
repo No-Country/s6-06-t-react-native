@@ -9,6 +9,7 @@ router.get("/",  profile.getUser)
       //.put("/edit/:scope",  profile.updateUser)  
       .put("/edit/remove",  profile.remove)
       .put("/edit/information",  profile.personal)
+      //RUTA CAMBIAR CONTRASEÑÑA
       //.put("/edit/professional",  profile.professional)
       .put("/edit/applications",  profile.applications)
       .put("/edit/post-saved",  profile.postSaved)

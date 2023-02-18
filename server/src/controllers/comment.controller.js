@@ -1,4 +1,4 @@
-const { Comment, User } = require('../models');
+const { Comment, User, Reaction } = require('../models');
 const { response } = require('../helpers');
 const { commentServices } = require('../services');
 
@@ -63,7 +63,7 @@ const deleteComment = async (req, res) => {
         const user = await User.findById(uid);
 
         if (comment.author.toString() !== uid && !user.admin) {
-            return response.error(req, res, 'User not authorized', 401);
+            return response.error(req, res, 'Unauthorized User', 401);
         }
 
         await Comment.findByIdAndUpdate(
@@ -82,7 +82,17 @@ const admDeleteComment = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const admDeleteComment = await Comment.findByIdAndDelete(id);
+
+        const comment=await Comment.findById(id)
+
+        if(comment) {
+            //PROBAR SI FUNCIONA !!!
+            await Comment.deleteMany({replieOf:comment.id})
+            await Reaction.deleteMany({comment:comment.id})
+    }
+        const admDeleteComment = await Comment.findByIdAndDelete(
+            id
+        );
 
         if (!admDeleteComment) {
             return response.error(req, res, 'Comment not found', 404);

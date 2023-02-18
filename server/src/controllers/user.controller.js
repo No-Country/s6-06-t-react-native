@@ -1,5 +1,5 @@
 const { response } = require('../helpers');
-const { User } = require('../models');
+const { User, Post, JobOffer } = require('../models');
 
 const editUser = async (req, res) => {
     const { id } = req.params;
@@ -69,8 +69,37 @@ const otherUser = async (req, res) => {
     }
 };
 
+const models={
+    post:Post,
+    joboffer:JobOffer
+}
+
+const favorite=async(req,res)=>{
+    const uid = req.uid;
+    const { id,place } = req.params;
+    try {
+
+
+
+        const user = await User.findById(uid);
+        const doc = await models[place].findById(id);
+console.log(uid);
+        if (!doc) {
+            return response.error(req, res, 'Your document does not exist', 400);
+        }
+        user.favorites.push(doc.id);
+        await user.save()
+        return response.success(req, res, 'Post Favorite saved', user);
+    } catch (error) {
+        console.log(error);
+        return response.error(req, res, 'Post not found', 500);
+    }
+
+}
+
 module.exports = {
     editUser,
     getAll,
-    otherUser
+    otherUser,
+    favorite
 };

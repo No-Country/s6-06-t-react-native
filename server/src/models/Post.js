@@ -33,7 +33,7 @@ const postSchema = new Schema(
         }
     },
     {
-        toObject: { virtuals: false },
+        toObject: { virtuals: true },//En true , get canal especifico devuelve el conteo de reaccciones y commetnarios
         toJSON: { virtuals: true },
         timestamps: true,
         versionKey: false

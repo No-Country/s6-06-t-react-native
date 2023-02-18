@@ -36,7 +36,7 @@ const offerSchema = new Schema(
         timestamps: true,
         versionKey: false,
         toJSON: { virtuals: true },
-        toObject: { virtuals: false }
+        toObject: { virtuals: true }//con TRUE trae todos los candidatos y cometarios
     }
 );
 

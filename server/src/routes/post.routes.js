@@ -7,14 +7,10 @@ router.use(validatorJWT)
 
 router.post('/create/:channel',  post.createPost )
 router.put('/update/:id', isAdmin,  post.updatePost)
-router.put('/remove/:id', isAdmin,  post.PostsRemove)
+router.delete('/remove/:id', isAdmin,  post.PostsRemove)
+//router.put('/favorite/:id', post.postFavoriteUser)
+router.get('/comments/:id', post.getComments)
 
-//FALTA:añadir a favorits
-router.put('/favorite/:id', post.postFavoriteUser)
-
-//FALTA:Obtiene cometarios de post especifico con repliesy reacciones 
-
-//FALTA:Obtiene todos los post -Paginado-ADMIN
 router.get('/', isAdmin ,post.getAll)
 
 module.exports = router;
