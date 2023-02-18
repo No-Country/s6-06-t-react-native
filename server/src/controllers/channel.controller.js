@@ -1,54 +1,55 @@
-const  response  = require('../helpers/response');
-const {Channel, User, Post, IsRead} = require('../models')
+const response = require('../helpers/response');
+const { Channel, User, Post, IsRead } = require('../models');
 
-const createChannel = async (req,res) =>{  
- //TODO:AGREGAR USUARIOS SI ES PRIVADO O TODOS SI ES PUBLICO
+const createChannel = async (req, res) => {
+    //TODO:AGREGAR USUARIOS SI ES PRIVADO O TODOS SI ES PUBLICO
     const channel = new Channel(req.body);
     await channel
         .save()
         .then((newChannel) => {
-            return  response.success(req, res,"Channel created successfully",newChannel,201)
+            return response.success(req,res,'Channel created successfully',newChannel,201);
         })
         .catch((error) => {
-            console.log(error)
-            return  response.error(req, res,"CONTACT ADMIN",500)
-        })
+            console.log(error);
+            return response.error(req, res, 'Contact Admin', 500);
+        });
 };
 
 const updateChannel = async (req, res) => {
-    
-    const {id} = req.params;
-    const {name, typechannel,active} = req.body
+    const { id } = req.params;
+    const { name, typechannel, active } = req.body;
 
     try {
         const updatedChannel = await Channel.findByIdAndUpdate(
             { _id: id },
-            { name, typechannel,active },
+            { name, typechannel, active },
             { new: true }
         );
         if (!updatedChannel) {
-            return response.error(req,res,"Canal no encontrado",updatedChannel,404)
+            return response.error( req,res,'Channel not found',updatedChannel,404);
         }
-        return response.success(req,res,"Canal actualizado",updatedChannel, 200)
-        } catch (error) {
-            return response.error(req,res,'CONTACT ADMIN',500)
-        }
-}
+        return response.success(req,res,'Updated channel',updatedChannel,200);
+    } catch (error) {
+        return response.error(req, res, 'Contact Admin', 500);
+    }
+};
 
-const deleteChannel =  async (req , res) => {
-    const {id} = req.params
+const deleteChannel = async (req, res) => {
+    const { id } = req.params;
     try {
         const channel = await Channel.findById({ _id: id });
-        
-        if (!channel) {return response.error(req,res,"Channel not found",404)}
-        
+
+        if (!channel) {
+            return response.error(req, res, 'Channel not found', 404);
+        }
+
         await channel.remove();
 
-        return response.success(req,res,"Channel removed successfully",{
+        return response.success(req, res, 'Channel removed successfully', {
             name: channel.name
         });
     } catch (error) {
-        return response.error(req,res,'CONTACT ADMIN',500)
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
@@ -61,59 +62,61 @@ const getAllChannels = async (req, res) => {
             channels
         };
 
-        return response.success(req,res, "Channels found successfully",data,200)
+        return response.success(req,res,'Channels found successfully', data, 200);
     } catch (error) {
-        return response.error(req,res, "CONTACT ADMIN",500)
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
 const getUserChannels = async (req, res) => {
-    const uid =req.uid
+    const uid = req.uid;
     try {
-        const user = await User.findById(uid).populate("channels","name");
+        const user = await User.findById(uid).populate('channels', 'name');
         if (!user) {
-            return response.error(req,res,"User not found", 404)
+            return response.error(req, res, 'User not found', 404);
         }
-        return response.success(req,res,"Channels found successfullys",
-        channels,200
-        )
-
-        } catch (error) {
-            console.error(error);
-            return res.status(500).send({ error: "An error has occurred" });
-        }
+        return response.success(req,res,'Channels found successfully',channels, 200);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ error: 'An error has occurred' });
+    }
 };
 
 const getPostsChannel = async (req, res) => {
-    const {uid}=req
+    const { uid } = req;
     const { from, to } = req.query;
-    const {id} = req.params;
+    const { id } = req.params;
 
     try {
-const channel=await Channel.findById(id)
+        const channel = await Channel.findById(id);
 
-if(!channel) response.error(req,res,"invalid channel",400)
+        if (!channel) response.error(req, res, 'invalid channel', 400);
 
-        const posts = await Post.find({channel:id})
+        const posts = await Post.find({ channel: id })
             .skip(Number(from))
             .limit(Number(to))
-            
-            .populate({path:"author",select:"fullName position isOnline img_avatar"})
+
+            .populate({
+                path: 'author',
+                select: 'fullName position isOnline img_avatar'
+            })
             .populate('countComments')
             .populate('megusta')
             .populate('apoyar')
             .populate('meinteresa')
             .populate('hacergracia');
 
+        const readPost = await IsRead.find({ uid, doc: { $in: posts } }).select(
+            'doc -_id'
+        );
 
-
-        const readPost=await IsRead.find({uid,doc:{$in: posts}}).select("doc -_id")
-        
-        return response.success(req,res,"Channel post:",{areRead:readPost,posts})
-
+        return response.success(req, res, 'Channel post:', {
+            areRead: readPost,
+            posts
+        });
     } catch (error) {
         console.log(error);
-        return response.error(req,res,'CONTACT ADMIN',500)
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 

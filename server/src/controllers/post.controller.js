@@ -19,19 +19,18 @@ const createPost = async (req, res) => {
 
     savedPost = await newPost(uid, body, channel, attachedFiles);
     if (Object.keys(savedPost).length > 0) {
-        //Con esta funcion lo busca y lo popula
         const post = await findPostById(savedPost.id);
 
         const totalPosts = await Post.find({ channel });
         const readPost = await IsRead.find({ uid, doc: { $in: totalPosts } });
         const count = totalPosts.length - readPost.length;
-        console.log(channel);
+
         io.emit(`${channel}-posts`, { post, count });
 
-        return success(req, res, 'post created successfully', post, 201);
+        return success(req, res, 'Post created successfully', post, 201);
     }
 
-    return error(req, res, 'post creation failed ', 400);
+    return error(req, res, 'Post creation failed ', 400);
 };
 
 const updatePost = async (req, res) => {
@@ -43,27 +42,14 @@ const updatePost = async (req, res) => {
 
     try {
         const post = await Post.findById(id);
-        //TAL VER RUTA DISTINTA ACTUALIZAR ADJUNTOS?
-        // const updatedPost = await Post.findByIdAndUpdate(
-        //     { _id: id },
-        //     {
-        //         title,
-        //         description,
-        //         attached
-        //     },
-        //     { new: true }
-        // );
         if (!post) {
-            return res.status(404).json({
-                success: false,
-                error: `Post no existe!!`
-            });
+            return response.error(req, res, 'Post not found', 404);
         }
 
         const user = await User.findById(uid);
 
         if (post.author.toString() !== uid && !user.admin) {
-            return response.error(req, res, 'Usuario no autorizado', 401);
+            return response.error(req, res, 'Unauthorized user', 401);
         }
 
         if (attached) {
@@ -81,13 +67,9 @@ const updatePost = async (req, res) => {
         post.title = title;
         post.description = description;
 
-        response.success(req, res, 'Post updated', post, 200);
+        return response.success(req, res, 'Post updated', post, 200);
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            success: false,
-            error: error.message
-        });
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
@@ -98,50 +80,35 @@ const PostsRemove = async (req, res) => {
     try {
         const removePost = await postsServices.remove(id, uid);
         if (!removePost)
-            return response.error(
-                req,
-                res,
-                'Hay un problema con el post que quiere remover!!',
-                400
-            );
+            return response.error(req,res,'There is a problem with the post that you want to remove!!',400);
 
         return response.success(req, res, 'Post deleted', removePost.id, 200);
     } catch (error) {
         console.log(error);
-        if (error.message === 'no-priviligies') {
-            return response.error(req, res, 'Usuario no autorizado', 401);
+        if (error.message === 'no-privileges') {
+            return response.error(req, res, 'Unauthorized User', 401);
         }
 
-        return response.error(req, res, 'Post no encontrado', 500);
+        return response.error(req, res, 'Post not found', 500);
     }
 };
 
-
 const postFavoriteUser = async (req, res) => {
-        const uid = req.uid;
-        const { id } = req.params;
-        try {
+    const uid = req.uid;
+    const { id } = req.params;
+    try {
+        const user = await User.findById(uid);
+        const post = await Post.findById(id);
 
-        const user = await User.findById(uid)
-        const post = await Post.findById(id)
-
-        if(!post) {
-        return response.error(
-            req,
-            res,
-            'No exite tu post',
-            400
-        )
-        
-        }  
-        user.favorites.push(id)
-        return response.success(req, res, 'Post Favorite saved', user )
-            
-        } catch (error) {
-            return response.error(req, res, 'Post no encontrado', 500);
+        if (!post) {
+            return response.error(req, res, 'Post not found', 400);
         }
-
-}
+        user.favorites.push(id);
+        return response.success(req, res, 'Post Favorite saved', user);
+    } catch (error) {
+        return response.error(req, res, 'Post not found', 500);
+    }
+};
 
 const getAll = async (req, res) => {
     const { from, to } = req.query;
@@ -157,12 +124,12 @@ const getAll = async (req, res) => {
             .populate({
                 path: 'channel',
                 select: 'name'
-            })
+            });
 
         return response.success(req, res, 'All post :', post, 200);
     } catch (e) {
         console.log(e);
-        return response.error(req, res, 'error de servidor', 500);
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 module.exports = {

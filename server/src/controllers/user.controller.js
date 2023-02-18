@@ -8,17 +8,17 @@ const editUser = async (req, res) => {
         const user = await User.findById(id);
 
         if (!user) {
-            response.error(req, res, 'No se encontro el usuario', 400);
+            response.error(req, res, 'User not found', 400);
         }
         const updatedUser = await User.findByIdAndUpdate(
             id,
             { ...body },
             { new: true }
         );
-        return response.success(req, res, 'updated user', updatedUser, 200);
+        return response.success(req, res, 'Updated user', updatedUser, 200);
     } catch (error) {
         console.log(error);
-        response.error(req, res, 'Servidor error', 500);
+        response.error(req, res, 'Contact Admin', 500);
     }
 };
 const getAll = async (req, res) => {
@@ -48,24 +48,24 @@ const getAll = async (req, res) => {
         return response.success(req, res, 'All users :', users, 200);
     } catch (e) {
         console.log(e);
-        return response.error(req, res, 'CONTACT  ADMIN', 500);
+        return response.error(req, res, 'Contact  Admin', 500);
     }
 };
 
 const otherUser = async (req, res) => {
     const { id } = req.params;
     try {
-        const user = await User.findById(id).select('fullName email isOnline img_avatar')
+        const user = await User.findById(id).select(
+            'fullName email isOnline img_avatar'
+        );
         if (!user) {
-            return response.error(req, res, 'User no encontrado', 400);
-        } 
-        
+            return response.error(req, res, 'User not found', 400);
+        }
+
         return response.success(req, res, 'Other user', user, 200);
     } catch (error) {
-        console.log(error)
-        return  response.error(
-            req, res, 'Error de servidor', 500
-        )
+        console.log(error);
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
