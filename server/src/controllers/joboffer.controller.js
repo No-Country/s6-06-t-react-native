@@ -2,19 +2,33 @@ const { User, JobOffer, Comment, Channel } = require('../models');
 const { response } = require('../helpers');
 
 const getJobOffers = async (req, res) => {
-    const { type, from, to } = req.query;
-    const query = type? type : {}
+    const { filter, from, to } = req.query;
+
+    const regex = { $regex: filter, $options: 'i' };
+    const query={
+        $or: [{ typechannel: regex }, { name: regex }]
+    }
+
     try {
-        const allOffers = await JobOffer.find(query)
+        const total = await JobOffer.find();
+
+        const allOffers = await JobOffer.find(filter?query:{})
             .skip(Number(from))
             .limit(Number(to))
             .populate('countCandidates')
             //.populate({ path: 'candidates', select: 'fullName -postulations' })
-            .populate('countComments')
-           // .populate({ path: 'comments', select: 'body -job_offer' });
+            .populate('countComments');
+        // .populate({ path: 'comments', select: 'body -job_offer' });
 
+        res.set('Content-Range', total.length);
 
-        return response.success(req,res,'Offers obtained successfully',allOffers,200);
+        return response.success(
+            req,
+            res,
+            'Offers obtained successfully',
+            allOffers,
+            200
+        );
     } catch (error) {
         console.log(error);
         return response.error(req, res, 'CONTACT ADMIN', 500);
@@ -38,7 +52,13 @@ const createPostulation = async (req, res) => {
 
         await offer.save();
 
-        return response.success(req,res,'Oferta creada con éxito',offer,201);
+        return response.success(
+            req,
+            res,
+            'Oferta creada con éxito',
+            offer,
+            201
+        );
     } catch (error) {
         console.log(error);
         return response.error(req, res, 'CONTACT ADMIN', 500);
@@ -68,15 +88,21 @@ const createComment = async (req, res) => {
             { new: true }
         );
 
-        return response.success(req,res,'comment created successfully',postToUpdate,201);
+        return response.success(
+            req,
+            res,
+            'comment created successfully',
+            postToUpdate,
+            201
+        );
     } catch (error) {
-        return response.error(req, res, "CONTACT ADMIN", 500);
+        return response.error(req, res, 'CONTACT ADMIN', 500);
     }
 };
 
 const updateJobOffer = async (req, res) => {
     const { id } = req.params;
-    const {...data} = req.body;
+    const { ...data } = req.body;
     try {
         const updatedJobOffer = await JobOffer.findByIdAndUpdate(
             { _id: id },
@@ -84,11 +110,25 @@ const updateJobOffer = async (req, res) => {
             { new: true }
         );
         if (!updatedJobOffer) {
-            return response.error(req,res,'Offer not found',updatedJobOffer,404);
+            return response.error(
+                req,
+                res,
+                'Offer not found',
+                updatedJobOffer,
+                404
+            );
         }
-        return response.success(req,res,'Oferta modificada con éxito',updatedJobOffer,200);
+
+        return response.success(
+            req,
+            res,
+            'Oferta modificada con éxito',
+            updatedJobOffer,
+            200
+        );
     } catch (error) {
-        return response.error(req, res, "CONTACT ADMIN", 500);
+        console.log(error);
+        return response.error(req, res, 'CONTACT ADMIN', 500);
     }
 };
 
@@ -96,9 +136,7 @@ const deleteJobOffer = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const deleteOffer = await JobOffer.findByIdAndDelete(
-            id
-        );
+        const deleteOffer = await JobOffer.findByIdAndDelete(id);
 
         if (!deleteOffer) {
             return response.error(req, res, 'Offer not found', 404);

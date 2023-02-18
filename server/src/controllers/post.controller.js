@@ -51,12 +51,17 @@ const updatePost = async (req, res) => {
 
         const user = await User.findById(uid);
 
-        if (post.author.toString() !== uid && !user.admin) {
+        if (!user.admin && post.author.toString() !== uid) {
             return response.error(req, res, 'Usuario no autorizado', 401);
         }
-        post.updateOne({ id }, { ...data });
 
-        response.success(req, res, 'Post updated', post, 200);
+        const a = await Post.findByIdAndUpdate(
+            { _id: id },
+            { ...data },
+            { new: true }
+        );
+
+        response.success(req, res, 'Post updated', a, 200);
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -69,9 +74,10 @@ const updatePost = async (req, res) => {
 const PostsRemove = async (req, res) => {
     const uid = req.uid;
     const { id } = req.params;
+    const { from, to, filter } = req.query;
+    const regex = { $regex: filter, $options: 'i' };
 
     try {
-      
         const removePost = await postsServices.remove(id);
         if (!removePost)
             return response.error(
@@ -111,10 +117,15 @@ const PostsRemove = async (req, res) => {
 // }
 
 const getAll = async (req, res) => {
-    const { from, to } = req.query;
+    const { from, to, filter } = req.query;
 
+    const regex = { $regex: filter, $options: 'i' };
+    const query = {
+        $or: [{ title: regex }, { description: regex }]
+    };
     try {
-        const post = await Post.find()
+        const total = await Post.find();
+        const post = await Post.find(filter ? query : {})
             .skip(Number(from))
             .limit(Number(to))
             .populate({
@@ -125,6 +136,8 @@ const getAll = async (req, res) => {
                 path: 'channel',
                 select: 'name'
             });
+
+        res.set('Content-Range', total.length);
 
         return response.success(req, res, 'All post :', post, 200);
     } catch (e) {

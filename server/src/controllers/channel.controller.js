@@ -62,33 +62,40 @@ const deleteChannel = async (req, res) => {
 
         //PROBAR SI FUNCIONA !!!
         await Post.deleteMany({ channel: channel.id });
-        await User.updateMany(
-            { channels: channel.id },
-            {
-                $pop: {
-                    channels: channel.id
-                }
-            }
-        );
+        //ARREGLAR
+        // await User.updateMany(
+        //     { channels: channel.id },
+        //     {
+        //         $pop: {
+        //             channels: channel.id
+        //         }
+        //     }
+        // );
 
         await channel.remove();
         return response.success(req, res, 'Channel removed successfully', {
             name: channel.name
         });
     } catch (error) {
+        console.log(error);
         return response.error(req, res, 'CONTACT ADMIN', 500);
     }
 };
 
 const getAllChannels = async (req, res) => {
+    const { from, to,filter } = req.query;
+    const regex = { $regex: filter, $options: 'i' };
+const query={
+    $or: [{ name: regex }, { typechannel: regex }]
+}
     try {
-        const channels = await Channel.find();
+        const channels = await Channel.find(filter?query:{});
 
         const data = {
             count: channels.length,
             channels
         };
-
+        res.set('Content-Range', channels.length);
         return response.success(
             req,
             res,
@@ -162,7 +169,11 @@ const getPostsChannel = async (req, res) => {
             'doc -_id'
         );
 
-        return response.success(req, res, 'Channel post:', {areRead: readPost,users,posts});
+        return response.success(req, res, 'Channel post:', {
+            areRead: readPost,
+            users,
+            posts
+        });
     } catch (error) {
         console.log(error);
         return response.error(req, res, 'CONTACT ADMIN', 500);

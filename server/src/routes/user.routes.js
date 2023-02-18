@@ -8,10 +8,10 @@ router.use(validatorJWT)
 //put editar usuario como ADmin-Validar admin  LO PONE EN SELECCIONADO Y AGREGA CANAL REQUERIMEINTOS
 router.put('/:id', isAdmin, user.editUser)
 //get obtiene todos los usuarios con todo completo <<<<<<<<<-validar admin
-router.get('/', isAdmin, user.getAll)
+router.get('/all', isAdmin, user.getAll)
 //get info de un usuario como otro usuario
 router.get('/:id',  user.otherUser)
-
+router.delete("/:id",isAdmin,user.deleteOne)
 router.put('/favorite/:place/:id', user.favorite)
 
 
