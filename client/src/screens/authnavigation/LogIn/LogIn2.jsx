@@ -18,6 +18,7 @@ import { useNavigation } from "@react-navigation/native";
 import { loginUser } from "../../../redux/actions/loginActions";
 import { useDispatch } from "react-redux";
 import { AsyncStorage } from "react-native";
+import { colors } from "../../../constants/colors";
 
 const LogIn2 = () => {
   const [data, setData] = useState({ password: "", email: "" });
@@ -65,7 +66,7 @@ const LogIn2 = () => {
         <View
           style={[
             styles.inputContainer,
-            { borderColor: isFocused ? "#4245E5" : "transparent" },
+            { borderColor: isFocused ? colors.primary : "transparent" },
           ]}
         >
           <AntDesign name="mail" size={20} />
@@ -80,7 +81,7 @@ const LogIn2 = () => {
         <View
           style={[
             styles.inputContainer,
-            { borderColor: isFocused2 ? "#4245E5" : "transparent" },
+            { borderColor: isFocused2 ? colors.primary : "transparent" },
           ]}
         >
           <AntDesign name="lock" size={20} />
@@ -96,7 +97,7 @@ const LogIn2 = () => {
         </View>
 
         <TouchableOpacity style={styles.forgot}>
-          <Text style={{ color: "#4245E5", fontSize: 12 }}>
+          <Text style={{ color: colors.primary, fontSize: 12 }}>
             Olvidaste tu contraseña?
           </Text>
         </TouchableOpacity>
@@ -113,7 +114,7 @@ const LogIn2 = () => {
           </Text>
           <TouchableOpacity>
             <Text
-              style={{ color: "#4245E5", textDecorationLine: "underline" }}
+              style={{ color: colors.primary, textDecorationLine: "underline" }}
               onPress={() => {
                 navigation.navigate("SignUp");
               }}
@@ -175,8 +176,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width - 25,
     height: 45,
     backgroundColor: "#fff",
-    // paddingStart: 20,
-    backgroundColor: "#EEEEEE",
+    backgroundColor: colors.input_background,
     marginBottom: 10,
   },
   inputText: { marginLeft: 10 },

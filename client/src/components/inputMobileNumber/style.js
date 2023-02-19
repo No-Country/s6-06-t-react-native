@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../constants/colors";
 
 export const styles = StyleSheet.create({
   containerInput: {
@@ -18,7 +19,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
   },
   input: {
-    outlineColor: "#4245E5",
+    outlineColor: colors.primary,
     backgroundColor: "#DEE3E5",
     paddingHorizontal: 15,
     paddingVertical: 16,
@@ -26,13 +27,15 @@ export const styles = StyleSheet.create({
     flex: 3,
     marginBottom: 5,
     color: "#000",
+    textAlign: 'center',
+    fontSize: 17
   },
   inputRegionalNumber: {
     marginRight: 11,
     flex:1
   },
   outLine: {
-    borderColor: "#4245E5",
+    borderColor: colors.primary,
     borderWidth: 1,
   },
   requerimiento: {
@@ -40,7 +43,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
   },
   error: {
-    color: "red",
+    color: colors.danger,
   },
   wrapperErrors: {
     display: 'flex',

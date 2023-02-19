@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../constants/colors";
 
 export const styles = StyleSheet.create({
   containerInput: {
@@ -13,7 +14,7 @@ export const styles = StyleSheet.create({
     marginBottom: 4,
   },
   input: {
-    outlineColor: "#4245E5",
+    outlineColor: colors.primary,
     backgroundColor: "#DEE3E5",
     paddingHorizontal: 15,
     paddingVertical: 16,
@@ -25,7 +26,7 @@ export const styles = StyleSheet.create({
   },
   inputSelected: {
     width: "100%",
-    borderColor: "#4245E5",
+    borderColor: colors.primary,
     borderWidth: 1,
     borderTopRightRadius: 15,
     borderTopLeftRadius: 15,
@@ -36,7 +37,7 @@ export const styles = StyleSheet.create({
   },
   lastInputSelected: {
     width: "100%",
-    borderColor: "#4245E5",
+    borderColor: colors.primary,
     borderWidth: 1,
     borderTopRightRadius: 0,
     borderTopLeftRadius: 0,
@@ -51,12 +52,18 @@ export const styles = StyleSheet.create({
     textAlign: "left",
     padding:0
   },
+  defaultTextInput: {
+    color: "#000",
+    fontSize: 15,
+    textAlign: "left",
+    padding:0
+  },
   optionText: {
     textAlign: "left",
     fontSize: 18,
   },
   selectedOption: {
-    backgroundColor: "#4245E5",
+    backgroundColor: colors.primary,
   },
   requerimiento: {
     color: "#37474F",
@@ -64,14 +71,14 @@ export const styles = StyleSheet.create({
   },
   dropdownStyles: {
     position: "relative",
-    marginTop: -32,
+    marginTop: -2,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
     borderWidth: 1,
     borderTopWidth: 0,
-    borderColor: "#4245E5",
+    borderColor: colors.primary,
     backgroundColor: "#fff",
     shadowColor: "rgba(0, 0, 0, 0.2)",
     shadowOffset: {
@@ -84,14 +91,14 @@ export const styles = StyleSheet.create({
   },
   lastDropdownStyles: {
     position: "relative",
-    marginTop: -25,
+    marginTop: 2,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
     borderWidth: 1,
     borderBottomWidth: 0,
-    borderColor: "#4245E5",
+    borderColor: colors.primary,
     backgroundColor: "#fff",
     shadowColor: "rgba(0, 0, 0, 0.2)",
     shadowOffset: {
@@ -103,6 +110,6 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
   },
   error: {
-    color: "red",
+    color: colors.danger,
   },
 });

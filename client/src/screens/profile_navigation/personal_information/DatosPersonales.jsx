@@ -21,6 +21,7 @@ import {
   editPersonalInfo,
   getUserData,
 } from "../../../redux/actions/personalActions";
+import { colors } from "../../../constants";
 
 const DatosPersonales = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -140,7 +141,7 @@ const DatosPersonales = () => {
             <View
               style={[
                 styles.inputContainer,
-                { borderColor: isFocused ? "#4245E5" : "transparent" },
+                { borderColor: isFocused ? colors.primary : "transparent" },
               ]}
             >
               <TextInput
@@ -156,7 +157,7 @@ const DatosPersonales = () => {
             <View
               style={[
                 styles.inputContainer,
-                { borderColor: isFocused2 ? "#4245E5" : "transparent" },
+                { borderColor: isFocused2 ? colors.primary : "transparent" },
               ]}
             >
               <TextInput
@@ -172,7 +173,7 @@ const DatosPersonales = () => {
             <View
               style={[
                 styles.inputContainer,
-                { borderColor: isFocused3 ? "#4245E5" : "transparent" },
+                { borderColor: isFocused3 ? colors.primary : "transparent" },
               ]}
             >
               <TextInput
@@ -234,7 +235,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 10,
     lineHeight: 30,
-    color: "#4245E5",
+    color: colors.primary,
   },
   profession: {
     fontSize: 18,
@@ -283,7 +284,7 @@ const styles = StyleSheet.create({
     height: 45,
     backgroundColor: "#fff",
     // paddingStart: 20,
-    backgroundColor: "#EEEEEE",
+    backgroundColor: colors.input_background,
     marginVertical: 15,
   },
   titlesection: {
