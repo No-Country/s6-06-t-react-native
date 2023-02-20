@@ -9,30 +9,33 @@ const createPost = async (req, res) => {
     const { body } = req;
     const { channel } = req.params;
     const { uid } = req;
-    const attached = req.files;
-    let attachedFiles;
-    if (attached) {
-        attachedFiles = Object.entries(attached).map((i) => i[1]);
-    }
+    
+    try{
+        const attached = req.files;
+        let attachedFiles;
+        if (attached) {
+            attachedFiles = Object.entries(attached).map((i) => i[1]);
+        }
 
-    let savedPost = {};
+        let savedPost = {};
 
-    savedPost = await newPost(uid, body, channel, attachedFiles);
+        savedPost = await newPost(uid, body, channel, attachedFiles);
 
-    if (Object.keys(savedPost).length > 0) {
-        const post = await findPostById(savedPost.id);
+        if (Object.keys(savedPost).length > 0) {
+            const post = await findPostById(savedPost.id);
 
-        const totalPosts = await Post.find({ channel });
-        const readPost = await IsRead.find({ uid, doc: { $in: totalPosts } });
-        const count = totalPosts.length - readPost.length;
+            const totalPosts = await Post.find({ channel });
+            const readPost = await IsRead.find({ uid, doc: { $in: totalPosts } });
+            const count = totalPosts.length - readPost.length;
 
-        io.emit(`${channel}-posts`, { post, count });
+            io.emit(`${channel}-posts`, { post, count });
 
-        return success(req, res, 'Post created successfully', post, 201);
-    }
-
-    return error(req, res, 'Post creation failed ', 400);
-};
+            return success(req, res, 'Post created successfully', post, 201);
+        }
+    } catch (error) {
+        return error(req, res, 'Post creation failed, contact Admin ', 400);
+    };
+}
 
 const updatePost = async (req, res) => {
     const uid = req.uid;
@@ -64,10 +67,9 @@ const updatePost = async (req, res) => {
 };
 
 const PostsRemove = async (req, res) => {
-    const uid = req.uid;
+
     const { id } = req.params;
-    const { from, to, filter } = req.query;
-    const regex = { $regex: filter, $options: 'i' };
+
 
     try {
         const removePost = await postsServices.remove(id);
@@ -76,7 +78,7 @@ const PostsRemove = async (req, res) => {
 
         return response.success(req, res, 'Post deleted', removePost, 200);
     } catch (error) {
-        console.log(error);
+        
         if (error.message === 'no-privileges') {
             return response.error(req, res, 'Unauthorized User', 401);
         }
@@ -127,13 +129,12 @@ const getAll = async (req, res) => {
 
         return response.success(req, res, 'All post :', post, 200);
     } catch (e) {
-        console.log(e);
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
 const getComments = async (req, res) => {
-    const { from, to } = req.query;
+    // const { from, to } = req.query; No está en Uso
     const { id } = req.params;
 
     try {
@@ -162,10 +163,8 @@ const getComments = async (req, res) => {
 
             return obj;
         });
-        console.log(commentsPopulated);
         return response.success(req, res, 'Comments :', commentsPopulated, 200);
     } catch (e) {
-        console.log(e);
         return response.error(req, res, 'Contact Admin', 500);
     }
 };

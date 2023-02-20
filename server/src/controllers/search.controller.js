@@ -24,10 +24,9 @@ const search = async (req, res) => {
                 })
         ]);
 
-        response.success(req, res, 'Results:', results);
+        return response.success(req, res, 'Results:', results);
     } catch (e) {
-        console.log(e);
-        response.error(req, res, 'Contact Admin', 500);
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 

@@ -19,7 +19,6 @@ const getUser = async (req, res) => {
 
         return response.success(req, res, 'User found', user, 200);
     } catch (e) {
-        console.log(e);
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
@@ -35,7 +34,7 @@ const remove = async (req, res) => {
 
         return response.success(req, res, 'Account deleted', removed.id, 200);
     } catch (error) {
-        console.log(error);
+        
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
@@ -51,7 +50,7 @@ const personal = async (req, res) => {
 
         return response.success(req, res, 'Updated profile', updatedUser, 200);
     } catch (error) {
-        console.log(error);
+        
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
@@ -72,7 +71,7 @@ const personal = async (req, res) => {
 
 //         return response.success(req, res, 'Updated profile', updatedUser, 200);
 //     } catch (error) {
-//         console.log(error);
+//         
 //         return response.error(req, res, 'CONTACT ADMIN', 500);
 //     }
 // };
@@ -88,7 +87,7 @@ const applications = async (req, res) => {
 
         return response.success(req, res, 'Updated profile', updatedUser, 200);
     } catch (error) {
-        console.log(error);
+        
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
@@ -104,13 +103,13 @@ const postSaved = async (req, res) => {
 
         return response.success(req, res, 'Updated profile', updatedUser, 200);
     } catch (error) {
-        console.log(error);
+        
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
 const profilePic = async (req, res) => {
-    //console.log(req.files);
+    
     const { pic } = req.files;
     const uid = req.uid;
 
@@ -122,7 +121,7 @@ const profilePic = async (req, res) => {
 
         return response.success(req,res,'Updated profile pic',updatedUser,200);
     } catch (error) {
-        console.log(error);
+        
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
