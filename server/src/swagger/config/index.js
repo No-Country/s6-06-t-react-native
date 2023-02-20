@@ -16,7 +16,8 @@ const swaggerJsDoc =require("swagger-jsdoc");
       },
       apis: [
           './src/swagger/routes/*.yaml',
-          './src/swagger/models/*.yaml'
+          './src/swagger/models/*.yaml',
+          './src/swagger/examples/*.yaml'
       ]
   };
 

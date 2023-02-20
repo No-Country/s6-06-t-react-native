@@ -1,0 +1,17 @@
+components:
+    schemas:
+        error:
+            type: object
+            properties:
+                error:
+                    type: string
+                    description: description of the error
+        success:
+            type: object
+            properties:
+                message:
+                    type: string
+                    description: description of the response
+                data:
+                    type: object
+                    description: object data

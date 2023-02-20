@@ -4,71 +4,86 @@ tags:
 paths:
     /api/auth/new:
         post:
-            summary: Register a new user
+            summary: Register a new user in the app
             tags: [Auth]
-            description: Register a new user in the app
-            parameters:
             requestBody:
                 required: true
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/registerUser'
+                            $ref: '#/components/schemas/user_registration'
             responses:
                 201:
-                    description: The user account was successfully created
+                    description: Success
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/responseUser'
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                user_success:
+                                    $ref: '#/components/examples/user_success'
                 400:
-                    description: User already exists
+                    description: Request error
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_repetead:
+                                    $ref: '#/components/examples/user_error_repetead'
                 500:
-                    description: There is a problem in DB
+                    description: Server error
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_db:
+                                    $ref: '#/components/examples/user_error_db'
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
     /api/auth/login:
         post:
-            summary: Login a user
+            summary: Login a user in the app
             tags: [Auth]
-            description: Login a user in the app
             requestBody:
                 required: true
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/loginUser'
+                            $ref: '#/components/schemas/user_login'
             responses:
                 200:
-                    description: The user was logged successfully
+                    description: Success
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/responseUser'
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                user_success:
+                                    $ref: '#/components/examples/user_success'
                 400:
-                    description: Bad Credentials
+                    description: Request error
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/error'
-                401:
-                    description: Must validate account with the provided email
+                            examples:
+                                user_error_inexistent:
+                                    $ref: '#/components/examples/user_error_inexistent'
+                                user_error_invalidated:
+                                    $ref: '#/components/examples/user_error_invalidated'
+                                user_error_incorrect:
+                                    $ref: '#/components/examples/user_error_incorrect'
+                500:
+                    description: Server error
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/error'
-                404:
-                    description: User not registered
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
     /api/auth/resend-email:
         get:
             parameters:
@@ -82,24 +97,23 @@ paths:
             tags: [Auth]
             responses:
                 200:
-                    description: Email resend succesfully, check inbox
+                    description: Success
                     content:
                         application/json:
                             schema:
-                                message:
-                                    type: string
-                                    description: description of the response
-                                data:
-                                    type: object
-                            example:
-                                message: Email resend succesfully , check inbox
-                                data: {}
-                400:
-                    description: Bad Credentials
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                user_success_email:
+                                    $ref: '#/components/examples/user_success_email'
+                500:
+                    description: Server error
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
     /api/auth/renew:
         get:
             parameters:
@@ -113,69 +127,78 @@ paths:
             tags: [Auth]
             responses:
                 200:
-                    description: Token generated succesfully
+                    description: Success
                     content:
                         application/json:
                             schema:
-                                message:
-                                    type: string
-                                    description: description of the response
-                                data:
-                                    type: object
-                                    properties:
-                                        token:
-                                            type: string
-                            example:
-                                message: Token generated succesfully
-                                data:
-                                    {
-                                        token: dflkjhf4t89yurdtndrt895nf7yh895hg89jf89h7896j78967fj89mj768jf58967hn8967hn589nhg6
-                                    }
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                user_success_token:
+                                    $ref: '#/components/examples/user_success_token'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
     /api/auth/linkedin:
         get:
             summary: Request the linkedin authentication page
             tags: [Auth]
             responses:
                 200:
-                    description: Open the link in the browser
+                    description: Success
                     content:
                         application/json:
                             schema:
-                                message:
-                                    type: string
-                                    description: description of the response
-                                data:
-                                    type: object
-                                    properties:
-                                        url:
-                                            type: string
-                            example:
-                                message: Open the link in the browser
-                                data:
-                                    {
-                                        url: https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78kdmirvbesua2&redirect_uri=http://localhost:5000/api/auth/linkedin/callback&state=FDfbdgFHDfsfoFUDHPSDSFd&scope=openid%20email%20profile
-                                    }
-
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                user_success_linkedin:
+                                    $ref: '#/components/examples/user_success_linkedin'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
     /api/auth/linkedin/callback:
         get:
             summary: Get the user from a linkedin account
             tags: [SERVER]
-
             responses:
                 200:
-                    description: Logged with a prevoius account
+                    description: Success
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Response'
-
-                201:
-                    description: Create a new account
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                user_success:
+                                    $ref: '#/components/examples/user_success'
+                400:
+                    description: Request error
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Response'
-
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_repetead:
+                                    $ref: '#/components/examples/user_error_repetead'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
     /api/auth/request-reset-password:
         post:
             summary: Request a password reset
@@ -186,21 +209,42 @@ paths:
                     application/json:
                         schema:
                             type: object
+                            properties:
+                                email:
+                                    type: string
+                                    description: the email of the user account
+                            required:
+                                - email
                             example:
                                 email: foo@bar.com
             responses:
                 200:
-                    description: Request for Password reset was succesfull
+                    description: Success
                     content:
                         application/json:
                             schema:
-                                type: object
-                                example:
-                                    msg:
-                                        Request for Password reset was
-                                        succesfull
-                                    data: http://localhost:5000/api/auth/reset-password?token=fa95483efa67bfe3cfcfb683370536c33587ceb7c8c2f8855873c66160b05d82&uid=63e40fe2aa7f165c18c0520b
-
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                user_success_request_reset_password:
+                                    $ref: '#/components/examples/user_success_request_reset_password'
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_inexistent:
+                                    $ref: '#/components/examples/user_error_inexistent'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
     /api/auth/validate-account:
         get:
             parameters:
@@ -208,7 +252,6 @@ paths:
                   name: token
                   schema:
                       type: string
-
                   required: true
                   description: The user token from current session
                 - in: query
@@ -217,14 +260,31 @@ paths:
                       type: string
                   required: true
                   description: The user id
-            summary: Validate the user account when is requested  -ONLY SERVER
+            summary: Validate the user account when is requested -ONLY SERVER-
             tags: [SERVER]
-
             responses:
                 200:
                     description:
-                        Show a succes screen when the account is activated
-
+                        'Success: show a succes screen when the account is
+                        activated'
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_invalid_token:
+                                    $ref: '#/components/examples/user_error_invalid_token'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
     /api/auth/reset-password:
         get:
             parameters:
@@ -232,7 +292,6 @@ paths:
                   name: token
                   schema:
                       type: string
-
                   required: true
                   description: The user token from current session
                 - in: query
@@ -241,14 +300,29 @@ paths:
                       type: string
                   required: true
                   description: The user id
-            summary: Render page for changue password -  ONLY FOR SERVER
+            summary: Render page for changue password -ONLY SERVER-
             tags: [SERVER]
-
             responses:
                 200:
-                    description: Loads the page for password changue
-
-    api/auth/reset-password:
+                    description: 'Success: Loads the page for password changue'
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_url:
+                                    $ref: '#/components/examples/user_error_url'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
         post:
             parameters:
                 - in: query
@@ -263,7 +337,7 @@ paths:
                       type: string
                   required: true
                   description: The user id
-            summary: Validates entered passwords and saves to DB- ONLY SERVER
+            summary: Validates entered passwords and saves to DB -ONLY SERVER-
             tags: [SERVER]
             requestBody:
                 required: true
@@ -271,9 +345,34 @@ paths:
                     application/json:
                         schema:
                             type: object
+                            properties:
+                                password:
+                                    type: string
+                                    description:
+                                        the password of the user account
+                            required:
+                                - password
                             example:
                                 password: foobar
             responses:
                 200:
                     description:
                         The password was updated and redirect to succes page
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_invalid_token:
+                                    $ref: '#/components/examples/user_error_invalid_token'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
