@@ -93,7 +93,7 @@ const favorite=async(req,res)=>{
 
         const user = await User.findById(uid);
         const doc = await models[place].findById(id);
-console.log(uid);
+
         if (!doc) {
             return response.error(req, res, 'Your document does not exist', 400);
         }

@@ -90,7 +90,7 @@ const getUserChannels = async (req, res) => {
         if (!user) {
             return response.error(req, res, 'User not found', 404);
         }
-        return response.success(req,res,'Channels found successfully',channels, 200);
+        return response.success(req,res,'Channels found successfully',user, 200);
     } catch (error) {
         console.error(error);
         return res.status(500).send({ error: 'An error has occurred' });

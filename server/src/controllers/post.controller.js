@@ -162,7 +162,7 @@ const getComments = async (req, res) => {
 
             return obj;
         });
-        console.log(commentsPopulated);
+    
         return response.success(req, res, 'Comments :', commentsPopulated, 200);
     } catch (e) {
         console.log(e);
