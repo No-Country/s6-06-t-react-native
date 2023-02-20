@@ -1,22 +1,12 @@
-// router.use(validatorJWT)
-
-// router.post('/new/:channel',  post.createPost )
 // router.put('/update/:id',  post.updatePost)
 // router.delete('/:id', isAdmin,  post.PostsRemove)
 // //router.put('/favorite/:id', post.postFavoriteUser)
-// router.get('/comments/:id', post.getComments)
 
-
-
-// const expect = require("chai").expect;
- const { app } = require("..");
+const { app } = require("..");
 const { Post } = require("../src/models");
-// var request = require('supertest')(app)
-// var host = process.env.URL;
-// //var request = supertest.agent(app)
-
 const request = require("supertest")(app);
 const expect = require("chai").expect;
+
 
 describe("GET /api/post/all",  function () {
 
@@ -26,93 +16,64 @@ this.beforeAll(async function () {
   total= (await Post.find()).length
 })
 
-  it("returns all posts, limited to 10 per page", async function () {
-    const response = await request.get("/api/post/all").set("x-token", process.env.TEST);
+  it("returns all posts, limited to 10 per page , only if user is admin", async function () {
+    const response = await request.get("/api/post/all").query(`from=0&to=10` ).set("x-token", process.env.TEST);
 
     expect(response.status).to.eql(200);
-    expect(response.body.data.length).to.eql(total)
+    expect(response.header["content-range"]).to.eql(String(total))
+    expect(response.body.data).to.have.lengthOf(10);
     expect(response.body.data[0].id).to.be.a("string")
   });
 
-  it("returns all posts, only if user is admin", async function () {
+
+  it("returns  error, if user isnt admin", async function () {
     const response = await request.get("/api/post/all").set("x-token", process.env.USER_TEST);
 
     expect(response.status).to.eql(403);
   });
 });
+
+describe("POST /api/post/new/:channel",  function () {
+
+ const general="63e3dc46a5dd297fac1ca2a2"
+
+    it("Create a new post in specific channel", async function () {
+      const response = await request.post(`/api/post/new/${general}`)
+      .send({title:"TESTING",description:"DESDE TESTING"})
+      .set("x-token", process.env.USER_TEST);
+  
+      expect(response.status).to.eql(201);
+      const post=response.body.data
+      expect(post.channel.name).to.eql("General")
+      expect(post.title).to.eql("TESTING")
+
+    });
+  
+  });
+
+describe("GET /api/post/comments/:id",  function () {
+
+  const post="63ef96cffd82c2329516553a"
+
+    it("returns all post comments , only active and with autors name ", async function () {
+      const response = await request.get(`/api/post/comments/${post}`).set("x-token", process.env.TEST);
+  
+      expect(response.status).to.eql(200);
+      expect(response.body.data).to.be.instanceOf(Array)
+      expect(response.body.data[0]).to.have.property("reactions")
+      expect(response.body.data[0]).to.have.property("author")
+
+      response.body.data.map(comment=>{
+        return expect(comment.active).to.not.be.false
+      })
+      
+    });
+  
+  
+    it("returns  error, if user isnt admin", async function () {
+      const response = await request.get("/api/post/all").set("x-token", process.env.USER_TEST);
+  
+      expect(response.status).to.eql(403);
+    });
+  });
             
-
-
-// describe("GET /api/posts/all ",  function () {
-//   it("returns all airports, limited to 30 per page",async function  (done) {
-//     const response = await request.get("/api/post/all").set("x-token", process.env.TEST)
-
-//     expect(response.status).toEqual(200,done)
-//     // expect(response.body.data.length).toEqual(51)
-//     // expect(response.body.data[0].id).to.be.a("string",done)
-//   });
-// });
-// /**
-//  * Testing user endpoint by giving an existing user
-//  */
-// describe("GET /users/:id", () => {
-//   it("respond with json containing a single user", (done) => {
-//     request(app)
-//       .get("/users/U0001")
-//       .set("Accept", "application/json")
-//       .expect("Content-Type", /json/)
-//       .expect(200, done);
-//   });
-
-//   it("respond with json user not found when the user does not exists", (done) => {
-//     request(app)
-//       .get("/users/nonexistinguser")
-//       .set("Accept", "application/json")
-//       .expect("Content-Type", /json/)
-//       .expect(404)
-//       .expect('"user not found"')
-//       .end((err) => {
-//         if (err) return done(err);
-//         done();
-//       });
-//   });
-// });
-
-// /**
-//  * Testing POST users endpoint
-//  */
-// describe("POST /users", () => {
-//   it("respond with 201 created", (done) => {
-//     const data = {
-//       username: "fazt",
-//       password: "password123",
-//     };
-//     request(app)
-//       .post("/users")
-//       .send(data)
-//       .set("Accept", "application/json")
-//       .expect("Content-Type", /json/)
-//       .expect(201)
-//       .end((err) => {
-//         if (err) return done(err);
-//         done();
-//       });
-//   });
-
-//   it("respond with 400 on bad request", (done) => {
-//     const data = {
-//       // no username and password
-//     };
-//     request(app)
-//       .post("/users")
-//       .send(data)
-//       .set("Accept", "application/json")
-//       .expect("Content-Type", /json/)
-//       .expect(400)
-//       .expect('"user not created"')
-//       .end((err) => {
-//         if (err) return done(err);
-//         done();
-//       });
-//   });
-//});
