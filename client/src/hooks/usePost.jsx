@@ -23,7 +23,7 @@ export const usePost = (url, token)=>{
             console.log(error)
         }
     }
-    console.log(Post);
+    // console.log(Post);
     return {
         Post
     }
