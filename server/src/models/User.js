@@ -81,7 +81,29 @@ const userSchema = new Schema(
             {
                 jobTitle: {
                     type: String
+                },
+                jobType:{
+                  type:String
+                },
+                company:{
+                  type:String
+                },
+                location:{
+                  type:String
+                },
+                yearIn:{
+                  type:String
+                },
+                yearOut:{
+                  type:String
+                },
+                current:{
+                  type:Boolean
+                },
+                description:{
+                  type:String
                 }
+
             }
         ],
         education: [
