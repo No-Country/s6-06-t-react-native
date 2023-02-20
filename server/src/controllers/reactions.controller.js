@@ -13,7 +13,6 @@ const make = async (req, res) => {
         io.emit('reaction-new-in-post', { reaction: reactions });
         return response.success(req, res, 'Successful reaction', 200);
     } catch (error) {
-        console.log(error);
         if (error.message === 'no-doc')
             return response.error(req, res, 'Document not found', 404);
         return response.error(req, res, 'Contact Admin', 500);
@@ -32,7 +31,6 @@ const remove = async (req, res) => {
         //io.emit('reaction-new-in-post', { reaction: newReaction });
         return response.success(req, res, 'Reaction successfully removed', 200);
     } catch (error) {
-        console.log(error);
         if (error.message === 'no-doc')
             return response.error(req, res, 'Document not found', 404);
         return response.error(req, res, 'Contact Admin', 500);
