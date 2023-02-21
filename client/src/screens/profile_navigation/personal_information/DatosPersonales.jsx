@@ -51,13 +51,13 @@ const DatosPersonales = () => {
 
   const isLoggedIn = async () => {
     try {
-      let userData = await AsyncStorage.getItem("userData");
-      userData = JSON.parse(userData);
+      const userData = await AsyncStorage.getItem("userData");
       if (userData) {
-        setUserInfo(userData);
-        setName(userData.fullName);
-        setPhone(userData.phone);
-        setEmail(userData.email);
+        const parsedUserData = JSON.parse(userData);
+        setUserInfo(parsedUserData);
+        setName(parsedUserData.fullName);
+        setPhone(parsedUserData.phone);
+        setEmail(parsedUserData.email);
       }
     } catch (e) {
       console.log("Is logged in error : " + e);
@@ -67,9 +67,10 @@ const DatosPersonales = () => {
   useEffect(() => {
     isLoggedIn();
     if (userInfo) {
-      setName(userInfo.name);
-      setPhone(userInfo.phone);
-      setEmail(userInfo.email);
+      const { name, phone, email } = userInfo;
+      setName(name);
+      setPhone(phone);
+      setEmail(email);
     }
   }, []);
 
