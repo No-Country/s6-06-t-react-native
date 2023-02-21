@@ -7,9 +7,8 @@ import { useState } from 'react';
 import AmountCommentsAndReactions from './AmountCommentsAndReactions';
 
 export default function CardPost({data}) {
-    let shorDataBody = data.description.length >=150 && data.description.slice(0, 150)
+    let shorDataBody = data?.description?.length >=150 && data.description.slice(0, 150)
     const [short, setShort] = useState(false);
-    console.log(data)
     return (
         <View style={styles.PostCard} >
             { data.important &&  <Pinned data={data.author} />}
@@ -17,7 +16,7 @@ export default function CardPost({data}) {
             <HeaderCard data={data.author} date={data.createdAt}/>
            
             <View style={styles.BodyPost}>
-                {data.description.length > 150 ? 
+                {data?.description?.length > 150 ? 
                     <Text style={styles.TextBody} >{short ? data.BodyPost  : shorDataBody + '...'}  <Text onPress={()=> setShort(!short)} style={styles.buttonShortPost} >{short ? 'Ocultar' : 'Ver mas'}</Text></Text> 
                     :
                     <Text style={styles.TextBody} >{data.description}</Text>

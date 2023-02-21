@@ -12,6 +12,7 @@ export default function AmountCommentsAndReactions({countComments, apoyar, hacer
   return (
     <View style={styles.ContainCommentReaction}>
       <View style={styles.containReaction} >
+        
         {/* <Image source={icons.smile} style={{width:20, height:20}}/>
         <Image source={icons.heart} style={{width:20, height:20}}/>
         <Image source={icons.claping} style={{width:20, height:20}}/> */}

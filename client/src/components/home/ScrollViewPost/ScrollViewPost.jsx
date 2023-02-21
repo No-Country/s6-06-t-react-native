@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { FlatList, ScrollView, Text } from 'react-native';
 import { styles } from './styles'
 import PostDayWrapper from './PostDayWrapper';
 
@@ -34,21 +34,18 @@ const ScrollViewPost = ({ post }) => {
     if (!group) {
         return <Text>Cargando...</Text>
     }
+
     return (
         <>
-
-            <ScrollView style={styles.scroll} 
-                contentOffset={{x: 0, y: 1000}}
-            >
-                {
-                    group.map((p, i) => (
-                        <PostDayWrapper
-                            group={p}
-                            key={i}
-                        />))
-
-                }
-            </ScrollView>
+            <FlatList 
+             data={group}
+             numColumns={1}
+             showsVerticalScrollIndicator={false}
+             keyExtractor={(group, i)=> String(i) }
+             renderItem={({item})=> (<PostDayWrapper group={item} />)}
+             contentContainerStyle={styles.flatListContain}
+             inverted={true}
+            />
         </>
     );
 }

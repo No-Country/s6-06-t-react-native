@@ -5,7 +5,7 @@ import { styles } from './styles'
 export default function InfoComunity({Channel}) {
     return (
         <View style={styles.typeComunity}>
-            <Text style={styles.subtitle}>Canal {Channel}</Text>
+            <Text style={styles.subtitle}>{Channel}</Text>
             <View style={styles.imgsUsers}>
                 <Image source={require('../../../../assets/users.jpeg')} style={[styles.imgUserComunity, { top: 0, left: 0 }]} />
                 <Image source={require('../../../../assets/users.jpeg')} style={[styles.imgUserComunity, { top: 0, left: 40 }]} />
