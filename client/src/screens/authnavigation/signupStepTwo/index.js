@@ -73,7 +73,7 @@ const RegistroStepTwo = () => {
         jobArea: allData.jobArea,
         education: [{ educationalLevel: allData.educationalLevel }],
       });
-      console.log(response);
+      // console.log(response);
       navigation.navigate("SignUpStepThree");
     } catch (error) {
       console.log(error);

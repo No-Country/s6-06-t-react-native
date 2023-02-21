@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
     borderRadius: 15,
     width: "100%",
     marginBottom: 5,
-    color: "#000",
     borderWidth: 0,
   },
   inputSelected: {
@@ -34,6 +33,7 @@ export const styles = StyleSheet.create({
     borderBottomLeftRadius: 0,
     borderBottomWidth: 0,
     backgroundColor: "#fff",
+    color: "#626A6D",
   },
   lastInputSelected: {
     width: "100%",
@@ -51,13 +51,7 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: "left",
     padding:0
-  },
-  defaultTextInput: {
-    color: "#000",
-    fontSize: 15,
-    textAlign: "left",
-    padding:0
-  },
+  }, 
   optionText: {
     textAlign: "left",
     fontSize: 18,
