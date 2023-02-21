@@ -137,7 +137,7 @@ const getPostsChannel = async (req, res) => {
 
         if (!channel) response.error(req, res, 'invalid channel', 400);
         const users = await User.find({ channels: id }).select('_id');
-        const posts = await Post.find({ channel: id })
+        const posts = await Post.find({ channel: id }).sort({createdAt: -1})
             .skip(Number(from))
             .limit(Number(to))
 
