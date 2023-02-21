@@ -9,6 +9,7 @@ import {
   TextInput,
   Dimensions,
 } from "react-native";
+import PrimaryButton from "../../../../components/PrimaryButton";
 import { colors } from "../../../../constants";
 
 const SobreMi = ({ data }) => {
@@ -44,7 +45,7 @@ const SobreMi = ({ data }) => {
       </TouchableOpacity>
       <View style={styles.txtcontainer}>
         <Text style={styles.text}>
-          {data
+          {data && data.about
             ? data.about
             : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
         </Text>
@@ -82,6 +83,7 @@ const SobreMi = ({ data }) => {
           <View style={styles.numContainer}>
             <Text>{aboutMe.length ? aboutMe.length : 0}/3000</Text>
           </View>
+          <PrimaryButton text="Guardar" handler={""} />
         </View>
       </Modal>
     </View>
