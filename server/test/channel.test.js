@@ -1,16 +1,9 @@
 const { app } = require('..');
-const { Post, Channel } = require('../src/models');
+const {  Channel } = require('../src/models');
 const request = require('supertest')(app);
 const expect = require('chai').expect;
 
-// router.post("/new",  isAdmin, verifyChannel.create,  channel.createChannel)
-//       .put('/:id',  isAdmin,verifyChannel.edit, channel.updateChannel)
-//       .delete('/:id',  isAdmin,verifyChannel.remove, channel.deleteChannel)
-
-//       .get('/user',  channel.getUserChannels)
-//       .get('/:id', channel.getPostsChannel)
-
-describe('GET /api/channel/all as user', function () {
+describe('GET /api/channel/all ', function () {
     let total;
 
     this.beforeAll(async function () {
@@ -26,29 +19,126 @@ describe('GET /api/channel/all as user', function () {
         expect(response.status).to.eql(200);
         expect(response.header['content-range']).to.eql(String(total));
         expect(response.body.data.count).to.eql(total);
+    });
+});
+
+describe('GET /api/channel/user ', function () {
+    it('returns all channels user is joined ', async function () {
+        const response = await request
+            .get('/api/channel/user')
+            .set('x-token', process.env.TEST);
+
+        expect(response.statusCode).to.eql(200);
+        expect(response.body.data.channels).to.be.instanceOf(Array);
+        expect(response.body.data.channels[0].name).to.eql('General');
+    });
+});
+
+describe('GET /api/channel/:id ', function () {
+    const channel = '63e3dc46a5dd297fac1ca2a2';
+    it('returns all posts in specific channel', async function () {
+        const response = await request
+            .get(`/api/channel/${channel}`)
+            .set('x-token', process.env.TEST);
+
+        expect(response.statusCode).to.eql(200);
+
+        const posts = response.body.data.posts;
+
+        posts.map((post) =>
+            expect(post).to.have.any.keys('id', 'title', 'author', 'channel')
+        );
+    });
+});
+
+
+const name = 'Test';
+
+describe('POST /api/channel/new ', function () {
+    it('Create new channel only if is admin ', async function () {
         
+        let response = await request
+            .post(`/api/channel/new`)
+            .send({ name, typechannel: 'public' })
+            .set('x-token', process.env.TEST);
+
+        expect(response.statusCode).to.eql(201);
+        expect(response.body.data.name).to.eql(name);
+
+        response = await request
+            .post(`/api/channel/new`)
+            .send({ name, typechannel: 'public' })
+            .set('x-token', process.env.TEST);
+
+        expect(response.statusCode).to.eql(400);
+
+        response = await request
+            .post(`/api/channel/new`)
+            .send({ name, typechannel: 'public' })
+            .set('x-token', process.env.USER_TEST);
+
+        expect(response.statusCode).to.eql(403);
+    });
+});
+
+describe('PUT /api/channel/:id', function () {
+    it('Update a specific Channel , only admin', async function () {
+        let channel = await Channel.findOne({  name });
+
+        let response = await request
+            .put(`/api/channel/${channel.id}`)
+            .send({
+                title: 'CAMBIADO DESDE TESTING'
+            })
+            .set('x-token', process.env.USER_TEST);
+
+        expect(response.status).to.eql(403);
+
+        response = await request
+        .put(`/api/channel/${channel.id}`)
+        .send({
+            name: 'CAMBIADO DESDE TESTING'
+        })
+        .set('x-token', process.env.TEST);
+
+        expect(response.status).to.eql(200)
+        expect(response.body.data.name).to.eql('CAMBIADO DESDE TESTING');
+    });
+});
+
+describe('DELETE /api/channel/:id', function () {
+    let channel;
+    this.beforeAll(async function () {
+        channel = await Channel.findOne({  name: 'CAMBIADO DESDE TESTING' });
     });
 
-    describe('GET /api/channel/user ', function () {
+    it('Delete a specific Channel if is Admin user', async function () {
+        let response = await request
+            .delete(`/api/channel/${channel.id}`)
+            .set('x-token', process.env.USER_TEST);
 
-    
-        it('returns all channels user is joined ', async function () {
-            const response = await request
-                .get('/api/channel/user')
-                .set('x-token', process.env.TEST);
-     
-            expect(response.status).to.eql(200);
-       
-           // expect(response.body.data).to.eql(total);
-            
-        });
+        expect(response.status).to.eql(403);
 
-    // it('returns  error, if user isnt admin', async function () {
-    //     const response = await request
-    //         .get('/api/post/all')
-    //         .set('x-token', process.env.USER_TEST);
+        response = await request
+        .delete(`/api/channel/${channel.id}`)
+            .set('x-token', process.env.TEST);
 
-    //     expect(response.status).to.eql(403);
-    // });
-})
-})
+        expect(response.status).to.eql(200);
+
+        expect(response.body.data.name).to.eql(channel.name);
+
+
+    });
+
+    it('Should fail with 400 status code', async function () {
+        const channel = { id: '63f3968e47d46f637062e2f8' };
+
+        const response = await request
+            .delete(`/api/channel/${channel.id}`)
+            .set('x-token', process.env.TEST);
+
+        expect(response.status).to.eql(404);
+    });
+});
+
+

@@ -41,6 +41,8 @@ const remove = async (id) => {
 
     const post = await Post.findById(id);
 
+    if(!post) return "no-post"
+
     if (post) {
         //PROBAR SI FUNCIONA !!!
         await Comment.deleteMany({ post: post.id });

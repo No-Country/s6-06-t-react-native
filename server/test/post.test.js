@@ -3,6 +3,7 @@ const { Post } = require('../src/models');
 const request = require('supertest')(app);
 const expect = require('chai').expect;
 
+
 describe('GET /api/post/all', function () {
     let total;
 
@@ -137,8 +138,8 @@ describe('DELETE /api/post/:id', function () {
             .delete(`/api/post/${post.id}`)
             .set('x-token', process.env.TEST);
 
-        expect(response.status).to.eql(500);
-    });//Refactorizar servicio, no esta devolviendo respuesta adecuada
+        expect(response.status).to.eql(400);
+    });
 
      //AGREGAR OTRO USUARIO SIN ADMIN e INTENTAR MODIFICAR => 401
 });

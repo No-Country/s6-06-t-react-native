@@ -71,9 +71,10 @@ const PostsRemove = async (req, res) => {
 
     try {
         const removePost = await postsServices.remove(id);
+      
         if (!removePost)
             return response.error(req,res,'There is a problem with the post that you want to remove!!',400);
-
+            if (removePost==="no-post")  return response.error(req,res,'There is a problem with the post that you want to remove!!',400); 
         return response.success(req, res, 'Post deleted', removePost, 200);
     } catch (error) {
         console.log(error);

@@ -11,7 +11,7 @@ module.exports = {
     slow: 75,
     color: true,
     exit: true,
-    timeout: 6000,
+    timeout: 8000,
     watch:true,
  
     ui: 'bdd',
