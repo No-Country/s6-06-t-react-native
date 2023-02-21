@@ -33,9 +33,7 @@ const PerfilProfesional = () => {
         <View style={styles.ppContainer}>
           <View>
             <Image
-              source={{
-                uri: "https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg",
-              }}
+              source={{ uri: profileImg }}
               style={{ width: 100, height: 100 }}
             />
             <TouchableOpacity style={styles.ppButton}>
