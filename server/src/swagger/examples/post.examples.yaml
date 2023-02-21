@@ -1,0 +1,115 @@
+components:
+    examples:
+        posts_success:
+            value:
+                message: All posts
+                data:
+                    [
+                        {
+                            author:
+                                {
+                                    id: '63eed21c50dc48caefd007de',
+                                    fullName: 'Michael Fox'
+                                },
+                            title: 'Time travels',
+                            description:
+                                'Hello friends, I had an incredible experience
+                                with Doc.',
+                            channel:
+                                {
+                                    id: '63e3dc46a5dd297fac1ca2a2',
+                                    name: 'General'
+                                },
+                            attached: [],
+                            important: false,
+                            createdAt: '2023-02-20T21:51:27.693Z',
+                            updatedAt: '2023-02-20T21:52:11.964Z',
+                            id: '63f3eb5fadca07af0b14a1b6'
+                        },
+                        {
+                            author:
+                                {
+                                    id: '63eed21c50dc48caefd007de',
+                                    fullName: 'Michael Fox'
+                                },
+                            title: 'Chaos theory',
+                            description:
+                                "I need someone to explain this to me. It's for
+                                school",
+                            channel:
+                                {
+                                    id: '63e3dc46a5dd297fac1ca2a2',
+                                    name: 'General'
+                                },
+                            attached: [],
+                            important: false,
+                            createdAt: '2023-02-20T21:51:27.693Z',
+                            updatedAt: '2023-02-20T21:52:11.964Z',
+                            id: '63f3eb5fadca07af0b14a1b6'
+                        }
+                    ]
+        post_comments_success:
+            value:
+                message: 'Comments:'
+                data: []
+        post_created:
+            value:
+                message: 'Post created successfully:'
+                data:
+                    {
+                        author:
+                            {
+                                id: '63eed21c50dc48caefd007de',
+                                fullName: 'Michael Fox'
+                            },
+                        title: 'Chaos theory',
+                        description:
+                            "I need someone to explain this to me. It's for
+                            school",
+                        channel:
+                            { id: '63e3dc46a5dd297fac1ca2a2', name: 'General' },
+                        attached: [],
+                        important: false,
+                        createdAt: '2023-02-20T21:51:27.693Z',
+                        updatedAt: '2023-02-20T21:52:11.964Z',
+                        id: '63f3eb5fadca07af0b14a1b6'
+                    }
+        post_creation_error:
+            value:
+                error: 'Post creation failed'
+        post_updated:
+            value:
+                message: Post updated
+                data:
+                    {
+                        author:
+                            {
+                                id: '63eed21c50dc48caefd007de',
+                                fullName: 'Michael Fox'
+                            },
+                        title: 'Chaos theory',
+                        description:
+                            "I need someone to explain this to me. It's for
+                            school",
+                        channel:
+                            { id: '63e3dc46a5dd297fac1ca2a2', name: 'General' },
+                        attached: [],
+                        important: false,
+                        createdAt: '2023-02-20T21:51:27.693Z',
+                        updatedAt: '2023-02-20T21:52:11.964Z',
+                        id: '63f3eb5fadca07af0b14a1b6'
+                    }
+        post_inexistent:
+            value:
+                error: 'Post not found'
+        post_unauthorized:
+            value:
+                error: 'Unauthorized user'
+        post_deleted:
+            value:
+                message: Post deleted
+                data: 63e567b356a174cab6fdb95c
+        post_error_remove:
+            value:
+                error:
+                    There is a problem with the post that you want to remove!!

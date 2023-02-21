@@ -1,6 +1,6 @@
 tags:
     name: Auth
-    description: Authentication endpoint
+    description: Authentication endpoints
 paths:
     /api/auth/new:
         post:

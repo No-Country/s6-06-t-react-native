@@ -29,15 +29,20 @@ components:
                     description: timestamp of the last connection
                 socketId:
                     type: string
+                    format: id
                     description: id of the socket
                 position:
                     type: string
                     description: the rol of the dev
                     enum:
-                        - fullstack
-                        - backend
-                        - frontend
-                        - uiux
+                        - 'Desarrollador/a Back-end'
+                        - 'Desarrollador/a Front-end'
+                        - 'Diseñador/a UX UI'
+                        - 'Diseñador/a UI'
+                        - 'Project Manager'
+                        - 'Team Leader'
+                        - 'Tester'
+                        - 'Otro'
                 img_avatar:
                     type: string
                     description: URL of the profile picture
@@ -52,11 +57,11 @@ components:
                     type: string
                     description: determines the work area
                     enum:
-                        - Diseño
-                        - Programación
-                        - Datos
-                        - Recursos humanos
-                        - Otros
+                        - 'Análisis de datos'
+                        - 'Desarrollo de Software  - Front / Back'
+                        - 'Diseño'
+                        - 'Testing'
+                        - 'Otros'
                 aboutme:
                     type: string
                     description: short description of the user
@@ -169,6 +174,7 @@ components:
                     description: account update date
                 uid:
                     type: string
+                    format: id
                     description: user identification code
                 token:
                     type: string

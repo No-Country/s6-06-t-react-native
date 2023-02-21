@@ -1,0 +1,230 @@
+tags:
+    name: Posts
+    description: Posts endpoints
+paths:
+    /api/post/all:
+        get:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+            summary: Get all the posts
+            tags: [Posts]
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                posts_success:
+                                    $ref: '#/components/examples/posts_success'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/post/comments/{post}:
+        get:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+                - in: params
+                  name: post
+                  schema:
+                      type: string
+                      format: id
+                  required: true
+                  description: the id of channel to  make the post
+            summary: Get the comments of a post
+            tags: [Posts]
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                post_comments_success:
+                                    $ref: '#/components/examples/post_comments_success'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/post/new/{channel}:
+        post:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+                - in: params
+                  name: channel
+                  schema:
+                      type: string
+                      format: id
+                  required: true
+                  description: The id of channel to make the post
+            summary: Create a new Post in a specific channel
+            tags: [Posts]
+            requestBody:
+                required: true
+                content:
+                    multipart/form-data:
+                        schema:
+                            $ref: '#/components/schemas/post_new'
+            responses:
+                201:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                post_created:
+                                    $ref: '#/components/examples/post_created'
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                post_creation_error:
+                                    $ref: '#/components/examples/post_creation_error'
+    /api/post/update/{post}:
+        put:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+                - in: params
+                  name: post
+                  schema:
+                      type: string
+                      format: id
+                  required: true
+                  description: The id of post to update
+            summary: Edit a post
+            tags: [Posts]
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/post_edit'
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                post_updated:
+                                    $ref: '#/components/examples/post_updated'
+                401:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                post_unauthorized:
+                                    $ref: '#/components/examples/post_unauthorized'
+                404:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                post_inexistent:
+                                    $ref: '#/components/examples/post_inexistent'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/post/{post}:
+        delete:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+                - in: params
+                  name: post
+                  schema:
+                      type: string
+                      format: id
+                  required: true
+                  description: The id of post to update
+            summary: Delete a post
+            tags: [Posts]
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                post_deleted:
+                                    $ref: '#/components/examples/post_deleted'
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                post_error_remove:
+                                    $ref: '#/components/examples/post_error_remove'
+                401:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                post_unauthorized:
+                                    $ref: '#/components/examples/post_unauthorized'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                post_inexistent:
+                                    $ref: '#/components/examples/post_inexistent'

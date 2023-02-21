@@ -1,67 +1,86 @@
 components:
     schemas:
-        Post:
+        post_response:
             type: object
             properties:
-                fullName:
+                author:
+                    type: object
+                    description: the author of the post
+                    properties:
+                        id:
+                            type: string
+                            format: id
+                        fullName:
+                            type: string
+                title:
                     type: string
-                    description: the name of the user
-                email:
+                    description: the title of the post
+                description:
                     type: string
-                    description: the email of the user account
-                password:
-                    type: string
-                    description: the encrypted password of the user account
-                emailisvalidated:
+                    description: the body of the post
+                channel:
+                    type: object
+                    description: channel where the post was made
+                    properties:
+                        id:
+                            type: string
+                            format: id
+                        name:
+                            type: string
+                attached:
+                    type: array
+                    description: urls of the attached files in the publication
+                    items:
+                        type: string
+                important:
                     type: boolean
-                    description: determines if the email was validated
-                admin:
-                    type: boolean
-                    description: determines if the user is admin
-                selected:
-                    type: boolean
-                    description: determines if the user belongs to selected
-                active:
-                    type: boolean
-                    description: determines if the account is active
-                isOnline:
-                    type: boolean
-                    description: determines if the user is online
-                lastSeen:
-                    type: number
-                    description: timestamp of the last connection
-                socketId:
+                    description: determines if the post was made by an admin
+                createdAt:
                     type: string
-                    description: id of the socket
-                position:
+                    description: post creation date
+                updatedAt:
                     type: string
-                    description: the rol of the dev
-                    enum:
-                        - fullstack
-                        - backend
-                        - frontend
-                        - uiux
-                availability:
+                    description: post update date
+                id:
                     type: string
-                    description: the shift available to work
-                technologies:
+                    format: id
+                    description: identification code of the post
+        post_edit:
+            type: object
+            properties:
+                title:
                     type: string
-                    description: technologies that you know
-                phone:
+                    description: the title of the post
+                description:
                     type: string
-                    description: the phone number
-            required:
-                - fullName
-                - email
-                - password
-                - availability
-                - technologies
-                - position
+                    description: the body of the post
+                attached:
+                    type: array
+                    description: urls of the attached files in the publication
+                    items:
+                        type: string
             example:
-                fullName: Michael
-                email: foo@bar.com
-                password: fooBar
-                availability: 'Mañana'
-                technologies: ['HTML', 'CSS']
-                phone: '4587123656'
-                position: 'fullstack'
+                title: 'New title'
+                description: 'New description'
+        post_new:
+            type: object
+            properties:
+                title:
+                    type: string
+                    description: the title of the post
+                description:
+                    type: string
+                    description: the body of the post
+                attached:
+                    type: array
+                    description: urls of the attached files in the publication
+                    items:
+                        type: string
+                        format: binary
+            required:
+                - title
+                - description
+            example:
+                title: 'Time travels'
+                description:
+                    'Hello friends, I had an incredible experience with Doc.'
