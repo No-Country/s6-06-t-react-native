@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     View,
   } from "react-native";
+import { colors } from "../constants/colors";
   
   const SecondaryButton = ({text, handler}) => {
     const HandleLogin = () => {/*LOGICA LOGIN*/};
@@ -12,7 +13,7 @@ import {
     return (
       <View>
         <TouchableOpacity onPress={handler} style={styles.signIn}>
-          <Text style={{ color: "#4245E5", fontWeight: "600" }}>
+          <Text style={{ color: colors.primary, fontWeight: "600" }}>
             {text}
           </Text>
         </TouchableOpacity>
@@ -32,7 +33,7 @@ import {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      borderColor:"#4245E5",
+      borderColor:colors.primary,
       borderWidth: 1.5,
     },
   });

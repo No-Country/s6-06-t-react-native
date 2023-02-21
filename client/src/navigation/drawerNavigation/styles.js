@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../../constants/colors';
 
 export const styles = StyleSheet.create({
     globalMargin: {
@@ -35,7 +36,7 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '700',
         marginVertical: 5,
-        color: '#4245E5',
+        color: colors.primary,
     },
     rol: {
         color: '#ACB4BE',
