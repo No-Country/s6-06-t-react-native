@@ -1,5 +1,5 @@
 const response = require('../helpers/response');
-const { Channel, User, Post, IsRead } = require('../models');
+const { Channel, User, Post, IsRead, Reaction } = require('../models');
 
 const createChannel = async (req, res) => {
     //TODO:AGREGAR USUARIOS SI ES PRIVADO O TODOS SI ES PUBLICO
@@ -7,7 +7,13 @@ const createChannel = async (req, res) => {
     await channel
         .save()
         .then((newChannel) => {
-            return response.success(req,res,'Channel created successfully',newChannel,201);
+            return response.success(
+                req,
+                res,
+                'Channel created successfully',
+                newChannel,
+                201
+            );
         })
         .catch((error) => {
             console.log(error);
@@ -26,9 +32,21 @@ const updateChannel = async (req, res) => {
             { new: true }
         );
         if (!updatedChannel) {
-            return response.error( req,res,'Channel not found',updatedChannel,404);
+            return response.error(
+                req,
+                res,
+                'Channel not found',
+                updatedChannel,
+                404
+            );
         }
-        return response.success(req,res,'Updated channel',updatedChannel,200);
+        return response.success(
+            req,
+            res,
+            'Updated channel',
+            updatedChannel,
+            200
+        );
     } catch (error) {
         return response.error(req, res, 'Contact Admin', 500);
     }
@@ -64,20 +82,26 @@ const deleteChannel = async (req, res) => {
 };
 
 const getAllChannels = async (req, res) => {
-    const { from, to,filter } = req.query;
+    const { from, to, filter } = req.query;
     const regex = { $regex: filter, $options: 'i' };
-const query={
-    $or: [{ name: regex }, { typechannel: regex }]
-}
+    const query = {
+        $or: [{ name: regex }, { typechannel: regex }]
+    };
     try {
-        const channels = await Channel.find(filter?query:{});
+        const channels = await Channel.find(filter ? query : {});
 
         const data = {
             count: channels.length,
             channels
         };
         res.set('Content-Range', channels.length);
-        return response.success(req,res,'Channels found successfully', data, 200);
+        return response.success(
+            req,
+            res,
+            'Channels found successfully',
+            data,
+            200
+        );
     } catch (error) {
         return response.error(req, res, 'Contact Admin', 500);
     }
@@ -90,7 +114,13 @@ const getUserChannels = async (req, res) => {
         if (!user) {
             return response.error(req, res, 'User not found', 404);
         }
-        return response.success(req,res,'Channels found successfully',channels, 200);
+        return response.success(
+            req,
+            res,
+            'Channels found successfully',
+            channels,
+            200
+        );
     } catch (error) {
         console.error(error);
         return res.status(500).send({ error: 'An error has occurred' });
@@ -116,10 +146,11 @@ const getPostsChannel = async (req, res) => {
                 select: 'fullName position isOnline img_avatar'
             })
             .populate('countComments')
-            .populate('megusta')
-            .populate('apoyar')
-            .populate('meinteresa')
-            .populate('hacergracia');
+
+            .populate('megusta', 'user -post -_id')
+            .populate('apoyar', 'user -post -_id')
+            .populate('meinteresa', 'user -post -_id')
+            .populate('hacergracia', 'user -post -_id');
 
         const readPost = await IsRead.find({ uid, doc: { $in: posts } }).select(
             'doc -_id'

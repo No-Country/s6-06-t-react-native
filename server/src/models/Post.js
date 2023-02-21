@@ -57,6 +57,13 @@ postSchema.virtual('reactions', {
     foreignField: 'post'
 });
 
+// postSchema.virtual('like', {
+//     ref: 'reaction',
+//     localField: '_id',
+//     foreignField: 'post',
+//     match: { type__Reaction: "apoyar" }
+// });
+
 
 const reactions = ['megusta', 'meinteresa', 'apoyar', 'hacergracia'];
 
@@ -66,7 +73,7 @@ reactions.forEach((reaction) => {
         localField: '_id',
         foreignField: 'post',
         match: { type__Reaction: reaction },
-        count: true
+        
     });
 });
 
