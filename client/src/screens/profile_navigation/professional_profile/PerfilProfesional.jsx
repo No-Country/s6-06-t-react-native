@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BackButton from "../../../components/BackButton";
@@ -33,28 +27,30 @@ const PerfilProfesional = () => {
   const profileImg = userInfo ? userInfo.img_avatar : defaultImg;
 
   return (
-    <SafeAreaView style={styles.container}>    
-    <TopBar tabname="Perfil Profesional" navigateTo="Profile" />
-    <ScrollView>
-      <View style={styles.ppContainer}>
-        <View>
-          <Image
-            source={{ uri: profileImg }}
-            style={{ width: 100, height: 100 }}
-          />
+    <SafeAreaView style={styles.container}>
+      <TopBar tabname="Perfil Profesional" navigateTo="Profile" />
+      <ScrollView>
+        <View style={styles.ppContainer}>
+          <View>
+            <Image
+              source={{
+                uri: "https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg",
+              }}
+              style={{ width: 100, height: 100 }}
+            />
             <TouchableOpacity style={styles.ppButton}>
               <Feather name="edit" size={20} color="blue" />
             </TouchableOpacity>
+          </View>
+          <TouchableOpacity style={styles.editButton}>
+            <AntDesign name="edit" size={25} color="black" />
+          </TouchableOpacity>
+          <Text style={styles.name}>
+            {userInfo ? userInfo.fullName : "Camilo Vargas"}
+          </Text>
+          <Text style={styles.profession}> Software Developer</Text>
         </View>
-        <TouchableOpacity style={styles.editButton}>
-          <AntDesign name="edit" size={25} color="black" />
-        </TouchableOpacity>
-        <Text style={styles.name}>
-          {userInfo ? userInfo.fullName : "Camilo Vargas"}
-        </Text>
-        <Text style={styles.profession}> Software Developer</Text>
-      </View>
-      <View style={styles.progressContainer}>
+        <View style={styles.progressContainer}>
           <ProgressCircle progress={progress} />
 
           <View style={styles.Textcontainer}>
@@ -87,28 +83,35 @@ const PerfilProfesional = () => {
 
         {/* Disponibilidad */}
         <View style={styles.tab}>
-        <View style={{flexDirection: "row"}}>
-          <Text style={{ fontSize: 14, fontWeight: "500", }}>
-            Disponibilidad Horaria
-          </Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={{ fontSize: 14, fontWeight: "500" }}>
+              Disponibilidad Horaria
+            </Text>
           </View>
-          <View style={{flexDirection: "row", justifyContent:"space-between"}}>
-          <Text style={{ fontSize: 12, }}>Part-Time (12 a 17HS)</Text>
-          <AntDesign name="edit" size={20} color="black" />
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={{ fontSize: 12 }}>Part-Time (12 a 17HS)</Text>
+            <AntDesign name="edit" size={20} color="black" />
           </View>
         </View>
 
         <View style={styles.tab}>
-          <View style={{flexDirection: "row", justifyContent:"center"}}>
-          <Text style={{ fontSize: 14, fontWeight: "500", }}>
-            Area Laboral de Interes
-          </Text>
-          {/* middle bar separation */}
-          
+          <View style={{ flexDirection: "row", justifyContent: "center" }}>
+            <Text style={{ fontSize: 14, fontWeight: "500" }}>
+              Area Laboral de Interes
+            </Text>
+            {/* middle bar separation */}
           </View>
-          <View style={{flexDirection: "row", justifyContent:"space-between", width: "50%",}}>
-          <Text style={{ fontSize: 12, }}>Diseno</Text>
-          <AntDesign name="edit" size={20} color="black" />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: "50%",
+            }}
+          >
+            <Text style={{ fontSize: 12 }}>Diseno</Text>
+            <AntDesign name="edit" size={20} color="black" />
           </View>
         </View>
 
@@ -119,10 +122,9 @@ const PerfilProfesional = () => {
           <Herramientas />
           <Idiomas />
         </View>
-    </ScrollView>
+      </ScrollView>
     </SafeAreaView>
   );
 };
-
 
 export default PerfilProfesional;
