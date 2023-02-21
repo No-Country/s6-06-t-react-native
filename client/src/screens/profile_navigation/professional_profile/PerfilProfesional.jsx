@@ -24,7 +24,7 @@ const PerfilProfesional = () => {
     getUserData(setUserInfo);
   }, []);
 
-  const profileImg = userInfo ? userInfo.img_avatar : defaultImg;
+  const profileImg = userInfo ? userInfo.img_avatar : "../icons/profilepicture.png";
 
   return (
     <SafeAreaView style={styles.container}>
