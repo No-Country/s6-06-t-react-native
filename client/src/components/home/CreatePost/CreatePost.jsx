@@ -1,10 +1,45 @@
 import { Feather, FontAwesome, MaterialIcons } from '@expo/vector-icons';
-import React from 'react';
+import React, { useState } from 'react';
 import {View, StyleSheet, Text, TextInput} from 'react-native';
 import { colors } from '../../../constants';
+import { usePost, usePostCreate } from '../../../hooks/usePost';
 import { ScreenWidth } from '../../../utils/ScreenDimesions';
 
-const CreatePost = () => {
+const CreatePost = ({token,uidChannel, setAll}) => {
+    let {create, Response} = usePostCreate();
+    let { Post, getPosts} = usePost();
+    const [Focus, setFocus] = useState(false);
+    const [Form, setForm] = useState({
+        title : "new post",
+        description: '',
+        attached : ''
+    })
+    let handlerChangeInput = (e)=>{
+        setForm({
+            ...Form,
+            description : e
+        })
+    }
+    let handlerSend = async ()=>{
+        let response
+
+        if (Form.description.length > 0) {
+            response = await create(`/post/new/${uidChannel}`, token, Form)
+        }
+        if (response.status === 201) {
+            setForm({
+                ...Form,
+                description : ''
+            })
+            setFocus(false)
+            // let data = await getPosts(`/channel/${uidChannel}`, token)
+            // setAll(data)
+            
+            
+        }
+        
+    }
+
     return (
         <View style={styles.shadow}>
            <View style={styles.CreatePostContainer}>
@@ -15,10 +50,14 @@ const CreatePost = () => {
                         style={styles.input}
                         placeholder={"Publicar"}
                         placeholderTextColor={colors.facebook}
+                        onChangeText={handlerChangeInput}
+                        value={Form.description}
+                        onFocus={()=> setFocus(true)}
+                        
                     />
                     <View style={styles.iconsContain}>
                         <FontAwesome name="microphone" size={20} color={colors.facebook} />
-                        <Feather name="send" size={20} color={colors.facebook} />
+                        <Feather name="send" size={20} color={colors.facebook} onPress={handlerSend}/>
                     </View>
                 </View>
 

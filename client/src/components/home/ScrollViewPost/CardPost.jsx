@@ -13,6 +13,7 @@ export default function CardPost({ data }) {
   const [short, setShort] = useState(false);
   // console.log("----------------------------");
   // console.log(data);
+  
   return (
     <View style={styles.PostCard}>
       {data.important && <Pinned data={data.author} />}
@@ -31,7 +32,7 @@ export default function CardPost({ data }) {
             </Text>
           </Text>
         ) : (
-          <Text style={styles.TextBody}>{data.description ? data.description.length : 'No description available'}</Text>
+          <Text style={styles.TextBody}>{data.description ? data.description : 'No description available'}</Text>
         )}
       </View>
       <AmountCommentsAndReactions 
