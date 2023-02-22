@@ -2,17 +2,16 @@ const express = require("express");
 const router = express.Router();
 const {validatorJWT, isAdmin} = require('../middlewares')
 const {user} = require('../controllers')
+const { verifyUser } = require('../validations')
+
 
 
 router.use(validatorJWT)
-//put editar usuario como ADmin-Validar admin  LO PONE EN SELECCIONADO Y AGREGA CANAL REQUERIMEINTOS
-router.put('/:id', isAdmin, user.editUser)
-//get obtiene todos los usuarios con todo completo <<<<<<<<<-validar admin
-router.get('/all', isAdmin, user.getAll)
-//get info de un usuario como otro usuario
-router.get('/:id',  user.otherUser)
-router.delete("/:id",isAdmin,user.deleteOne)
-router.put('/favorite/:place/:id', user.favorite)
+router.put('/:id', verifyUser.edit, isAdmin, user.editUser)
+    .get('/all',  isAdmin, user.getAll)
+    .get('/:id', verifyUser.getByIdUser, user.otherUser)
+    .delete("/:id", verifyUser.remove,isAdmin,user.deleteOne)
+    .put('/favorite/:place/:id', user.favorite)
 
 
 

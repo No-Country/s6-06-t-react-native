@@ -14,7 +14,6 @@ const findPostById = async (id) => {
 
 const newPost = async (uid, body, channel, files) => {
     const { title, description } = body;
-console.log(channel);
     const post = new Post({
         title,
         description,
