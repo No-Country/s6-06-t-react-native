@@ -11,7 +11,6 @@ import {
 
 const ExperienciaLaboral = () => {
   const navigation = useNavigation();
-
   return (
     <View style={styles.container} onPress={() => navigation.navigate("AddExperience")}>
       <View
@@ -30,6 +29,7 @@ const ExperienciaLaboral = () => {
           }}
         >
           Experiecia Laboral
+
         </Text>
         <Feather
           name="edit-3"

@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
   },
   input: {
     outlineColor: colors.primary,
-    backgroundColor: "#DEE3E5",
+    backgroundColor: colors.input_background,
     paddingHorizontal: 15,
     paddingVertical: 16,
     borderRadius: 15,
