@@ -34,8 +34,19 @@ export default function CardPost({ data }) {
           <Text style={styles.TextBody}>{data.description ? data.description.length : 'No description available'}</Text>
         )}
       </View>
-      <AmountCommentsAndReactions />
+      <AmountCommentsAndReactions 
+                countComments={data.countComments}
+                apoyar={data.apoyar}
+                hacergracia={data.hacergracia}
+                important={data.important}
+                like={data.megusta}
+                meinteresa={data.meinteresa}
+        /> 
       <Comments />
     </View>
   );
 }
+
+
+/* 
+*/
