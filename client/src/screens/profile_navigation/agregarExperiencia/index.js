@@ -14,6 +14,7 @@ import { areaLaboral } from "../../../utils/dataAreaLaboral.js";
 import InputComponentSelectList from "../../../components/inputSelectList/index.js";
 import { EvilIcons } from "@expo/vector-icons";
 import { colors } from "../../../constants/colors.js";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 const AgregarExperiencia = () => {
   const navigation = useNavigation();
@@ -32,10 +33,7 @@ const AgregarExperiencia = () => {
         .string()
         .max(50, "Ingresa hasta 50 carácteres.")
         .required("Campo requerido."),
-      yearOut: yup
-        .string()
-        .max(50, "Ingresa hasta 50 carácteres.")
-        .required("Campo requerido."),
+      yearOut: yup.string().max(50, "Ingresa hasta 50 carácteres."),
     })
     .required();
   const [errorMessage, setErrorMessage] = useState(null);
@@ -51,6 +49,8 @@ const AgregarExperiencia = () => {
     setErrorMessage(null);
   };
 
+  const [data, setData] = useState('')
+  console.log(data);
   const onSubmit = (data) => {
     console.log(data);
     navigation.goBack();
@@ -121,7 +121,34 @@ const AgregarExperiencia = () => {
           )}
           name="location"
         />
-
+        {/* <View>
+          <GooglePlacesAutocomplete
+            placeholder="Selecciona la ubicación de tu empleo."
+            onPress={(data, details = null) => {
+              // 'details' is provided when fetchDetails = true
+              setData(data)
+              console.log(data, details);
+            }}
+            // keyboardShouldPersistTaps="never"
+            // fetchDetails={true}
+            enablePoweredByContainer={false}
+            styles={{
+              textInput: {
+                backgroundColor: colors.input_background,
+                borderRadius: 15,
+                paddingHorizontal: 15,
+                paddingVertical: 16,
+                height: "auto",
+                fontSize: 17,
+                color: colors.grey_placeholder,
+              },
+            }}
+            query={{
+              key: "AIzaSyAtOh7oKl9bNbK3E0gSB8xV6wX7JCBUVeE",
+              language: "es",
+            }}
+          />
+        </View> */}
         <Controller
           control={control}
           onChange={handleOnChange}
