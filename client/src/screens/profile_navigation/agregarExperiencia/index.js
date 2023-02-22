@@ -14,7 +14,7 @@ import { areaLaboral } from "../../../utils/dataAreaLaboral.js";
 import InputComponentSelectList from "../../../components/inputSelectList/index.js";
 import { EvilIcons } from "@expo/vector-icons";
 import { colors } from "../../../constants/colors.js";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+// import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 const AgregarExperiencia = () => {
   const navigation = useNavigation();
@@ -55,6 +55,7 @@ const AgregarExperiencia = () => {
     console.log(data);
     navigation.goBack();
   };
+  
   return (
     <ScrollView style={styles.whiteContainer}>
       <View style={styles.formContainer}>
