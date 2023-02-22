@@ -1,12 +1,25 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import InfoRevField from "./InfoRevField";
 import CheckBox from "expo-checkbox";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import PrimaryButton from "../../../../components/PrimaryButton";
+import { Picker } from "@react-native-picker/picker";
+import { colors } from "../../../../constants";
 const InformacionRelevante = ({ setIsModalVisible }) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [toggleCheckBox2, setToggleCheckBox2] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [puesto, setPuesto] = useState(null);
+  const [disponibilidad, setDisponibilidad] = useState(null);
+  const [area, setArea] = useState(null);
+
   return (
     <View style={styles.capo}>
       <View style={styles.container}>
@@ -23,21 +36,120 @@ const InformacionRelevante = ({ setIsModalVisible }) => {
         </View>
         <View style={styles.fields}>
           <InfoRevField label="Nombre y apellido" input="Camilo Vargas" />
-          <InfoRevField
-            label="Puesto Laboral"
-            input="UX Designer"
-            arrow={true}
-          />
-          <InfoRevField
-            label="Disponibilidad horaria"
-            input="Part-time(12 a 17hs)"
-            arrow={true}
-          />
-          <InfoRevField
-            label="Área laboral a la que querés pertenecer"
-            input="Diseño"
-            arrow={true}
-          />
+          <Text style={styles.label}>Puesto Laboral</Text>
+
+          {/* ///----------- PUESTO LABORAL */}
+          <View
+            style={[
+              styles.inputContainer,
+              { borderColor: isFocused ? colors.primary : "transparent" },
+            ]}
+          >
+            <Picker
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              onValueChange={(itemValue) => {
+                if (itemValue !== null) {
+                  setPuesto(itemValue);
+                  console.log(itemValue);
+                }
+              }}
+              style={styles.picker}
+            >
+              <Picker.Item
+                label={puesto ? puesto : "Selecciona tu respuesta"}
+                value={null}
+                enabled={false}
+              />
+              <Picker.Item
+                label="Desarrollador/a Back-end"
+                value="Desarrollador/a Back-end"
+              />
+              <Picker.Item
+                label="Desarrollador/a Front-end"
+                value="Desarrollador/a Front-end"
+              />
+              <Picker.Item
+                label="Desarrollador/a UX UI"
+                value="Desarrollador/a UX UI"
+              />
+              <Picker.Item
+                label="Desarrollador/a UI"
+                value="Desarrollador/a UI"
+              />
+              <Picker.Item label="Project Manager" value="Project Manager" />
+              <Picker.Item label="Team Leader" value="Team Leader" />
+              <Picker.Item label="Tester" value="Tester" />
+              <Picker.Item label="Otro" value="Otro" />
+            </Picker>
+          </View>
+
+          {/* ///----------- DISPONIBILIDAD HORARIA */}
+          <Text style={styles.label}>Disponibilidad Horaria</Text>
+          <View
+            style={[
+              styles.inputContainer,
+              { borderColor: isFocused ? colors.primary : "transparent" },
+            ]}
+          >
+            <Picker
+              onValueChange={(itemValue, itemIndex) =>
+                setDisponibilidad(itemValue)
+              }
+              style={styles.picker}
+            >
+              <Picker.Item
+                label={
+                  disponibilidad ? disponibilidad : "Selecciona disponibilidad"
+                }
+                value={null}
+                enabled={false}
+              />
+              <Picker.Item
+                label="Part-time (10 a 13hs)"
+                value="Part-time (10 a 13hs)"
+              />
+              <Picker.Item
+                label="Part-time (12 a 17hs)"
+                value="Part-time (12 a 17hs)"
+              />
+              <Picker.Item
+                label="Full-time (10 a 17hs)"
+                value="Full-time (10 a 17hs)"
+              />
+            </Picker>
+          </View>
+
+          {/* ///----------- AREA LABORAL */}
+          <Text style={styles.label}>
+            Área laboral a la que querés pertenecer
+          </Text>
+          <View
+            style={[
+              styles.inputContainer,
+              { borderColor: isFocused ? colors.primary : "transparent" },
+            ]}
+          >
+            <Picker
+              onValueChange={(itemValue, itemIndex) => setArea(itemValue)}
+              style={styles.picker}
+            >
+              <Picker.Item
+                label={area ? area : "Selecciona tu respuesta"}
+                value={null}
+                enabled={false}
+              />
+              <Picker.Item label="Análisis de datos" value="chino" />
+              <Picker.Item
+                label="Desarrollo de software - Front/Back"
+                value="chino"
+              />
+              <Picker.Item label="Diseño" value="Diseño" />
+              <Picker.Item label="Testing" value="Testing" />
+              <Picker.Item label="Otros" value="Otros" />
+            </Picker>
+          </View>
+
           <View style={styles.checkcont}>
             <CheckBox
               disabled={false}
@@ -86,8 +198,29 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     marginTop: 10,
-    marginBottom: -15,
+    marginBottom: -20,
   },
-  checkcont: { display: "flex", flexDirection: "row", padding: 5 },
-  checktext:{fontSize:12, marginLeft:5 }
+  checkcont: {
+    display: "flex",
+    flexDirection: "row",
+    padding: 5,
+    alignItems: "center",
+  },
+  checktext: { fontSize: 15, marginLeft: 5 },
+  inputContainer: {
+    fontSize: 12,
+    borderRadius: 10,
+    borderWidth: 1,
+    width: Dimensions.get("window").width - 25,
+    height: 40,
+    backgroundColor: "#fff",
+    backgroundColor: colors.input_background,
+    marginVertical: 15,
+    justifyContent: "center",
+  },
+  label: {
+    marginTop: -10,
+    marginBottom: -10,
+    fontSize: 15,
+  },
 });
