@@ -4,14 +4,14 @@ import ScrollViewPost from "../../../../components/home/ScrollViewPost/ScrollVie
 import HeaderHome from "../../../../components/home/header/Index";
 import { styles } from "./styles";
 import { useSelector } from "react-redux";
-
 import CreatePost from "../../../../components/home/CreatePost/CreatePost";
-import { reqResApi } from "../../../../config/axiosConfig";
+import { usePost } from "../../../../hooks/usePost";
 
 const Home = ({ navigation }) => {
   const state = useSelector((state) => state.login.user);
   let Channel= "Canal General"
   let idChannelGeneral = "63e3dc46a5dd297fac1ca2a2";
+  let { getPosts } = usePost();
 
   const [Posts, setPosts] = useState([]);
   if (!state) {
@@ -28,23 +28,7 @@ const Home = ({ navigation }) => {
 
 
 
-  let getPosts = async (url, token, setList)=>{
-    let response 
-    let data = []
-    try {
-        response = await reqResApi.get( url , {
-            headers : {'x-token' : token }
-        })
-    } catch (error) {
-        console.log(error)
-    }
-    if (response.status === 200) {
-      console.log(response)
-      data.push(...response.data.data.posts)
-      setList(data)
-      
-    }
-  }
+  
 
   console.log(Posts)
   return (

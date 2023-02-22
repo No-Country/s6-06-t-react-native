@@ -51,15 +51,15 @@ const ScrollViewPost = ({post, token, getPost, load, setList}) => {
              inverted={true}
              refreshing={refreshBool}
              onRefresh={refresh}
+             onEndReachedThreshold={0.1}
              
-             
-            //  ListFooterComponent={ load ?
-            //     <ActivityIndicator
-            //       size='large'
-            //       color='#AEAEAE'
-            //     /> : 
-            //     <View style={{height: 100}}></View>
-            //   }
+             ListFooterComponent={ load ?
+                <ActivityIndicator
+                  size='large'
+                  color='#AEAEAE'
+                /> : 
+                <View style={{height: 100}}></View>
+              }
             />
         </>
     );
