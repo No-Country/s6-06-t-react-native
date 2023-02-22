@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  Modal,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BackButton from "../../../components/BackButton";
@@ -15,16 +22,20 @@ import ExperienciaLaboral from "./componentes/ExperienciaLaboral";
 import Educacion from "./componentes/Educacion";
 import Idiomas from "./componentes/Idiomas";
 import Herramientas from "./componentes/Herramientas";
+import InformacionRelevante from "./componentes/InformacionRelevante";
 const PerfilProfesional = () => {
   const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState(null);
   const [progress, setProgress] = useState(100);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     getUserData(setUserInfo);
   }, []);
 
-  const profileImg = userInfo ? userInfo.img_avatar : "../icons/profilepicture.png";
+  const profileImg = userInfo
+    ? userInfo.img_avatar
+    : "../icons/profilepicture.png";
 
   return (
     <SafeAreaView style={styles.container}>
@@ -36,7 +47,7 @@ const PerfilProfesional = () => {
               source={{ uri: profileImg }}
               style={{ width: 100, height: 100 }}
             />
-            <TouchableOpacity style={styles.ppButton}>
+            <TouchableOpacity style={styles.ppButton} onPress={()=> setIsModalVisible(true)}>
               <Feather name="edit" size={20} color="blue" />
             </TouchableOpacity>
           </View>
@@ -121,6 +132,10 @@ const PerfilProfesional = () => {
           <Idiomas />
         </View>
       </ScrollView>
+
+      <Modal visible={isModalVisible} animationType="slide">
+        <InformacionRelevante setIsModalVisible={setIsModalVisible}/>
+      </Modal>
     </SafeAreaView>
   );
 };

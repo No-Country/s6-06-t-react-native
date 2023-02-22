@@ -112,7 +112,7 @@ const Idiomas = ({ data }) => {
               <Picker.Item label="C1-C2 - Alto" value="c1" />
             </Picker>
           </View>
-          <PrimaryButton text="Guardar" handler={""} />
+          <PrimaryButton text="Guardar" />
         </View>
       </Modal>
     </View>

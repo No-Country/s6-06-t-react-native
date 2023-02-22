@@ -1,6 +1,8 @@
 import { AntDesign, Feather } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Modal, TouchableOpacity } from "react-native";
+import symbolicateStackTrace from "react-native/Libraries/Core/Devtools/symbolicateStackTrace";
+import { colors } from "../../../../constants";
 import TechTab from "./TechTab";
 
 const Herramientas = () => {
@@ -31,15 +33,29 @@ const Herramientas = () => {
               name="edit-3"
               size={22}
               color="blue"
-              style={styles.arrow}
+              style={{ marginRight: 10, marginTop: 10 }}
             />
           </View>
-          <View style={styles.txtcontainer}>
+          <View style={{ marginLeft: 15 }}>
+            <TechTab text="Figma" color="#3B3DD1" />
+            <TechTab text="Adobe Illustrator" color="#8284FF" />
+            <TechTab text="Adobe Photoshop" color="#863BD1" />
+          </View>
+          <View>
+            <View style={styles.line}></View>
+            <View style={styles.plus}>
+              <Text style={styles.plustitle}>
+                Mostrar todas las herramientas
+              </Text>
+              <AntDesign name="arrowright" size={15} color="#8284FF" />
+            </View>
+          </View>
+          {/* <View style={styles.txtcontainer}>
             <Text style={styles.text}>
               Añadir Herramientas{" "}
               <Text style={{ fontWeight: "bold", fontSize: 20 }}>+</Text>
             </Text>
-          </View>
+          </View> */}
         </View>
       </TouchableOpacity>
       {/* -------------------MODAL--------------------- */}
@@ -58,19 +74,21 @@ const Herramientas = () => {
             <Text style={styles.desc}>Tecnologías</Text>
             <AntDesign name="plus" size={25} color="#4245E5" />
           </View>
-          <TechTab text="Figma" color="#3B3DD1" />
-          <TechTab text="Adobe Illustrator" color="#8284FF" />
-          <TechTab text="Adobe Photoshop" color="#863BD1" />
-          <TechTab text="HTML" color="#FFA8A7" />
-          <TechTab text="CSS" color="#D13BCB" />
-          <TechTab text="Jira" color="#3B3DD1" />
+          <TechTab edit={true} text="Figma" color="#3B3DD1" />
+          <TechTab edit={true} text="Adobe Illustrator" color="#8284FF" />
+          <TechTab edit={true} text="Adobe Photoshop" color="#863BD1" />
+          <TechTab edit={true} text="HTML" color="#FFA8A7" />
+          <TechTab edit={true} text="CSS" color="#D13BCB" />
+          <TechTab edit={true} text="Jira" color="#3B3DD1" />
         </View>
         <View style={styles.subtitleCont}>
           <Text style={styles.desc}>Habilidades Interpersonales</Text>
           <AntDesign name="plus" size={25} color="#4245E5" />
         </View>
         <View style={styles.skillsCont}>
-          <Text style={styles.skill}>Aún no agregaste habilidades interpersonales</Text>
+          <Text style={styles.skill}>
+            Aún no agregaste habilidades interpersonales
+          </Text>
         </View>
       </Modal>
     </View>
@@ -85,8 +103,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     marginTop: 10,
+    paddingBottom: 10,
     width: "100%",
-    height: 132,
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -105,6 +123,20 @@ const styles = StyleSheet.create({
   text: {
     color: "#4245E5",
   },
+  line: {
+    height: 2,
+    width: "100%",
+    backgroundColor: "#8284FF",
+    marginTop: 20,
+  },
+  plus: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop:10
+  },
+  plustitle: { color: "#8284FF", fontSize:14, paddingHorizontal:5 },
   modalContainer: {
     marginTop: 10,
     marginHorizontal: 10,
@@ -141,13 +173,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  skillsCont:{
-    marginHorizontal:20,
-    marginTop:10
+  skillsCont: {
+    marginHorizontal: 20,
+    marginTop: 10,
   },
-  skill:{
-    fontSize:14,
-    color:"#888888",
-    fontWeight:"400"
-  }
+  skill: {
+    fontSize: 14,
+    color: "#888888",
+    fontWeight: "400",
+  },
 });
