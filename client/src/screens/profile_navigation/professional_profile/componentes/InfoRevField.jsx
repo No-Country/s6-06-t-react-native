@@ -16,7 +16,7 @@ export default InfoRevField;
 
 const styles = StyleSheet.create({
   container: {},
-  label: {fontSize:15},
+  label: {fontSize:12},
   inputcon: {
     backgroundColor: "#EEEEEE",
     height: 45,
@@ -27,5 +27,5 @@ const styles = StyleSheet.create({
     justifyContent:"space-between",
     marginBottom:10
 },
-  input: {paddingLeft:10},
+  input: {paddingLeft:10, fontSize:12},
 });

@@ -133,8 +133,10 @@ const PerfilProfesional = () => {
         </View>
       </ScrollView>
 
-      <Modal visible={isModalVisible} animationType="slide">
-        <InformacionRelevante setIsModalVisible={setIsModalVisible}/>
+      <Modal visible={isModalVisible} animationType="slide" 
+      transparent={true}
+      >
+        <InformacionRelevante setIsModalVisible={setIsModalVisible}  transparent={true}/>
       </Modal>
     </SafeAreaView>
   );
