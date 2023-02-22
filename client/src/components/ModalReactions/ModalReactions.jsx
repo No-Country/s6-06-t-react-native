@@ -1,55 +1,38 @@
-import React from 'react';
-import {Modal, Text, View,} from 'react-native';
 
-const ModalReactions = () => {
+import React from 'react';
+import {Image, Modal, Text, TouchableWithoutFeedback, View} from 'react-native';
+import { colors } from '../../constants';
+import icons from '../../utils/icons';
+import {styles} from './styles'
+
+const ModalReactions = ({status, setShow, Show}) => {
+    if (!status) {
+        return (<View></View>)
+    }
     return (
         <View style={styles.centeredView}>
-            <Modal
-                animationType="fade"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
-                    setModalVisible(!modalVisible);
-                }}>
-                <View style={[styles.centeredView, { backgroundColor: 'rgba(0, 0, 0, 0.73)' }]}>
+            <TouchableWithoutFeedback onPressIn={()=> setShow(!Show)} >
+                <Image source={icons.smile} style={{width:25, height:25, marginEnd : 10}}/>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={()=> setShow(!Show)}  >
+                <Image source={icons.heart} style={{width:25, height:25, marginEnd : 10}}/>
 
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>CANALES</Text>
-                        <View style={styles.selectModal}>
-                            <View style={[styles.selectFirst]} >
-                                <Text style={[styles.selectdAgain]} >Pre-seleccionado 7</Text>
-                                <AntDesign name="checkcircleo" size={16} color={colors.facebook} />
-                            </View>
-                            <View style={[styles.selectFirst]} >
-                                <Text style={[]} >Requerimientos - jobs</Text>
-                                <AntDesign name="checkcircleo" size={16} color={colors.black} />
-                            </View>
-                            <View style={[styles.selectFirst]} >
-                                <Text style={[]} >Equipo Amazon</Text>
-                                <AntDesign name="checkcircleo" size={16} color={colors.black} />
-                            </View>
-                            <View style={[styles.selectFirst]} >
-                                <Text style={[]} >Proyectos</Text>
-                                <AntDesign name="checkcircleo" size={16} color={colors.black} />
-                            </View>
-                            
-                        </View>
-                        <TouchableWithoutFeedback>
-                            <Text style={[styles.button, styles.ButtonExplorer]}>Abrir Canal</Text>
-                        </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback
-                            onPress={() => setModalVisible(!modalVisible)}>
-                            <Text style={[styles.button, styles.buttonClose]}>Explorar Canales</Text>
-                        </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={()=> setShow(!Show)}  >
+                <Image source={icons.claping} style={{width:25, height:25, marginEnd : 10}}/>
 
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={()=> setShow(!Show)}  >
+                <Image source={icons.party} style={{width:25, height:25,marginEnd : 10}}/>
 
-                    </View>
-                </View>
-            </Modal>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={()=> setShow(!Show)}  >
+                <Image source={icons.thumbsUp} style={{width:25, height:25,}}/>
+            </TouchableWithoutFeedback>
         </View>
     );
 }
+
 
 
 
