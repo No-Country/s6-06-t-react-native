@@ -10,13 +10,13 @@ const PostDayWrapper = ({group}) => {
     }
     return (
         <>
-            <DateTitle d={group.date} />
             {
                 group.posts.map((p, i)=>(
-                    <CardPost key={i} data={p} />
-
-                ))
+                    <CardPost key={i}data={p} />
+                    
+                    ))
             }
+            <DateTitle d={group.date} />
         </>
     );
 }
