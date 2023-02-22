@@ -7,15 +7,17 @@ import {
   View,
 } from "react-native";
 
-const TechTab = ({ text, color }) => {
+const TechTab = ({ text, color, edit = false }) => {
   return (
     <View style={[styles.container]}>
       <View style={[styles.textContainer, { backgroundColor: color }]}>
         <Text style={styles.text}>{text}</Text>
       </View>
-      <TouchableOpacity>
-        <Feather name="edit-3" size={22} color="#4245E5" />
-      </TouchableOpacity>
+      {edit ? (
+        <TouchableOpacity>
+          <Feather name="edit-3" size={22} color="#4245E5" />
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 };
@@ -37,9 +39,9 @@ const styles = StyleSheet.create({
     width: "90%",
     justifyContent: "center",
   },
-  text:{
+  text: {
     color: "white",
     fontSize: 18,
     fontWeight: "400",
-  }
+  },
 });
