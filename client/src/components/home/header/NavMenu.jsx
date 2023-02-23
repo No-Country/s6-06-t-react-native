@@ -31,7 +31,7 @@ export default function NavMenu({ pathImgUser }) {
   return (
     <View style={styles.header}>
       <View>
-        <Feather name="menu" size={24} color="black" />
+        <Feather name="menu" size={24} color="black" onPress={() => {navigation.openDrawer()}}/>
       </View>
       <View style={styles.inputContain}>
         <EvilIcons name="search" size={24} color={colors.lightGrey} />
