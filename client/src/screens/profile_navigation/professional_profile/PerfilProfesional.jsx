@@ -26,7 +26,7 @@ import InformacionRelevante from "./componentes/InformacionRelevante";
 const PerfilProfesional = () => {
   const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState(null);
-  const [progress, setProgress] = useState(100);
+  const [progress, setProgress] = useState(30);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
