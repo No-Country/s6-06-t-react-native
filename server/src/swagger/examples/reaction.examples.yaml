@@ -1,0 +1,11 @@
+components:
+    examples:
+        reaction_success:
+            value:
+                message: Successfully reacted
+        reaction_remove_success:
+            value:
+                message: Reaction successfully removed
+        reaction_error_inexistent:
+            value:
+                error: Document not found

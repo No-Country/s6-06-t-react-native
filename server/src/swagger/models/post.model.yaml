@@ -1,0 +1,86 @@
+components:
+    schemas:
+        post_response:
+            type: object
+            properties:
+                author:
+                    type: object
+                    description: the author of the post
+                    properties:
+                        id:
+                            type: string
+                            format: id
+                        fullName:
+                            type: string
+                title:
+                    type: string
+                    description: the title of the post
+                description:
+                    type: string
+                    description: the body of the post
+                channel:
+                    type: object
+                    description: channel where the post was made
+                    properties:
+                        id:
+                            type: string
+                            format: id
+                        name:
+                            type: string
+                attached:
+                    type: array
+                    description: urls of the attached files in the publication
+                    items:
+                        type: string
+                important:
+                    type: boolean
+                    description: determines if the post was made by an admin
+                createdAt:
+                    type: string
+                    description: post creation date
+                updatedAt:
+                    type: string
+                    description: post update date
+                id:
+                    type: string
+                    format: id
+                    description: identification code of the post
+        post_edit:
+            type: object
+            properties:
+                title:
+                    type: string
+                    description: the title of the post
+                description:
+                    type: string
+                    description: the body of the post
+                attached:
+                    type: array
+                    description: urls of the attached files in the publication
+                    items:
+                        type: string
+            example:
+                title: 'New title'
+                description: 'New description'
+        post_new:
+            type: object
+            properties:
+                title:
+                    type: string
+                    description: the title of the post
+                description:
+                    type: string
+                    description: the body of the post
+                attached:
+                    type: array
+                    description: urls of the attached files in the publication
+                    items:
+                        type: string
+                        format: binary
+            required:
+                - title
+                - description
+            example:
+                title: 'Time travels'
+                description:
+                    'Hello friends, I had an incredible experience with Doc.'

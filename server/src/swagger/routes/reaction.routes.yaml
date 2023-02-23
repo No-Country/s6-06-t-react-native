@@ -1,0 +1,121 @@
+tags:
+    name: Reactions
+    description: Reactions endpoints
+paths:
+    /api/reaction/{scope}/{id}:
+        post:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+                - in: params
+                  name: scope
+                  schema:
+                      type: string
+                      enum: ['post', 'comment']
+                  required: true
+                  description: Can be post or comment
+                - in: params
+                  name: id
+                  schema:
+                      type: string
+                      format: id
+                  required: true
+                  description: The id of post o comment to react
+            summary: Add a new reaction
+            tags: [Reactions]
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/reaction_new'
+            responses:
+                201:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                reaction_success:
+                                    $ref: '#/components/examples/reaction_success'
+                404:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                reaction_error_inexistent:
+                                    $ref: '#/components/examples/reaction_error_inexistent'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+        put:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+                - in: params
+                  name: scope
+                  schema:
+                      type: string
+                      enum: ['post', 'comment']
+                  required: true
+                  description: Can be post or comment
+                - in: params
+                  name: id
+                  schema:
+                      type: string
+                      format: id
+                  required: true
+                  description: The id of post o comment to remove react
+            summary: Remove a reaction
+            tags: [Reactions]
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/reaction_new'
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                reaction_remove_success:
+                                    $ref: '#/components/examples/reaction_remove_success'
+                404:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                reaction_error_inexistent:
+                                    $ref: '#/components/examples/reaction_error_inexistent'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'

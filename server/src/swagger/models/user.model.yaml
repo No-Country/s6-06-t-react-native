@@ -1,0 +1,374 @@
+components:
+    schemas:
+        user_response:
+            type: object
+            properties:
+                fullName:
+                    type: string
+                    description: the name of the user
+                email:
+                    type: string
+                    description: the email of the user account
+                emailisvalidated:
+                    type: boolean
+                    description: determines if the email was validated
+                admin:
+                    type: boolean
+                    description: determines if the user is admin
+                selected:
+                    type: boolean
+                    description: determines if the user belongs to selected
+                active:
+                    type: boolean
+                    description: determines if the account is active
+                isOnline:
+                    type: boolean
+                    description: determines if the user is online
+                lastSeen:
+                    type: number
+                    description: timestamp of the last connection
+                socketId:
+                    type: string
+                    format: id
+                    description: id of the socket
+                position:
+                    type: string
+                    description: the rol of the dev
+                    enum:
+                        - 'Desarrollador/a Back-end'
+                        - 'Desarrollador/a Front-end'
+                        - 'Diseñador/a UX UI'
+                        - 'Diseñador/a UI'
+                        - 'Project Manager'
+                        - 'Team Leader'
+                        - 'Tester'
+                        - 'Otro'
+                img_avatar:
+                    type: string
+                    description: URL of the profile picture
+                availability:
+                    type: string
+                    description: the shift available to work
+                    enum:
+                        - Full-Time
+                        - Mañana
+                        - Tarde
+                jobArea:
+                    type: string
+                    description: determines the work area
+                    enum:
+                        - 'Análisis de datos'
+                        - 'Desarrollo de Software  - Front / Back'
+                        - 'Diseño'
+                        - 'Testing'
+                        - 'Otros'
+                aboutme:
+                    type: string
+                    description: short description of the user
+                workExperience:
+                    type: array
+                    description: jobs the user has worked in
+                    items:
+                        type: object
+                        properties:
+                            jobTitle:
+                                type: string
+                                description: name of the job
+                education:
+                    type: array
+                    description: education that the user received
+                    items:
+                        type: object
+                        properties:
+                            educationalLevel:
+                                type: string
+                                description: educational level reached
+                                enum:
+                                    - Secundario completo
+                                    - Secundario incompleto
+                                    - Universitario completo
+                                    - Universitario en curso
+                                    - Estudiante autodidacta
+                                    - Otros
+                            educationTitle:
+                                type: string
+                                description: title of the education
+                            institute:
+                                type: string
+                                description: name of the institution
+                            educationStatus:
+                                type: string
+                                description: status of the education
+                            inCourse:
+                                type: string
+                                description: education in progress
+                            year_in:
+                                type: string
+                                description: year in which the studies began
+                            year_out:
+                                type: string
+                                description: year in which the studies finished
+                languages:
+                    type: array
+                    description: languages the user knows
+                    items:
+                        type: string
+                technologies:
+                    type: array
+                    description: technologies that the user knows
+                    items:
+                        type: string
+                        enum:
+                            - HTML
+                            - CSS
+                            - Figma
+                            - AdobeXD
+                            - Framer X
+                            - Photoshop
+                            - Illustrator
+                            - JavaScript
+                            - TypeScript
+                            - Python
+                            - Java
+                            - Go
+                            - Vue.js
+                            - Next.js
+                            - React
+                            - React Native
+                            - Angular
+                            - Jest
+                            - Selenium
+                            - Node.js
+                            - Express.js
+                            - Deno
+                            - GraphQL
+                            - Koa
+                softSkills:
+                    type: array
+                    description: soft skills that the user has
+                    items:
+                        type: string
+                phone:
+                    type: string
+                    description: phone number of the user
+                favorites:
+                    type: array
+                    description: posts marked as favorites
+                    items:
+                        type: string
+                channels:
+                    type: array
+                    description: channels you belong to
+                    items:
+                        type: string
+                postulations:
+                    type: array
+                    description: applications for job offers
+                    items:
+                        type: string
+                createdAt:
+                    type: string
+                    description: account creation date
+                updatedAt:
+                    type: string
+                    description: account update date
+                uid:
+                    type: string
+                    format: id
+                    description: user identification code
+                token:
+                    type: string
+                    description: user identification token
+        user_registration:
+            type: object
+            properties:
+                fullName:
+                    type: string
+                    description: the name of the user
+                email:
+                    type: string
+                    description: the email of the user account
+                password:
+                    type: string
+                    description: the encrypted password of the user account
+                position:
+                    type: string
+                    description: the rol of the dev
+                    enum:
+                        - fullstack
+                        - backend
+                        - frontend
+                        - uiux
+                img_avatar:
+                    type: string
+                    description: URL of the profile picture
+                availability:
+                    type: string
+                    description: the shift available to work
+                    enum:
+                        - Full-Time
+                        - Mañana
+                        - Tarde
+                jobArea:
+                    type: string
+                    description: determines the work area
+                    enum:
+                        - Diseño
+                        - Programación
+                        - Datos
+                        - Recursos humanos
+                        - Otros
+                aboutme:
+                    type: string
+                    description: short description of the user
+                workExperience:
+                    type: array
+                    description: jobs the user has worked in
+                    items:
+                        type: object
+                        properties:
+                            jobTitle:
+                                type: string
+                                description: name of the job
+                education:
+                    type: array
+                    description: education that the user received
+                    items:
+                        type: object
+                        properties:
+                            educationalLevel:
+                                type: string
+                                description: educational level reached
+                                enum:
+                                    - Secundario completo
+                                    - Secundario incompleto
+                                    - Universitario completo
+                                    - Universitario en curso
+                                    - Estudiante autodidacta
+                                    - Otros
+                            educationTitle:
+                                type: string
+                                description: title of the education
+                            institute:
+                                type: string
+                                description: name of the institution
+                            educationStatus:
+                                type: string
+                                description: status of the education
+                            inCourse:
+                                type: string
+                                description: education in progress
+                            year_in:
+                                type: string
+                                description: year in which the studies began
+                            year_out:
+                                type: string
+                                description: year in which the studies finished
+                languages:
+                    type: array
+                    description: languages the user knows
+                    items:
+                        type: string
+                technologies:
+                    type: array
+                    description: technologies that the user knows
+                    items:
+                        type: string
+                        enum:
+                            - HTML
+                            - CSS
+                            - Figma
+                            - AdobeXD
+                            - Framer X
+                            - Photoshop
+                            - Illustrator
+                            - JavaScript
+                            - TypeScript
+                            - Python
+                            - Java
+                            - Go
+                            - Vue.js
+                            - Next.js
+                            - React
+                            - React Native
+                            - Angular
+                            - Jest
+                            - Selenium
+                            - Node.js
+                            - Express.js
+                            - Deno
+                            - GraphQL
+                            - Koa
+                softSkills:
+                    type: array
+                    description: soft skills that the user has
+                    items:
+                        type: string
+                phone:
+                    type: string
+                    description: phone number of the user
+                favorites:
+                    type: array
+                    description: posts marked as favorites
+                    items:
+                        type: string
+                channels:
+                    type: array
+                    description: channels you belong to
+                    items:
+                        type: string
+                postulations:
+                    type: array
+                    description: applications for job offers
+                    items:
+                        type: string
+            required:
+                - fullName
+                - email
+                - password
+            example:
+                fullName: Michael Fox 2
+                email: michael@fox.com
+                password: traveltime
+                position: fullstack
+                img_avatar: https://upload.wikimedia.org/wikipedia/commons/2/20/Michael_J_Fox_2020.jpg
+                availability: 'Full-Time'
+                jobArea: Programación
+                aboutme:
+                    'Michael Andrew Fox, más conocido como Michael J. Fox, es un
+                    actor canadiense-estadounidense retirado.​​ Su carrera en el
+                    cine y la televisión comenzó a finales de los años 70. Entre
+                    sus papeles se destacan: Marty McFly en la trilogía de
+                    Regreso al futuro; Alex P.'
+                workExperience: [{ jobTitle: Actor }]
+                education:
+                    [
+                        {
+                            educationalLevel: Otros,
+                            educationTitle: Wizard,
+                            institute: Hogwarts,
+                            educationStatus: finished,
+                            inCourse: false,
+                            year_in: 1979,
+                            year_out: 1984
+                        }
+                    ]
+                languages: ['Spanish', 'English', 'Parseltongue']
+                technologies: ['HTML', 'CSS']
+                softSkills: ['creativity', 'confidence', 'enthusiasm']
+                phone: 123456789
+        user_login:
+            type: object
+            properties:
+                email:
+                    type: string
+                    description: the email of the user account
+                password:
+                    type: string
+                    description: the encrypted password of the user account
+            required:
+                - email
+                - password
+            example:
+                email: michael@fox.com
+                password: traveltime

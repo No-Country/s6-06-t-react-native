@@ -1,0 +1,291 @@
+components:
+    examples:
+        user_success:
+            value:
+                message: The user was logged successfully
+                data:
+                    fullName: Michael Fox
+                    email: michael@fox.com
+                    emailisvalidated: true
+                    admin: false
+                    selected: true
+                    active: true
+                    isOnline: true
+                    lastSeen: 647190566
+                    socketId: null
+                    position: fullstack
+                    img_avatar: https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png
+                    availability: 'Full-Time'
+                    jobArea: Programación
+                    aboutme:
+                        'Michael Andrew Fox, más conocido como Michael J. Fox,
+                        es un actor canadiense-estadounidense retirado.​​ Su
+                        carrera en el cine y la televisión comenzó a finales de
+                        los años 70. Entre sus papeles se destacan: Marty McFly
+                        en la trilogía de Regreso al futuro; Alex P.'
+                    workExperience: [{ jobTitle: Actor }]
+                    education:
+                        [
+                            {
+                                educationalLevel: Otros,
+                                educationTitle: Wizard,
+                                institute: Hogwarts,
+                                educationStatus: finished,
+                                inCourse: false,
+                                year_in: 1979,
+                                year_out: 1984
+                            }
+                        ]
+                    languages: ['Spanish', 'English', 'Parseltongue']
+                    technologies: ['HTML', 'CSS']
+                    softSkills: ['creativity', 'confidence', 'enthusiasm']
+                    phone: 123456789
+                    favorites: []
+                    channels: []
+                    postulations: []
+                    createdAt: 2023-02-17T01:02:20.660Z
+                    updatedAt: 2023-02-17T01:02:20.660Z
+                    uid: 63eed21c50dc48caefd007de
+                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2M2VlZDIxYzUwZGM0OGNhZWZkMDA3ZGUiLCJuYW1lIjoiTWljaGFlbCIsImlhdCI6MTY3NjU5NTc0MCwiZXhwIjoxNjc5MTg3NzQwfQ.Hk5CTzU8sN5f3lkPvyVRwxjBA6uSzKuqVcbm1axtYXc
+        user_error_repetead:
+            value:
+                error: User already exists
+        user_error_db:
+            value:
+                error: There is a problem in DB
+        user_error_general:
+            value:
+                error: Contact Admin
+        user_error_incorrect:
+            value:
+                error: Bad Credentials
+        user_error_inexistent:
+            value:
+                error: User not found
+        user_error_invalidated:
+            value:
+                error: Must validate account with the provided email
+        user_success_email:
+            value:
+                message: Email resend succesfully, check inbox
+        user_success_token:
+            value:
+                message: Token generated succesfully
+                data:
+                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2M2VlZDIxYzUwZGM0OGNhZWZkMDA3ZGUiLCJuYW1lIjoiTWljaGFlbCIsImlhdCI6MTY3NjU5NTc0MCwiZXhwIjoxNjc5MTg3NzQwfQ.Hk5CTzU8sN5f3lkPvyVRwxjBA6uSzKuqVcbm1axtYXc
+        user_success_linkedin:
+            value:
+                message: Open the link in the browser
+                data:
+                    url: https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78kdmirvbesua2&redirect_uri=http://localhost:5000/api/auth/linkedin/callback&state=FDfbdgFHDfsfoFUDHPSDSFd&scope=openid%20email%20profile
+        user_success_request_reset_password:
+            value:
+                message: Request for Password reset was succesfull, Check email
+        user_error_invalid_token:
+            value:
+                message: Invalid or expired token
+        user_error_url:
+            value:
+                message: There is a problem with the provided url
+        user_success_all:
+            value:
+                message: The user was logged successfully
+                data:
+                    [
+                        {
+                            fullName: Michael Fox,
+                            email: michael@fox.com,
+                            emailisvalidated: true,
+                            admin: false,
+                            selected: true,
+                            active: true,
+                            isOnline: true,
+                            lastSeen: 647190566,
+                            socketId: null,
+                            position: fullstack,
+                            img_avatar: https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png,
+                            availability: 'Full-Time',
+                            jobArea: Programación,
+                            aboutme:
+                                'Michael Andrew Fox, más conocido como Michael
+                                J. Fox, es un actor canadiense-estadounidense
+                                retirado.​​ Su carrera en el cine y la
+                                televisión comenzó a finales de los años 70.
+                                Entre sus papeles se destacan: Marty McFly en la
+                                trilogía de Regreso al futuro; Alex P.',
+                            workExperience: [{ jobTitle: Actor }],
+                            education:
+                                [
+                                    {
+                                        educationalLevel: Otros,
+                                        educationTitle: Wizard,
+                                        institute: Hogwarts,
+                                        educationStatus: finished,
+                                        inCourse: false,
+                                        year_in: 1979,
+                                        year_out: 1984
+                                    }
+                                ],
+                            languages: ['Spanish', 'English', 'Parseltongue'],
+                            technologies: ['HTML', 'CSS'],
+                            softSkills:
+                                ['creativity', 'confidence', 'enthusiasm'],
+                            phone: 123456789,
+                            favorites: [],
+                            channels: [],
+                            postulations: [],
+                            createdAt: 2023-02-17T01:02:20.660Z,
+                            updatedAt: 2023-02-17T01:02:20.660Z,
+                            uid: 63eed21c50dc48caefd007de
+                        },
+                        {
+                            fullName: Michael Fox,
+                            email: michael@fox.com,
+                            emailisvalidated: true,
+                            admin: false,
+                            selected: true,
+                            active: true,
+                            isOnline: true,
+                            lastSeen: 647190566,
+                            socketId: null,
+                            position: fullstack,
+                            img_avatar: https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png,
+                            availability: 'Full-Time',
+                            jobArea: Programación,
+                            aboutme:
+                                'Michael Andrew Fox, más conocido como Michael
+                                J. Fox, es un actor canadiense-estadounidense
+                                retirado.​​ Su carrera en el cine y la
+                                televisión comenzó a finales de los años 70.
+                                Entre sus papeles se destacan: Marty McFly en la
+                                trilogía de Regreso al futuro; Alex P.',
+                            workExperience: [{ jobTitle: Actor }],
+                            education:
+                                [
+                                    {
+                                        educationalLevel: Otros,
+                                        educationTitle: Wizard,
+                                        institute: Hogwarts,
+                                        educationStatus: finished,
+                                        inCourse: false,
+                                        year_in: 1979,
+                                        year_out: 1984
+                                    }
+                                ],
+                            languages: ['Spanish', 'English', 'Parseltongue'],
+                            technologies: ['HTML', 'CSS'],
+                            softSkills:
+                                ['creativity', 'confidence', 'enthusiasm'],
+                            phone: 123456789,
+                            favorites: [],
+                            channels: [],
+                            postulations: [],
+                            createdAt: 2023-02-17T01:02:20.660Z,
+                            updatedAt: 2023-02-17T01:02:20.660Z,
+                            uid: 63eed21c50dc48caefd007de
+                        }
+                    ]
+        other_user_success:
+            value:
+                message: 'Other user:'
+                data:
+                    fullName: 'Michaels Fox 2'
+                    email: 'michsasssel@fox.com'
+                    isOnline: true
+                    img_avatar: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Michael_J_Fox_2020.jpg'
+                    uid: '63f3d62f5338854bb635cdd2'
+        update_user_success:
+            value:
+                message: 'User updated'
+                data:
+                    fullName: Michael Fox
+                    email: michael@fox.com
+                    emailisvalidated: true
+                    admin: false
+                    selected: true
+                    active: true
+                    isOnline: true
+                    lastSeen: 647190566
+                    socketId: null
+                    position: fullstack
+                    img_avatar: https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png
+                    availability: 'Full-Time'
+                    jobArea: Programación
+                    aboutme:
+                        'Michael Andrew Fox, más conocido como Michael J. Fox,
+                        es un actor canadiense-estadounidense retirado.​​ Su
+                        carrera en el cine y la televisión comenzó a finales de
+                        los años 70. Entre sus papeles se destacan: Marty McFly
+                        en la trilogía de Regreso al futuro; Alex P.'
+                    workExperience: [{ jobTitle: Actor }]
+                    education:
+                        [
+                            {
+                                educationalLevel: Otros,
+                                educationTitle: Wizard,
+                                institute: Hogwarts,
+                                educationStatus: finished,
+                                inCourse: false,
+                                year_in: 1979,
+                                year_out: 1984
+                            }
+                        ]
+                    languages: ['Spanish', 'English', 'Parseltongue']
+                    technologies: ['HTML', 'CSS']
+                    softSkills: ['creativity', 'confidence', 'enthusiasm']
+                    phone: 123456789
+                    favorites: []
+                    channels: []
+                    postulations: []
+                    createdAt: 2023-02-17T01:02:20.660Z
+                    updatedAt: 2023-02-17T01:02:20.660Z
+                    uid: 63eed21c50dc48caefd007de
+        favorite_success:
+            value:
+                message: 'Post Favorite saved'
+                data:
+                    fullName: Michael Fox
+                    email: michael@fox.com
+                    emailisvalidated: true
+                    admin: false
+                    selected: true
+                    active: true
+                    isOnline: true
+                    lastSeen: 647190566
+                    socketId: null
+                    position: fullstack
+                    img_avatar: https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png
+                    availability: 'Full-Time'
+                    jobArea: Programación
+                    aboutme:
+                        'Michael Andrew Fox, más conocido como Michael J. Fox,
+                        es un actor canadiense-estadounidense retirado.​​ Su
+                        carrera en el cine y la televisión comenzó a finales de
+                        los años 70. Entre sus papeles se destacan: Marty McFly
+                        en la trilogía de Regreso al futuro; Alex P.'
+                    workExperience: [{ jobTitle: Actor }]
+                    education:
+                        [
+                            {
+                                educationalLevel: Otros,
+                                educationTitle: Wizard,
+                                institute: Hogwarts,
+                                educationStatus: finished,
+                                inCourse: false,
+                                year_in: 1979,
+                                year_out: 1984
+                            }
+                        ]
+                    languages: ['Spanish', 'English', 'Parseltongue']
+                    technologies: ['HTML', 'CSS']
+                    softSkills: ['creativity', 'confidence', 'enthusiasm']
+                    phone: 123456789
+                    favorites: []
+                    channels: []
+                    postulations: []
+                    createdAt: 2023-02-17T01:02:20.660Z
+                    updatedAt: 2023-02-17T01:02:20.660Z
+                    uid: 63eed21c50dc48caefd007de
+        favorite_error_inexistent:
+            value:
+                error: Your document does not exist

@@ -9,7 +9,7 @@ const {auth , channel, post ,comment,profile,jobOffer,reaction,search, user}=req
 require('./src/database/config.js');
 
 const swaggerUI =require("swagger-ui-express");
-const specs=require("./src/swagger/config/config")
+const specs=require("./src/swagger/config")
 require('./src/database/config.js');
 const PORT = process.env.PORT || 3001;
 

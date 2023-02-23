@@ -1,0 +1,16 @@
+components:
+    schemas:
+        reaction_new:
+            type: object
+            properties:
+                reaction:
+                    type: string
+                    enum:
+                        - megusta
+                        - meinteresa
+                        - apoyar
+                        - hacergracia
+            required:
+                - reaction
+            example:
+                reaction: 'meinteresa'
