@@ -25,14 +25,21 @@ const InformacionRelevante = ({ setIsModalVisible }) => {
       <View style={styles.container}>
         <View style={styles.titlecont}>
           <TouchableOpacity onPress={() => setIsModalVisible(false)}>
-            <AntDesign
-              name="left"
-              size={25}
-              color="#4245E5"
-              style={{ position: "absolute", left: -50, top: -12 }}
-            />
+            <View style={styles.arrowcont}>
+              <AntDesign name="left" size={25} color="#4245E5" />
+            </View>
           </TouchableOpacity>
-          <Text style={styles.infotitle}>Información Relevante</Text>
+          <View
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              paddingTop: 10,
+            }}
+          >
+            <View style={styles.line}></View>
+            <Text style={styles.infotitle}>Información Relevante</Text>
+          </View>
         </View>
         <View style={styles.fields}>
           <InfoRevField label="Nombre y apellido" input="Camilo Vargas" />
@@ -139,10 +146,13 @@ const InformacionRelevante = ({ setIsModalVisible }) => {
                 value={null}
                 enabled={false}
               />
-              <Picker.Item label="Análisis de datos" value="chino" />
+              <Picker.Item
+                label="Análisis de datos"
+                value="Análisis de datos"
+              />
               <Picker.Item
                 label="Desarrollo de software - Front/Back"
-                value="chino"
+                value="Desarrollo de software - Front/Back"
               />
               <Picker.Item label="Diseño" value="Diseño" />
               <Picker.Item label="Testing" value="Testing" />
@@ -183,15 +193,32 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     width: "100%",
-    marginTop: 175,
+    marginTop: 165,
     backgroundColor: "white",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
+  arrowcont: {
+    position: "absolute",
+    backgroundColor: "#EDEDED",
+    borderRadius: 50,
+    height: 30,
+    width: 30,
+    left: -55,
+    top: -180,
+    justifyContent: "center",
+  },
+  line: {
+    backgroundColor: "#8C8EDD",
+    height: 4,
+    width: 80,
+    borderRadius: 25,
+    marginBottom:7
+  },
   titlecont: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 7,
   },
   infotitle: { fontSize: 18, fontWeight: "500", marginRight: 10 },
   fields: {
