@@ -8,7 +8,7 @@ export const colors = {
     white: '#F9F9F9',
     background: '#F4F4F4',
     input_background: '#EEEEEE',
-    grey_placeholder: '#E5E5E5',
+    grey_placeholder: '#626A6D',
     grey_line: '#B4B4B4',
     lightGrey: '#F9F9F9',
     danger: '#F01212',

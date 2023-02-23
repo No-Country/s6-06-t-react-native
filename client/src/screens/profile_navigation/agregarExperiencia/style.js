@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../constants";
 
 export const styles = StyleSheet.create({
       whiteContainer: {
@@ -19,5 +20,5 @@ export const styles = StyleSheet.create({
     requeridas:{
       color: '#626A6D',
       marginBottom: 16
-    }
+    },
   });
