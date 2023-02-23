@@ -1,6 +1,6 @@
 tags:
-    name: Auth
-    description: Authentication endpoints
+    - name: Auth
+      description: Authentication endpoints
 paths:
     /api/auth/new:
         post:
@@ -167,38 +167,6 @@ paths:
                             examples:
                                 user_error_general:
                                     $ref: '#/components/examples/user_error_general'
-    /api/auth/linkedin/callback:
-        get:
-            summary: Get the user from a linkedin account
-            tags: [SERVER]
-            responses:
-                200:
-                    description: Success
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/success'
-                            examples:
-                                user_success:
-                                    $ref: '#/components/examples/user_success'
-                400:
-                    description: Request error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                user_error_repetead:
-                                    $ref: '#/components/examples/user_error_repetead'
-                500:
-                    description: Server error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                user_error_general:
-                                    $ref: '#/components/examples/user_error_general'
     /api/auth/request-reset-password:
         post:
             summary: Request a password reset
@@ -236,6 +204,38 @@ paths:
                             examples:
                                 user_error_inexistent:
                                     $ref: '#/components/examples/user_error_inexistent'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/auth/linkedin/callback:
+        get:
+            summary: Get the user from a linkedin account
+            tags: [SERVER]
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                user_success:
+                                    $ref: '#/components/examples/user_success'
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_repetead:
+                                    $ref: '#/components/examples/user_error_repetead'
                 500:
                     description: Server error
                     content:

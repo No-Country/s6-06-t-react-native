@@ -1,0 +1,40 @@
+tags:
+    - name: Search
+      description: Search endpoints
+paths:
+    /api/search?search={search}:
+        get:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+                - in: query
+                  name: search
+                  schema:
+                      type: string
+                  required: true
+                  description: The term to perform the search
+            summary: Search for posts or users in all joined channels
+            tags: [Search]
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                search_success:
+                                    $ref: '#/components/examples/search_success'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
