@@ -26,7 +26,7 @@ import InformacionRelevante from "./componentes/InformacionRelevante";
 const PerfilProfesional = () => {
   const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState(null);
-  const [progress, setProgress] = useState(100);
+  const [progress, setProgress] = useState(30);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
@@ -133,8 +133,10 @@ const PerfilProfesional = () => {
         </View>
       </ScrollView>
 
-      <Modal visible={isModalVisible} animationType="slide">
-        <InformacionRelevante setIsModalVisible={setIsModalVisible}/>
+      <Modal visible={isModalVisible} animationType="slide" 
+      transparent={true}
+      >
+        <InformacionRelevante setIsModalVisible={setIsModalVisible}  transparent={true}/>
       </Modal>
     </SafeAreaView>
   );
