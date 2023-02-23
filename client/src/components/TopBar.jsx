@@ -9,7 +9,7 @@ const Profile = ({ tabname, navigateTo }) => {
 
     return (
         <View style={styles.Topcontainer}>
-            <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate(navigateTo)}>
+            <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                 <AntDesign name="left" size={20} color="black" />
             </TouchableOpacity>
             <Text style={styles.title}>{tabname}</Text>

@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ActivityIndicator, FlatList, ScrollView, Text, View } from 'react-native';
 import { styles } from './styles'
 import PostDayWrapper from './PostDayWrapper';
 
 
-const ScrollViewPost = ({ post }) => {
+
+const ScrollViewPost = ({post, token, getPost, load, setList}) => {
+    let idChannelGeneral = "63e3dc46a5dd297fac1ca2a2";
     const [group, setgroup] = useState();
+    const [refreshBool, setrefreshBool] = useState(false);
+    let refresh = async ()=>{
+        setrefreshBool(!refreshBool)
+        await getPost(`/channel/${idChannelGeneral}`, token, setList)
+        setrefreshBool(false)
+    }
     let GroupByDatePost = (post)=>{
         let dates = []
         post.forEach( p=> {
@@ -30,24 +38,29 @@ const ScrollViewPost = ({ post }) => {
     }
     useEffect(() => {
         GroupByDatePost(post)
-    }, []);
-    if (!group) {
-        return <Text>Cargando...</Text>
-    }
+    },[post])
+
     return (
         <>
-
-            <ScrollView style={styles.scroll} >
-
-                {
-                    group.map((p, i) => (
-                        <PostDayWrapper
-                            group={p}
-                            key={i}
-                        />))
-
-                }
-            </ScrollView>
+            <FlatList 
+             data={group}
+             numColumns={1}
+             showsVerticalScrollIndicator={false}
+             keyExtractor={(group, i)=> String(i) }
+             renderItem={({item})=> (<PostDayWrapper group={item} />)}
+             inverted={true}
+             refreshing={refreshBool}
+             onRefresh={refresh}
+             onEndReachedThreshold={0.1}
+             
+             ListFooterComponent={ load ?
+                <ActivityIndicator
+                  size='large'
+                  color='#AEAEAE'
+                /> : 
+                <View style={{height: 100}}></View>
+              }
+            />
         </>
     );
 }

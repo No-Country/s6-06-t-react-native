@@ -87,7 +87,8 @@ export const styles = StyleSheet.create({
         width : '33%',
         justifyContent : 'center',
         alignItems : 'center',
-        marginVertical : 8
+        marginVertical : 8,
+        position : 'relative'
     },
     borderRight : {
         borderRightWidth : 1,

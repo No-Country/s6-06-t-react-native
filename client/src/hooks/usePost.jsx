@@ -2,31 +2,47 @@ import { useEffect, useState } from "react";
 import { reqResApi } from '../config/axiosConfig'
 
 
-export const usePost = (url, token)=>{
-    const [Post, setPost] = useState([]);
-
-    useEffect(() => {
-        getPosts(url, token)
-        
-    }, []);
-
-    let getPosts = async (url, token)=>{
+export const usePost = ()=>{
+    let getPosts = async (url, token, setList)=>{
+        let response 
+        let data = []
         try {
-            let data = await reqResApi.get( url , {
+            response = await reqResApi.get( url , {
                 headers : {'x-token' : token }
             })
-            // console.log(data.data.data.posts)
-            if (data.status == 200) {
-                setPost(data.data.data.posts)
-            }
         } catch (error) {
             console.log(error)
         }
+        if (response.status === 200) {
+          console.log(response)
+          data.push(...response.data.data.posts)
+          setList(data)
+          
+        }
     }
-    console.log(Post);
     return {
-        Post
+        getPosts
     }
     
+}
+
+export const usePostCreate = ()=>{
+    let create = async(url, token, data) =>{
+        let response
+        try {
+            response = await reqResApi.post(url, data, {
+                headers : { 'x-token' : token}
+            })
+            
+        } catch (error) {
+            console.log(error)
+        }
+        return response
+    }
+
+    return {
+        create
+    }
+
 }
 

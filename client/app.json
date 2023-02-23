@@ -36,5 +36,10 @@
       }
     }
     
+    },
+    "owner": "s6-06-react-native",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
   }
 }
