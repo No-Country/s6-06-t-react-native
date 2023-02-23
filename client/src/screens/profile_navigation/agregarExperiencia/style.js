@@ -24,12 +24,19 @@ export const styles = StyleSheet.create({
     checkboxWrapper:{
       display: 'flex',
       flexDirection: 'row',
-      alignItems: 'center'
+      alignItems: 'center',
+      marginBottom: 16
     },
     checkbox:{
       marginRight: 9
     },
     checkboxLabel:{
       fontSize:17
+    },
+    fixedButton:{
+      width: '100%',
+      position:'absolute',
+      bottom:0,
+      paddingHorizontal: 18
     }
   });

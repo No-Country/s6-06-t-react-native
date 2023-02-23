@@ -1,12 +1,5 @@
 import { useState } from "react";
-import {
-  Pressable,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  TouchableOpacityBase,
-  View,
-} from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import InputComponent from "../../../components/input/index.js";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
 import { styles } from "./style.js";
@@ -22,6 +15,7 @@ import { EvilIcons } from "@expo/vector-icons";
 import { colors } from "../../../constants/colors.js";
 import { tipoContrato } from "../../../utils/dataTipoContrato.js";
 import CheckBox from "expo-checkbox";
+import InputTextArea from "../../../components/inputTextArea/Index.js";
 // import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 const AgregarExperiencia = () => {
@@ -39,10 +33,14 @@ const AgregarExperiencia = () => {
       location: yup.string().max(50, "Ingresa hasta 50 carácteres."),
       yearIn: yup
         .string()
-        .max(50, "Ingresa hasta 50 carácteres.")
+        .matches(/\d/, 'Ingrese solo números')
+        .max(4, "Ingresa hasta 4 carácteres.")
         .required("Campo requerido."),
-      yearOut: yup.string().max(50, "Ingresa hasta 50 carácteres."),
+      yearOut: yup.string()
+      .matches(/\d/, 'Ingrese solo números')
+      .max(4, "Ingresa hasta 4 carácteres."),
       current: yup.boolean(),
+      description: yup.string().max(120, "Ingresa hasta 120 carácteres."),
     })
     .required();
   const [errorMessage, setErrorMessage] = useState(null);
@@ -54,15 +52,14 @@ const AgregarExperiencia = () => {
     setValue,
     watch,
   } = useForm({ resolver: yupResolver(schema) });
-  console.log(watch("current"));
+
   const handleOnChange = () => {
     setErrorMessage(null);
   };
 
-  console.log(watch('current'));
+  const isEditable = watch("current");
 
   const [data, setData] = useState("");
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -70,8 +67,8 @@ const AgregarExperiencia = () => {
   };
 
   return (
-    <ScrollView style={styles.whiteContainer}>
-      <View style={styles.formContainer}>
+    <View style={styles.whiteContainer}>
+      <ScrollView style={styles.formContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text>
             <EvilIcons name="close" size={30} color={colors.primary} />
@@ -192,6 +189,7 @@ const AgregarExperiencia = () => {
               onChangeText={(value) => onChange(value)}
               value={value}
               error={errors.yearOut}
+              editable={!isEditable}
             />
           )}
           name="yearOut"
@@ -201,26 +199,40 @@ const AgregarExperiencia = () => {
           control={control}
           onChange={handleOnChange}
           defaultValue={false}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TouchableOpacity
-              style={styles.checkboxWrapper}
-              onPress={() => setToggleCheckBox(!toggleCheckBox)}
-            >
+          render={({ field: { onChange, value } }) => (
+            <View style={styles.checkboxWrapper}>
               <CheckBox
                 style={styles.checkbox}
                 disabled={false}
                 value={value}
-                onValueChange={onChange}
+                onValueChange={(value) => onChange(value)}
                 color={colors.primary}
               />
-
               <Text style={styles.checkboxLabel}>
                 Actualmente trabajo en este rol
               </Text>
-            </TouchableOpacity>
+            </View>
           )}
           name="current"
         />
+
+        <Controller
+          control={control}
+          onChange={handleOnChange}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputTextArea
+              label="Descripción"
+              onBlur={onBlur}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              error={errors.description}
+              requerimiento="- Máximo 120 carácteres"
+            />
+          )}
+          name="description"
+        />
+      </ScrollView>
+      <View style={styles.fixedButton}>
         <PrimaryButton
           text="Guardar"
           width="width: 100%"
@@ -228,7 +240,7 @@ const AgregarExperiencia = () => {
           disabledColor={!isValid}
         />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
