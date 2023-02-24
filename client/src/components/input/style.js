@@ -13,6 +13,9 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     marginBottom: 4,
   },
+  mutedText:{
+    color: colors.text_grey
+  },
   input: {
     outlineColor: colors.primary,
     backgroundColor: colors.input_background,

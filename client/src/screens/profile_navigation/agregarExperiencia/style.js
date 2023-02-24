@@ -21,4 +21,22 @@ export const styles = StyleSheet.create({
       color: '#626A6D',
       marginBottom: 16
     },
+    checkboxWrapper:{
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 16
+    },
+    checkbox:{
+      marginRight: 9
+    },
+    checkboxLabel:{
+      fontSize:17
+    },
+    fixedButton:{
+      width: '100%',
+      position:'absolute',
+      bottom:0,
+      paddingHorizontal: 18
+    }
   });
