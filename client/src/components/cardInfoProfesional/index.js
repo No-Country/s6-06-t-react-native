@@ -1,7 +1,9 @@
-import { Feather } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
+import WorkExpImg from "../../../assets/workExpImg.png";
+import { colors } from "../../constants";
 import { styles } from "./style";
 
 const CardInfoProfesional = ({ cardTitle, aniadir, userData }) => {
@@ -18,48 +20,50 @@ const CardInfoProfesional = ({ cardTitle, aniadir, userData }) => {
           padding: 2,
         }}
       >
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            marginLeft: 10,
-            marginTop: 10,
-          }}
-        >
-          {cardTitle}
-        </Text>
-        <Feather
-          name="edit-3"
-          size={22}
-          color="blue"
-          style={{ marginRight: 10, marginTop: 10 }}
-        />
+        <Text style={styles.titleCard}>{cardTitle}</Text>
+        <View style={styles.iconWrapper}>
+          {userData && <Ionicons name="add" size={30} color={colors.primary} />}
+          <Feather
+            name="edit-3"
+            size={22}
+            color={colors.primary}
+            style={{ marginLeft: 10 }}
+          />
+        </View>
       </View>
 
-      {userData ? (
+      {!userData ? (
         <TouchableOpacity
           style={styles.txtcontainer}
           onPress={() => navigation.navigate("AddExperience")}
         >
           <View style={styles.aniadirWrapper}>
             <Text style={styles.text}>{aniadir}</Text>
-            <Text style={{ fontWeight: "bold", fontSize: 20 }}>+</Text>
+            <Text style={styles.iconoAdd}>+</Text>
           </View>
         </TouchableOpacity>
       ) : (
-        <View>
-          <Text>2021 - Actualidad</Text>
-          <View>
-            <Text>Diseñadora</Text>
-            <View>
-              <Text>Motomundo -</Text>
-              <Text>Freelance</Text>
-            </View>
+        <View style={styles.wrapperInformation}>
+          <View style={styles.wrapperImagen}>
+            <Image
+              source={require("../../../assets/workExpImg.png")}
+              style={styles.img}
+            />
           </View>
-          <Text>
-            Trabajo para clientes locales e internacionales. Diseño y rediseño
-            mobile y web. UX Research. Benchmarking...
-          </Text>
+          <View style={styles.wrapperInformacion}>
+            <Text style={styles.workDate}>2021 - Actualidad</Text>
+            <View style={styles.descriptionWrapper}>
+              <Text style={styles.titleWork}>Diseñadora</Text>
+              <View style={styles.companyWrapper}>
+                <Text style={styles.companyName}>Motomundo - </Text>
+                <Text style={styles.contract}>Freelance</Text>
+              </View>
+            </View>
+            <Text style={styles.workDescription}>
+              Trabajo para clientes locales e internacionales. Diseño y rediseño
+              mobile y web. UX Research. Benchmarking...
+            </Text>
+          </View>
         </View>
       )}
     </View>

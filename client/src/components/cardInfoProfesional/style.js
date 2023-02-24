@@ -6,9 +6,10 @@ export const styles = StyleSheet.create({
     backgroundColor: "white",
     marginTop: 10,
     width: "100%",
-    height: 132,
+    minHeight: 132,
     borderRadius: 10,
     shadowColor: "#000",
+    padding: 13,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -17,24 +18,75 @@ export const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
+  titleCard: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
   txtcontainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-  aniadirWrapper:{
-    display: 'flex',
-    flexDirection:'row',
-    alignItems: 'center'
+  iconWrapper:{
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
-  text:{
+  aniadirWrapper: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  text: {
     color: colors.primary,
     fontSize: 16,
-    marginRight: 3
+    marginRight: 3,
   },
-  iconoAdd:{
+  iconoAdd: {
     color: colors.primary,
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+  wrapperInformation:{
+    display: 'flex',
+    flexDirection:'row'
+  },
+  wrapperImagen:{
+    flex: 1,
+    top: -30,
+    left: 12
+  },
+  img:{
+    width: '60%',
+    resizeMode: 'contain',
+  },
+  wrapperInformacion:{
+    flex: 3,
+    paddingRight: 30
+  },
+  workDate: {
+    color: colors.primary,
+    fontSize: 16,
     fontWeight: 'bold',
-    fontSize: 20
-  }
+    marginBottom: 15,
+  },
+  descriptionWrapper: {
+    marginBottom: 13
+  },
+  titleWork: {
+    fontSize: 22,
+    fontWeight: "500",
+  },
+  companyWrapper: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  companyName: {
+    fontSize: 16,
+  },
+  contract: {
+    fontSize: 16,
+    color: colors.grey_placeholder,
+  },
+  workDescription: {},
 });
