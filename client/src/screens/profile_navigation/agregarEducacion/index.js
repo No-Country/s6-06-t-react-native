@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import InputComponent from "../../../components/input/index.js";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
-import { styles } from "./style.js";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
@@ -16,31 +15,32 @@ import { colors } from "../../../constants/colors.js";
 import { tipoContrato } from "../../../utils/dataTipoContrato.js";
 import CheckBox from "expo-checkbox";
 import InputTextArea from "../../../components/inputTextArea/Index.js";
-// import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { styles } from "./style.js";
+import { estadoEstudio } from "../../../utils/dataEstadoEstudio.js";
+import { nivelEstudio } from "../../../utils/dataNivelEstudio.js";
 
-const AgregarExperiencia = () => {
+const AgregarEducacion = () => {
   const navigation = useNavigation();
 
   const schema = yup
     .object({
-      jobTitle: yup
+      title: yup
         .string()
         .min(5, "Ingresa al menos 5 carácteres.")
         .max(30, "Ingresa como máximo 30 carácteres.")
         .required("Campo requerido."),
-      company: yup.string().max(50, "Ingresa hasta 50 carácteres."),
-      jobType: yup.string().max(50, "Ingresa hasta 50 carácteres."),
-      location: yup.string().max(50, "Ingresa hasta 50 carácteres."),
-      yearIn: yup
+      institution: yup.string().max(50, "Ingresa hasta 50 carácteres."),
+      state: yup.string().required(),
+      start: yup
         .string()
-        .matches(/\d/, "Ingrese solo números")
+        .matches(/\d/, "Ingrese solo números")        
         .length(4, "Ingresa el año completo, ejemplo: 2022")
         .required("Campo requerido."),
-      yearOut: yup
+      end: yup
         .string()
         .matches(/\d/, "Ingrese solo números")
         .length(4, "Ingresa el año completo, ejemplo: 2022"),
-      current: yup.boolean(),
+      inProgress: yup.boolean(),
       description: yup.string().max(120, "Ingresa hasta 120 carácteres."),
     })
     .required();
@@ -52,15 +52,13 @@ const AgregarExperiencia = () => {
     formState: { errors, isValid },
     setValue,
     watch,
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(schema) }, {mode: 'onBlur'});
 
   const handleOnChange = () => {
     setErrorMessage(null);
   };
 
-  const isEditable = watch("current");
-
-  const [data, setData] = useState("");
+  const isEditable = watch("inProgress");
 
   const onSubmit = (data) => {
     console.log(data);
@@ -75,7 +73,7 @@ const AgregarExperiencia = () => {
             <EvilIcons name="close" size={30} color={colors.primary} />
           </Text>
         </TouchableOpacity>
-        <Text style={styles.header}>Agregar experiencia</Text>
+        <Text style={styles.header}>Agregar Educación</Text>
         <Text style={styles.requeridas}>*Filas requeridas</Text>
         <Controller
           control={control}
@@ -83,39 +81,23 @@ const AgregarExperiencia = () => {
           render={({ field: { onChange, onBlur } }) => (
             <InputComponent
               label="Título*"
-              placeholder="Ingresa la posición que ocupas"
+              placeholder="Ingresa que estas estudiando"
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
-              error={errors.jobTitle}
+              error={errors.title}
             />
           )}
-          name="jobTitle"
-        />
-
-        <Controller
-          control={control}
-          onChange={handleOnChange}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <InputComponent
-              label="Nombre de la empresa"
-              placeholder="Por ejemplo: No Country"
-              onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-              error={errors.company}
-            />
-          )}
-          name="company"
+          name="title"
         />
 
         <InputComponentSelectList
-          label="Tipo de trabajo"
-          data={tipoContrato}
-          name="jobType"
+          label="Nivel de estudios*"
+          data={nivelEstudio}
+          name="level"
           control={control}
-          error={errors.jobType}
+          error={errors.level}
           setValue={setValue}
-          placeholder="Indica el tipo de contrato"
+          placeholder="Ejemplo: Autodidacta"
         />
 
         <Controller
@@ -123,59 +105,41 @@ const AgregarExperiencia = () => {
           onChange={handleOnChange}
           render={({ field: { onChange, onBlur, value } }) => (
             <InputComponent
-              label="Ubicación"
-              placeholder="Selecciona la ubicación de tu empleo"
+              label="Institución"
+              placeholder="Ingresa la institución"
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               value={value}
-              error={errors.location}
+              error={errors.institution}
             />
           )}
-          name="location"
+          name="institution"
         />
-        {/* <View>
-          <GooglePlacesAutocomplete
-            placeholder="Selecciona la ubicación de tu empleo."
-            onPress={(data, details = null) => {
-              // 'details' is provided when fetchDetails = true
-              setData(data)
-              console.log(data, details);
-            }}
-            // keyboardShouldPersistTaps="never"
-            // fetchDetails={true}
-            enablePoweredByContainer={false}
-            styles={{
-              textInput: {
-                backgroundColor: colors.input_background,
-                borderRadius: 15,
-                paddingHorizontal: 15,
-                paddingVertical: 16,
-                height: "auto",
-                fontSize: 17,
-                color: colors.grey_placeholder,
-              },
-            }}
-            query={{
-              key: "AIzaSyAtOh7oKl9bNbK3E0gSB8xV6wX7JCBUVeE",
-              language: "es",
-            }}
-          />
-        </View> */}
+
+        <InputComponentSelectList
+          label="Estado de estudio*"
+          data={estadoEstudio}
+          name="state"
+          control={control}
+          error={errors.state}
+          setValue={setValue}
+        />
+
         <Controller
           control={control}
           onChange={handleOnChange}
           render={({ field: { onChange, onBlur, value } }) => (
             <InputComponent
-              label="Fecha de ingreso*"
+              label="Año de ingreso*"
               keyboardType="numeric"
               placeholder="Selecciona el año de comienzo"
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               value={value}
-              error={errors.yearIn}
+              error={errors.start}
             />
           )}
-          name="yearIn"
+          name="start"
         />
 
         <Controller
@@ -183,17 +147,17 @@ const AgregarExperiencia = () => {
           onChange={handleOnChange}
           render={({ field: { onChange, onBlur, value } }) => (
             <InputComponent
-              label="Fecha de egreso"
+              label="Año de egreso"
               keyboardType="numeric"
               placeholder="Ingresa el año de finalización"
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               value={value}
-              error={errors.yearOut}
+              error={errors.end}
               editable={!isEditable}
             />
           )}
-          name="yearOut"
+          name="end"
         />
 
         <Controller
@@ -209,12 +173,10 @@ const AgregarExperiencia = () => {
                 onValueChange={(value) => onChange(value)}
                 color={colors.primary}
               />
-              <Text style={styles.checkboxLabel}>
-                Actualmente trabajo en este rol
-              </Text>
+              <Text style={styles.checkboxLabel}>Actualmente asisto</Text>
             </View>
           )}
-          name="current"
+          name="inProgress"
         />
 
         <Controller
@@ -245,4 +207,4 @@ const AgregarExperiencia = () => {
   );
 };
 
-export default AgregarExperiencia;
+export default AgregarEducacion;
