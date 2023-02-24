@@ -5,14 +5,14 @@ const getJobOffers = async (req, res) => {
     const { filter, from, to } = req.query;
 
     const regex = { $regex: filter, $options: 'i' };
-    const query={
+    const query = {
         $or: [{ typechannel: regex }, { name: regex }]
-    }
+    };
 
     try {
         const total = await JobOffer.find();
 
-        const allOffers = await JobOffer.find(filter?query:{})
+        const allOffers = await JobOffer.find(filter ? query : {})
             .skip(Number(from))
             .limit(Number(to))
             .populate('countCandidates')
@@ -20,7 +20,13 @@ const getJobOffers = async (req, res) => {
             .populate('countComments');
         // .populate({ path: 'comments', select: 'body -job_offer' });
         res.set('Content-Range', total.length);
-        return response.success(req,res,'Offers obtained successfully',allOffers,200);
+        return response.success(
+            req,
+            res,
+            'Offers obtained successfully',
+            allOffers,
+            200
+        );
     } catch (error) {
         console.log(error);
         return response.error(req, res, 'Contact Admin', 500);
@@ -44,7 +50,13 @@ const createPostulation = async (req, res) => {
 
         await offer.save();
 
-        return response.success(req,res,'Offer created successfully',offer,201);
+        return response.success(
+            req,
+            res,
+            'Offer created successfully',
+            offer,
+            201
+        );
     } catch (error) {
         console.log(error);
         return response.error(req, res, 'Contact Admin', 500);
@@ -74,7 +86,13 @@ const createComment = async (req, res) => {
             { new: true }
         );
 
-        return response.success(req,res,'Comment created successfully',postToUpdate,201);
+        return response.success(
+            req,
+            res,
+            'Comment created successfully',
+            postToUpdate,
+            201
+        );
     } catch (error) {
         return response.error(req, res, 'Contact Admin', 500);
     }
@@ -98,7 +116,13 @@ const updateJobOffer = async (req, res) => {
                 404
             );
         }
-        return response.success(req,res,'Offer modified successfully',updatedJobOffer,200);
+        return response.success(
+            req,
+            res,
+            'Offer modified successfully',
+            updatedJobOffer,
+            200
+        );
     } catch (error) {
         return response.error(req, res, 'Contact Admin', 500);
     }
