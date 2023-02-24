@@ -23,6 +23,7 @@ import Educacion from "./componentes/Educacion";
 import Idiomas from "./componentes/Idiomas";
 import Herramientas from "./componentes/Herramientas";
 import InformacionRelevante from "./componentes/InformacionRelevante";
+import CardInfoProfesional from "../../../components/cardInfoProfesional";
 const PerfilProfesional = () => {
   const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState(null);
@@ -37,7 +38,7 @@ const PerfilProfesional = () => {
     ? userInfo.img_avatar
     : "../icons/profilepicture.png";
 
-  return (
+    return (
     <SafeAreaView style={styles.container}>
       <TopBar tabname="Perfil Profesional" navigateTo="Profile" />
       <ScrollView>
@@ -47,7 +48,10 @@ const PerfilProfesional = () => {
               source={{ uri: profileImg }}
               style={{ width: 100, height: 100 }}
             />
-            <TouchableOpacity style={styles.ppButton} onPress={()=> setIsModalVisible(true)}>
+            <TouchableOpacity
+              style={styles.ppButton}
+              onPress={() => setIsModalVisible(true)}
+            >
               <Feather name="edit" size={20} color="blue" />
             </TouchableOpacity>
           </View>
@@ -55,9 +59,11 @@ const PerfilProfesional = () => {
             <AntDesign name="edit" size={25} color="black" />
           </TouchableOpacity>
           <Text style={styles.name}>
-            {userInfo ? userInfo.fullName : "Camilo Vargas"}
+            {userInfo ? userInfo.fullName : "No hay información."}
           </Text>
-          <Text style={styles.profession}> Software Developer</Text>
+          <Text style={styles.profession}>
+            {userInfo ? userInfo?.jobArea : "No hay información."}
+          </Text>
         </View>
         <View style={styles.progressContainer}>
           <ProgressCircle progress={progress} />
@@ -90,53 +96,53 @@ const PerfilProfesional = () => {
           </View>
         </View>
 
-        {/* Disponibilidad */}
         <View style={styles.tab}>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={{ fontSize: 14, fontWeight: "500" }}>
-              Disponibilidad Horaria
+          <View style={styles.leftTab}>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={{ fontSize: 14, fontWeight: "500" }}>
+                Disponibilidad horaria
+              </Text>
+            </View>
+            <View style={styles.separadorTab}></View>
+
+            <Text style={styles.datoUser}>
+              {userInfo ? userInfo?.availability : "No hay información."}
             </Text>
           </View>
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <Text style={{ fontSize: 12 }}>Part-Time (12 a 17HS)</Text>
-            <AntDesign name="edit" size={20} color="black" />
-          </View>
+          <AntDesign name="edit" size={20} color={colors.primary} />
         </View>
 
         <View style={styles.tab}>
-          <View style={{ flexDirection: "row", justifyContent: "center" }}>
-            <Text style={{ fontSize: 14, fontWeight: "500" }}>
-              Area Laboral de Interes
+          <View style={styles.leftTab}>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={{ fontSize: 14, fontWeight: "500" }}>
+              Área laboral de interés
+              </Text>
+            </View>
+            <View style={styles.separadorTab}></View>
+
+            <Text style={styles.datoUser}>
+              {userInfo ? userInfo?.position : "No hay información."}
             </Text>
-            {/* middle bar separation */}
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: "50%",
-            }}
-          >
-            <Text style={{ fontSize: 12 }}>Diseno</Text>
-            <AntDesign name="edit" size={20} color="black" />
-          </View>
+          <AntDesign name="edit" size={20} color={colors.primary} />
         </View>
 
         <View style={styles.infoTabs}>
+          <CardInfoProfesional cardTitle='Experiencia laboral' aniadir='Añadir experiencia laboral'/>
           <SobreMi />
-          <ExperienciaLaboral />
+          <ExperienciaLaboral  />
           <Educacion />
           <Herramientas />
           <Idiomas />
         </View>
       </ScrollView>
 
-      <Modal visible={isModalVisible} animationType="slide" 
-      transparent={true}
-      >
-        <InformacionRelevante setIsModalVisible={setIsModalVisible}  transparent={true}/>
+      <Modal visible={isModalVisible} animationType="slide" transparent={true}>
+        <InformacionRelevante
+          setIsModalVisible={setIsModalVisible}
+          transparent={true}
+        />
       </Modal>
     </SafeAreaView>
   );
