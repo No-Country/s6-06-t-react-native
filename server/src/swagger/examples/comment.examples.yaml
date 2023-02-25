@@ -1,0 +1,39 @@
+components:
+    examples:
+        comment_success:
+            value:
+                message: 'Comment created successfully'
+                data:
+                    {
+                        author: '63ed97dc7f7939e67f02f46d',
+                        body: 'Trying',
+                        active: true,
+                        attached: [],
+                        job_offer: '63e71bed0a8c3c1f4c739765',
+                        createdAt: '2023-02-24T02:21:30.238Z',
+                        updatedAt: '2023-02-24T02:21:30.238Z',
+                        id: '63f81f2adac0f8311d438e85'
+                    }
+        comment_edit_success:
+            value:
+                message: 'Comment modified successfully'
+                data:
+                    {
+                        author: '63ed97dc7f7939e67f02f46d',
+                        body: 'Trying harder',
+                        active: true,
+                        attached: [],
+                        job_offer: '63e71bed0a8c3c1f4c739765',
+                        createdAt: '2023-02-24T02:21:30.238Z',
+                        updatedAt: '2023-02-24T02:21:30.238Z',
+                        id: '63f81f2adac0f8311d438e85'
+                    }
+        comment_delete_success:
+            value:
+                message: 'Comment deleted successfully'
+        comment_error_inexistent:
+            value:
+                error: Document not found
+        comment_error_unauthorized:
+            value:
+                error: You dont have permission to update this comment

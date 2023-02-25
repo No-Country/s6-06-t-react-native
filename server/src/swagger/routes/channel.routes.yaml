@@ -1,75 +1,8 @@
 tags:
-    name: Posts
-    description: Posts endpoints
+    - name: Channels
+      description: Channels endpoints
 paths:
-    /api/post/all:
-        get:
-            parameters:
-                - in: header
-                  name: x-token
-                  schema:
-                      type: string
-                  required: true
-                  description: The token users account
-            summary: Get all the posts
-            tags: [Admins]
-            responses:
-                200:
-                    description: Success
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/success'
-                            examples:
-                                posts_success:
-                                    $ref: '#/components/examples/posts_success'
-                500:
-                    description: Server error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                user_error_general:
-                                    $ref: '#/components/examples/user_error_general'
-    /api/post/comments/{post}:
-        get:
-            parameters:
-                - in: header
-                  name: x-token
-                  schema:
-                      type: string
-                  required: true
-                  description: The token users account
-                - in: params
-                  name: post
-                  schema:
-                      type: string
-                      format: id
-                  required: true
-                  description: The id of channel to  make the post
-            summary: Get the comments of a post
-            tags: [Posts]
-            responses:
-                200:
-                    description: Success
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/success'
-                            examples:
-                                post_comments_success:
-                                    $ref: '#/components/examples/post_comments_success'
-                500:
-                    description: Server error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                user_error_general:
-                                    $ref: '#/components/examples/user_error_general'
-    /api/post/new/{channel}:
+    /api/channel/new:
         post:
             parameters:
                 - in: header
@@ -78,41 +11,34 @@ paths:
                       type: string
                   required: true
                   description: The token users account
-                - in: params
-                  name: channel
-                  schema:
-                      type: string
-                      format: id
-                  required: true
-                  description: The id of channel to make the post
-            summary: Create a new Post in a specific channel
-            tags: [Posts]
+            summary: Create a new channel
+            tags: [Admins]
             requestBody:
                 required: true
                 content:
-                    multipart/form-data:
+                    application/json:
                         schema:
-                            $ref: '#/components/schemas/post_new'
+                            $ref: '#/components/schemas/new_channel'
             responses:
-                201:
+                200:
                     description: Success
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/success'
                             examples:
-                                post_created:
-                                    $ref: '#/components/examples/post_created'
-                400:
-                    description: Request error
+                                user_success:
+                                    $ref: '#/components/examples/user_success'
+                500:
+                    description: Server error
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/error'
                             examples:
-                                post_creation_error:
-                                    $ref: '#/components/examples/post_creation_error'
-    /api/post/update/{post}:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/channel/{id}:
         put:
             parameters:
                 - in: header
@@ -122,20 +48,20 @@ paths:
                   required: true
                   description: The token users account
                 - in: params
-                  name: post
+                  name: id
                   schema:
                       type: string
                       format: id
                   required: true
-                  description: The id of post to update
-            summary: Edit a post
-            tags: [Posts]
+                  description: The id of channel to update
+            summary: Edit a channel
+            tags: [Admins]
             requestBody:
                 required: true
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/post_edit'
+                            $ref: '#/components/schemas/edit_channel'
             responses:
                 200:
                     description: Success
@@ -144,17 +70,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/success'
                             examples:
-                                post_updated:
-                                    $ref: '#/components/examples/post_updated'
-                401:
-                    description: Request error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                post_unauthorized:
-                                    $ref: '#/components/examples/post_unauthorized'
+                                channel_edit_success:
+                                    $ref: '#/components/examples/channel_edit_success'
                 404:
                     description: Request error
                     content:
@@ -162,8 +79,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/error'
                             examples:
-                                post_inexistent:
-                                    $ref: '#/components/examples/post_inexistent'
+                                channel_inexistent:
+                                    $ref: '#/components/examples/channel_inexistent'
                 500:
                     description: Server error
                     content:
@@ -173,7 +90,6 @@ paths:
                             examples:
                                 user_error_general:
                                     $ref: '#/components/examples/user_error_general'
-    /api/post/{id}:
         delete:
             parameters:
                 - in: header
@@ -188,8 +104,8 @@ paths:
                       type: string
                       format: id
                   required: true
-                  description: The id of post to delete
-            summary: Delete a post
+                  description: The id of channel to delete
+            summary: Delete a channel
             tags: [Admins]
             responses:
                 200:
@@ -199,26 +115,17 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/success'
                             examples:
-                                post_deleted:
-                                    $ref: '#/components/examples/post_deleted'
-                400:
+                                channel_edit_success:
+                                    $ref: '#/components/examples/channel_edit_success'
+                404:
                     description: Request error
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/error'
                             examples:
-                                post_error_remove:
-                                    $ref: '#/components/examples/post_error_remove'
-                401:
-                    description: Request error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                post_unauthorized:
-                                    $ref: '#/components/examples/post_unauthorized'
+                                channel_inexistent:
+                                    $ref: '#/components/examples/channel_inexistent'
                 500:
                     description: Server error
                     content:
@@ -226,5 +133,139 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/error'
                             examples:
-                                post_inexistent:
-                                    $ref: '#/components/examples/post_inexistent'
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/channel/{id}?from={from}&to={to}:
+        get:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+                - in: params
+                  name: id
+                  schema:
+                      type: string
+                      format: id
+                  required: true
+                  description: The id of the channel
+                - in: query
+                  name: from
+                  schema:
+                      type: number
+                  description: Select the first offer
+                - in: query
+                  name: to
+                  schema:
+                      type: number
+                  description: Select the last offer
+            summary: Get all posts specific channel
+            tags: [Channels]
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                channel_one_success:
+                                    $ref: '#/components/examples/channel_one_success'
+                404:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                channel_inexistent:
+                                    $ref: '#/components/examples/channel_inexistent'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/channel/user:
+        get:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+            summary: Get the channels where the user is joined
+            tags: [Channels]
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                channel_user_success:
+                                    $ref: '#/components/examples/channel_user_success'
+                404:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_inexistent:
+                                    $ref: '#/components/examples/user_error_inexistent'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/channel/all?from={from}&to={to}:
+        get:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                - in: query
+                  name: from
+                  schema:
+                      type: number
+                  description: Select the first offer
+                - in: query
+                  name: to
+                  schema:
+                      type: number
+                  description: Select the last offer
+            summary: Gets all the channels
+            tags: [Channels]
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                channel_user_success:
+                                    $ref: '#/components/examples/channel_user_success'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'

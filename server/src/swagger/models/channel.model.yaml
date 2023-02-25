@@ -1,0 +1,37 @@
+components:
+    schemas:
+        new_channel:
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: the email of the user account
+                typechannel:
+                    type: string
+                    description: the encrypted password of the user account
+                    enum:
+                        - private
+                        - public
+            required:
+                - name
+            example:
+                name: Selected
+                typechannel: private
+        edit_channel:
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: the email of the user account
+                typechannel:
+                    type: string
+                    description: the encrypted password of the user account
+                    enum:
+                        - private
+                        - public
+                active:
+                    type: boolean
+            example:
+                name: Selected fixed
+                typechannel: private
+                active: false

@@ -18,8 +18,7 @@ const createUser = async (req, res) => {
             201
         );
     } catch (error) {
-        console.log(error);
-        response.error(req, res, 'Contact Admin', 500);
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
@@ -35,7 +34,6 @@ const validateAccount = async (req, res) => {
 
         res.render('success', { layout: 'index', message: validate });
     } catch (e) {
-        console.log(e);
         return response.error(req, res, 'Contact Admin');
     }
 };
@@ -45,10 +43,9 @@ const resendEmail = async (req, res) => {
     try {
         await authServices.resendEmail(uid);
 
-        response.success(req,res,'Email resend succesfully , check inbox ',undefined,200);
+        response.success(req,res,'Email resend successfully , check inbox ',undefined,200);
     } catch (e) {
-        console.log(e);
-        response.error(req, res, 'Contact Admin', 500);
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
@@ -70,7 +67,6 @@ const loginUser = async (req, res) => {
 
         response.success(req, res, 'User logged in', user, 200);
     } catch (error) {
-        console.log(error);
         return response.error(req, res, 'Contact Admin');
     }
 };
@@ -100,7 +96,6 @@ const loginLinkedIn = async (req, res) => {
 
         response.success(req, res, 'User logged in', login, 200);
     } catch (e) {
-        console.log(e);
         return response.error(req, res, 'Contact ADMIN');
     }
 };
@@ -116,7 +111,6 @@ const resetPasswordRequest = async (req, res) => {
 
         response.success(req,res,'Request for Password reset was successfully,Check email ',null,200);
     } catch (e) {
-        console.log(e);
         return response.error(req, res, 'Contact Admin');
     }
 };
@@ -132,7 +126,6 @@ const resetPassword = async (req, res) => {
 
         res.render('success', { layout: 'index', message: reset });
     } catch (e) {
-        console.log(e);
         return response.error(req, res, 'Contact ADMIN');
     }
 };
@@ -143,7 +136,7 @@ const renderRecoverPassword = (req, res) => {
     if (uid && token) {
         res.render('main', { layout: 'index', uid, token });
     } else {
-        response.error(req,res,'There is a problem with the provided url',400);
+        return response.error(req,res,'There is a problem with the provided url',400);
     }
 };
 

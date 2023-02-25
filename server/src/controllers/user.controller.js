@@ -17,7 +17,6 @@ const editUser = async (req, res) => {
         );
         return response.success(req, res, 'Updated user', updatedUser, 200);
     } catch (error) {
-        console.log(error);
         response.error(req, res, 'Contact Admin', 500);
     }
 };
@@ -74,7 +73,6 @@ const otherUser = async (req, res) => {
 
         return response.success(req, res, 'Other user', user, 200);
     } catch (error) {
-        console.log(error);
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
@@ -93,7 +91,7 @@ const favorite=async(req,res)=>{
 
         const user = await User.findById(uid);
         const doc = await models[place].findById(id);
-console.log(uid);
+
         if (!doc) {
             return response.error(req, res, 'Your document does not exist', 400);
         }
@@ -101,7 +99,6 @@ console.log(uid);
         await user.save()
         return response.success(req, res, 'Post Favorite saved', user);
     } catch (error) {
-        console.log(error);
         return response.error(req, res, 'Post not found', 500);
     }
 
@@ -116,13 +113,8 @@ const deleteOne=async(req,res)=>{
         if (!user) {
             return response.error(req, res, 'User not found', 404);
         }
-
-        
-
-        
         return response.success(req, res, 'User removed successfully', user );
     } catch (error) {
-        console.log(error);
         return response.error(req, res, 'CONTACT ADMIN', 500);
     }
 

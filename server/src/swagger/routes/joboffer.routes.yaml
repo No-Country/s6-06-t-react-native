@@ -1,75 +1,8 @@
 tags:
-    name: Posts
-    description: Posts endpoints
+    name: Job Offers
+    description: Job Offer endpoints
 paths:
-    /api/post/all:
-        get:
-            parameters:
-                - in: header
-                  name: x-token
-                  schema:
-                      type: string
-                  required: true
-                  description: The token users account
-            summary: Get all the posts
-            tags: [Admins]
-            responses:
-                200:
-                    description: Success
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/success'
-                            examples:
-                                posts_success:
-                                    $ref: '#/components/examples/posts_success'
-                500:
-                    description: Server error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                user_error_general:
-                                    $ref: '#/components/examples/user_error_general'
-    /api/post/comments/{post}:
-        get:
-            parameters:
-                - in: header
-                  name: x-token
-                  schema:
-                      type: string
-                  required: true
-                  description: The token users account
-                - in: params
-                  name: post
-                  schema:
-                      type: string
-                      format: id
-                  required: true
-                  description: The id of channel to  make the post
-            summary: Get the comments of a post
-            tags: [Posts]
-            responses:
-                200:
-                    description: Success
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/success'
-                            examples:
-                                post_comments_success:
-                                    $ref: '#/components/examples/post_comments_success'
-                500:
-                    description: Server error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                user_error_general:
-                                    $ref: '#/components/examples/user_error_general'
-    /api/post/new/{channel}:
+    /api/job-offer/new:
         post:
             parameters:
                 - in: header
@@ -78,41 +11,34 @@ paths:
                       type: string
                   required: true
                   description: The token users account
-                - in: params
-                  name: channel
-                  schema:
-                      type: string
-                      format: id
-                  required: true
-                  description: The id of channel to make the post
-            summary: Create a new Post in a specific channel
-            tags: [Posts]
+            summary: Create a new job offer
+            tags: [Admins]
             requestBody:
                 required: true
                 content:
-                    multipart/form-data:
+                    application/json:
                         schema:
-                            $ref: '#/components/schemas/post_new'
+                            $ref: '#/components/schemas/new_joboffer'
             responses:
-                201:
+                200:
                     description: Success
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/success'
                             examples:
-                                post_created:
-                                    $ref: '#/components/examples/post_created'
-                400:
-                    description: Request error
+                                joboffer_success:
+                                    $ref: '#/components/examples/joboffer_success'
+                500:
+                    description: Server error
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/error'
                             examples:
-                                post_creation_error:
-                                    $ref: '#/components/examples/post_creation_error'
-    /api/post/update/{post}:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/job-offer/edit/{id}:
         put:
             parameters:
                 - in: header
@@ -122,20 +48,20 @@ paths:
                   required: true
                   description: The token users account
                 - in: params
-                  name: post
+                  name: id
                   schema:
                       type: string
                       format: id
                   required: true
-                  description: The id of post to update
-            summary: Edit a post
-            tags: [Posts]
+                  description: The id of offer to update
+            summary: Update a job offer
+            tags: [Admins]
             requestBody:
                 required: true
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/post_edit'
+                            $ref: '#/components/schemas/edit_joboffer'
             responses:
                 200:
                     description: Success
@@ -144,17 +70,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/success'
                             examples:
-                                post_updated:
-                                    $ref: '#/components/examples/post_updated'
-                401:
-                    description: Request error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                post_unauthorized:
-                                    $ref: '#/components/examples/post_unauthorized'
+                                joboffer_edit_success:
+                                    $ref: '#/components/examples/joboffer_edit_success'
                 404:
                     description: Request error
                     content:
@@ -162,8 +79,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/error'
                             examples:
-                                post_inexistent:
-                                    $ref: '#/components/examples/post_inexistent'
+                                joboffer_error_inexistent:
+                                    $ref: '#/components/examples/joboffer_error_inexistent'
                 500:
                     description: Server error
                     content:
@@ -173,7 +90,7 @@ paths:
                             examples:
                                 user_error_general:
                                     $ref: '#/components/examples/user_error_general'
-    /api/post/{id}:
+    /api/job-offer/{id}:
         delete:
             parameters:
                 - in: header
@@ -188,8 +105,8 @@ paths:
                       type: string
                       format: id
                   required: true
-                  description: The id of post to delete
-            summary: Delete a post
+                  description: The id of offer to delete
+            summary: Delete a job offer
             tags: [Admins]
             responses:
                 200:
@@ -199,26 +116,17 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/success'
                             examples:
-                                post_deleted:
-                                    $ref: '#/components/examples/post_deleted'
-                400:
+                                joboffer_delete_success:
+                                    $ref: '#/components/examples/joboffer_delete_success'
+                404:
                     description: Request error
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/error'
                             examples:
-                                post_error_remove:
-                                    $ref: '#/components/examples/post_error_remove'
-                401:
-                    description: Request error
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/error'
-                            examples:
-                                post_unauthorized:
-                                    $ref: '#/components/examples/post_unauthorized'
+                                joboffer_error_inexistent:
+                                    $ref: '#/components/examples/joboffer_error_inexistent'
                 500:
                     description: Server error
                     content:
@@ -226,5 +134,101 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/error'
                             examples:
-                                post_inexistent:
-                                    $ref: '#/components/examples/post_inexistent'
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/job-offer/postulate/{id}:
+        post:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+                - in: params
+                  name: id
+                  schema:
+                      type: string
+                  required: true
+                  description: The id of offer to postulate
+            summary: Postulate to a job offer
+            tags: [Job Offers]
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                joboffer_delete_success:
+                                    $ref: '#/components/examples/joboffer_delete_success'
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                joboffer_error_selected:
+                                    $ref: '#/components/examples/joboffer_error_selected'
+                404:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_inexistent:
+                                    $ref: '#/components/examples/user_error_inexistent'
+                                joboffer_error_inexistent:
+                                    $ref: '#/components/examples/joboffer_error_inexistent'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/job-offer/all?from={from}&to={to}:
+        get:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+                - in: query
+                  name: from
+                  schema:
+                      type: number
+                  description: Select the first offer
+                - in: query
+                  name: to
+                  schema:
+                      type: number
+                  description: Select the last offer
+            summary: Get all offers
+            tags: [Job Offers]
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                joboffer_all_success:
+                                    $ref: '#/components/examples/joboffer_all_success'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
