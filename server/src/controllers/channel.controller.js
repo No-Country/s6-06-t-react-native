@@ -37,23 +37,11 @@ const updateChannel = async (req, res) => {
 const deleteChannel = async (req, res) => {
     const { id } = req.params;
     try {
-        const channel = await Channel.findById({ id });
+        const channel = await Channel.findById({ _id: id });
         if (!channel) {
             return response.error(req, res, 'Channel not found', 404);
         }
-
-        //PROBAR SI FUNCIONA !!!
         await Post.deleteMany({ channel: channel.id });
-        //ARREGLAR
-        // await User.updateMany(
-        //     { channels: channel.id },
-        //     {
-        //         $pop: {
-        //             channels: channel.id
-        //         }
-        //     }
-        // );
-
         await channel.remove();
         return response.success(req, res, 'Channel removed successfully', {
             name: channel.name
