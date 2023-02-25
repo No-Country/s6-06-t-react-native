@@ -7,6 +7,7 @@ import ModalComment from './ModalComment/ModalComment'
 import { useCommentInput } from '../../../hooks/useCommentInput'
 import { useSelector } from 'react-redux'
 import icons from '../../../utils/icons';
+import { colors } from '../../../constants'
 
 export default function Comments({data}) {
     const state = useSelector((state) => state.login.user);
@@ -51,25 +52,25 @@ export default function Comments({data}) {
                     {Reaction === "megusta" && (
                         <>
                             <Image source={icons.heart} style={{width:25, height:25, marginEnd : 10}}/>
-                            <Text style={styles.descriptionComment}>Me Gusta</Text>
+                            <Text style={[styles.descriptionComment, styles.select]}>Me Gusta</Text>
                         </>
                     )}
                     {Reaction === "meinteresa" && (
                         <>
                             <Image source={icons.thumbsUp} style={{width:25, height:25, marginEnd : 10}}/>
-                            <Text style={styles.descriptionComment}>Me Interesa</Text>
+                            <Text style={[styles.descriptionComment, styles.select]}>Me Interesa</Text>
                         </>
                     )}
                     {Reaction === "apoyar" && (
                         <>
                             <Image source={icons.claping} style={{width:25, height:25, marginEnd : 10}}/>
-                            <Text style={styles.descriptionComment}>Apoyar</Text>
+                            <Text style={[styles.descriptionComment, styles.select]}>Apoyar</Text>
                         </>
                     )}
                     {Reaction === "hacergracia" && (
                         <>
                             <Image source={icons.smile} style={{width:25, height:25, marginEnd : 10}}/>
-                            <Text style={styles.descriptionComment}>Me divierte</Text>
+                            <Text style={[styles.descriptionComment, styles.select]}>Me divierte</Text>
                         </>
                     )}
                 </View>
