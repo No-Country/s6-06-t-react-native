@@ -43,7 +43,7 @@ export default function CardPost({ data }) {
                 like={data.megusta}
                 meinteresa={data.meinteresa}
         /> 
-      <Comments />
+      <Comments data={data} />
     </View>
   );
 }

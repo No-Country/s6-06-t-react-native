@@ -45,4 +45,34 @@ export const usePostCreate = ()=>{
     }
 
 }
+export const useReaction = ()=>{
+    let addReaction = async (url, token, type)=>{
+        let response 
+        try {
+            response = await reqResApi.post( url, type, {
+                headers : {'x-token' : token }
+            })
+        } catch (error) {
+            console.log(error)
+        }
+        console.log(response)
+    }
+
+    let removeReaction = async(url, token, type) =>{
+        let response 
+        try {
+            response = await reqResApi.put( url, type, {
+                headers : {'x-token' : token }
+            })
+        } catch (error) {
+            console.log(error)
+        }
+        console.log(response)
+    }
+    return {
+        addReaction,
+        removeReaction
+    }
+    
+}
 
