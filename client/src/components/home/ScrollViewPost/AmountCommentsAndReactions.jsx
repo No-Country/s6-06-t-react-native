@@ -5,7 +5,8 @@ import { styles } from './styles'
 
 
 
-export default function AmountCommentsAndReactions({countComments, apoyar, hacergracia ,important, like ,meinteresa}) {
+export default function AmountCommentsAndReactions({countComments, apoyar, hacergracia ,important, like ,meinteresa, isModalVisible,
+  setIsModalVisible}) {
   const [countReaction, setcountReaction] = useState([]);
   let sortedReaction= ()=>{
     let array = [
@@ -64,7 +65,7 @@ export default function AmountCommentsAndReactions({countComments, apoyar, hacer
 
       </View>
       <View style={styles.LengthComment}>
-        { countComments > 0 && <Text style={styles.TextAmountComment} >{countComments} Comentarios</Text>}
+        { countComments > 0 && <Text style={styles.TextAmountComment} onPress={()=> setIsModalVisible(true)}>{countComments} Comentarios</Text>}
       </View>
     </View>
   )

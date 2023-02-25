@@ -11,6 +11,7 @@ export default function CardPost({ data }) {
     ? data.description.length >= 150 && data.description.slice(0, 150)
     : "no description";
   const [short, setShort] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   // console.log("----------------------------");
   // console.log(data);
   
@@ -42,9 +43,11 @@ export default function CardPost({ data }) {
                 important={data.important}
                 like={data.megusta}
                 meinteresa={data.meinteresa}
+                isModalVisible={isModalVisible}
+                setIsModalVisible={setIsModalVisible}
 
         /> 
-      <Comments data={data} />
+      <Comments data={data} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} />
     </View>
   );
 }

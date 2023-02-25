@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 import icons from '../../../utils/icons';
 import { colors } from '../../../constants'
 
-export default function Comments({data}) {
+export default function Comments({data, isModalVisible, setIsModalVisible}) {
     const state = useSelector((state) => state.login.user);
     let searchReaction = (data)=>{
         let reaction = undefined
@@ -33,7 +33,7 @@ export default function Comments({data}) {
     const [Show, setShow] = useState(false);
     let {Focus, setFocus} = useCommentInput();
     const [Reaction, setReaction] = useState();
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    // const [isModalVisible, setIsModalVisible] = useState(false);
     useEffect(() => {
         setReaction(searchReaction(data))
     }, [])
