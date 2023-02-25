@@ -1,8 +1,18 @@
 export const trasformDateADateString = (d) =>{
     let date = new Date(d)
+    let newDate = new Date()
+    if (date.toLocaleDateString() === newDate.toLocaleDateString()) {
+        return 'Hoy'
+    }
+
     let numberDay = date.getDay()
     let day = date.getDate()
     let month = date.getMonth()
+    
+    // if (month === newDate.getMonth() && date.getFullYear() === newDate.getFullYear()   ) {
+        
+    // }
+
     switch (numberDay) {
         case 0:
             numberDay = 'Domingo' 

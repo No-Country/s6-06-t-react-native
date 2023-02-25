@@ -3,7 +3,8 @@ import { ScreenWidth } from '../../../../utils/ScreenDimesions';
 
 export const styles = StyleSheet.create({
     homeContain : {
-        flex : 1 
+        flex : 1,
+        backgroundColor : 'white'
     },
     HeaderContain : {
         paddingTop : 10,
