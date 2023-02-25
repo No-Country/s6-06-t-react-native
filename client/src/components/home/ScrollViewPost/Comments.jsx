@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { styles } from './styles'
 import { Feather, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 import ModalReactions from '../../ModalReactions/ModalReactions'
+import ModalComment from './ModalComment/ModalComment'
 import { useCommentInput } from '../../../hooks/useCommentInput'
 import { useSelector } from 'react-redux'
 import icons from '../../../utils/icons';
@@ -31,6 +32,7 @@ export default function Comments({data}) {
     const [Show, setShow] = useState(false);
     let {Focus, setFocus} = useCommentInput();
     const [Reaction, setReaction] = useState();
+    const [isModalVisible, setIsModalVisible] = useState(false);
     useEffect(() => {
         setReaction(searchReaction(data))
     }, [])
@@ -72,13 +74,13 @@ export default function Comments({data}) {
                     )}
                 </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback>
-                <View style={[styles.ActionPost, styles.borderRight]} onPress={()=> setFocus(!Focus)}>
-                    <MaterialCommunityIcons name="comment-text-outline" size={24} color="black" />
-                    <Text style={styles.descriptionComment}>Comentar</Text>
-                </View>
-
+            <TouchableWithoutFeedback onPress={()=>  setIsModalVisible(true)}>
+                    <View style={[styles.ActionPost, styles.borderRight]} >
+                        <MaterialCommunityIcons name="comment-text-outline" size={24} color="black" />
+                        <Text style={styles.descriptionComment}>Comentar</Text>
+                    </View>
             </TouchableWithoutFeedback>
+            <ModalComment isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}/>
             <TouchableWithoutFeedback>
                 <View style={styles.ActionPost}>
                     <Feather name="send" size={24} color="black" />
