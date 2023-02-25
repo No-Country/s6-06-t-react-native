@@ -21,7 +21,7 @@ const ModalComment = ({ isModalVisible, setIsModalVisible, idPost, user, count }
     addComment(`/comment/new/${idPost}/post`, user.token, value)
     setdata(undefined)
     
-    setListComent([...ListComent, 8])
+    setListComent([8, ...ListComent])
     settotal(total + 1);
   }
   return (
