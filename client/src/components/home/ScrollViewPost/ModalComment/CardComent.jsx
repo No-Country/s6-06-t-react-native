@@ -1,17 +1,26 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { colors } from '../../../../constants';
+import { ObtainHourDate } from '../../../../utils/Date';
 
 const CardComent = () => {
+    let data = {
+        author: {
+            fullName : 'Random',
+            img_avatar : 'https://www.pngitem.com/pimgs/m/421-4212341_default-avatar-svg-hd-png-download.png'
+        },
+        body : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur soluta quis cum! Nulla voluptatibus, voluptatem minima magnam unde dolore animi ullam dolorem aspernatur, accusamus in odio voluptas dicta eum molestiae!',
+        createAt : '2023-02-15T19:23:00'
+    }
     return (
         <View style={styles.cardContain}>
             <View style={styles.imgContain}>
-                <Image source={{ uri: 'https://www.pngitem.com/pimgs/m/421-4212341_default-avatar-svg-hd-png-download.png' }} style={styles.img} />
+                <Image source={{ uri: data.author.img_avatar }} style={styles.img} />
             </View>
             <View style={styles.bodyContain}>
-                <Text style={styles.name}>Nombre</Text>
-                <Text style={styles.hour}>Hora</Text>
-                <Text style={styles.body}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur soluta quis cum! Nulla voluptatibus, voluptatem minima magnam unde dolore animi ullam dolorem aspernatur, accusamus in odio voluptas dicta eum molestiae!</Text>
+                <Text style={styles.name}>{data.author.fullName}</Text>
+                <Text style={styles.hour}>{ObtainHourDate(data.createAt)}</Text>
+                <Text style={styles.body}>{data.body}</Text>
             </View>
         </View>
     );

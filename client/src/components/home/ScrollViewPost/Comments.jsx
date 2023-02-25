@@ -80,7 +80,7 @@ export default function Comments({data}) {
                         <Text style={styles.descriptionComment}>Comentar</Text>
                     </View>
             </TouchableWithoutFeedback>
-            <ModalComment isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} idPost={data.id} user={state}/>
+            <ModalComment isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} idPost={data.id} user={state} count={data.countComments}/>
             <TouchableWithoutFeedback>
                 <View style={styles.ActionPost}>
                     <Feather name="send" size={24} color="black" />

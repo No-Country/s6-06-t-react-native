@@ -5,11 +5,13 @@ import { colors } from '../../../../constants';
 import { useComment } from '../../../../hooks/usePost';
 import PrimaryButton from '../../../PrimaryButton'
 import CardComent from './CardComent';
-const ModalComment = ({ isModalVisible, setIsModalVisible, idPost, user }) => {
+import ListComentContain from './ListComentContain';
+const ModalComment = ({ isModalVisible, setIsModalVisible, idPost, user, count }) => {
   const [data, setdata] = useState();
   const [Load, setLoad] = useState(false);
   const [ListComent, setListComent] = useState([1,2,3,4,5,6,7]);
-
+  const [total, settotal] = useState(count);
+  
     // url, token, data
   let { addComment } = useComment();
   let pushComment = ()=>{
@@ -20,32 +22,22 @@ const ModalComment = ({ isModalVisible, setIsModalVisible, idPost, user }) => {
     setdata(undefined)
     
     setListComent([...ListComent, 8])
+    settotal(total + 1);
   }
   return (
     <Modal visible={isModalVisible} animationType="slide">
         <TouchableOpacity onPress={() => setIsModalVisible(false)}>
           <AntDesign name="close" size={25} style={styles.x} />
         </TouchableOpacity>
-      <View style={{flex: 2}}>
-
-        <FlatList 
-          data={ListComent}
-          numColumns={1}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(Coment, i)=> String(i) }
-          renderItem={({item})=> (<CardComent />)}
-          //  refreshing={refreshBool}
-          //  onRefresh={refresh}
-          onEndReachedThreshold={0.1}
-          ListFooterComponent={ Load ?
-              <ActivityIndicator
-                size='large'
-                color='#AEAEAE'
-              /> : 
-              <View style={{height: 50}}></View>
-            }
-        />
+      {total === 0 ? 
+      <View style={{flex : 2}}>
+        <Text>No hay comentarios</Text>
       </View>
+      :
+      <ListComentContain ListComent={ListComent} Load={Load}/>
+      }
+
+      
       <View style={styles.modalContainer}>
         <Text style={styles.sobreMi}>Comentar</Text>
         <Text style={styles.desc}>Descripción</Text>
