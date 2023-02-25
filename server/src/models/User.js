@@ -83,25 +83,25 @@ const userSchema = new Schema(
                     type: String
                 },
                 jobType:{
-                  type:String
+                    type:String
                 },
                 company:{
-                  type:String
+                    type:String
                 },
                 location:{
-                  type:String
+                    type:String
                 },
                 yearIn:{
-                  type:String
+                    type:String
                 },
                 yearOut:{
-                  type:String
+                    type:String
                 },
                 current:{
-                  type:Boolean
+                    type:Boolean
                 },
                 description:{
-                  type:String
+                    type:String
                 }
 
             }
@@ -109,15 +109,15 @@ const userSchema = new Schema(
         education: [
             {
                 educationalLevel: {
-                    type: String,
-                    enum: [
-                        'Secundario completo',
-                        'Secundario incompleto',
-                        'Universitario completo',
-                        'Universitario en curso',
-                        'Estudiante autodidacta',
-                        'Otros'
-                    ]
+                    type: String
+                    // enum: [
+                    //     'Secundario completo',
+                    //     'Secundario incompleto',
+                    //     'Universitario completo',
+                    //     'Universitario en curso',
+                    //     'Estudiante autodidacta',
+                    //     'Otros'
+                    // ]
                 },
                 educationTitle: {
                     type: String
