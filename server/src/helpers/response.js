@@ -1,6 +1,6 @@
 const success = (req, res, message, data = {}, status = 200) => {
   res.status(status).send({
-    msg: message,
+    message: message,
     data: data,
   });
 };

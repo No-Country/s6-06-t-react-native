@@ -34,7 +34,7 @@ const validateAccount = async (req, res) => {
 
         res.render('success', { layout: 'index', message: validate });
     } catch (e) {
-        return response.error(req, res, 'Contact Admin');
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
