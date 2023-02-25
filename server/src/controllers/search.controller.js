@@ -8,7 +8,6 @@ const search = async (req, res) => {
 
     try {
         const { channels } = await User.findById(uid);
-        console.log(channels);
         const results = await Promise.all([
             User.find({ $or: [{ fullName: regex }, { email: regex }] }).limit(
                 10
@@ -26,8 +25,7 @@ const search = async (req, res) => {
 
         response.success(req, res, 'Results:', results);
     } catch (e) {
-        console.log(e);
-        response.error(req, res, 'Contact Admin', 500);
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 

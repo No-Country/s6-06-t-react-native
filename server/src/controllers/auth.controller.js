@@ -18,7 +18,6 @@ const createUser = async (req, res) => {
             201
         );
     } catch (error) {
-        console.log(error);
         response.error(req, res, 'Contact Admin', 500);
     }
 };
@@ -35,7 +34,6 @@ const validateAccount = async (req, res) => {
 
         res.render('success', { layout: 'index', message: validate });
     } catch (e) {
-        console.log(e);
         return response.error(req, res, 'Contact Admin');
     }
 };
@@ -47,7 +45,6 @@ const resendEmail = async (req, res) => {
 
         response.success(req,res,'Email resend succesfully , check inbox ',undefined,200);
     } catch (e) {
-        console.log(e);
         response.error(req, res, 'Contact Admin', 500);
     }
 };
@@ -61,16 +58,12 @@ const loginUser = async (req, res) => {
         if (user === 'not-registered')
             return response.error(req, res, 'User not registered ', 400);
         if (user === 'validate')
-            return response.error(req,res,
-                'Must validate account with the provided email',
-                400
-            );
+            return response.error(req,res,'Must validate account with the provided email',400);
         if (user === 'bad-credentials')
             return response.error(req, res, 'Bad Credentials', 400);
 
         response.success(req, res, 'User logged in', user, 200);
     } catch (error) {
-        console.log(error);
         return response.error(req, res, 'Contact Admin');
     }
 };
@@ -83,7 +76,7 @@ const renewToken = async (req, res) => {
     response.success(req, res, 'Token generated successfully ', { token }, 200);
 };
 
-const generateLinkedinLink = (req, res) => {
+    const generateLinkedinLink = (req, res) => {
     const url = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=http://localhost:5000/api/auth/linkedin/callback&state=${process.env.STATE}&scope=openid%20email%20profile`;
 
     response.success(req, res, 'Open the link in the browser', { url });
@@ -100,7 +93,6 @@ const loginLinkedIn = async (req, res) => {
 
         response.success(req, res, 'User logged in', login, 200);
     } catch (e) {
-        console.log(e);
         return response.error(req, res, 'Contact ADMIN');
     }
 };
@@ -116,7 +108,6 @@ const resetPasswordRequest = async (req, res) => {
 
         response.success(req,res,'Request for Password reset was successfully,Check email ',null,200);
     } catch (e) {
-        console.log(e);
         return response.error(req, res, 'Contact Admin');
     }
 };
@@ -132,7 +123,6 @@ const resetPassword = async (req, res) => {
 
         res.render('success', { layout: 'index', message: reset });
     } catch (e) {
-        console.log(e);
         return response.error(req, res, 'Contact ADMIN');
     }
 };

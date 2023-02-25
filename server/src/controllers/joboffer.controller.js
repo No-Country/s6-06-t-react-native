@@ -22,7 +22,6 @@ const getJobOffers = async (req, res) => {
         res.set('Content-Range', total.length);
         return response.success(req,res,'Offers obtained successfully',allOffers,200);
     } catch (error) {
-        console.log(error);
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
@@ -46,7 +45,6 @@ const createPostulation = async (req, res) => {
 
         return response.success(req,res,'Offer created successfully',offer,201);
     } catch (error) {
-        console.log(error);
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
@@ -90,13 +88,7 @@ const updateJobOffer = async (req, res) => {
             { new: true }
         );
         if (!updatedJobOffer) {
-            return response.error(
-                req,
-                res,
-                'Offer not found',
-                updatedJobOffer,
-                404
-            );
+            return response.error(req,res,'Offer not found',updatedJobOffer,404);
         }
         return response.success(req,res,'Offer modified successfully',updatedJobOffer,200);
     } catch (error) {
@@ -143,7 +135,6 @@ const postulateOffer = async (req, res) => {
 
         return response.success(req, res, 'Successfully application', 200);
     } catch (error) {
-        console.log(error);
         return response.error(req, res, 'Contact Admin', 500);
     }
 };

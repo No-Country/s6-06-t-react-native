@@ -7,16 +7,9 @@ const createChannel = async (req, res) => {
     await channel
         .save()
         .then((newChannel) => {
-            return response.success(
-                req,
-                res,
-                'Channel created successfully',
-                newChannel,
-                201
-            );
+            return response.success(req,res,'Channel created successfully',newChannel,201);
         })
         .catch((error) => {
-            console.log(error);
             return response.error(req, res, 'Contact Admin', 500);
         });
 };
@@ -32,21 +25,9 @@ const updateChannel = async (req, res) => {
             { new: true }
         );
         if (!updatedChannel) {
-            return response.error(
-                req,
-                res,
-                'Channel not found',
-                updatedChannel,
-                404
-            );
+            return response.error(req,res,'Channel not found',updatedChannel,404);
         }
-        return response.success(
-            req,
-            res,
-            'Updated channel',
-            updatedChannel,
-            200
-        );
+        return response.success(req,res,'Updated channel',updatedChannel,200);
     } catch (error) {
         return response.error(req, res, 'Contact Admin', 500);
     }
@@ -55,7 +36,7 @@ const updateChannel = async (req, res) => {
 const deleteChannel = async (req, res) => {
     const { id } = req.params;
     try {
-        const channel = await Channel.findById({ _id: id });
+        const channel = await Channel.findById({ id });
         if (!channel) {
             return response.error(req, res, 'Channel not found', 404);
         }
@@ -95,13 +76,7 @@ const getAllChannels = async (req, res) => {
             channels
         };
         res.set('Content-Range', channels.length);
-        return response.success(
-            req,
-            res,
-            'Channels found successfully',
-            data,
-            200
-        );
+        return response.success(req,res,'Channels found successfully',data,200);
     } catch (error) {
         return response.error(req, res, 'Contact Admin', 500);
     }
@@ -114,13 +89,7 @@ const getUserChannels = async (req, res) => {
         if (!user) {
             return response.error(req, res, 'User not found', 404);
         }
-        return response.success(
-            req,
-            res,
-            'Channels found successfully',
-            user.channels,
-            200
-        );
+        return response.success(req,res,'Channels found successfully',user.channels,200);
     } catch (error) {
         console.error(error);
         return res.status(500).send({ error: 'An error has occurred' });

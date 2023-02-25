@@ -78,7 +78,6 @@ const PostsRemove = async (req, res) => {
 
         return response.success(req, res, 'Post deleted', removePost, 200);
     } catch (error) {
-        console.log(error);
         if (error.message === 'no-privileges') {
             return response.error(req, res, 'Unauthorized User', 401);
         }
@@ -129,7 +128,6 @@ const getAll = async (req, res) => {
 
         return response.success(req, res, 'All post :', post, 200);
     } catch (e) {
-        console.log(e);
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
@@ -164,10 +162,8 @@ const getComments = async (req, res) => {
 
             return obj;
         });
-        console.log(commentsPopulated);
         return response.success(req, res, 'Comments :', commentsPopulated, 200);
     } catch (e) {
-        console.log(e);
         return response.error(req, res, 'Contact Admin', 500);
     }
 };

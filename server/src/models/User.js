@@ -41,7 +41,6 @@ const userSchema = new Schema(
         socketId: {
             type: String
         },
-        ///////////////////////////////////////////////////////////////////////
         position: {
             type: String,
             enum: [
