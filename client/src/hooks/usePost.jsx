@@ -76,3 +76,22 @@ export const useReaction = ()=>{
     
 }
 
+
+export const useComment = ()=>{
+    let addComment = async (url, token, type)=>{
+        let response 
+        try {
+            response = await reqResApi.post( url, type, {
+                headers : {'x-token' : token }
+            })
+        } catch (error) {
+            console.log(error)
+        }
+        // console.log(response)
+    }
+    return {
+        addComment,
+
+    }
+    
+}

@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 import icons from '../../../utils/icons';
 
 export default function Comments({data}) {
-    const state = useSelector((state) => state.login.user);   
+    const state = useSelector((state) => state.login.user);
     let searchReaction = (data)=>{
         let reaction = undefined
         reaction = data.megusta.find( c => c.user === state._id)
@@ -80,7 +80,7 @@ export default function Comments({data}) {
                         <Text style={styles.descriptionComment}>Comentar</Text>
                     </View>
             </TouchableWithoutFeedback>
-            <ModalComment isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}/>
+            <ModalComment isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} idPost={data.id} user={state}/>
             <TouchableWithoutFeedback>
                 <View style={styles.ActionPost}>
                     <Feather name="send" size={24} color="black" />

@@ -2,14 +2,25 @@ import { AntDesign } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { View, StyleSheet, Modal, TouchableOpacity, Text, TextInput, Dimensions, FlatList, Image, ActivityIndicator } from 'react-native';
 import { colors } from '../../../../constants';
+import { useComment } from '../../../../hooks/usePost';
 import PrimaryButton from '../../../PrimaryButton'
 import CardComent from './CardComent';
-const ModalComment = ({ isModalVisible, setIsModalVisible, data }) => {
+const ModalComment = ({ isModalVisible, setIsModalVisible, idPost, user }) => {
+  const [data, setdata] = useState();
   const [Load, setLoad] = useState(false);
   const [ListComent, setListComent] = useState([1,2,3,4,5,6,7]);
 
-  
-
+    // url, token, data
+  let { addComment } = useComment();
+  let pushComment = ()=>{
+    let value = {
+      body : data
+    }
+    addComment(`/comment/new/${idPost}/post`, user.token, value)
+    setdata(undefined)
+    
+    setListComent([...ListComent, 8])
+  }
   return (
     <Modal visible={isModalVisible} animationType="slide">
         <TouchableOpacity onPress={() => setIsModalVisible(false)}>
@@ -31,37 +42,31 @@ const ModalComment = ({ isModalVisible, setIsModalVisible, data }) => {
                 size='large'
                 color='#AEAEAE'
               /> : 
-              <View style={{height: 100}}></View>
+              <View style={{height: 50}}></View>
             }
         />
       </View>
       <View style={styles.modalContainer}>
         <Text style={styles.sobreMi}>Comentar</Text>
-        {/* <Text style={styles.filasReq}>*Filas requeridas</Text> */}
         <Text style={styles.desc}>Descripción</Text>
         <View
           style={[
             styles.inputContainer,
-            // { borderColor: isFocused ? colors.primary : "transparent" },
           ]}
         >
           <TextInput
-            //   value={aboutMe}
-            //   onChangeText={(value) => setAboutMe(value)}
-            placeholder={
-              data
-                ? data.about
-                : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            }
+              value={data}
+              onChangeText={(value) => setdata(value)}
+            placeholder={ "Ingrese su comentario..."}
             // onFocus={() => setIsFocused(true)}
             // onBlur={() => setIsFocused(false)}
             multiline={true}
           />
         </View>
         <View style={styles.numContainer}>
-          <Text>/3000</Text>
+          <Text>{data ? data.length : 0}/3000</Text>
         </View>
-        <PrimaryButton text="Guardar" handler={""} />
+        <PrimaryButton text="Guardar" handler={pushComment} />
       </View>
     </Modal>
   );
