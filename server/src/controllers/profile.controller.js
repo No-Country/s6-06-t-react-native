@@ -119,7 +119,7 @@ const profilePic = async (req, res) => {
         if (!updatedUser)
             return response.error(req,res,'There is a problem with the token provided',400);
 
-        return response.success(req,res,'Updated profile pic',updatedUser,200);
+        return response.success(req,res,'Updated profile pic', updatedUser,200);
     } catch (error) {
         
         return response.error(req, res, 'Contact Admin', 500);

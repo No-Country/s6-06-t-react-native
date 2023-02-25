@@ -1,0 +1,114 @@
+components:
+    examples:
+        profile_error_inexistent:
+            value:
+                error: There is a problem with de provided uid
+        profile_error_token:
+            value:
+                error: There is a problem with the token provided
+        profile_success:
+            value:
+                message: 'User found'
+                data:
+                    {
+                        fullName: 'Michael',
+                        email: 'f@bar.com',
+                        admin: false,
+                        selected: true,
+                        active: true,
+                        emailisvalidated: true,
+                        availability: 'Mañana',
+                        technologies: ['HTML', 'CSS'],
+                        phone: 4587123656,
+                        position: 'fullstack',
+                        img_avatar: 'https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png',
+                        favorites: [],
+                        channels: ['63e8ec9ec08f1c72e0d40a05'],
+                        postulations:
+                            [
+                                {
+                                    _id: '63ea5e31a132a300064cedf8',
+                                    author: '63ea5aef35e5b43ca136e786',
+                                    title: 'General2',
+                                    description: 'Guuuenerauuuul2',
+                                    channel: ['63e8ec9ec08f1c72e0d40a07'],
+                                    attached: [],
+                                    active: true
+                                }
+                            ],
+                        createdAt: '2023-02-13T15:44:47.915Z',
+                        updatedAt: '2023-02-13T15:44:47.915Z',
+                        uid: '63ea5aef35e5b43ca136e786'
+                    }
+        profile_remove_success:
+            value:
+                message: 'Account deleted'
+                data: '63ea5aef35e5b43ca136e786'
+        profile_edit_success:
+            value:
+                message: 'Updated profile'
+                data:
+                    {
+                        fullName: 'Michael',
+                        email: 'f@bar.com',
+                        admin: false,
+                        selected: true,
+                        active: true,
+                        emailisvalidated: true,
+                        availability: 'Mañana',
+                        technologies: ['HTML', 'CSS'],
+                        phone: 4587123656,
+                        position: 'fullstack',
+                        img_avatar: 'https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png',
+                        favorites: [],
+                        channels: ['63e8ec9ec08f1c72e0d40a05'],
+                        postulations:
+                            [
+                                {
+                                    _id: '63ea5e31a132a300064cedf8',
+                                    author: '63ea5aef35e5b43ca136e786',
+                                    title: 'General2',
+                                    description: 'Guuuenerauuuul2',
+                                    channel: ['63e8ec9ec08f1c72e0d40a07'],
+                                    attached: [],
+                                    active: true
+                                }
+                            ],
+                        createdAt: '2023-02-13T15:44:47.915Z',
+                        updatedAt: '2023-02-13T15:44:47.915Z',
+                        uid: '63ea5aef35e5b43ca136e786'
+                    }
+        profile_picture_success:
+            value:
+                message: 'Updated profile pic'
+                data:
+                    {
+                        fullName: 'Michael',
+                        email: 'f@bar.com',
+                        admin: false,
+                        selected: true,
+                        active: true,
+                        emailisvalidated: true,
+                        availability: 'Mañana',
+                        technologies: ['HTML', 'CSS'],
+                        phone: 4587123656,
+                        position: 'fullstack',
+                        img_avatar: 'https://w7.pngwing.com/pngs/627/693/png-transparent-computer-icons-user-user-icon.png',
+                        favorites: [],
+                        channels: ['63e8ec9ec08f1c72e0d40a05'],
+                        postulations:
+                            [
+                                {
+                                    _id: '63ea5e31a132a300064cedf8',
+                                    author: '63ea5aef35e5b43ca136e786',
+                                    title: 'General2',
+                                    description: 'Guuuenerauuuul2',
+                                    channel: ['63e8ec9ec08f1c72e0d40a07'],
+                                    attached: [],
+                                    active: true
+                                }
+                            ],
+                        createdAt: '2023-02-13T15:44:47.915Z',
+                        updatedAt: '2023-02-13T15:44:47.915Z',
+                        uid: '63ea5aef35e5b43ca136e786'
+                    }

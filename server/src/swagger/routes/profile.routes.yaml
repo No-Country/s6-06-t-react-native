@@ -1,0 +1,268 @@
+tags:
+    - name: Profile
+      description: Profile endpoints
+paths:
+    /api/profile/:
+        get:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+            summary: Get all the information about user profile
+            tags: [Profile]
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                profile_success:
+                                    $ref: '#/components/examples/profile_success'
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                profile_error_inexistent:
+                                    $ref: '#/components/examples/profile_error_inexistent'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/profile/edit/remove:
+        put:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+            summary: Delete Account
+            tags: [Profile]
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                profile_remove_success:
+                                    $ref: '#/components/examples/profile_remove_success'
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                profile_error_token:
+                                    $ref: '#/components/examples/profile_error_token'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/profile/edit/information:
+        put:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+            summary: Edit the info about the user
+            tags: [Profile]
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/profile_edit'
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                profile_edit_success:
+                                    $ref: '#/components/examples/profile_edit_success'
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                profile_error_token:
+                                    $ref: '#/components/examples/profile_error_token'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/profile/edit/applications:
+        put:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+            summary: Remove selected postulations
+            tags: [Profile]
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/remove_aplications'
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                profile_edit_success:
+                                    $ref: '#/components/examples/profile_edit_success'
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                profile_error_token:
+                                    $ref: '#/components/examples/profile_error_token'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/profile/edit/post-saved:
+        put:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+            summary: Remove saved posts
+            tags: [Profile]
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/remove_aplications'
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                profile_edit_success:
+                                    $ref: '#/components/examples/profile_edit_success'
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                profile_error_token:
+                                    $ref: '#/components/examples/profile_error_token'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
+    /api/profile/edit/profile-pic:
+        put:
+            parameters:
+                - in: header
+                  name: x-token
+                  schema:
+                      type: string
+                  required: true
+                  description: The token users account
+            summary: Update the profile Pic
+            tags: [Profile]
+            requestBody:
+                required: true
+                content:
+                    multipart/form-data:
+                        schema:
+                            type: object
+                            properties:
+                                attached:
+                                    type: string
+                                    format: binary
+                        attached:
+                            contentType: image/png, image/jpeg
+            responses:
+                200:
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/success'
+                            examples:
+                                profile_picture_success:
+                                    $ref: '#/components/examples/profile_picture_success'
+                400:
+                    description: Request error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                profile_error_token:
+                                    $ref: '#/components/examples/profile_error_token'
+                500:
+                    description: Server error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                user_error_general:
+                                    $ref: '#/components/examples/user_error_general'
