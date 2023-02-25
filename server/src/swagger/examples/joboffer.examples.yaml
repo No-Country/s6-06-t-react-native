@@ -1,0 +1,105 @@
+components:
+    examples:
+        joboffer_success:
+            value:
+                message: Offer created successfully
+                data:
+                    {
+                        author: '63ed97dc7f7939e67f02f46d',
+                        title: 'Time travels',
+                        description:
+                            'Hello friends, I had an incredible experience with
+                            Doc.',
+                        channel: ['63ea4b10b8d1a9df10159272'],
+                        attached: [],
+                        active: true,
+                        type: 'front',
+                        createdAt: '2023-02-24T02:54:44.783Z',
+                        updatedAt: '2023-02-24T02:54:44.783Z',
+                        id: '63f826f4dac0f8311d438e8f'
+                    }
+        joboffer_edit_success:
+            value:
+                message: Offer modified successfully
+                data:
+                    {
+                        author: '63ed97dc7f7939e67f02f46d',
+                        title: 'Time travels edited',
+                        description:
+                            'Hello friends, I had an awesome experience with
+                            Doc.',
+                        channel: ['63ea4b10b8d1a9df10159272'],
+                        attached: [],
+                        active: true,
+                        type: 'front',
+                        createdAt: '2023-02-24T02:54:44.783Z',
+                        updatedAt: '2023-02-24T02:54:44.783Z',
+                        id: '63f826f4dac0f8311d438e8f'
+                    }
+        joboffer_delete_success:
+            value:
+                message: Offer successfully removed
+        joboffer_error_inexistent:
+            value:
+                error: 'Offer not found'
+        joboffer_error_selected:
+            value:
+                error: "You can't apply"
+        joboffer_all_success:
+            value:
+                message: Offers obtained successfully
+                data:
+                    [
+                        {
+                            'title': 'Cambiando requerimiento',
+                            'active': false,
+                            '__v': 0,
+                            'channel': ['63e7f448a2801292083251d5'],
+                            'description': 'ia tu sabes ddd',
+                            'updatedAt': '2023-02-18T12:00:14.667Z',
+                            'attached': [],
+                            'candidates':
+                                [
+                                    '63e70d8b1e13665295c8fd7a',
+                                    '63e7f59f6aeca8b3ecf17d1f',
+                                    '63e70b2dc12faa8b8693727a'
+                                ],
+                            'countCandidates': 0,
+                            'comments':
+                                [
+                                    '63e802ff5576c3d00a60278a',
+                                    '63e803065576c3d00a60278e',
+                                    '63e803105576c3d00a602796'
+                                ],
+                            'countComments': 3,
+                            'id': '63e71bed0a8c3c1f4c739765'
+                        },
+                        {
+                            'title': 'Req UXUI',
+                            'active': false,
+                            'permissions': false,
+                            '__v': 0,
+                            'channel': ['63e7f448a2801292083251d5'],
+                            'attached': [],
+                            'updatedAt': '2023-02-17T21:31:59.653Z',
+                            'candidates': [],
+                            'countCandidates': 0,
+                            'comments': [],
+                            'countComments': 0,
+                            'id': '63e71bfe0a8c3c1f4c73976b'
+                        },
+                        {
+                            'title': 'Req front 2',
+                            'channel': [],
+                            'attached': [],
+                            'active': true,
+                            '__v': 0,
+                            'updatedAt': '2023-02-17T21:17:45.410Z',
+                            'description': 'aaaaffffff',
+                            'candidates': [],
+                            'countCandidates': 0,
+                            'comments': [],
+                            'countComments': 0,
+                            'id': '63e7f8cbc18ec0071a2cf7f6'
+                        }
+                    ]

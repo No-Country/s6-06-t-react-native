@@ -5,14 +5,14 @@ const getJobOffers = async (req, res) => {
     const { filter, from, to } = req.query;
 
     const regex = { $regex: filter, $options: 'i' };
-    const query={
+    const query = {
         $or: [{ typechannel: regex }, { name: regex }]
-    }
+    };
 
     try {
         const total = await JobOffer.find();
 
-        const allOffers = await JobOffer.find(filter?query:{})
+        const allOffers = await JobOffer.find(filter ? query : {})
             .skip(Number(from))
             .limit(Number(to))
             .populate('countCandidates')
@@ -117,7 +117,7 @@ const postulateOffer = async (req, res) => {
     try {
         const user = await User.findById(uid);
         const offer = await JobOffer.findById(id);
-        console.log(user);
+        
 
         if (!user) {
             return response.error(req, res, 'User not found', 404);

@@ -18,7 +18,7 @@ const createUser = async (req, res) => {
             201
         );
     } catch (error) {
-        response.error(req, res, 'Contact Admin', 500);
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
@@ -43,9 +43,9 @@ const resendEmail = async (req, res) => {
     try {
         await authServices.resendEmail(uid);
 
-        response.success(req,res,'Email resend succesfully , check inbox ',undefined,200);
+        response.success(req,res,'Email resend successfully , check inbox ',undefined,200);
     } catch (e) {
-        response.error(req, res, 'Contact Admin', 500);
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
@@ -133,7 +133,7 @@ const renderRecoverPassword = (req, res) => {
     if (uid && token) {
         res.render('main', { layout: 'index', uid, token });
     } else {
-        response.error(req,res,'There is a problem with the provided url',400);
+        return response.error(req,res,'There is a problem with the provided url',400);
     }
 };
 

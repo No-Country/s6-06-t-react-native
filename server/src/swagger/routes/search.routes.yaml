@@ -1,5 +1,5 @@
 tags:
-    - name: Search
+    - name: Searchs
       description: Search endpoints
 paths:
     /api/search?search={search}:
@@ -18,7 +18,7 @@ paths:
                   required: true
                   description: The term to perform the search
             summary: Search for posts or users in all joined channels
-            tags: [Search]
+            tags: [Searchs]
             responses:
                 200:
                     description: Success

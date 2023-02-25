@@ -34,7 +34,7 @@ const updateComment = async (req, res) => {
         }
 
         if (comment.author.toString() !== uid) {
-            return response.error(req,res, 'You dont have permission to update this comment',401);
+            return response.error(req,res,'You dont have permission to update this comment',401);
         }
 
         const updatedComment = await Comment.findByIdAndUpdate(
@@ -82,17 +82,14 @@ const admDeleteComment = async (req, res) => {
     const { id } = req.params;
 
     try {
+        const comment = await Comment.findById(id);
 
-        const comment=await Comment.findById(id)
-
-        if(comment) {
+        if (comment) {
             //PROBAR SI FUNCIONA !!!
-            await Comment.deleteMany({replieOf:comment.id})
-            await Reaction.deleteMany({comment:comment.id})
-    }
-        const admDeleteComment = await Comment.findByIdAndDelete(
-            id
-        );
+            await Comment.deleteMany({ replieOf: comment.id });
+            await Reaction.deleteMany({ comment: comment.id });
+        }
+        const admDeleteComment = await Comment.findByIdAndDelete(id);
 
         if (!admDeleteComment) {
             return response.error(req, res, 'Comment not found', 404);
@@ -126,7 +123,7 @@ const replyComment = async (req, res) => {
             { new: true }
         );
 
-        return response.success(req, res,'Reply to comment successfully',undefined,201);
+        return response.success(req,res,'Reply to comment successfully',undefined,201);
     } catch (error) {
         return response.error(req, res, 'Contact Admin', 500);
     }

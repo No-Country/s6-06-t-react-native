@@ -48,7 +48,7 @@ const personal = async (req, res) => {
             return response.error(req,res,'There is a problem with the token provided',400);
 
         return response.success(req, res, 'Updated profile', updatedUser, 200);
-    } catch (error) {
+    } catch (error) { 
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
@@ -68,7 +68,7 @@ const personal = async (req, res) => {
 //             );
 
 //         return response.success(req, res, 'Updated profile', updatedUser, 200);
-//     } catch (error) {  
+//     } catch (error) {
 //         return response.error(req, res, 'CONTACT ADMIN', 500);
 //     }
 // };
@@ -104,6 +104,7 @@ const postSaved = async (req, res) => {
 };
 
 const profilePic = async (req, res) => {
+    
     const { pic } = req.files;
     const uid = req.uid;
 
@@ -113,16 +114,14 @@ const profilePic = async (req, res) => {
         if (!updatedUser)
             return response.error(req,res,'There is a problem with the token provided',400);
 
-        return response.success(req,res,'Updated profile pic',updatedUser,200);
+        return response.success(req,res,'Updated profile pic', updatedUser,200);
     } catch (error) {
-
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
 module.exports = {
     getUser,
-
     remove,
     personal,
     //professional,

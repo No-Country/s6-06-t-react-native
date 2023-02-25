@@ -1,0 +1,111 @@
+components:
+    examples:
+        channel_new_success:
+            value:
+                message: Channel created successfully
+                data:
+                    {
+                        name: Selected,
+                        typechannel: 'private',
+                        createdAt: '2023-02-10T13:04:02.218Z',
+                        updatedAt: '2023-02-10T13:04:02.218Z',
+                        id: '63e640c2b4895ce97338ca61'
+                    }
+        channel_inexistent:
+            value:
+                error: Channel not found
+        channel_edit_success:
+            value:
+                message: Updated channel
+                data:
+                    {
+                        name: 'Selected fixed',
+                        typechannel: 'private',
+                        active: false,
+                        createdAt: '2023-02-10T13:04:02.218Z',
+                        updatedAt: '2023-02-10T18:32:17.954Z',
+                        id: '63e640c2b4895ce97338ca61'
+                    }
+        channel_delete_success:
+            value:
+                message: Channel removed successfully
+                data: { name: 'Selected fixed' }
+        channel_user_success:
+            value:
+                message: Channels found successfully
+                data: [{ name: 'General', id: '63e527334301295852cc4f4f' }]
+        channel_one_success:
+            value:
+                message: 'Channel posts:'
+                data:
+                    {
+                        'posts':
+                            [
+                                {
+                                    'user': '63e5b0dc18e65afddcd3be3c',
+                                    'title': 'PRIMERggg',
+                                    'comments': [],
+                                    'reactions': [],
+                                    'channel': [],
+                                    'attached': [],
+                                    'important': false,
+                                    'active': true,
+                                    'permissions': true,
+                                    'createdAt': '2023-02-10T03:13:12.774Z',
+                                    'updatedAt': '2023-02-10T03:13:12.774Z',
+                                    'id': '63e5b64834de3305d0198a50'
+                                },
+                                {
+                                    'user': '63e5b75334de3305d0198a5f',
+                                    'title': 'post',
+                                    'comments':
+                                        [
+                                            {
+                                                '_id': '63ea3c64481c880aedc97678',
+                                                'body': 'Generasl2',
+                                                'attached': [],
+                                                'post': '63ea3abb2058e8310c6b1e0d',
+                                                'createdAt': '2023-02-13T13:34:28.419Z'
+                                            }
+                                        ],
+                                    'reactions':
+                                        [
+                                            {
+                                                '_id': '63ea3c64481c880aedc97678',
+                                                'type_reaction': 'megusta',
+                                                'post': '63ea3abb2058e8310c6b1e0d'
+                                            }
+                                        ],
+                                    'channel': ['63e527334301295852cc4f4f'],
+                                    'attached': [],
+                                    'important': false,
+                                    'active': true,
+                                    'permissions': true,
+                                    'createdAt': '2023-02-10T13:06:42.235Z',
+                                    'updatedAt': '2023-02-10T18:12:02.768Z',
+                                    'id': '63e64162b4895ce97338ca7d'
+                                }
+                            ]
+                    }
+        channel_all_success:
+            value:
+                message: Channels found successfully
+                data:
+                    {
+                        count: 3,
+                        channels:
+                            [
+                                {
+                                    name: 'General',
+                                    id: '63e527334301295852cc4f4f'
+                                },
+                                {
+                                    name: 'Seleccionado',
+                                    id: '63e527334301295852cc4f4f'
+                                },
+                                {
+                                    name: 'Requerimientos',
+                                    id: '63e527334301295852cc4f4f'
+                                }
+                            ]
+                    }

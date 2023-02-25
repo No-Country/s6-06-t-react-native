@@ -8,9 +8,9 @@ const createPost = async (req, res) => {
     const { body } = req;
     const { channel } = req.params;
     const { uid } = req;
-    const attached = req.files;
     
     try{
+        const attached = req.files;
         let attachedFiles;
         if (attached) {
             attachedFiles = Object.entries(attached).map((i) => i[1]);
@@ -29,12 +29,12 @@ const createPost = async (req, res) => {
 
             io.emit(`${channel}-posts`, { post, count });
 
-            return response.success(req, res, 'Post created successfully', post, 201);
+            return success(req, res, 'Post created successfully', post, 201);
         }
-    }catch(error){
-        return response.error(req, res, 'Post creation failed ', 400);
-    }
-};
+    } catch (error) {
+        return error(req, res, 'Post creation failed, contact Admin ', 400);
+    };
+}
 
 const updatePost = async (req, res) => {
     const uid = req.uid;
@@ -66,10 +66,9 @@ const updatePost = async (req, res) => {
 };
 
 const PostsRemove = async (req, res) => {
-    const uid = req.uid;
+
     const { id } = req.params;
-    const { from, to, filter } = req.query;
-    const regex = { $regex: filter, $options: 'i' };
+
 
     try {
         const removePost = await postsServices.remove(id);
@@ -133,7 +132,7 @@ const getAll = async (req, res) => {
 };
 
 const getComments = async (req, res) => {
-    const { from, to } = req.query;
+    // const { from, to } = req.query; No está en Uso
     const { id } = req.params;
 
     try {

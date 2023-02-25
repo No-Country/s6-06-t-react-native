@@ -110,7 +110,6 @@ const deleteOne=async(req,res)=>{
         if (!user) {
             return response.error(req, res, 'User not found', 404);
         }
-        
         return response.success(req, res, 'User removed successfully', user );
     } catch (error) {
         return response.error(req, res, 'CONTACT ADMIN', 500);

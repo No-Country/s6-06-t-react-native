@@ -1,0 +1,48 @@
+components:
+    schemas:
+        new_joboffer:
+            type: object
+            properties:
+                title:
+                    type: string
+                    description: the title of the job offer
+                description:
+                    type: string
+                    description: the body of the job offer
+                type:
+                    type: string
+                    description: the category of the job offer
+                    enum:
+                        - front
+                        - back
+                        - ui
+            required:
+                - title
+                - description
+                - type
+            example:
+                title: 'Time travels'
+                description:
+                    'Hello friends, I had an incredible experience with Doc.'
+                type: front
+        edit_joboffer:
+            type: object
+            properties:
+                title:
+                    type: string
+                    description: the title of the job offer
+                description:
+                    type: string
+                    description: the body of the job offer
+                type:
+                    type: string
+                    description: the category of the job offer
+                    enum:
+                        - front
+                        - back
+                        - ui
+            example:
+                title: 'Time travels edited'
+                description:
+                    'Hello friends, I had an awesome experience with Doc.'
+                type: front

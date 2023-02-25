@@ -3,15 +3,16 @@ const { Channel, User, Post, IsRead } = require('../models');
 
 const createChannel = async (req, res) => {
     //TODO:AGREGAR USUARIOS SI ES PRIVADO O TODOS SI ES PUBLICO
+    try{
     const channel = new Channel(req.body);
     await channel
         .save()
         .then((newChannel) => {
             return response.success(req,res,'Channel created successfully',newChannel,201);
         })
-        .catch((error) => {
+    }catch (error){
             return response.error(req, res, 'Contact Admin', 500);
-        });
+        }
 };
 
 const updateChannel = async (req, res) => {
@@ -92,7 +93,7 @@ const getUserChannels = async (req, res) => {
         return response.success(req,res,'Channels found successfully',user.channels,200);
     } catch (error) {
         console.error(error);
-        return res.status(500).send({ error: 'An error has occurred' });
+        return response.error(req,res,'Contact Admin', 500);
     }
 };
 
@@ -138,7 +139,6 @@ const getPostsChannel = async (req, res) => {
             posts,
         });
     } catch (error) {
-        console.log(error);
         return response.error(req, res, 'CONTACT ADMIN', 500);
     }
 };

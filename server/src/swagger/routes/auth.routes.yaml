@@ -260,7 +260,7 @@ paths:
                       type: string
                   required: true
                   description: The user id
-            summary: Validate the user account when is requested -ONLY SERVER-
+            summary: Validate the user account when is requested
             tags: [SERVER]
             responses:
                 200:
@@ -300,7 +300,7 @@ paths:
                       type: string
                   required: true
                   description: The user id
-            summary: Render page for changue password -ONLY SERVER-
+            summary: Render page for changue password
             tags: [SERVER]
             responses:
                 200:
@@ -337,7 +337,7 @@ paths:
                       type: string
                   required: true
                   description: The user id
-            summary: Validates entered passwords and saves to DB -ONLY SERVER-
+            summary: Validates entered passwords and saves to DB
             tags: [SERVER]
             requestBody:
                 required: true
