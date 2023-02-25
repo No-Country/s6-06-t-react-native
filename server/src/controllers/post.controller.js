@@ -1,5 +1,4 @@
 const { response } = require('../helpers');
-const { success, error } = require('../helpers/response.js');
 const { Post, User, IsRead, Comment } = require('../models');
 const { postsServices } = require('../services');
 const { findPostById, newPost } = require('../services/post.services.js');
@@ -10,28 +9,31 @@ const createPost = async (req, res) => {
     const { channel } = req.params;
     const { uid } = req;
     const attached = req.files;
-    let attachedFiles;
-    if (attached) {
-        attachedFiles = Object.entries(attached).map((i) => i[1]);
+    
+    try{
+        let attachedFiles;
+        if (attached) {
+            attachedFiles = Object.entries(attached).map((i) => i[1]);
+        }
+
+        let savedPost = {};
+
+        savedPost = await newPost(uid, body, channel, attachedFiles);
+
+        if (Object.keys(savedPost).length > 0) {
+            const post = await findPostById(savedPost.id);
+
+            const totalPosts = await Post.find({ channel });
+            const readPost = await IsRead.find({ uid, doc: { $in: totalPosts } });
+            const count = totalPosts.length - readPost.length;
+
+            io.emit(`${channel}-posts`, { post, count });
+
+            return response.success(req, res, 'Post created successfully', post, 201);
+        }
+    }catch(error){
+        return response.error(req, res, 'Post creation failed ', 400);
     }
-
-    let savedPost = {};
-
-    savedPost = await newPost(uid, body, channel, attachedFiles);
-
-    if (Object.keys(savedPost).length > 0) {
-        const post = await findPostById(savedPost.id);
-
-        const totalPosts = await Post.find({ channel });
-        const readPost = await IsRead.find({ uid, doc: { $in: totalPosts } });
-        const count = totalPosts.length - readPost.length;
-
-        io.emit(`${channel}-posts`, { post, count });
-
-        return success(req, res, 'Post created successfully', post, 201);
-    }
-
-    return error(req, res, 'Post creation failed ', 400);
 };
 
 const updatePost = async (req, res) => {

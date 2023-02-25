@@ -1,5 +1,5 @@
 const response = require('../helpers/response');
-const { Channel, User, Post, IsRead, Reaction } = require('../models');
+const { Channel, User, Post, IsRead } = require('../models');
 
 const createChannel = async (req, res) => {
     //TODO:AGREGAR USUARIOS SI ES PRIVADO O TODOS SI ES PUBLICO
@@ -118,7 +118,7 @@ const getUserChannels = async (req, res) => {
             req,
             res,
             'Channels found successfully',
-            channels,
+            user.channels,
             200
         );
     } catch (error) {
@@ -145,8 +145,15 @@ const getPostsChannel = async (req, res) => {
                 path: 'author',
                 select: 'fullName position isOnline img_avatar'
             })
+            .populate({
+                path: 'comments',
+                select: 'body active attached createdAt updatedAt',
+                populate: {
+                    path: 'author',
+                    select: 'fullName img_avatar _id'
+                }
+            })
             .populate('countComments')
-
             .populate('megusta', 'user -post -_id')
             .populate('apoyar', 'user -post -_id')
             .populate('meinteresa', 'user -post -_id')
@@ -159,7 +166,7 @@ const getPostsChannel = async (req, res) => {
         return response.success(req, res, 'Channel post:', {
             areRead: readPost,
             users,
-            posts
+            posts,
         });
     } catch (error) {
         console.log(error);
