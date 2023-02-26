@@ -11,14 +11,22 @@ export default function CardPost({ data }) {
     ? data.description.length >= 150 && data.description.slice(0, 150)
     : "no description";
   const [short, setShort] = useState(false);
-  console.log("----------------------------");
-  console.log(data);
+
+  console.log("<<<<---------------------------->>>>>");
+  console.log("candidatos: ", data.candidates);
   
+  let author = {
+    _id: data.id,
+    fullName: data.title,
+    isOnline: data.active,
+    position: data.type,
+    img_avatar: "https://res.cloudinary.com/dv2elz7mk/image/upload/v1677369212/nnthghri1e3kv4lu7b13.jpg"
+  }
   return (
     <View style={styles.PostCard}>
-      {data.important && <Pinned data={data.author} />}
+      {data.important && <Pinned data={author} />}
 
-      <HeaderCard data={data.author} date={data.createdAt} />
+      <HeaderCard data={data} date={data.updatedAt} />
 
       <View style={styles.BodyPost}>
         {data.description && data.description.length > 150 ? (
@@ -37,11 +45,7 @@ export default function CardPost({ data }) {
       </View>
       <AmountCommentsAndReactions 
                 countComments={data.countComments}
-                apoyar={data.apoyar}
-                hacergracia={data.hacergracia}
-                important={data.important}
-                like={data.megusta}
-                meinteresa={data.meinteresa}
+                countCandidates={data.candidates ? data.candidates.length : 0}
         /> 
       <Comments />
     </View>

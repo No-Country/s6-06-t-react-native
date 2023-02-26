@@ -1,6 +1,7 @@
 import {styles} from './styles.js'
-import { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image} from 'react-native'
+import { useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
+import { View, Text, ScrollView, TouchableOpacity, Image, ActivityIndicator} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 // import HeaderHome from "../../../components/home/header/Index";
 import NavMenu from "../../../../components/home/header/NavMenu";
@@ -11,10 +12,33 @@ import frontEnd from '../../../../../assets/jobs/front_end.png'
 import todos from '../../../../../assets/jobs/todos.png'
 import uxUi from '../../../../../assets/jobs/ux_ui.png'
 
+import { usePostJobs } from "../../../../hooks/usePostJob";
+import ScrollViewPost from '../../../../components/home/ScrollViewPostJob/ScrollViewPost';
+
 const JobsChannel = () =>{
   let dataUser = {
     Channel: "Requirimientos - Jobs",
   };
+  const state = useSelector((state) => state.login.user);
+  const [Posts, setPosts] = useState([]);
+
+  let { getPosts } = usePostJobs();
+
+  if (!state) {
+    return (
+      <View>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+  useEffect(() => {
+    console.log("este es mi token; ", state.token);
+    ( async ()=> { await getPosts(`/job-offer/all`, state.token, setPosts)} )()
+    
+  }, []); 
+
+  console.log("aqui estan los de requirimientos --------->", Posts);
+
   let [activador, setActivador] = useState([true,false,false,false])
   return (
     <SafeAreaView style={styles.homeContain}>
@@ -53,7 +77,11 @@ const JobsChannel = () =>{
       </ScrollView>
       
     </View>
-    {activador[0] && <Text>HOLA SOY TODOS</Text>}
+    {activador[0] && 
+      <View style={styles.ScrollContain}>
+        <ScrollViewPost post={Posts} token={state.token} getPost={getPosts} load={true} setList={setPosts} />
+      </View>
+    }
     {activador[1] && <Text>HOLA SOY FRONT END</Text>}
     {activador[2] && <Text>HOLA SOY BACK END</Text>}
     {activador[3] && <Text>HOLA SOY UX UI</Text>} 
