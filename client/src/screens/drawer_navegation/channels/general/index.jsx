@@ -30,7 +30,7 @@ const Home = ({ navigation }) => {
 
   
 
-  console.log(Posts)
+  // console.log(Posts)
   return (
     <SafeAreaView style={styles.homeContain}>
       <View style={styles.HeaderContain}>

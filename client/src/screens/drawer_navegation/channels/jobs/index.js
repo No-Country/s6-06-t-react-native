@@ -23,7 +23,7 @@ const JobsChannel = () =>{
   const [Posts, setPosts] = useState([]);
 
   let { getPosts } = usePostJobs();
-
+  console.log("esta en la info del usuario--->", state);
   if (!state) {
     return (
       <View>
@@ -32,12 +32,12 @@ const JobsChannel = () =>{
     );
   }
   useEffect(() => {
-    console.log("este es mi token; ", state.token);
+   
     ( async ()=> { await getPosts(`/job-offer/all`, state.token, setPosts)} )()
     
   }, []); 
 
-  console.log("aqui estan los de requirimientos --------->", Posts);
+  // console.log("aqui estan los de requirimientos --------->", Posts);
 
   let [activador, setActivador] = useState([true,false,false,false])
   return (
@@ -45,7 +45,7 @@ const JobsChannel = () =>{
     
     <View style={styles.HeaderContain}>
         <NavMenu />
-        <Text style = {styles.saludo}>Hola, Camilo!</Text>
+        <Text style = {styles.saludo}>Hola, {state.fullName}!</Text>
         <View style = {{position: 'relative', right: 18}}>
           <InfoComunity Channel={dataUser.Channel} />
         </View>

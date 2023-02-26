@@ -11,8 +11,8 @@ export default function CardPost({ data }) {
     ? data.description.length >= 150 && data.description.slice(0, 150)
     : "no description";
   const [short, setShort] = useState(false);
-  console.log("----------------------------");
-  console.log(data);
+  // console.log("----------------------------");
+  // console.log(data);
   
   return (
     <View style={styles.PostCard}>

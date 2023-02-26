@@ -12,8 +12,8 @@ export default function CardPost({ data }) {
     : "no description";
   const [short, setShort] = useState(false);
 
-  console.log("<<<<---------------------------->>>>>");
-  console.log("candidatos: ", data.candidates);
+  // console.log("<<<<---------------------------->>>>>");
+  // console.log("candidatos: ", data.candidates);
   
   let author = {
     _id: data.id,
