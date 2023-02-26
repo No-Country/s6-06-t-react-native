@@ -41,8 +41,9 @@ export const styles = StyleSheet.create({
     HeaderPost:{
         paddingTop : 10,
         flexDirection : 'row',
-        justifyContent : 'space-evenly',
-        alignItems: 'center'
+        justifyContent : 'space-between',
+        alignItems: 'center',
+        paddingHorizontal : 30
     },
     TitlePost : {
         flexDirection : 'row',
@@ -119,6 +120,10 @@ export const styles = StyleSheet.create({
     descriptionComment : {
         fontSize : ScreenWidth <= 360 ? 10: 12,
         fontWeight : '400'
+    },
+    select : {
+        color : colors.facebook,
+        fontWeight : '700'
     },
     ContainCommentReaction:{
         flexDirection : 'row',
