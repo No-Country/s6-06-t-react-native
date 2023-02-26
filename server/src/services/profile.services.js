@@ -43,13 +43,9 @@ const personal = async (uid, body) => {
               email,
               emailisvalidated: false
           }
-        : {...other};
+        : { ...other };
 
-    const user = await User.findByIdAndUpdate(
-        uid,
-        isEmail,
-        { new: true }
-    ); //DEBEN HACER LOGOUT SI CAMBIAN EL EMAIL , VERIFICARLO X EMAIL VOLVER A LOGUEARSE
+    const user = await User.findByIdAndUpdate(uid, isEmail, { new: true }); //DEBEN HACER LOGOUT SI CAMBIAN EL EMAIL , VERIFICARLO X EMAIL VOLVER A LOGUEARSE
 
     handleEmailToken(user, validateLink, validateTemplate);
 

@@ -81,28 +81,27 @@ const userSchema = new Schema(
                 jobTitle: {
                     type: String
                 },
-                jobType:{
-                    type:String
+                jobType: {
+                    type: String
                 },
-                company:{
-                    type:String
+                company: {
+                    type: String
                 },
-                location:{
-                    type:String
+                location: {
+                    type: String
                 },
-                yearIn:{
-                    type:String
+                yearIn: {
+                    type: String
                 },
-                yearOut:{
-                    type:String
+                yearOut: {
+                    type: String
                 },
-                current:{
-                    type:Boolean
+                current: {
+                    type: Boolean
                 },
-                description:{
-                    type:String
+                description: {
+                    type: String
                 }
-
             }
         ],
         education: [
@@ -130,7 +129,6 @@ const userSchema = new Schema(
                 inCourse: {
                     type: Boolean
                 },
-
                 year_in: {
                     type: String
                 },
@@ -183,7 +181,6 @@ const userSchema = new Schema(
         phone: {
             type: String
         },
-        /////////////////////////////////////////////////////////////////////////
         favorites: [
             {
                 type: Schema.Types.ObjectId,

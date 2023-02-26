@@ -33,18 +33,18 @@ const postSchema = new Schema(
         }
     },
     {
-        toObject: { virtuals: true },//En true , get canal especifico devuelve el conteo de reaccciones y commetnarios
+        toObject: { virtuals: true }, //En true , get canal especifico devuelve el conteo de reaccciones y commetnarios
         toJSON: { virtuals: true },
         timestamps: true,
         versionKey: false
     }
 );
+
 postSchema.virtual('comments', {
     ref: 'comment',
     localField: '_id',
     foreignField: 'post'
 });
-
 postSchema.virtual('countComments', {
     ref: 'comment',
     localField: '_id',
@@ -57,14 +57,6 @@ postSchema.virtual('reactions', {
     foreignField: 'post'
 });
 
-// postSchema.virtual('like', {
-//     ref: 'reaction',
-//     localField: '_id',
-//     foreignField: 'post',
-//     match: { type__Reaction: "apoyar" }
-// });
-
-
 const reactions = ['megusta', 'meinteresa', 'apoyar', 'hacergracia'];
 
 reactions.forEach((reaction) => {
@@ -72,8 +64,7 @@ reactions.forEach((reaction) => {
         ref: 'reaction',
         localField: '_id',
         foreignField: 'post',
-        match: { type__Reaction: reaction },
-        
+        match: { type__Reaction: reaction }
     });
 });
 

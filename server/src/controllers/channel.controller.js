@@ -3,16 +3,20 @@ const { Channel, User, Post, IsRead } = require('../models');
 
 const createChannel = async (req, res) => {
     //TODO:AGREGAR USUARIOS SI ES PRIVADO O TODOS SI ES PUBLICO
-    try{
-    const channel = new Channel(req.body);
-    await channel
-        .save()
-        .then((newChannel) => {
-            return response.success(req,res,'Channel created successfully',newChannel,201);
-        })
-    }catch (error){
-            return response.error(req, res, 'Contact Admin', 500);
-        }
+    try {
+        const channel = new Channel(req.body);
+        await channel.save().then((newChannel) => {
+            return response.success(
+                req,
+                res,
+                'Channel created successfully',
+                newChannel,
+                201
+            );
+        });
+    } catch (error) {
+        return response.error(req, res, 'Contact Admin', 500);
+    }
 };
 
 const updateChannel = async (req, res) => {
@@ -26,9 +30,21 @@ const updateChannel = async (req, res) => {
             { new: true }
         );
         if (!updatedChannel) {
-            return response.error(req,res,'Channel not found',updatedChannel,404);
+            return response.error(
+                req,
+                res,
+                'Channel not found',
+                updatedChannel,
+                404
+            );
         }
-        return response.success(req,res,'Updated channel',updatedChannel,200);
+        return response.success(
+            req,
+            res,
+            'Updated channel',
+            updatedChannel,
+            200
+        );
     } catch (error) {
         return response.error(req, res, 'Contact Admin', 500);
     }
@@ -65,7 +81,13 @@ const getAllChannels = async (req, res) => {
             channels
         };
         res.set('Content-Range', channels.length);
-        return response.success(req,res,'Channels found successfully',data,200);
+        return response.success(
+            req,
+            res,
+            'Channels found successfully',
+            data,
+            200
+        );
     } catch (error) {
         return response.error(req, res, 'Contact Admin', 500);
     }
@@ -78,10 +100,16 @@ const getUserChannels = async (req, res) => {
         if (!user) {
             return response.error(req, res, 'User not found', 404);
         }
-        return response.success(req,res,'Channels found successfully',user.channels,200);
+        return response.success(
+            req,
+            res,
+            'Channels found successfully',
+            user.channels,
+            200
+        );
     } catch (error) {
         console.error(error);
-        return response.error(req,res,'Contact Admin', 500);
+        return response.error(req, res, 'Contact Admin', 500);
     }
 };
 
@@ -95,10 +123,10 @@ const getPostsChannel = async (req, res) => {
 
         if (!channel) response.error(req, res, 'invalid channel', 400);
         const users = await User.find({ channels: id }).select('_id');
-        const posts = await Post.find({ channel: id }).sort({createdAt: -1})
+        const posts = await Post.find({ channel: id })
+            .sort({ createdAt: -1 })
             .skip(Number(from))
             .limit(Number(to))
-
             .populate({
                 path: 'author',
                 select: 'fullName position isOnline img_avatar'
@@ -124,7 +152,7 @@ const getPostsChannel = async (req, res) => {
         return response.success(req, res, 'Channel post:', {
             areRead: readPost,
             users,
-            posts,
+            posts
         });
     } catch (error) {
         return response.error(req, res, 'CONTACT ADMIN', 500);

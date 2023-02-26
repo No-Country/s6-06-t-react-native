@@ -1,36 +1,29 @@
 const mongoose = require('mongoose');
-require('dotenv').config
-const uri = process.env.URLDB || 'mongodb://mongo/newdb'
+require('dotenv').config;
+const uri = process.env.URLDB || 'mongodb://mongo/newdb';
 const { Channel } = require('../models');
 
-mongoose.set("strictQuery", false)
+mongoose.set('strictQuery', false);
 
-mongoose.connect(uri,{
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
-mongoose.connection.on('open', () =>{
-    console.log('Conectado a', uri)
+mongoose.connection.on('open', () => {
+    console.log('Conectado a Mongo correctamente!', uri);
 
-    const defaultChannels=["General","Requerimientos"]
+    const defaultChannels = ['General', 'Requerimientos'];
 
-    defaultChannels.forEach(async(channel)=>{
+    defaultChannels.forEach(async (channel) => {
+        const isChannel = await Channel.findOne({ name: channel });
 
-        const isChannel=await Channel.findOne({name:channel})
+        if (!isChannel) {
+            const newChannel = new Channel({
+                name: channel
+            });
 
-    if(!isChannel) {
-        const newChannel=new Channel({
-            name:channel
-        })
-    
-        await newChannel.save()
-    }
-
-
-    })
-
-})
-
-
-
+            await newChannel.save();
+        }
+    });
+});
