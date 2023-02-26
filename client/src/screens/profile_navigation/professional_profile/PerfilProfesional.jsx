@@ -127,7 +127,7 @@ const PerfilProfesional = () => {
         <View style={styles.infoTabs}>
           <SobreMi />
           <CardInfoProfesional route='AddEducation' cardTitle='Experiencia laboral' aniadir='Añadir experiencia laboral'/>
-          <CardInfoProfesional route='AddExperience' cardTitle='Educaicón' aniadir='Añadir educación'/>
+          <CardInfoProfesional route='AddExperience' cardTitle='Educación' aniadir='Añadir educación'/>
           <Herramientas />
           <Idiomas />
         </View>
