@@ -9,17 +9,13 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import BackButton from "../../../components/BackButton";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { getUserData } from "../../../redux/actions/personalActions";
-import defaultImg from "../icons/profilepicture.png";
 import { colors } from "../../../constants";
 import TopBar from "../../../components/TopBar";
 import styles from "./styles";
 import ProgressCircle from "./ProgressCircle";
 import SobreMi from "./componentes/SobreMi";
-import ExperienciaLaboral from "./componentes/ExperienciaLaboral";
-import Educacion from "./componentes/Educacion";
 import Idiomas from "./componentes/Idiomas";
 import Herramientas from "./componentes/Herramientas";
 import InformacionRelevante from "./componentes/InformacionRelevante";
@@ -129,10 +125,9 @@ const PerfilProfesional = () => {
         </View>
 
         <View style={styles.infoTabs}>
-          <CardInfoProfesional cardTitle='Experiencia laboral' aniadir='Añadir experiencia laboral'/>
           <SobreMi />
-          <ExperienciaLaboral  />
-          <Educacion />
+          <CardInfoProfesional route='AddEducation' cardTitle='Experiencia laboral' aniadir='Añadir experiencia laboral'/>
+          <CardInfoProfesional route='AddExperience' cardTitle='Educaicón' aniadir='Añadir educación'/>
           <Herramientas />
           <Idiomas />
         </View>

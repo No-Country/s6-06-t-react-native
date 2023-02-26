@@ -6,12 +6,12 @@ import WorkExpImg from "../../../assets/workExpImg.png";
 import { colors } from "../../constants";
 import { styles } from "./style";
 
-const CardInfoProfesional = ({ cardTitle, aniadir, userData }) => {
+const CardInfoProfesional = ({ route, cardTitle, aniadir, userData }) => {
   const navigation = useNavigation();
   return (
     <View
       style={styles.container}
-      onPress={() => navigation.navigate("AddExperience")}
+      onPress={() => navigation.navigate({route})}
     >
       <View
         style={{
