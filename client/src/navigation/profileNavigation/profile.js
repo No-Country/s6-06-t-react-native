@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AgregarEducacion from "../../screens/profile_navigation/agregarEducacion";
 import AgregarExperiencia from "../../screens/profile_navigation/agregarExperiencia";
 import MisPostulaciones from "../../screens/profile_navigation/my_aplications/MisPostulaciones";
 import DatosPersonales from "../../screens/profile_navigation/personal_information/DatosPersonales";
@@ -23,6 +24,7 @@ const ProfileNavigation = ({ navigation }) => {
       <Stack.Screen name="Guardados" component={Guardados} />
       <Stack.Screen name="Configuracion" component={Configuracion} />
       <Stack.Screen name="AddExperience" component={AgregarExperiencia} />
+      <Stack.Screen name="AddEducation" component={AgregarEducacion} />
     </Stack.Navigator>
   );
 };

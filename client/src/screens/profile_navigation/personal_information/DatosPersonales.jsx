@@ -123,6 +123,12 @@ const DatosPersonales = () => {
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
             />
+            <Text style={styles.name}>
+              {userInfo ? userInfo.fullName : "Camilo Vargas"}
+            </Text>
+            <Text style={styles.profession}>
+              {userInfo && userInfo?.position}
+            </Text>
           </View>
 
           <Text style={styles.titlesection}>Fecha de nacimiento:</Text>
