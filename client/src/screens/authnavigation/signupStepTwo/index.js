@@ -62,7 +62,7 @@ const RegistroStepTwo = () => {
   const onSubmit = async (data) => {
     const allData = { ...data, ...rest };
     try {
-      const response = await axios.post(`${URL_BACK}/auth/new`, {
+      await axios.post(`${URL_BACK}/auth/new`, {
         fullName: allData?.fullName,
         email: allData?.email,
         password: allData?.password,
@@ -73,7 +73,6 @@ const RegistroStepTwo = () => {
         jobArea: allData.jobArea,
         education: [{ educationalLevel: allData.educationalLevel }],
       });
-      // console.log(response);
       navigation.navigate("SignUpStepThree");
     } catch (error) {
       console.log(error);

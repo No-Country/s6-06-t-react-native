@@ -37,6 +37,7 @@ const PerfilProfesional = () => {
     ? userInfo.img_avatar
     : "../icons/profilepicture.png";
 
+  console.log(userInfo);
   return (
     <SafeAreaView style={styles.container}>
       <TopBar tabname="Perfil Profesional" navigateTo="Profile" />
