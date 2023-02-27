@@ -11,8 +11,15 @@ import { colors } from "../constants/colors";
 const PrimaryButton = ({ text, handler, width, disabledColor = false }) => {
   return (
     <View>
-      <Pressable onPress={handler} style={[styles.signIn, width && styles.width, disabledColor && styles.disabledColor ]}>
-        <Text style={{ color: "white", fontWeight: "600" }}>{text}</Text>
+      <Pressable
+        onPress={handler}
+        style={[
+          styles.signIn,
+          width && styles.width,
+          disabledColor && styles.disabledColor,
+        ]}
+      >
+        <Text style={styles.text}>{text}</Text>
       </Pressable>
     </View>
   );
@@ -30,11 +37,17 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    fontSize: 20,
   },
-  width:{
-    width: '100%'
+  width: {
+    width: "100%",
   },
   disabledColor: {
-    backgroundColor: colors.primary_light
-  }
+    backgroundColor: colors.primary_light,
+  },
+  text: {
+    color: '#fff',
+    fontWeight: "600",
+    fontSize: 23,
+  },
 });
