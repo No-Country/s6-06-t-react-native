@@ -99,9 +99,7 @@ const DatosPersonales = () => {
               {userInfo ? userInfo.fullName : "Camilo Vargas"}
             </Text>
             <Text style={styles.profession}>
-              {userInfo && userInfo.position === "fullstack"
-                ? "Full-Stack Developer"
-                : "Software Developer"}
+              {userInfo && userInfo?.position}
             </Text>
           </View>
 
