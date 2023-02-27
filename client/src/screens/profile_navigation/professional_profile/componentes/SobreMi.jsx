@@ -47,7 +47,7 @@ const SobreMi = ({ data }) => {
         <Text style={styles.text}>
           {data && data.about
             ? data.about
-            : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+            : "Contales sobre vos a aquellos que miren tu perfil profesional..."}
         </Text>
       </View>
 

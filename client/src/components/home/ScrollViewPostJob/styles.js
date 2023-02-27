@@ -41,16 +41,20 @@ export const styles = StyleSheet.create({
     HeaderPost:{
         paddingTop : 10,
         flexDirection : 'row',
-        justifyContent : 'space-between',
-        alignItems: 'center',
-        paddingHorizontal : 30
+        justifyContent : 'space-evenly',
+        alignItems: 'center'
     },
     TitlePost : {
         flexDirection : 'row',
-        alignItems : 'flex-end'
+        alignItems : 'flex-end',
+        marginBottom: 5,
+    },
+    TitlePostContain: {
+        position: "relative",
+        right: 30,
     },
     UserName:{
-        fontWeight : '600',
+        fontWeight : '700',
         fontSize : ScreenWidth <= 360 ? 15: 18,
         letterSpacing : ScreenWidth <= 360 ? 0.4: 0.7   
     },
@@ -59,10 +63,15 @@ export const styles = StyleSheet.create({
         fontWeight : '400',
         alignSelf : 'center'
     },
+    ViewSubtitlePost: {
+        backgroundColor: '#444450',
+        width:65,
+        borderRadius: 5,
+    },
     SubtitlePost :{
         fontSize : ScreenWidth <= 360 ? 10 : 14,
         color : colors.text_grey,
-        fontWeight : '600'
+        fontWeight : '500',
     },
     BodyPost:{
         width : '100%',
@@ -121,21 +130,19 @@ export const styles = StyleSheet.create({
         fontSize : ScreenWidth <= 360 ? 10: 12,
         fontWeight : '400'
     },
-    select : {
-        color : colors.facebook,
-        fontWeight : '700'
-    },
     ContainCommentReaction:{
         flexDirection : 'row',
         justifyContent : 'space-between',
-        paddingHorizontal : 15,
-        paddingBottom : 5,
+        paddingHorizontal : 50,
+        paddingBottom : 15,
         paddingTop : 5
     },
     containReaction: {
         flexDirection : 'row',
         justifyContent : 'space-evenly',
-        minWidth : 80
+        minWidth : 80,
+        // position: 'relative',
+        // left: 30,
     },
     TextAmountComment : {
         textDecorationLine : 'underline',

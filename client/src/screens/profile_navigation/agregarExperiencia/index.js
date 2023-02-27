@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import InputComponent from "../../../components/input/index.js";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
 import { styles } from "./style.js";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,6 +16,12 @@ import { tipoContrato } from "../../../utils/dataTipoContrato.js";
 import CheckBox from "expo-checkbox";
 import InputTextArea from "../../../components/inputTextArea/Index.js";
 // import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+
+import { useDispatch } from "react-redux";
+import {
+  editPersonalInfo,
+  getUserData,
+} from "../../../redux/actions/personalActions";
 
 const AgregarExperiencia = () => {
   const navigation = useNavigation();
@@ -34,12 +39,12 @@ const AgregarExperiencia = () => {
       yearIn: yup
         .string()
         .matches(/\d/, "Ingrese solo números")
-        .length(4, "Ingresa el año completo, ejemplo: 2022")
+        .max(4, "Ingresa hasta 4 carácteres.")
         .required("Campo requerido."),
       yearOut: yup
         .string()
         .matches(/\d/, "Ingrese solo números")
-        .length(4, "Ingresa el año completo, ejemplo: 2022"),
+        .max(4, "Ingresa hasta 4 carácteres."),
       current: yup.boolean(),
       description: yup.string().max(120, "Ingresa hasta 120 carácteres."),
     })
@@ -62,9 +67,26 @@ const AgregarExperiencia = () => {
 
   const [data, setData] = useState("");
 
+  const dispatch = useDispatch();
+  const [userInfo, setUserInfo] = useState(null);
+
+  useEffect(() => {
+    getUserData(setUserInfo);
+  }, []);
+
+
   const onSubmit = (data) => {
-    console.log(data);
-    navigation.goBack();
+    dispatch(
+      editPersonalInfo(
+        {
+          workExperience: [...userInfo?.workExperience, data]
+        },
+        userInfo?.token
+      )
+    )
+      .then((res) => console.log(res))
+      .then(navigation.goBack)
+      .catch((error) => console.log(error));
   };
 
   return (

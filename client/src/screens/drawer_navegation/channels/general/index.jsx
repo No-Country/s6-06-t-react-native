@@ -26,11 +26,6 @@ const Home = ({ navigation }) => {
     ( async ()=> { await getPosts(`/channel/${idChannelGeneral}`, state.token, setPosts)} )()
   }, []);
 
-
-
-  
-
-  console.log(Posts)
   return (
     <SafeAreaView style={styles.homeContain}>
       <View style={styles.HeaderContain}>
