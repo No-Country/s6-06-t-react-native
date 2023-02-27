@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import InputComponent from "../../../components/input/index.js";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
@@ -19,52 +19,73 @@ import { styles } from "./style.js";
 import { estadoEstudio } from "../../../utils/dataEstadoEstudio.js";
 import { nivelEstudio } from "../../../utils/dataNivelEstudio.js";
 
+import { useDispatch } from "react-redux";
+import {
+  editPersonalInfo,
+  getUserData,
+} from "../../../redux/actions/personalActions";
+
 const AgregarEducacion = () => {
   const navigation = useNavigation();
 
   const schema = yup
     .object({
-      title: yup
+      educationTitle: yup
         .string()
         .min(5, "Ingresa al menos 5 carácteres.")
         .max(30, "Ingresa como máximo 30 carácteres.")
         .required("Campo requerido."),
-      institution: yup.string().max(50, "Ingresa hasta 50 carácteres."),
-      state: yup.string().required(),
-      start: yup
+      institute: yup.string().max(50, "Ingresa hasta 50 carácteres."),
+      educationStatus: yup.string().required(),
+      year_in: yup
         .string()
-        .matches(/\d/, "Ingrese solo números")        
+        .matches(/\d/, "Ingrese solo números")
         .length(4, "Ingresa el año completo, ejemplo: 2022")
         .required("Campo requerido."),
-      end: yup
+      year_out: yup
         .string()
         .matches(/\d/, "Ingrese solo números")
         .length(4, "Ingresa el año completo, ejemplo: 2022"),
-      inProgress: yup.boolean(),
+      inCourse: yup.boolean(),
       description: yup.string().max(120, "Ingresa hasta 120 carácteres."),
     })
     .required();
   const [errorMessage, setErrorMessage] = useState(null);
 
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
     formState: { errors, isValid },
     setValue,
     watch,
-  } = useForm({ resolver: yupResolver(schema) }, {mode: 'onBlur'});
+  } = useForm({ resolver: yupResolver(schema) }, { mode: "onBlur" });
 
   const handleOnChange = () => {
     setErrorMessage(null);
   };
 
-  const isEditable = watch("inProgress");
+  const isEditable = watch("inCourse");
+
+  const [userInfo, setUserInfo] = useState(null);
+
+  useEffect(() => {
+    getUserData(setUserInfo);
+  }, []);
 
   const onSubmit = (data) => {
-    console.log(data);
-    navigation.goBack();
+    dispatch(
+      editPersonalInfo(
+        {
+          education: [...userInfo?.education, data],
+        },
+        userInfo?.token
+      )
+    )
+      .then((res) => console.log(res))
+      .then(navigation.goBack)
+      .catch((error) => console.log(error));
   };
-
   return (
     <View style={styles.whiteContainer}>
       <ScrollView style={styles.formContainer}>
@@ -84,10 +105,10 @@ const AgregarEducacion = () => {
               placeholder="Ingresa que estas estudiando"
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
-              error={errors.title}
+              error={errors.educationTitle}
             />
           )}
-          name="title"
+          name="educationTitle"
         />
 
         <InputComponentSelectList
@@ -110,18 +131,18 @@ const AgregarEducacion = () => {
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               value={value}
-              error={errors.institution}
+              error={errors.institute}
             />
           )}
-          name="institution"
+          name="institute"
         />
 
         <InputComponentSelectList
           label="Estado de estudio*"
           data={estadoEstudio}
-          name="state"
+          name="educationStatus"
           control={control}
-          error={errors.state}
+          error={errors.educationStatus}
           setValue={setValue}
         />
 
@@ -136,10 +157,10 @@ const AgregarEducacion = () => {
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               value={value}
-              error={errors.start}
+              error={errors.year_in}
             />
           )}
-          name="start"
+          name="year_in"
         />
 
         <Controller
@@ -153,11 +174,11 @@ const AgregarEducacion = () => {
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               value={value}
-              error={errors.end}
+              error={errors.year_out}
               editable={!isEditable}
             />
           )}
-          name="end"
+          name="year_out"
         />
 
         <Controller
@@ -176,7 +197,7 @@ const AgregarEducacion = () => {
               <Text style={styles.checkboxLabel}>Actualmente asisto</Text>
             </View>
           )}
-          name="inProgress"
+          name="inCourse"
         />
 
         <Controller

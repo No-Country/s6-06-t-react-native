@@ -7,7 +7,6 @@ import {
   ScrollView,
   Modal,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { getUserData } from "../../../redux/actions/personalActions";
@@ -21,7 +20,6 @@ import Herramientas from "./componentes/Herramientas";
 import InformacionRelevante from "./componentes/InformacionRelevante";
 import CardInfoProfesional from "../../../components/cardInfoProfesional";
 const PerfilProfesional = () => {
-  const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState(null);
   const [progress, setProgress] = useState(30);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -34,7 +32,7 @@ const PerfilProfesional = () => {
     ? userInfo.img_avatar
     : "../icons/profilepicture.png";
 
-    return (
+  return (
     <SafeAreaView style={styles.container}>
       <TopBar tabname="Perfil Profesional" navigateTo="Profile" />
       <ScrollView>
@@ -112,7 +110,7 @@ const PerfilProfesional = () => {
           <View style={styles.leftTab}>
             <View style={{ flexDirection: "row" }}>
               <Text style={{ fontSize: 14, fontWeight: "500" }}>
-              Área laboral de interés
+                Área laboral de interés
               </Text>
             </View>
             <View style={styles.separadorTab}></View>
@@ -126,8 +124,16 @@ const PerfilProfesional = () => {
 
         <View style={styles.infoTabs}>
           <SobreMi />
-          <CardInfoProfesional route='AddEducation' cardTitle='Experiencia laboral' aniadir='Añadir experiencia laboral'/>
-          <CardInfoProfesional route='AddExperience' cardTitle='Educación' aniadir='Añadir educación'/>
+          <CardInfoProfesional
+            route="AddExperience"
+            cardTitle="Experiencia laboral"
+            aniadir="Añadir experiencia laboral"
+          />
+          <CardInfoProfesional
+            route="AddEducation"
+            cardTitle="Educación"
+            aniadir="Añadir educación"
+          />
           <Herramientas />
           <Idiomas />
         </View>

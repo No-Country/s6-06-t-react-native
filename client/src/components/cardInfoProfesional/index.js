@@ -2,7 +2,6 @@ import { Feather, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import WorkExpImg from "../../../assets/workExpImg.png";
 import { colors } from "../../constants";
 import { styles } from "./style";
 
@@ -11,7 +10,7 @@ const CardInfoProfesional = ({ route, cardTitle, aniadir, userData }) => {
   return (
     <View
       style={styles.container}
-      onPress={() => navigation.navigate({route})}
+      onPress={() => navigation.navigate(route)}
     >
       <View
         style={{
@@ -35,7 +34,7 @@ const CardInfoProfesional = ({ route, cardTitle, aniadir, userData }) => {
       {!userData ? (
         <TouchableOpacity
           style={styles.txtcontainer}
-          onPress={() => navigation.navigate("AddExperience")}
+          onPress={() => navigation.navigate(route)}
         >
           <View style={styles.aniadirWrapper}>
             <Text style={styles.text}>{aniadir}</Text>
