@@ -82,7 +82,6 @@ const AgregarEducacion = () => {
         userInfo?.token
       )
     )
-      .then((res) => console.log(res))
       .then(navigation.goBack)
       .catch((error) => console.log(error));
   };

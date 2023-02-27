@@ -21,19 +21,20 @@ import InformacionRelevante from "./componentes/InformacionRelevante";
 import CardInfoProfesional from "../../../components/cardInfoProfesional";
 const PerfilProfesional = () => {
   const [userInfo, setUserInfo] = useState(null);
-  const [progress, setProgress] = useState(30);
+  const [progress, setProgress] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     getUserData(setUserInfo);
-  }, [userInfo]);
-
+  }, []);
+  console.log(userInfo?.workExperience);
   const profileImg = userInfo
-    ? userInfo.img_avatar
+    ? userInfo?.img_avatar
     : "../icons/profilepicture.png";
+
   return (
     <SafeAreaView style={styles.container}>
-      <TopBar tabname="Perfil Profesional" navigateTo="Profile" />
+      <TopBar tabname="Perfil Profesional" />
       <ScrollView>
         <View style={styles.ppContainer}>
           <View>
@@ -124,15 +125,18 @@ const PerfilProfesional = () => {
         <View style={styles.infoTabs}>
           <SobreMi />
           <CardInfoProfesional
-            route="AddExperience"
+            routeToAdd="AddExperience"
+            routeToSeeAll="SeeAllWorkExp"
             cardTitle="Experiencia laboral"
             aniadir="Añadir experiencia laboral"
+            dataToSee={userInfo?.workExperience}
             workExp={userInfo?.workExperience}
           />
           <CardInfoProfesional
-            route="AddEducation"
+            routeToAdd="AddEducation"
             cardTitle="Educación"
             aniadir="Añadir educación"
+            dataToSee={userInfo?.education}
             education={userInfo?.education}
           />
           <Herramientas />

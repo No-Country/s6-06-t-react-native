@@ -23,7 +23,6 @@ const JobsChannel = () =>{
   const [Posts, setPosts] = useState([]);
 
   let { getPosts } = usePostJobs();
-  console.log("esta en la info del usuario--->", state);
   if (!state) {
     return (
       <View>
@@ -36,8 +35,6 @@ const JobsChannel = () =>{
     ( async ()=> { await getPosts(`/job-offer/all`, state.token, setPosts)} )()
     
   }, []); 
-
-  // console.log("aqui estan los de requirimientos --------->", Posts);
 
   let [activador, setActivador] = useState([true,false,false,false])
   return (
