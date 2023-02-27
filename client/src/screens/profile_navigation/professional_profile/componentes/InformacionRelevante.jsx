@@ -58,7 +58,7 @@ const InformacionRelevante = ({ setIsModalVisible }) => {
               onValueChange={(itemValue) => {
                 if (itemValue !== null) {
                   setPuesto(itemValue);
-                  console.log(itemValue);
+                  // console.log(itemValue);
                 }
               }}
               style={styles.picker}
