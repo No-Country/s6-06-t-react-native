@@ -26,12 +26,11 @@ const PerfilProfesional = () => {
 
   useEffect(() => {
     getUserData(setUserInfo);
-  }, []);
+  }, [userInfo]);
 
   const profileImg = userInfo
     ? userInfo.img_avatar
     : "../icons/profilepicture.png";
-
   return (
     <SafeAreaView style={styles.container}>
       <TopBar tabname="Perfil Profesional" navigateTo="Profile" />
@@ -128,11 +127,13 @@ const PerfilProfesional = () => {
             route="AddExperience"
             cardTitle="Experiencia laboral"
             aniadir="Añadir experiencia laboral"
+            workExp={userInfo?.workExperience}
           />
           <CardInfoProfesional
             route="AddEducation"
             cardTitle="Educación"
             aniadir="Añadir educación"
+            education={userInfo?.education}
           />
           <Herramientas />
           <Idiomas />
