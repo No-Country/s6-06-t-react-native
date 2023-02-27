@@ -6,18 +6,18 @@ import PostDayWrapper from './PostDayWrapper';
 
 
 const ScrollViewPost = ({post, token, getPost, load, setList}) => {
-    let idChannelGeneral = "63e3dc46a5dd297fac1ca2a2";
+    // let idChannelGeneral = "63e3dc46a5dd297fac1ca2a2";
     const [group, setgroup] = useState();
     const [refreshBool, setrefreshBool] = useState(false);
     let refresh = async ()=>{
         setrefreshBool(!refreshBool)
-        await getPost(`/channel/${idChannelGeneral}`, token, setList)
+        await getPost(`/job-offer/all`, token, setList)
         setrefreshBool(false)
     }
     let GroupByDatePost = (post)=>{
         let dates = []
         post.forEach( p=> {
-            let d = new Date(p.createdAt)
+            let d = new Date(p.updatedAt)
             dates.push(d.toDateString())
         });
         dates = new Set(dates)
@@ -29,7 +29,7 @@ const ScrollViewPost = ({post, token, getPost, load, setList}) => {
                 posts : []
             }
             post.forEach((p, j)=>{
-                if(new Date(p.createdAt).toDateString() === dat){
+                if(new Date(p.updatedAt).toDateString() === dat){
                    dates[i].posts.push(p) 
                 }
             })

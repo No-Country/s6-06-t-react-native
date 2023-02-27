@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../constants";
 
 const styles = StyleSheet.create({
   container: {
@@ -82,12 +83,26 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginHorizontal: 25,
   },
+  leftTab: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  separadorTab:{
+    height: 20,
+    width: 1,
+    backgroundColor: colors.primary_light,
+    marginHorizontal: 10
+  },
+  datoUser:{
+    textDecorationLine: 'underline',
+  },
   infoTabs: {
     paddingHorizontal: 10,
     marginTop: 25,
     marginBottom: 10,
   },
-  
+
 });
 
 export default styles;
