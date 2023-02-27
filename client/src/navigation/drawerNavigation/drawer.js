@@ -4,6 +4,7 @@ import {
 } from "@react-navigation/drawer";
 import { View, TouchableOpacity, Text, Image } from "react-native";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import Community from "../../screens/drawer_navegation/community";
 import GeneralChannel from "../../screens/drawer_navegation/channels/general";
 import ShortlistedChannel from "../../screens/drawer_navegation/channels/shortlisted";
@@ -31,6 +32,7 @@ import { colors } from "../../constants";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavegation = () => {
+  
   return (
     <Drawer.Navigator
       initialRouteName="GeneralChannel"
@@ -54,6 +56,7 @@ const DrawerNavegation = () => {
 export default DrawerNavegation;
 
 export const MenuInterno = ({ props }) => {
+  const user = useSelector(state => state.login.user)
   const [state, setState] = useState(true);
   const dispatch = useDispatch();
 
@@ -70,8 +73,8 @@ export const MenuInterno = ({ props }) => {
           <Image source={backDrawer} style={styles.backDrawerIcon} />
         </TouchableOpacity>
         <Image source={Face} style={styles.avatar} />
-        <Text style={styles.name}>Camilo Vargas</Text>
-        <Text style={styles.rol}>UX designer</Text>
+        <Text style={styles.name}>{user.fullName}</Text>
+        <Text style={styles.rol}>`{user.position.toUpperCase()}`</Text>
       </View>
       {/* Opciones de menú */}
       <View style={styles.menuContainer}>
