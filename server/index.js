@@ -75,3 +75,7 @@ app.locals.io = io;
 server.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
+
+
+module.exports.app = app;
+

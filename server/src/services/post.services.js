@@ -14,6 +14,7 @@ const findPostById = async (id) => {
 
 const newPost = async (uid, body, channel, files) => {
     const { title, description } = body;
+
     const post = new Post({
         title,
         description,
@@ -39,6 +40,8 @@ const newPost = async (uid, body, channel, files) => {
 const remove = async (id) => {
 
     const post = await Post.findById(id);
+
+    if(!post) return "no-post"
 
     if (post) {
         //PROBAR SI FUNCIONA !!!
