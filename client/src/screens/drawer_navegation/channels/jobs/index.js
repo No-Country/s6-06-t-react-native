@@ -13,7 +13,7 @@ import todos from '../../../../../assets/jobs/todos.png'
 import uxUi from '../../../../../assets/jobs/ux_ui.png'
 
 import { usePostJobs } from "../../../../hooks/usePostJob";
-import ScrollViewPost from '../../../../components/home/ScrollViewPostJob/ScrollViewPost';
+import ScrollViewPost from '../../../../components/home/ScrollViewPost/ScrollViewPost.jsx';
 
 const JobsChannel = () =>{
   let dataUser = {
