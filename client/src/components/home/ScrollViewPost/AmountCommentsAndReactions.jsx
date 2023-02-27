@@ -36,7 +36,7 @@ export default function AmountCommentsAndReactions({countComments, apoyar, hacer
       }
       return 0;
     });
-    console.log(array)
+    // console.log(array)
     setcountReaction(array)
   }
   useEffect(() => {

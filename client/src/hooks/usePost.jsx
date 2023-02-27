@@ -14,7 +14,7 @@ export const usePost = ()=>{
             console.log(error)
         }
         if (response.status === 200) {
-          console.log(response)
+        //   console.log(response)
           data.push(...response.data.data.posts)
           setList(data)
           
@@ -55,7 +55,7 @@ export const useReaction = ()=>{
         } catch (error) {
             console.log(error)
         }
-        console.log(response)
+        // console.log(response)
     }
 
     let removeReaction = async(url, token, type) =>{
@@ -67,7 +67,7 @@ export const useReaction = ()=>{
         } catch (error) {
             console.log(error)
         }
-        console.log(response)
+        // console.log(response)
     }
     return {
         addReaction,

@@ -9,10 +9,11 @@ import {
   TextInput,
   Modal,
   Dimensions,
+  Button,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BackButton from "../../../components/BackButton";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Fontisto } from "@expo/vector-icons";
 import { AsyncStorage } from "react-native";
 import PrimaryButton from "../../../components/PrimaryButton";
 import SecondaryButton from "../../../components/SecondaryButton";
@@ -22,18 +23,40 @@ import {
   getUserData,
 } from "../../../redux/actions/personalActions";
 import { colors } from "../../../constants";
+import DateTimePicker, {
+  DateTimePickerAndroid,
+} from "@react-native-community/datetimepicker";
+import { Picker } from "@react-native-picker/picker";
 
 const DatosPersonales = () => {
   const [userInfo, setUserInfo] = useState(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [name, setName] = useState("");
+  const [area, setArea] = useState("+54");
+  const [pais, setPais] = useState("Argentina");
   const [phone, setPhone] = useState("");
+  const [date, setDate] = useState(null);
   const [email, setEmail] = useState("");
+  const [linkedin, setLinkedIn] = useState("");
+  const [portfolio, setPortfolio] = useState("");
 
   const [isFocused, setIsFocused] = useState(false);
   const [isFocused2, setIsFocused2] = useState(false);
   const [isFocused3, setIsFocused3] = useState(false);
+  const [isFocused4, setIsFocused4] = useState(false);
+  const [isFocused5, setIsFocused5] = useState(false);
   const dispatch = useDispatch();
+
+  const onChange = (event, selectedDate) => {
+    const stringDate = selectedDate.toString().split(" ");
+    setDate(`${stringDate[2]} - ${stringDate[1]} - ${stringDate[3]}`);
+  };
+  const showDatepicker = (e) => {
+    DateTimePickerAndroid.open({
+      value: new Date(),
+      mode: "date",
+      onChange,
+    });
+  };
 
   const editedUser = {
     fullName: name,
@@ -77,89 +100,77 @@ const DatosPersonales = () => {
   {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.topbar}>
-          <BackButton component="Home" />
-          <Text style={styles.title}>Datos Personales</Text>
-          <View>
-            <Text style={styles.hidden}>aaaaa</Text>
+        <View style={styles.topcont}>
+          <View style={styles.topbar}>
+            <BackButton component="Home" />
+            <Text style={styles.title}>Información Personal</Text>
           </View>
+          <View style={styles.line}></View>
         </View>
 
-        <View style={styles.ppContainer}>
-          <View style={styles.header}>
-            <Image
-              source={
-                userInfo
-                  ? { uri: userInfo.img_avatar }
-                  : require("../icons/profilepicture.png")
-              }
-              style={{ width: 100, height: 100 }}
+        <View style={styles.inputSection}>
+          <Text style={styles.titlesection}>Nombre y apellido:</Text>
+          <View
+            style={[
+              styles.inputContainer,
+              { borderColor: isFocused ? colors.primary : "transparent" },
+            ]}
+          >
+            <TextInput
+              placeholder={name}
+              value={name}
+              onChangeText={(value) => setName(value)}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
             />
-            <Text style={styles.name}>
-              {userInfo ? userInfo.fullName : "Camilo Vargas"}
-            </Text>
-            <Text style={styles.profession}>
-              {userInfo && userInfo.position === "fullstack"
-                ? "Full-Stack Developer"
-                : "Software Developer"}
-            </Text>
           </View>
 
-          <View style={styles.tab}>
-            <View style={styles.tabinfo}>
-              <Text style={styles.tabText}>
-                Teléfono: {userInfo ? userInfo.phone : ""}
+          <Text style={styles.titlesection}>Fecha de nacimiento:</Text>
+          <TouchableOpacity
+            onPress={showDatepicker}
+            style={styles.inputContainer}
+          >
+            {date ? (
+              <Text> {date}</Text>
+            ) : (
+              <Text style={styles.placeholder}>
+                Selecciona tu fecha de nacimiento
               </Text>
+            )}
+            <Fontisto name="date" size={20} />
+          </TouchableOpacity>
+
+          <Text style={styles.titlesection}>Celular</Text>
+
+          <View
+            style={[
+              styles.numberContainer,
+              { borderColor: isFocused2 ? colors.primary : "transparent" },
+            ]}
+          >
+            <View style={styles.pickerCont}>
+              <Picker
+                style={styles.area}
+                onValueChange={(itemValue, itemIndex) => {
+                  setArea(itemValue);
+                }}
+              >
+                <Picker.Item
+                  label={area ? area : "Área"}
+                  value={null}
+                  enabled={false}
+                />
+                <Picker.Item label="+54" value="+54" />
+                <Picker.Item label="+591" value="+591" />
+                <Picker.Item label="+55" value="+55" />
+                <Picker.Item label="+56" value="+56" />
+                <Picker.Item label="+57" value="+57" />
+                <Picker.Item label="+593" value="+593" />
+                <Picker.Item label="+52" value="+52" />
+                <Picker.Item label="+51" value="+51" />
+              </Picker>
             </View>
-          </View>
-
-          <View style={styles.tab}>
-            <View style={styles.tabinfo}>
-              <Text style={styles.tabText}>
-                Email: {userInfo ? userInfo.email : ""}
-              </Text>
-            </View>
-          </View>
-        </View>
-
-        <PrimaryButton
-          text="Editar datos"
-          handler={() => setIsModalVisible(true)}
-        />
-
-        {/*                              // MODAL               */}
-
-        <Modal
-          visible={isModalVisible}
-          animationType="slide"
-          style={styles.modalContainer}
-        >
-          <Text style={styles.title}>Editar Datos</Text>
-          <View style={styles.inputSection}>
-            <Text style={styles.titlesection}>Nombre:</Text>
-
-            <View
-              style={[
-                styles.inputContainer,
-                { borderColor: isFocused ? colors.primary : "transparent" },
-              ]}
-            >
-              <TextInput
-                placeholder={name}
-                value={name}
-                onChangeText={(value) => setName(value)}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
-              />
-            </View>
-            <Text style={styles.titlesection}>Teléfono</Text>
-
-            <View
-              style={[
-                styles.inputContainer,
-                { borderColor: isFocused2 ? colors.primary : "transparent" },
-              ]}
-            >
+            <View style={styles.number}>
               <TextInput
                 placeholder={phone}
                 value={phone}
@@ -168,32 +179,80 @@ const DatosPersonales = () => {
                 onBlur={() => setIsFocused2(false)}
               />
             </View>
-            <Text style={styles.titlesection}>Email</Text>
+          </View>
+          <Text style={styles.titlesection}>Correo electrónico</Text>
 
-            <View
-              style={[
-                styles.inputContainer,
-                { borderColor: isFocused3 ? colors.primary : "transparent" },
-              ]}
-            >
-              <TextInput
-                placeholder={email}
-                value={email}
-                onChangeText={(value) => setEmail(value)}
-                onFocus={() => setIsFocused3(true)}
-                onBlur={() => setIsFocused3(false)}
-              />
-            </View>
-            <PrimaryButton
-              text="Guardar cambios"
-              handler={(e) => handleSave(e)}
-            />
-            <SecondaryButton
-              text="Cancelar"
-              handler={() => setIsModalVisible(false)}
+          <View
+            style={[
+              styles.inputContainer,
+              { borderColor: isFocused3 ? colors.primary : "transparent" },
+            ]}
+          >
+            <TextInput
+              placeholder={email}
+              value={email}
+              onChangeText={(value) => setEmail(value)}
+              onFocus={() => setIsFocused3(true)}
+              onBlur={() => setIsFocused3(false)}
             />
           </View>
-        </Modal>
+
+          <Text style={styles.titlesection}>País</Text>
+          <View style={styles.paisCont}>
+            <Picker
+              style={styles.paisPick}
+              onValueChange={(itemValue, itemIndex) => {
+                setPais(itemValue);
+              }}
+            >
+              <Picker.Item
+                label={pais ? pais : "Área"}
+                value={null}
+                enabled={false}
+              />
+              <Picker.Item label="Argentina" value="Argentina" />
+              <Picker.Item label="Bolivia" value="Bolivia" />
+              <Picker.Item label="Brasil" value="Brasil" />
+              <Picker.Item label="Chile" value="Chile" />
+              <Picker.Item label="Colombia" value="Colombia" />
+              <Picker.Item label="Ecuador" value="Ecuador" />
+              <Picker.Item label="México" value="México" />
+              <Picker.Item label="Perú" value="Perú" />
+            </Picker>
+          </View>
+          <Text style={styles.titlesection}>LinkedIn</Text>
+          <View
+            style={[
+              styles.inputContainer,
+              { borderColor: isFocused4 ? colors.primary : "transparent" },
+            ]}
+          >
+            <TextInput
+              placeholder={linkedin}
+              value={linkedin}
+              onChangeText={(value) => setLinkedIn(value)}
+              onFocus={() => setIsFocused4(true)}
+              onBlur={() => setIsFocused4(false)}
+            />
+          </View>
+          <Text style={styles.titlesection}>Portfolio</Text>
+          <View
+            style={[
+              styles.inputContainer,
+              { borderColor: isFocused5 ? colors.primary : "transparent" },
+            ]}
+          >
+            <TextInput
+              placeholder={portfolio}
+              value={portfolio}
+              onChangeText={(value) => setPortfolio(value)}
+              onFocus={() => setIsFocused5(true)}
+              onBlur={() => setIsFocused5(false)}
+            />
+          </View>
+        </View>
+
+        <PrimaryButton text="Guardar" />
       </SafeAreaView>
     );
   }
@@ -205,73 +264,25 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
   },
-  header: {
-    alignItems: "center",
-    marginBottom: 30,
-  },
   title: {
-    fontSize: 27,
+    fontSize: 20,
     fontWeight: "bold",
     marginLeft: 30,
   },
+  line: {
+    width: "100%",
+    backgroundColor: colors.input_background,
+    height: 10,
+    marginVertical: 5,
+  },
+  topcont: {
+    display: "flex",
+    flexDirection: "column",
+  },
   topbar: {
     flexDirection: "row",
-    gap: 10,
     alignItems: "center",
-    padding: 20,
-  },
-  ppContainer: {
-    alignItems: "center",
-    marginTop: 20,
-    width: "100%",
-  },
-  ppButton: {
-    position: "absolute",
-    top: 70,
-    left: 70,
-  },
-  name: {
-    fontSize: 27,
-    fontWeight: "bold",
-    marginTop: 10,
-    lineHeight: 30,
-    color: colors.primary,
-  },
-  profession: {
-    fontSize: 18,
-    color: "#a9a9a9",
-    lineHeight: 30,
-  },
-  editButton: {
-    position: "absolute",
-    top: 115,
-    right: 40,
-  },
-
-  tab: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#ffffff",
-    padding: 12,
-    borderRadius: 15,
-    marginBottom: 20,
-    marginHorizontal: 20,
-    elevation: 5,
-    shadowOffset: { width: 0, height: 5 },
-    shadowColor: "rgba(117, 101, 123, 0.26)",
-    shadowOpacity: 1,
-    shadowRadius: 20,
-  },
-  tabinfo: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  tabText: {
-    fontSize: 16,
-    width: "90%",
-    fontWeight: "600",
+    left: -30,
   },
   inputContainer: {
     flexDirection: "row",
@@ -283,23 +294,48 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width - 25,
     height: 45,
     backgroundColor: "#fff",
-    // paddingStart: 20,
     backgroundColor: colors.input_background,
-    marginVertical: 15,
+    marginVertical: 5,
+    justifyContent: "space-between",
   },
   titlesection: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: "700",
   },
   inputSection: {
     paddingHorizontal: 15,
     marginTop: 30,
   },
-  modalContainer: {
-    marginTop: 20,
+  numberContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: 45,
+    width: "100%",
+    borderRadius: 10,
   },
-  hidden: {
-    color: "white",
+  pickerCont: {
+    height: 45,
+    backgroundColor: colors.input_background,
+    borderRadius: 10,
+    justifyContent: "center",
+  },
+  area: {
+    width: Dimensions.get("window").width - 270,
+    justifyContent: "center",
+    marginHorizontal: 5,
+  },
+  number: {
+    borderRadius: 10,
+    width: Dimensions.get("window").width - 160,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.input_background,
+  },
+  paisCont: {
+    height: 45,
+    backgroundColor: colors.input_background,
+    borderRadius: 10,
+    justifyContent: "center",
   },
 });
 

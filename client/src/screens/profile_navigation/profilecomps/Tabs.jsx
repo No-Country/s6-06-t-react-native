@@ -16,7 +16,7 @@ const Tabs = () => {
       >
         <View style={styles.tabinfo}>
           <FontAwesome5 name="user" style={styles.icon} />
-          <Text style={styles.tabText}>Datos Personales</Text>
+          <Text style={styles.tabText}>Información Personal</Text>
         </View>
         <AntDesign name="right" style={styles.icon2} />
       </TouchableOpacity>
