@@ -17,11 +17,12 @@ import CheckBox from "expo-checkbox";
 import InputTextArea from "../../../components/inputTextArea/Index.js";
 // import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   editPersonalInfo,
   getUserData,
 } from "../../../redux/actions/personalActions";
+import { Cambiador } from "../../../redux/actions/actions.js";
 
 const AgregarExperiencia = () => {
   const navigation = useNavigation();
@@ -36,6 +37,7 @@ const AgregarExperiencia = () => {
       company: yup.string().max(50, "Ingresa hasta 50 carácteres."),
       jobType: yup.string().max(50, "Ingresa hasta 50 carácteres."),
       location: yup.string().max(50, "Ingresa hasta 50 carácteres."),
+      current: yup.boolean(),
       yearIn: yup
         .string()
         .matches(/\d/, "Ingrese solo números")
@@ -45,7 +47,6 @@ const AgregarExperiencia = () => {
         .string()
         .matches(/\d/, "Ingrese solo números")
         .max(4, "Ingresa hasta 4 carácteres."),
-      current: yup.boolean(),
       description: yup.string().max(120, "Ingresa hasta 120 carácteres."),
     })
     .required();
@@ -57,7 +58,10 @@ const AgregarExperiencia = () => {
     formState: { errors, isValid },
     setValue,
     watch,
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm(
+    { resolver: yupResolver(schema) },
+    { defaultValues: { current: false } }
+  );
 
   const handleOnChange = () => {
     setErrorMessage(null);
@@ -74,16 +78,18 @@ const AgregarExperiencia = () => {
     getUserData(setUserInfo);
   }, []);
 
+  const activador = useSelector((state) => state.login.variable);
 
   const onSubmit = (data) => {
     dispatch(
       editPersonalInfo(
         {
-          workExperience: [...userInfo?.workExperience, data]
+          workExperience: [...userInfo?.workExperience, data],
         },
         userInfo?.token
       )
     )
+      .then(() => dispatch(Cambiador(!activador)))
       .then(navigation.goBack())
       .catch((error) => console.log(error));
   };

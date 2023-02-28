@@ -2,18 +2,14 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import GoBackArrow from "./goBackArrow";
 
 const Profile = ({ tabname }) => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.Topcontainer}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-        <AntDesign name="left" size={20} color="black" />
-      </TouchableOpacity>
+      <GoBackArrow/>
       <Text style={styles.title}>{tabname}</Text>
     </View>
   );

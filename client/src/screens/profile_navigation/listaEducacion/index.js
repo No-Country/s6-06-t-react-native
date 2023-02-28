@@ -7,10 +7,9 @@ import { getUserData } from "../../../redux/actions/personalActions";
 import { useSelector } from "react-redux";
 import { Root } from "react-native-popup-confirm-toast";
 import GoBackArrow from "../../../components/goBackArrow";
-import CardIndividualInfo from "../../../components/CardProfesionalInfo/ExperienciaLaboral";
+import CardIndividualEducation from "../../../components/CardProfesionalInfo/Educacion";
 
-const ListaInfoLaboral = () => {
-
+const ListaInfoEducacion = () => {
   const [userInfo, setUserInfo] = useState(null);
   const activador = useSelector((state) => state.login.variable);
 
@@ -18,23 +17,23 @@ const ListaInfoLaboral = () => {
     getUserData(setUserInfo);
   }, [activador]);
 
-  const work = userInfo?.workExperience;
+  const education = userInfo?.education;
 
   return (
     <Root>
       <ScrollView style={styles.mainContainer}>
         <View style={styles.secondaryContainer}>
-          <GoBackArrow/>
+          <GoBackArrow />
         </View>
         <View style={styles.line}></View>
 
         <View style={styles.secondaryContainer}>
           <View style={styles.titleAndIcon}>
-            <Text style={styles.titleList}>Experiencia laboral</Text>
+            <Text style={styles.titleList}>Educación </Text>
             <Ionicons name="add" size={30} color={colors.primary} />
           </View>
-          {work?.map((data) => {
-            return <CardIndividualInfo key={data._id} {...data} />;
+          {education?.map((data) => {
+            return <CardIndividualEducation key={data._id} {...data} />;
           })}
         </View>
       </ScrollView>
@@ -42,4 +41,4 @@ const ListaInfoLaboral = () => {
   );
 };
 
-export default ListaInfoLaboral;
+export default ListaInfoEducacion;

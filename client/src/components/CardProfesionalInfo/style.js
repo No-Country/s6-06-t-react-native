@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     flex: 3,
     paddingRight: 30,
   },
-  workDate: {
+  dates: {
     color: colors.primary,
     fontSize: 16,
     fontWeight: "bold",
@@ -37,24 +37,24 @@ export const styles = StyleSheet.create({
   descriptionWrapper: {
     marginBottom: 13,
   },
-  titleWork: {
+  title: {
     fontSize: 22,
     fontWeight: "500",
   },
-  companyWrapper: {
+  institutionWrapper: {
     display: "flex",
     flexDirection: "row",
     maxWidth: "90%",
   },
-  companyName: {
+  primaryData: {
     fontSize: 16,
   },
-  contract: {
+  secondaryData: {
     fontSize: 16,
     color: colors.grey_placeholder,
     maxWidth: "70%",
   },
-  workDescription: {},
+  description: {},
   iconsWrappers: {
     display: "flex",
     flexDirection: "row",

@@ -18,12 +18,14 @@ import SobreMi from "./componentes/SobreMi";
 import Idiomas from "./componentes/Idiomas";
 import Herramientas from "./componentes/Herramientas";
 import InformacionRelevante from "./componentes/InformacionRelevante";
+import { useSelector } from "react-redux";
 import CardInfoProfesional from "../../../components/cardInfoProfesional";
+
 const PerfilProfesional = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [progress, setProgress] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [activador, setActivador] = useState(false)
+  const activador = useSelector((state) => state.login.variable);
 
   useEffect(() => {
     getUserData(setUserInfo);
@@ -41,7 +43,7 @@ const PerfilProfesional = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TopBar tabname="Perfil Profesional" />
+      <TopBar tabname="Perfil profesional" />
       <ScrollView>
         <View style={styles.ppContainer}>
           <View>
@@ -141,6 +143,7 @@ const PerfilProfesional = () => {
           />
           <CardInfoProfesional
             routeToAdd="AddEducation"
+            routeToSeeAll="SeeAllEducation"
             cardTitle="Educación"
             aniadir="Añadir educación"
             dataToSee={userInfo?.education}
