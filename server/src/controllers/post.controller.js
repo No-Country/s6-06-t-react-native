@@ -29,10 +29,10 @@ const createPost = async (req, res) => {
 
             io.emit(`${channel}-posts`, { post, count });
 
-            return success(req, res, 'Post created successfully', post, 201);
+            return response.success(req, res, 'Post created successfully', post, 201);
         }
     } catch (error) {
-        return error(req, res, 'Post creation failed, contact Admin ', 400);
+        return response.error(req, res, 'Post creation failed, contact Admin ', 400);
     };
 }
 

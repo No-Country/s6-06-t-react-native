@@ -3,7 +3,6 @@ const { Post } = require('../src/models');
 const request = require('supertest')(app);
 const expect = require('chai').expect;
 
-
 describe('GET /api/post/all', function () {
     let total;
 
@@ -82,7 +81,8 @@ describe('PUT /api/post/update/:id', function () {
         const response = await request
             .put(`/api/post/update/${post.id}`)
             .send({
-                title: 'CAMBIADO DESDE TESTING'
+                title: 'CAMBIADO DESDE TESTING',
+                description: 'AAA'
             })
             .set('x-token', process.env.USER_TEST);
 
@@ -97,7 +97,8 @@ describe('PUT /api/post/update/:id', function () {
         const response = await request
             .put(`/api/post/update/${post.id}`)
             .send({
-                title: 'CAMBIADO DESDE TESTING'
+                title: 'CAMBIADO DESDE TESTING',
+                description: 'AAA'
             })
             .set('x-token', process.env.USER_TEST);
 
@@ -110,7 +111,10 @@ describe('PUT /api/post/update/:id', function () {
 describe('DELETE /api/post/:id', function () {
     let post;
     this.beforeAll(async function () {
-        post = await Post.findOne({ active: true, title: 'CAMBIADO DESDE TESTING' });
+        post = await Post.findOne({
+            active: true,
+            title: 'CAMBIADO DESDE TESTING'
+        });
     });
 
     it('Delete a specific post if is Admin user', async function () {
@@ -127,8 +131,6 @@ describe('DELETE /api/post/:id', function () {
         expect(response.status).to.eql(200);
 
         expect(response.body.data).to.eql(post.id);
-
-
     });
 
     it('Should fail with 400 status code', async function () {
@@ -141,5 +143,5 @@ describe('DELETE /api/post/:id', function () {
         expect(response.status).to.eql(400);
     });
 
-     //AGREGAR OTRO USUARIO SIN ADMIN e INTENTAR MODIFICAR => 401
+    //AGREGAR OTRO USUARIO SIN ADMIN e INTENTAR MODIFICAR => 401
 });

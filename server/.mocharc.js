@@ -12,7 +12,7 @@ module.exports = {
     color: true,
     exit: true,
     timeout: 8000,
-    watch:true,
+    watch:false,
  
     ui: 'bdd',
     'watch-files': ['lib/**/*.js',"test/**/*.js"],

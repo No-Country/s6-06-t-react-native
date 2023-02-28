@@ -5,9 +5,9 @@ const { Post } = require("../models")
 
 const create = [
     check("title", "title is required").not().isEmpty(),
-    check("title").custom(async (title) => await validateDb(Post, "title", title)),
+   // check("title").custom(async (title) => await validateDb(Post, "title", title)),
     check("description", "description is required").not().isEmpty(),
-    check("description").custom( async (description) => await validateDb(Post, "description", description)),
+   // check("description").custom( async (description) => await validateDb(Post, "description", description)),
     validateFields,
 ]
 
@@ -15,9 +15,9 @@ const edit = [
     param('id').isMongoId(),
     param("id").custom(async (id) => await validateDb(Post, "id", id)),
     check("title", "title is required").not().isEmpty(),
-    check("title").custom(async (title) => await validateDb(Post, "title", title)),
+    //check("title").custom(async (title) => await validateDb(Post, "title", title)),
     check("description", "description is required").not().isEmpty(),
-    check("description").custom(async (description) => await validateDb(Post, "description", description)),
+    //check("description").custom(async (description) => await validateDb(Post, "description", description)),
     validateFields,
 ]
 
