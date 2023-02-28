@@ -36,8 +36,7 @@ export default function Comments({data, isModalVisible, setIsModalVisible}) {
     // const [isModalVisible, setIsModalVisible] = useState(false);
     useEffect(() => {
         setReaction(searchReaction(data))
-    }, [])
-
+    }, []) 
     return (
         <View style={styles.ActionPostContain} >
             <TouchableWithoutFeedback onPress={()=> setShow(!Show)} onPressOut={()=> setShow(!Show)} >
@@ -81,7 +80,7 @@ export default function Comments({data, isModalVisible, setIsModalVisible}) {
                         <Text style={styles.descriptionComment}>Comentar</Text>
                     </View>
             </TouchableWithoutFeedback>
-            <ModalComment isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} idPost={data.id} user={state} count={data.countComments}/>
+            <ModalComment isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} idPost={data.id} user={state} count={data.countComments} list={data.comments}/>
             <TouchableWithoutFeedback>
                 <View style={styles.ActionPost}>
                     <Feather name="send" size={24} color="black" />
