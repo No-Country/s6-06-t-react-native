@@ -52,7 +52,6 @@ const ScrollViewPost = ({post, token, getPost, load, setList}) => {
              refreshing={refreshBool}
              onRefresh={refresh}
              onEndReachedThreshold={0.1}
-             
              ListFooterComponent={ load ?
                 <ActivityIndicator
                   size='large'

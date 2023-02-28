@@ -12,7 +12,10 @@ export const styles = StyleSheet.create({
     },
     ScrollContain : {
         flex : ScreenWidth <= 360 ? 5 : 7,
-        paddingVertical : 10
+        paddingVertical : 10,
+        marginTop: 10,
+
+        // backgroundColor: 'red'
     },
     saludo: {
         color: "#4245E5",
@@ -34,6 +37,36 @@ export const styles = StyleSheet.create({
     buttonText: {
         fontWeight: "500",
         color: "white",
+    },
+    main: {
+        marginTop: 10,
+        alignContent: 'center',
+        alignSelf: 'center',
+        
+    },
+    bodyMain: {
+        marginVertical : 10,
+        marginHorizontal : 4,
+        paddingHorizontal: 15,
+        paddingVertical : 15,
+        borderWidth : 1,
+        borderColor : "#DAE1EA",
+        borderRadius : 10
+    },
+    bodyMainText: {
+        textAlign: 'center',
+        marginVertical: 20,
+        fontWeight: "500",
+    },
+    novedadesNoJobs: {
+        fontWeight: "700",
+        textAlign: 'center',
+    },
+    textBackCanal: {
+        marginTop: 20,
+        color: "#4245E5",
+        fontWeight: "700",
+        textAlign: 'center',
     },
 })
 

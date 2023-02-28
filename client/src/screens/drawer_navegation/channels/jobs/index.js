@@ -14,7 +14,7 @@ import todos from '../../../../../assets/jobs/todos.png'
 import uxUi from '../../../../../assets/jobs/ux_ui.png'
 
 import { usePostJobs } from "../../../../hooks/usePostJob";
-import ScrollViewPost from '../../../../components/home/ScrollViewPost/ScrollViewPost.jsx';
+import ScrollViewPost from '../../../../components/home/ScrollViewPostJob/ScrollViewPost.jsx';
 
 const JobsChannel = () =>{
   let dataUser = {
@@ -92,7 +92,7 @@ const JobsChannel = () =>{
       </View>
     }
     {activador[1] && (postFront.length > 0 ?  
-      <Text><ScrollViewPost post={postFront} token={state.token} getPost={getPosts} load={false} setList={setPosts} /> </Text>: 
+      <View style={styles.ScrollContain}><ScrollViewPost post={postFront} token={state.token} getPost={getPosts} load={false} setList={setPosts} /></View>: 
       <NoVacantes rol ="back-end" styles={styles}/>)
     }
 
@@ -100,7 +100,10 @@ const JobsChannel = () =>{
       <ScrollViewPost post={postBack} token={state.token} getPost={getPosts} load={true} setList={setPosts} /> : 
       <NoVacantes rol ="back-end" styles={styles}/>)
     }
-    {activador[3] && <Text>HOLA SOY UX UI</Text>} 
+    {activador[3] && (postUXUI.length > 0 ?  
+      <ScrollViewPost post={postUXUI} token={state.token} getPost={getPosts} load={true} setList={setPosts} /> : 
+      <NoVacantes rol ="UX-UI" styles={styles}/>)
+    }
   </SafeAreaView>
   )
 }
