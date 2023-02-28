@@ -84,7 +84,7 @@ const AgregarExperiencia = () => {
         userInfo?.token
       )
     )
-      .then(navigation.goBack)
+      .then(navigation.goBack())
       .catch((error) => console.log(error));
   };
 

@@ -23,14 +23,21 @@ const PerfilProfesional = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [progress, setProgress] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [activador, setActivador] = useState(false)
 
   useEffect(() => {
     getUserData(setUserInfo);
-  }, []);
-  console.log(userInfo?.workExperience);
+  }, [activador]);
+
   const profileImg = userInfo
     ? userInfo?.img_avatar
     : "../icons/profilepicture.png";
+
+  useEffect(() => {
+    if (userInfo?.workExperience.length !== 0) {
+      setProgress(progress + 15);
+    }
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

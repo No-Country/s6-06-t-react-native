@@ -22,12 +22,18 @@ const ListaInfoLaboral = () => {
 
   return (
     <ScrollView style={styles.mainContainer}>
+      <View>
+
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Text>
           <EvilIcons name="close" size={30} color={colors.primary} />
         </Text>
       </TouchableOpacity>
-      {work.map((data) => {
+        <View>
+
+        </View>
+      </View>
+      {work?.map((data) => {
         return (
           <CardIndividualInfo key={data._id} {...data}/>
         );
