@@ -149,9 +149,6 @@ export const styles = StyleSheet.create({
         textDecorationColor : colors.text_grey,
         color : '#626A6D',
         fontSize : ScreenWidth <= 360 ? 12: 14
-    }
-
-    
-    
+    },
 })
 

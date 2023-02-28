@@ -3,6 +3,7 @@ import {
   LOGIN_USER_REJECTED,
   LOGIN_USER_SUCCESS,
   LOGOUT_USER,
+  CAMBIADOR,
 } from "../types/loginTypes";
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   user: null,
   token: null,
   error: null,
+  variable: false,
 };
 
 export const loginReducer = (state = initialState, { type, payload }) => {
@@ -47,6 +49,11 @@ export const loginReducer = (state = initialState, { type, payload }) => {
         token: null,
         error: null,
       };
+    case CAMBIADOR:
+      return {
+        ...state,
+        variable: payload,
+      }
     default:
       return { ...state };
   }

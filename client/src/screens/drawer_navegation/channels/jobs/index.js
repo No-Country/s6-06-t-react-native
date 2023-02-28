@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 // import HeaderHome from "../../../components/home/header/Index";
 import NavMenu from "../../../../components/home/header/NavMenu";
 import InfoComunity from '../../../../components/home/header/InfoComunity.jsx';
+import NoVacantes from '../../../../components/NoVacantes.jsx';
 
 import backEnd from '../../../../../assets/jobs/back_end.png'
 import frontEnd from '../../../../../assets/jobs/front_end.png'
@@ -13,7 +14,7 @@ import todos from '../../../../../assets/jobs/todos.png'
 import uxUi from '../../../../../assets/jobs/ux_ui.png'
 
 import { usePostJobs } from "../../../../hooks/usePostJob";
-import ScrollViewPost from '../../../../components/home/ScrollViewPostJob/ScrollViewPost';
+import ScrollViewPost from '../../../../components/home/ScrollViewPostJob/ScrollViewPost.jsx';
 
 const JobsChannel = () =>{
   let dataUser = {
@@ -23,6 +24,7 @@ const JobsChannel = () =>{
   const [Posts, setPosts] = useState([]);
 
   let { getPosts } = usePostJobs();
+  // console.log("esta en la info del usuario--->", state);
   if (!state) {
     return (
       <View>
@@ -35,6 +37,16 @@ const JobsChannel = () =>{
     ( async ()=> { await getPosts(`/job-offer/all`, state.token, setPosts)} )()
     
   }, []); 
+
+  // console.log("aqui estan los de requirimientos --------->", Posts);
+
+  const postFront = Posts.filter(e => e.type === "front").length ? Posts.filter(e => e.type === "front") : [];
+  console.log("<<<<estos son los postFront>>>", postFront)
+  const postBack = Posts.filter(e => e.type === "back").length > 0 ? Posts.filter(e => e.type === "back") : [];
+  console.log("<<<<estos son los postBackt>>>", postBack)
+
+  const postUXUI = Posts.filter(e => e.type === "uxui").length > 0 ? Posts.filter(e => e.type === "uxui") : [];
+  console.log("<<<<estos son los postUXUI>>>", postUXUI)
 
   let [activador, setActivador] = useState([true,false,false,false])
   return (
@@ -79,9 +91,19 @@ const JobsChannel = () =>{
         <ScrollViewPost post={Posts} token={state.token} getPost={getPosts} load={true} setList={setPosts} />
       </View>
     }
-    {activador[1] && <Text>HOLA SOY FRONT END</Text>}
-    {activador[2] && <Text>HOLA SOY BACK END</Text>}
-    {activador[3] && <Text>HOLA SOY UX UI</Text>} 
+    {activador[1] && (postFront.length > 0 ?  
+      <View style={styles.ScrollContain}><ScrollViewPost post={postFront} token={state.token} getPost={getPosts} load={false} setList={setPosts} /></View>: 
+      <NoVacantes rol ="back-end" styles={styles}/>)
+    }
+
+    {activador[2] && (postBack.length > 0 ?  
+      <ScrollViewPost post={postBack} token={state.token} getPost={getPosts} load={true} setList={setPosts} /> : 
+      <NoVacantes rol ="back-end" styles={styles}/>)
+    }
+    {activador[3] && (postUXUI.length > 0 ?  
+      <ScrollViewPost post={postUXUI} token={state.token} getPost={getPosts} load={true} setList={setPosts} /> : 
+      <NoVacantes rol ="UX-UI" styles={styles}/>)
+    }
   </SafeAreaView>
   )
 }

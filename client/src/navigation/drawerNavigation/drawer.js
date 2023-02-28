@@ -35,7 +35,7 @@ const DrawerNavegation = () => {
   
   return (
     <Drawer.Navigator
-      initialRouteName="GeneralChannel"
+      initialRouteName="Jobs"
       screenOptions={{
         headerShown: false,
       }}
