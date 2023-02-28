@@ -150,28 +150,5 @@ export const styles = StyleSheet.create({
         color : '#626A6D',
         fontSize : ScreenWidth <= 360 ? 12: 14
     },
-    main: {
-        justifyContent: 'center',
-    },
-    bodyMain: {
-        marginVertical : 10,
-        marginHorizontal : 4,
-        paddingVertical : 5,
-        borderWidth : 1,
-        borderColor : colors.grey_line,
-        borderRadius : 10
-    },
-    bodyMainText: {
-        marginVertical: 20,
-        fontWeight: "500",
-    },
-    novedadesNoJobs: {
-        fontWeight: "700",
-    },
-    textBackCanal: {
-        marginTop: 30,
-        color: "#4245E5",
-        fontWeight: "700",
-    }
 })
 
