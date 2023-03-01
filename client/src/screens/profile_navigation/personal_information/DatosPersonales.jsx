@@ -131,7 +131,7 @@ const DatosPersonales = () => {
             style={styles.inputContainer}
           >
             {date ? (
-              <Text> {date}</Text>
+              <Text>{date}</Text>
             ) : (
               <Text style={styles.placeholder}>
                 Selecciona tu fecha de nacimiento
