@@ -3,7 +3,7 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import InputComponent from "../../../components/input/index.js";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
 import { styles } from "./style.js";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -26,12 +26,11 @@ import { Cambiador } from "../../../redux/actions/actions.js";
 
 const AgregarExperiencia = () => {
   const navigation = useNavigation();
-
+  const { params } = useRoute();
   const schema = yup
     .object({
       jobTitle: yup
         .string()
-        .min(5, "Ingresa al menos 5 carácteres.")
         .max(30, "Ingresa como máximo 30 carácteres.")
         .required("Campo requerido."),
       company: yup.string().max(50, "Ingresa hasta 50 carácteres."),
@@ -58,11 +57,18 @@ const AgregarExperiencia = () => {
     formState: { errors, isValid },
     setValue,
     watch,
-  } = useForm(
-    { resolver: yupResolver(schema) },
-    { defaultValues: { current: false } }
-  );
-
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      jobTitle: params ? params.jobTitle : "",
+      company: params ? params.company : "",
+      jobType: params ? params.jobType : "",
+      location: params ? params.location : "",
+      current: params ? params.current : false,
+      yearIn: params ? params.yearIn : undefined,
+      description: params ? params.description : "",
+    },
+  });
   const handleOnChange = () => {
     setErrorMessage(null);
   };
@@ -81,17 +87,47 @@ const AgregarExperiencia = () => {
   const activador = useSelector((state) => state.login.variable);
 
   const onSubmit = (data) => {
-    dispatch(
-      editPersonalInfo(
-        {
-          workExperience: [...userInfo?.workExperience, data],
-        },
-        userInfo?.token
+    if (params) {
+      let updatedExperiences = userInfo?.workExperience.map((work) => {
+        if (work._id === params._id) {
+          return {
+            jobTitle: data.jobTitle,
+            company: data.company,
+            jobType: data.jobType,
+            location: data.location,
+            current: data.current,
+            yearIn: data.yearIn,
+            yearOut: data.yearOut,
+            description: data.description,
+          };
+        }
+        return work;
+      });
+
+      dispatch(
+        editPersonalInfo(
+          {
+            workExperience: [...updatedExperiences],
+          },
+          userInfo?.token
+        )
       )
-    )
-      .then(() => dispatch(Cambiador(!activador)))
-      .then(navigation.goBack())
-      .catch((error) => console.log(error));
+        .then(() => dispatch(Cambiador(!activador)))
+        .then(navigation.goBack())
+        .catch((error) => console.log(error));
+    } else {
+      dispatch(
+        editPersonalInfo(
+          {
+            workExperience: [...userInfo?.workExperience, data],
+          },
+          userInfo?.token
+        )
+      )
+        .then(() => dispatch(Cambiador(!activador)))
+        .then(navigation.goBack())
+        .catch((error) => console.log(error));
+    }
   };
 
   return (
@@ -102,7 +138,9 @@ const AgregarExperiencia = () => {
             <EvilIcons name="close" size={30} color={colors.primary} />
           </Text>
         </TouchableOpacity>
-        <Text style={styles.header}>Agregar experiencia</Text>
+        <Text style={styles.header}>
+          {params ? "Editar" : "Agregar experiencia"}
+        </Text>
         <Text style={styles.requeridas}>*Filas requeridas</Text>
         <Controller
           control={control}
@@ -114,6 +152,7 @@ const AgregarExperiencia = () => {
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               error={errors.jobTitle}
+              defaultValue={params ? params.jobTitle : ""}
             />
           )}
           name="jobTitle"
@@ -130,6 +169,7 @@ const AgregarExperiencia = () => {
               onChangeText={(value) => onChange(value)}
               value={value}
               error={errors.company}
+              defaultValue={params ? params.company : ""}
             />
           )}
           name="company"
@@ -143,6 +183,7 @@ const AgregarExperiencia = () => {
           error={errors.jobType}
           setValue={setValue}
           placeholder="Indica el tipo de contrato"
+          defaultValue={params ? params.jobType : ""}
         />
 
         <Controller
@@ -156,6 +197,7 @@ const AgregarExperiencia = () => {
               onChangeText={(value) => onChange(value)}
               value={value}
               error={errors.location}
+              defaultValue={params ? params.location : ""}
             />
           )}
           name="location"
@@ -200,6 +242,7 @@ const AgregarExperiencia = () => {
               onChangeText={(value) => onChange(value)}
               value={value}
               error={errors.yearIn}
+              defaultValue={params ? params.yearIn : ""}
             />
           )}
           name="yearIn"
@@ -218,6 +261,7 @@ const AgregarExperiencia = () => {
               value={value}
               error={errors.yearOut}
               editable={!isEditable}
+              defaultValue={params ? params.yearOut : ""}
             />
           )}
           name="yearOut"
@@ -255,6 +299,7 @@ const AgregarExperiencia = () => {
               value={value}
               error={errors.description}
               requerimiento="- Máximo 120 carácteres"
+              defaultValue={params ? params.description : ""}
             />
           )}
           name="description"

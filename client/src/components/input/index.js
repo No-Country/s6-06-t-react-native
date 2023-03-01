@@ -16,7 +16,8 @@ const InputComponent = ({
   onChangeText,
   value,
   error,
-  editable = true
+  editable = true,
+  defaultValue
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [showPassState, setShowPassState] = useState(false);
@@ -57,6 +58,7 @@ const InputComponent = ({
           onChangeText={onChangeText}
           value={value}
           editable={editable}
+          defaultValue={defaultValue}
         />
         {showPass && (
           <TouchableOpacity

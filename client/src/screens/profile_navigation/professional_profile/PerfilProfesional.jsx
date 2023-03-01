@@ -35,12 +35,6 @@ const PerfilProfesional = () => {
     ? userInfo?.img_avatar
     : "../icons/profilepicture.png";
 
-  useEffect(() => {
-    if (userInfo?.workExperience.length !== 0) {
-      setProgress(progress + 15);
-    }
-  }, []);
-
   return (
     <SafeAreaView style={styles.container}>
       <TopBar tabname="Perfil profesional" />

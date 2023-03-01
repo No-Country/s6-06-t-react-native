@@ -7,9 +7,12 @@ import { getUserData } from "../../../redux/actions/personalActions";
 import { useSelector } from "react-redux";
 import { Root } from "react-native-popup-confirm-toast";
 import GoBackArrow from "../../../components/goBackArrow";
-import CardIndividualEducation from "../../../components/CardProfesionalInfo/Educacion";
+import { useNavigation } from "@react-navigation/native";
+import CardIndividualEducation from "../../../components/CardInfoIndividual/Educacion";
 
 const ListaInfoEducacion = () => {
+  const navigation = useNavigation();
+
   const [userInfo, setUserInfo] = useState(null);
   const activador = useSelector((state) => state.login.variable);
 
@@ -30,7 +33,7 @@ const ListaInfoEducacion = () => {
         <View style={styles.secondaryContainer}>
           <View style={styles.titleAndIcon}>
             <Text style={styles.titleList}>Educación </Text>
-            <Ionicons name="add" size={30} color={colors.primary} />
+            <Ionicons name="add" size={30} color={colors.primary}  onPress={() => navigation.navigate('AddEducation')}/>
           </View>
           {education?.map((data) => {
             return <CardIndividualEducation key={data._id} {...data} />;

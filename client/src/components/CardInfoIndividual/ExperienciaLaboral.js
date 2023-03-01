@@ -95,7 +95,24 @@ const CardIndividualInfo = ({
             onPress={() => handleDelete(_id)}
           />
           <View style={styles.separador}></View>
-          <Feather name="edit-3" size={22} style={styles.icono} />
+          <Feather
+            name="edit-3"
+            size={22}
+            style={styles.icono}
+            onPress={() =>
+              navigation.navigate("AddExperience", {
+                jobTitle,
+                jobType,
+                company,
+                location,
+                yearIn,
+                yearOut,
+                description,
+                current,
+                _id,
+              })
+            }
+          />
         </View>
       </View>
     </View>
