@@ -7,9 +7,7 @@ import { useState } from "react";
 import AmountCommentsAndReactions from "./AmountCommentsAndReactions";
 
 export default function CardPost({ data }) {
-    let shorDataBody = data && data.description
-    ? data.description.length >= 150 && data.description.slice(0, 150)
-    : "no description";
+  let shorDataBody = data?.description?.length >= 150 ? data.description.slice(0,150) : data.description
   const [short, setShort] = useState(false);
 
   // console.log("<<<<---------------------------->>>>>");
@@ -31,7 +29,7 @@ export default function CardPost({ data }) {
       <View style={styles.BodyPost}>
         {data.description && data.description.length > 150 ? (
           <Text style={styles.TextBody}>
-            {short ? data.BodyPost : shorDataBody + "..."}{" "}
+            {short ? data.description : shorDataBody + "..."}{" "}
             <Text
               onPress={() => setShort(!short)}
               style={styles.buttonShortPost}

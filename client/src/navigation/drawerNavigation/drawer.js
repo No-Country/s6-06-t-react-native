@@ -73,7 +73,7 @@ export const MenuInterno = ({ props }) => {
         <TouchableOpacity onPress={() => props.navigation.closeDrawer()}>
           <Image source={backDrawer} style={styles.backDrawerIcon} />
         </TouchableOpacity>
-        <Image source={Face} style={styles.avatar} />
+        <Image source={{uri : user.img_avatar}} style={styles.avatar} />
         <Text style={styles.name}>{user.fullName}</Text>
         <Text style={styles.rol}>`{user.position.toUpperCase()}`</Text>
       </View>
