@@ -95,3 +95,23 @@ export const useComment = ()=>{
     }
     
 }
+
+export const useUpdatePic= ()=>{
+    let updatePic = async ( token, image)=>{
+        const data = new FormData;
+        data.append("pic", image);
+        console.log(data)
+        let response
+        try {
+            response = await reqResApi.put('/profile/edit/profile-pic', data,{
+                headers : {'x-token' : token, "Content-Type": "multipart/form-data"}
+            })
+        } catch (error) {
+            console.log(error)
+        }
+        console.log(response)
+    }
+    return {
+        updatePic
+    }
+}

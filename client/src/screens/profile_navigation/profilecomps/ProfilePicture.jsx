@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import { StyleSheet } from "react-native";
+import { useImageUp } from "../../../hooks/useImageUp";
+import { useUpdatePic } from "../../../hooks/usePost";
 import { getUserData } from "../../../redux/actions/personalActions";
-
+import { useSelector } from 'react-redux'
 const ProfilePicture = () => {
   const [userInfo, setUserInfo] = useState(null);
-
+  const [profileImage, setProfileImage] = useState("https://www.pngitem.com/pimgs/m/421-4212341_default-avatar-svg-hd-png-download.png");
+  const state = useSelector(state => state.login.user)
   
+  const { pickCam, pickImage } = useImageUp();
   useEffect(() => {
-    getUserData(setUserInfo);
+    getUserData(setUserInfo, setProfileImage);
   }, []);
 
-  const profileImage = userInfo
-    ? userInfo.img_avatar
-    : "../icons/profilepicture.png";
+  
+  let handleSendPic = ()=>{
+    pickImage(setProfileImage, state.token)
+  }
+  
 
   return (
     <View style={styles.ppContainer}>
@@ -22,7 +28,7 @@ const ProfilePicture = () => {
           source={{ uri: profileImage }}
           style={{ width: 100, height: 100 }}
         />
-        <Pressable style={styles.ppButton}>
+        <Pressable style={styles.ppButton} onPress={handleSendPic}>
           <Image
             source={require("../icons/changepicture.png")}
             style={{ width: 30, height: 30 }}

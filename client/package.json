@@ -41,7 +41,8 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "yup": "^1.0.0",
-    "@react-native-community/datetimepicker": "6.5.2"
+    "@react-native-community/datetimepicker": "6.5.2",
+    "expo-image-picker": "~14.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
