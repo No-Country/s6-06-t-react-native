@@ -15,10 +15,10 @@ const getJobOffers = async (req, res) => {
         const allOffers = await JobOffer.find(filter ? query : {})
             .skip(Number(from))
             .limit(Number(to))
-            .populate('countCandidates')
-            //.populate({ path: 'candidates', select: 'fullName -postulations' })
-            .populate('countComments');
-        // .populate({ path: 'comments', select: 'body -job_offer' });
+            //.populate('countCandidates')
+            .populate({ path: 'candidates', select: 'fullName -postulations' })
+            //.populate('countComments');
+        .populate({ path: 'comments',populate:{path:"author",select:"fullName img_avatar isOnline"},select: 'body author -job_offer' });
         res.set('Content-Range', total.length);
         return response.success(req,res,'Offers obtained successfully',allOffers,200);
     } catch (error) {
