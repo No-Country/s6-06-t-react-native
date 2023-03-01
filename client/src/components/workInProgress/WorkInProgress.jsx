@@ -1,10 +1,14 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import progreso from "../../../assets/progreso.png";
+import BackButton from "../BackButton";
 
 const WorkInProgress = ({ color }) => {
   return (
     <View style={[styles.container, { backgroundColor: color }]}>
+      <View style={styles.back}>
+        <BackButton />
+      </View>
       <Animatable.Image
         source={progreso}
         style={styles.image}
@@ -44,9 +48,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    height:"100%"
+    height: "100%",
   },
-  image: { height: 300, resizeMode: "contain", marginTop: 20, marginBottom:30 },
+  back: { alignSelf: "flex-start", top: -35 },
+  image: {
+    height: 300,
+    resizeMode: "contain",
+    marginTop: 20,
+    marginBottom: 30,
+  },
   title: {
     color: "#4245E5",
     fontSize: 34,
