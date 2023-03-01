@@ -47,7 +47,7 @@ export default function CardPost({ data }) {
                 countComments={data.countComments}
                 countCandidates={data.candidates ? data.candidates.length : 0}
         /> 
-      <Comments data={data} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}/>
+      <Comments data={data} />
     </View>
   );
 }
