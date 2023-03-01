@@ -30,6 +30,7 @@ import { Picker } from "@react-native-picker/picker";
 
 const DatosPersonales = () => {
   const [userInfo, setUserInfo] = useState(null);
+  console.log(userInfo)
   const [name, setName] = useState("");
   const [area, setArea] = useState("+54");
   const [pais, setPais] = useState("Argentina");
@@ -96,7 +97,7 @@ const DatosPersonales = () => {
       setEmail(email);
     }
   }, []);
-
+  console.log(phone)
   {
     return (
       <SafeAreaView style={styles.container}>
@@ -172,7 +173,7 @@ const DatosPersonales = () => {
             </View>
             <View style={styles.number}>
               <TextInput
-                placeholder={phone}
+                placeholder={`${phone}`}
                 value={phone}
                 onChangeText={(value) => setPhone(value)}
                 onFocus={() => setIsFocused2(true)}

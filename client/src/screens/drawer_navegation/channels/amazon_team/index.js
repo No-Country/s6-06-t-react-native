@@ -1,10 +1,11 @@
 import styles from './styles.js'
 import { View, Text } from 'react-native'
+import WorkInProgress from '../../../../components/workInProgress/WorkInProgress.jsx';
 
 const AmazonTeamChannel = () =>{
   return (
     <View>
-        <Text>Hola soy el canal AmazonTeamChannel 7</Text>
+       <WorkInProgress color="white"/>
     </View>
   )
 }

@@ -1,6 +1,6 @@
 import {styles} from './styles.js'
 import { useState, useEffect} from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import { View, Text, ScrollView, TouchableOpacity, Image, ActivityIndicator} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 // import HeaderHome from "../../../components/home/header/Index";
@@ -16,11 +16,21 @@ import uxUi from '../../../../../assets/jobs/ux_ui.png'
 import { usePostJobs } from "../../../../hooks/usePostJob";
 import ScrollViewPost from '../../../../components/home/ScrollViewPostJob/ScrollViewPost.jsx';
 
+import { Cambiador } from '../../../../redux/actions/actions.js';
 const JobsChannel = () =>{
   let dataUser = {
     Channel: "Requirimientos - Jobs",
   };
   const state = useSelector((state) => state.login.user);
+  const variable = useSelector(state => state.login.variable); // CON ESTA LINEA OBTIENES LA VARIABLE GLOBAL
+  console.log("soy variable inicial", variable);
+  const dispatch = useDispatch();
+
+  const handler = () => {
+    console.log(variable)
+    dispatch(Cambiador(!variable)); //CON ESTA LINEA CAMBIAS LA VARIABLE GLOBAL DEL REDUX 
+}
+
   const [Posts, setPosts] = useState([]);
 
   let { getPosts } = usePostJobs();
@@ -41,12 +51,12 @@ const JobsChannel = () =>{
   // console.log("aqui estan los de requirimientos --------->", Posts);
 
   const postFront = Posts.filter(e => e.type === "front").length ? Posts.filter(e => e.type === "front") : [];
-  console.log("<<<<estos son los postFront>>>", postFront)
+  // console.log("<<<<estos son los postFront>>>", postFront)
   const postBack = Posts.filter(e => e.type === "back").length > 0 ? Posts.filter(e => e.type === "back") : [];
-  console.log("<<<<estos son los postBackt>>>", postBack)
+  // console.log("<<<<estos son los postBackt>>>", postBack)
 
   const postUXUI = Posts.filter(e => e.type === "uxui").length > 0 ? Posts.filter(e => e.type === "uxui") : [];
-  console.log("<<<<estos son los postUXUI>>>", postUXUI)
+  // console.log("<<<<estos son los postUXUI>>>", postUXUI)
 
   let [activador, setActivador] = useState([true,false,false,false])
   return (
@@ -104,6 +114,7 @@ const JobsChannel = () =>{
       <ScrollViewPost post={postUXUI} token={state.token} getPost={getPosts} load={true} setList={setPosts} /> : 
       <NoVacantes rol ="UX-UI" styles={styles}/>)
     }
+    
   </SafeAreaView>
   )
 }

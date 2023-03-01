@@ -12,8 +12,7 @@ export default function CardPost({ data }) {
     : "no description";
   const [short, setShort] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  // console.log("----------------------------");
-  // console.log(data);
+  
   
   return (
     <View style={styles.PostCard}>

@@ -47,7 +47,7 @@ export default function CardPost({ data }) {
                 countComments={data.countComments}
                 countCandidates={data.candidates ? data.candidates.length : 0}
         /> 
-      <Comments />
+      <Comments data={data} />
     </View>
   );
 }
