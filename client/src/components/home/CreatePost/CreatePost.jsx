@@ -5,7 +5,7 @@ import { colors } from '../../../constants';
 import { usePost, usePostCreate } from '../../../hooks/usePost';
 import { ScreenWidth } from '../../../utils/ScreenDimesions';
 
-const CreatePost = ({token,uidChannel, setAll}) => {
+const CreatePost = ({token,uidChannel, setAll, Posts, setPosts, user, activador, setActivador}) => {
     let {create, Response} = usePostCreate();
     let { Post, getPosts} = usePost();
     const [Focus, setFocus] = useState(false);
@@ -22,22 +22,45 @@ const CreatePost = ({token,uidChannel, setAll}) => {
     }
     let handlerSend = async ()=>{
         let response
-
+        let newPost = {
+            apoyar : [],
+            autor: {
+                fullName : user.fullName,
+                img_avatar : user.img_avatar,
+                isOnline : user.active,
+                position: user.position,
+                _id : user._id
+            },
+            channel : uidChannel,
+            comments:[],
+            createdAt : new Date(),
+            description: Form.description,
+            countComments: 0,
+            hacergracia : [],
+            important : false,
+            megusta:[],
+            meinteresa : [],
+            permissions: true,
+            title: Form.title,
+            updatedAt : new Date(),
+            attached : Form.attached
+        }   
         if (Form.description.length > 0) {
             response = await create(`/post/new/${uidChannel}`, token, Form)
         }
+        console.log(response)
         if (response.status === 201) {
+            console.log('entro')
             setForm({
                 ...Form,
                 description : ''
             })
+            setPosts([newPost, ...Posts])
             setFocus(false)
             // let data = await getPosts(`/channel/${uidChannel}`, token)
             // setAll(data)
-            
-            
         }
-        
+        setActivador(!activador)
     }
 
     return (
