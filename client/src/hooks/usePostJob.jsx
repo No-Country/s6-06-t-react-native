@@ -5,9 +5,6 @@ export const usePostJobs = ()=>{
     let getPosts = async (url, token, setList)=>{
         let response 
         let data = []
-        console.log("probemos url: ", url)
-        console.log("probemos token: ", token)
-        console.log("probemos setList: ", setList)
         try {
             response = await reqResApi.get( url , {
                 headers : {'x-token' : `${token}` }
