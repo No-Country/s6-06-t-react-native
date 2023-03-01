@@ -6,22 +6,27 @@ import { useComment } from '../../../../hooks/usePost';
 import PrimaryButton from '../../../PrimaryButton'
 import CardComent from './CardComent';
 import ListComentContain from './ListComentContain';
-const ModalComment = ({ isModalVisible, setIsModalVisible, idPost, user, count }) => {
+const ModalComment = ({ isModalVisible, setIsModalVisible, idPost, user, count, list }) => {
   const [data, setdata] = useState();
   const [Load, setLoad] = useState(false);
-  const [ListComent, setListComent] = useState([1,2,3,4,5,6,7]);
+  const [ListComent, setListComent] = useState(list);
   const [total, settotal] = useState(count);
   
     // url, token, data
   let { addComment } = useComment();
   let pushComment = ()=>{
     let value = {
-      body : data
+        author: {
+          fullName : user.fullName,
+          img_avatar : user.img_avatar
+        },
+        body : data,
+        createAt : new Date()
     }
     addComment(`/comment/new/${idPost}/post`, user.token, value)
     setdata(undefined)
     
-    setListComent([8, ...ListComent])
+    setListComent([value, ...ListComent])
     settotal(total + 1);
   }
   return (

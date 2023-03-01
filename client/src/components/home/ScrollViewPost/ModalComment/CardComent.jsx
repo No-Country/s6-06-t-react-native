@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, Text } from 'react-native';
 import { colors } from '../../../../constants';
 import { ObtainHourDate } from '../../../../utils/Date';
 
-const CardComent = () => {
+const CardComent = ({item}) => {
     let data = {
         author: {
             fullName : 'Random',
@@ -15,12 +15,12 @@ const CardComent = () => {
     return (
         <View style={styles.cardContain}>
             <View style={styles.imgContain}>
-                <Image source={{ uri: data.author.img_avatar }} style={styles.img} />
+                <Image source={{ uri: item.author.img_avatar }} style={styles.img} />
             </View>
             <View style={styles.bodyContain}>
-                <Text style={styles.name}>{data.author.fullName}</Text>
-                <Text style={styles.hour}>{ObtainHourDate(data.createAt)}</Text>
-                <Text style={styles.body}>{data.body}</Text>
+                <Text style={styles.name}>{item.author.fullName}</Text>
+                <Text style={styles.hour}>{ObtainHourDate(item.createAt)}</Text>
+                <Text style={styles.body}>{item.body}</Text>
             </View>
         </View>
     );
