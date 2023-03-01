@@ -16,6 +16,8 @@ const InformacionRelevante = ({ setIsModalVisible }) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [toggleCheckBox2, setToggleCheckBox2] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [isFocused2, setIsFocused2] = useState(false);
+  const [isFocused3, setIsFocused3] = useState(false);
   const [puesto, setPuesto] = useState(null);
   const [disponibilidad, setDisponibilidad] = useState(null);
   const [area, setArea] = useState(null);
@@ -53,8 +55,6 @@ const InformacionRelevante = ({ setIsModalVisible }) => {
             ]}
           >
             <Picker
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
               onValueChange={(itemValue) => {
                 if (itemValue !== null) {
                   setPuesto(itemValue);
@@ -96,13 +96,13 @@ const InformacionRelevante = ({ setIsModalVisible }) => {
           <View
             style={[
               styles.inputContainer,
-              { borderColor: isFocused ? colors.primary : "transparent" },
+              { borderColor: isFocused2 ? colors.primary : "transparent" },
             ]}
           >
             <Picker
-              onValueChange={(itemValue, itemIndex) =>
-                setDisponibilidad(itemValue)
-              }
+              onValueChange={(itemValue, itemIndex) => {
+                setDisponibilidad(itemValue);
+              }}
               style={styles.picker}
             >
               <Picker.Item
@@ -113,16 +113,16 @@ const InformacionRelevante = ({ setIsModalVisible }) => {
                 enabled={false}
               />
               <Picker.Item
-                label="Part-time (10 a 13hs)"
-                value="Part-time (10 a 13hs)"
+                label={`Part-time (10 a 13hs)`}
+                value={`Part-time (10 a 13hs)`}
               />
               <Picker.Item
-                label="Part-time (12 a 17hs)"
-                value="Part-time (12 a 17hs)"
+                label={`Part-time (12 a 17hs)`}
+                value={`Part-time (12 a 17hs)`}
               />
               <Picker.Item
-                label="Full-time (10 a 17hs)"
-                value="Full-time (10 a 17hs)"
+                label={`Full-time (10 a 17hs)`}
+                value={`Full-time (10 a 17hs)`}
               />
             </Picker>
           </View>
@@ -134,7 +134,7 @@ const InformacionRelevante = ({ setIsModalVisible }) => {
           <View
             style={[
               styles.inputContainer,
-              { borderColor: isFocused ? colors.primary : "transparent" },
+              { borderColor: isFocused3 ? colors.primary : "transparent" },
             ]}
           >
             <Picker
@@ -193,28 +193,29 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     width: "100%",
-    bottom:-270,
+    bottom: -255,
     backgroundColor: "white",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    paddingBottom:40
+    paddingBottom: 40,
   },
   arrowcont: {
     position: "absolute",
     backgroundColor: "#EDEDED",
     borderRadius: 50,
-    height: 30,
-    width: 30,
-    left: -55,
-    top: -180,
+    height: 40,
+    width: 40,
+    left: -75,
+    top: -275,
     justifyContent: "center",
+    alignItems: "center",
   },
   line: {
     backgroundColor: "#8C8EDD",
     height: 4,
     width: 80,
     borderRadius: 25,
-    marginBottom:7
+    marginBottom: 7,
   },
   titlecont: {
     flexDirection: "row",
@@ -231,7 +232,7 @@ const styles = StyleSheet.create({
   checkcont: {
     display: "flex",
     flexDirection: "row",
-    padding: 5,
+    margin: 5,
     alignItems: "center",
   },
   checktext: { fontSize: 15, marginLeft: 5 },
@@ -240,15 +241,22 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     width: Dimensions.get("window").width - 25,
-    height: 40,
+    height: 42,
     backgroundColor: "#fff",
     backgroundColor: colors.input_background,
     marginVertical: 15,
     justifyContent: "center",
   },
   label: {
-    marginTop: -10,
-    marginBottom: -10,
     fontSize: 15,
+    width: "75%",
+    lineHeight: 15,
+    marginBottom: -5,
+    zIndex: -10,
+  },
+  picker: {
+    zIndex: 100,
+    marginVertical: 10,
+    height: 25,
   },
 });
