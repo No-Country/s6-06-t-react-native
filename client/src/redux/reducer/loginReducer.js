@@ -5,6 +5,7 @@ import {
   LOGOUT_USER,
   CAMBIADOR,
 } from "../types/loginTypes";
+import {UPDATE_IMG_USER} from "../types/loginTypes";
 
 const initialState = {
   isLoading: false,
@@ -14,7 +15,9 @@ const initialState = {
   variable: false,
 };
 
+
 export const loginReducer = (state = initialState, { type, payload }) => {
+  console.log('entro a login')
   switch (type) {
     case LOGIN_USER_PENDING:
       return {
@@ -49,6 +52,15 @@ export const loginReducer = (state = initialState, { type, payload }) => {
         token: null,
         error: null,
       };
+      case UPDATE_IMG_USER:
+        console.log('entro')
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            img_avatar : payload
+          },
+        };
     case CAMBIADOR:
       return {
         ...state,

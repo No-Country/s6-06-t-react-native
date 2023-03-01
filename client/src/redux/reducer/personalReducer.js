@@ -2,6 +2,7 @@ import {
   EDIT_PERSONAL_INFO_PENDING,
   EDIT_PERSONAL_INFO_REJECTED,
   EDIT_PERSONAL_INFO_SUCCESS,
+  UPDATE_IMG_USER,
 } from "../types/personalTypes";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
 };
 
 export const personalReducer = (state = initialState, { type, payload }) => {
+  console.log('entro a personal')
   switch (type) {
     case EDIT_PERSONAL_INFO_PENDING:
       return {
@@ -37,6 +39,14 @@ export const personalReducer = (state = initialState, { type, payload }) => {
         token: payload.token,
         error: null,
       };
+      case UPDATE_IMG_USER:
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            img_avatar : payload
+          },
+        };
 
     default:
       return { ...state };

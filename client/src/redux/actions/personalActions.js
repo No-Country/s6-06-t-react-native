@@ -3,9 +3,10 @@ import { URL_BACK } from "../../config";
 import {
   EDIT_PERSONAL_INFO_PENDING,
   EDIT_PERSONAL_INFO_REJECTED,
-  EDIT_PERSONAL_INFO_SUCCESS,
+  EDIT_PERSONAL_INFO_SUCCESS
 } from "../types/personalTypes";
 import { AsyncStorage } from "react-native";
+import { useSelector } from "react-redux";
 
 //                EDIT PERSONAL INFO
 export const editPersonalInfo = (payload, token) => {
@@ -30,12 +31,13 @@ export const editPersonalInfo = (payload, token) => {
 };
 
 //                GET USER DATA
-export const getUserData = async (setState) => {
+export const getUserData = async (setState, setImage) => {
+  const state = useSelector(state => state.login.user)
   try {
-    let userData = await AsyncStorage.getItem("userData");
-    userData = JSON.parse(userData);
+    let userData = state
     if (userData) {
       setState(userData);
+      setImage(state.img_avatar)
     }
   } catch (e) {
     console.log(`getUserData Error: ${e}`);
