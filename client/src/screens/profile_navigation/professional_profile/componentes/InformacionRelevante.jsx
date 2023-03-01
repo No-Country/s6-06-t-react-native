@@ -193,10 +193,11 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     width: "100%",
-    marginTop: 165,
+    bottom:-270,
     backgroundColor: "white",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
+    paddingBottom:40
   },
   arrowcont: {
     position: "absolute",
