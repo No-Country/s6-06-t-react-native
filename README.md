@@ -26,6 +26,7 @@
 <p>Esta aplicacion esta desarrolada por el grupo <span>s4-06-t-react-native</span> de No Country</p>
 
 ## _Integrantes del equipo:_
+* ##### [Luciana Mansilla - Diseñadora UX/UI](https://www.linkedin.com/in/maria-luciana-mansilla/) #####
 * ##### [Carlos Jesus Huane Sarmiento - Desarrollador Front End](https://www.linkedin.com/in/carlos-huane-317934235/) #####
 * ##### [Cintia Jimena Martinez - Desarrolladora Front End](https://www.linkedin.com/in/cintiajimenamartinez/) #####
 * ##### [Marcos Britos - Desarrollador Front End](https://www.linkedin.com/in/marcos-britos/) #####
