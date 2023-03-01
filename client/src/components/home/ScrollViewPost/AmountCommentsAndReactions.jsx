@@ -50,16 +50,16 @@ export default function AmountCommentsAndReactions({countComments, apoyar, hacer
 
         {countReaction.map((c, i) =>{
           if (c.type === 'megusta' && i < 3 && c.count > 0) {
-            return (<Image source={icons.heart} style={{width:20, height:20}}/>)
+            return (<Image key={i} source={icons.heart} style={{width:20, height:20}}/>)
           }
           if (c.type === 'meinteresa' && i < 3 && c.count > 0) {
-            return (<Image source={icons.thumbsUp} style={{width:20, height:20}}/>)
+            return (<Image key={i} source={icons.thumbsUp} style={{width:20, height:20}}/>)
           }
           if (c.type === 'apoyar' && i < 3 && c.count > 0) {
-            return (<Image source={icons.claping} style={{width:20, height:20}}/>)
+            return (<Image key={i} source={icons.claping} style={{width:20, height:20}}/>)
           }
           if (c.type === 'hacergracia' && i < 3 && c.count > 0) {
-            return (<Image source={icons.smile} style={{width:20, height:20}}/>)
+            return (<Image key={i} source={icons.smile} style={{width:20, height:20}}/>)
           }
         })}
 

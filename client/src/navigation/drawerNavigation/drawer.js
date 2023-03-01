@@ -16,6 +16,7 @@ import DirectMessages from "../../screens/drawer_navegation/direct_messages";
 
 import Profile from "../profileNavigation/profile.js";
 
+import { logoutUser } from "../../redux/actions/loginActions";
 import communityIcon from "../../../assets/communityIcon.png";
 import channel_Icon from "../../../assets/channel_Icon.png";
 import messagesIcon from "../../../assets/messagesIcon.png";
@@ -178,7 +179,7 @@ export const MenuInterno = ({ props }) => {
         </TouchableOpacity>
       </View>
       <View style={[styles.extra, state ? { bottom: 15 } : { marginTop: 154 }]}>
-        <TouchableOpacity style={styles.menuBottom} onPress={() => {}}>
+        <TouchableOpacity style={styles.menuBottom} onPress={(e) => handleLogout(e)}>
           <View style={styles.menuBottomOption}>
             <Image source={logOutIcon} />
             <Text style={styles.menuTextExtra}>Cerrar sesión</Text>

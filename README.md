@@ -29,6 +29,7 @@
 * ##### [Carlos Jesus Huane Sarmiento - Desarrollador Front End](https://www.linkedin.com/in/carlos-huane-317934235/) #####
 * ##### [Cintia Jimena Martinez - Desarrolladora Front End](https://www.linkedin.com/in/cintiajimenamartinez/) #####
 * ##### [Marcos Britos - Desarrollador Front End](https://www.linkedin.com/in/marcos-britos/) #####
+* ##### [Leandro Pereyra - Desarrollador Front End](https://www.linkedin.com/in/leandro-pereyra/) #####
 * ##### [Miguel Ernesto Bazzarelli - Desarrollador Back End](http://www.linkedin.com/in/miguel-ernesto-bazzarelli-8b5029247) #####
 * ##### [Lucas Emanuel Zarate - Desarrollador Back End](https://www.linkedin.com/in/lucas-zarate-b77b2b3b/) #####
 * ##### [César Herrera - Desarrollador Back End](https://www.linkedin.com/in/herrera-cesar/) #####

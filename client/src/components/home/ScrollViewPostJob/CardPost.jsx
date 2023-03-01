@@ -11,6 +11,9 @@ export default function CardPost({ data }) {
     ? data.description.length >= 150 && data.description.slice(0, 150)
     : "no description";
   const [short, setShort] = useState(false);
+
+  // console.log("<<<<---------------------------->>>>>");
+  // console.log("candidatos: ", data.candidates);
   
   let author = {
     _id: data.id,
@@ -44,7 +47,7 @@ export default function CardPost({ data }) {
                 countComments={data.countComments}
                 countCandidates={data.candidates ? data.candidates.length : 0}
         /> 
-      <Comments />
+      <Comments data={data} />
     </View>
   );
 }
