@@ -17,7 +17,6 @@ const initialState = {
 
 
 export const loginReducer = (state = initialState, { type, payload }) => {
-  console.log('entro a login')
   switch (type) {
     case LOGIN_USER_PENDING:
       return {
@@ -53,7 +52,6 @@ export const loginReducer = (state = initialState, { type, payload }) => {
         error: null,
       };
       case UPDATE_IMG_USER:
-        console.log('entro')
         return {
           ...state,
           user: {
