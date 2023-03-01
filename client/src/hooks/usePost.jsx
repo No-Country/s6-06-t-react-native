@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { URL_BACK } from "../config";
 import { reqResApi } from '../config/axiosConfig'
 import { Platform } from 'react-native'
+import { useDispatch } from "react-redux";
+import { updateImgUser } from "../redux/actions/loginActions";
 
 export const usePost = ()=>{
     let getPosts = async (url, token, setList)=>{
@@ -99,56 +101,30 @@ export const useComment = ()=>{
 }
 
 export const useUpdatePic= ()=>{
-    let updatePic = async ( token, image)=>{
-        // const profile_pic = {
-        //     name: 'image',
-        //     type: 'image',
-        //     path: image,
-        //     uri: '../../assets/users.jpeg',
-        //   }
-          const formData = new FormData()
-        //   formData.append('pic', profile_pic);
-
-          const trimmedURI = (Platform.OS === "android") ? image.uri : image.uri.replace("file://", "");
-          const fileName = trimmedURI.split("/").pop();
-          const media = {
-                name: fileName,
-                height: image.height,
-                width: image.width,
-                type: image.type,
-                uri: trimmedURI
-            };
-
-        // console.log(formData)
-        formData.append('pic', media);
-        let response
-        // formData.append('profile_pic', profile_pic);
-        try {
-            response = await reqResApi.put('/profile/edit/profile-pic', formData, {
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "multipart/form-data",
-                    'x-token' : token
-                  }, 
-            })
-        } catch (error) {
-            console.log(error)   
-        }
-        // fetch(URL_BACK + '/profile/', {
-        //     method: "PUT",
-        //     headers: {
-        //       Accept: "application/json",
-        //       "Content-Type": "multipart/form-data",
-        //       'x-token' : token
+    const dispatch = useDispatch();
+    let updatePic = async ( token, fileUri)=>{
+        let filename = fileUri.split('/').pop();
+        let match = /\.(\w+)$/.exec(filename);
+        let type = match ? `image/${match[1]}` : `image`;
+        let formData = new FormData();
+        formData.append('pic', {uri : fileUri, name: filename, type})
         
-        //     },
-        //     body: formData
-        //   })
-        //   .then(response => console.log(response.json()))
-        //   .catch(error => console.log(error))
-        console.log(response)
+  
+        try {
+            let response = await reqResApi.put('/profile/edit/profile-pic', formData, {
+                headers : {
+                    'content-type' : 'multipart/form-data',
+                    'x-token' : token
+                }
+            })
+            console.log(response.data.data.img_avatar)
+            dispatch(updateImgUser(response.data.data.img_avatar))
+        } catch (error) {
+            console.log(error)
+        }
     }
     return {
         updatePic
+        }
     }
-}
+

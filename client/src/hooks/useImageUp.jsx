@@ -6,6 +6,7 @@ export function useImageUp() {
     const [image, setImage] = useState(null);
     const [status, requestPermission] = ImagePicker.useCameraPermissions();
     const { updatePic } = useUpdatePic();
+
     const pickImage = async (setImageFather, token) => {
       // No permissions request is necessary for launching the image library
       let result = await ImagePicker.launchImageLibraryAsync({
@@ -18,7 +19,7 @@ export function useImageUp() {
       if (!result.canceled) {
         setImageFather(result.assets[0].uri);
         setImage(result.assets[0].uri);
-        updatePic(token, result.assets[0])
+        updatePic(token, result.assets[0].uri)
       }
       
     };
