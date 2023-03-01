@@ -136,6 +136,7 @@ const profilePic = async (req, res) => {
             200
         );
     } catch (error) {
+        console.log(error);
         return response.error(req, res, 'Contact Admin', 500);
     }
 };
