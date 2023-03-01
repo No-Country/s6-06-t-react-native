@@ -2,3 +2,6 @@
 pnpm-lock.yaml
 /data/
 .env*
+**/.env
+coverage
+.vscode

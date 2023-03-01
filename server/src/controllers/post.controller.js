@@ -32,7 +32,6 @@ const createPost = async (req, res) => {
             return response.success(req, res, 'Post created successfully', post, 201);
         }
     } catch (error) {
-    
         return response.error(req, res, 'Post creation failed, contact Admin ', 400);
     };
 }
@@ -75,7 +74,7 @@ const PostsRemove = async (req, res) => {
         const removePost = await postsServices.remove(id);
         if (!removePost)
             return response.error(req,res,'There is a problem with the post that you want to remove!!',400);
-
+            if (removePost==="no-post")  return response.error(req,res,'There is a problem with the post that you want to remove!!',400); 
         return response.success(req, res, 'Post deleted', removePost, 200);
     } catch (error) {
         if (error.message === 'no-privileges') {
@@ -162,6 +161,7 @@ const getComments = async (req, res) => {
 
             return obj;
         });
+    
         return response.success(req, res, 'Comments :', commentsPopulated, 200);
     } catch (e) {
         return response.error(req, res, 'Contact Admin', 500);

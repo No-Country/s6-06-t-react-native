@@ -117,7 +117,7 @@ const postulateOffer = async (req, res) => {
     try {
         const user = await User.findById(uid);
         const offer = await JobOffer.findById(id);
-        
+  
 
         if (!user) {
             return response.error(req, res, 'User not found', 404);

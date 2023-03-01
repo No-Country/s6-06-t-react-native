@@ -5,13 +5,13 @@ const { Comment } = require("../models")
 
 const create = [
     check("body", "body is required").not().isEmpty(),
-    check("body").custom(async (body) => await validateDb(Comment, "body", body)),
+    //check("body").custom(async (body) => await validateDb(Comment, "body", body)),
     validateFields,
 ]
 
 const edit = [
     param('id').isMongoId(),
-    param("id").custom(async (id) => await validateDb(Comment, "id", id)),
+    //param("id").custom(async (id) => await validateDb(Comment, "id", id)),
     check("body", "body is required").not().isEmpty(),
     validateFields,
 ]
