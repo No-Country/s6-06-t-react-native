@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { View, SafeAreaView, Text, ActivityIndicator } from "react-native";
 import HeaderHome from "../../../components/home/header/Index";
-import { styles } from "./styles";
 import { useSelector } from "react-redux";
 import ScrollViewPost from "../../../components/home/ScrollViewPost/ScrollViewPost";
 import { usePost } from "../../../hooks/usePost";
+import WorkInProgress from "../../../components/workInProgress/WorkInProgress";
 
 const Community = ({ navigation }) => {
   const state = useSelector((state) => state.login.user);
@@ -22,13 +22,8 @@ const Community = ({ navigation }) => {
     );
   }
   return (
-    <SafeAreaView style={styles.homeContain}>
-      <View style={styles.HeaderContain}>
-        <HeaderHome Channel={dataUser.Channel} />
-      </View>
-      <View style={styles.ScrollContain}>
-        <ScrollViewPost post={Post} />
-      </View>
+    <SafeAreaView>
+      <WorkInProgress />
     </SafeAreaView>
   );
 };
