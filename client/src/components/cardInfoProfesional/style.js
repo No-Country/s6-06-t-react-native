@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  iconWrapper:{
+  iconWrapper: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -47,31 +47,31 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
   },
-  wrapperInformation:{
-    display: 'flex',
-    flexDirection:'row'
+  wrapperInformation: {
+    display: "flex",
+    flexDirection: "row",
   },
-  wrapperImagen:{
+  wrapperImagen: {
     flex: 1,
     top: -30,
-    left: 12
+    left: 12,
   },
-  img:{
-    width: '60%',
-    resizeMode: 'contain',
+  img: {
+    width: "60%",
+    resizeMode: "contain",
   },
-  wrapperInformacion:{
+  wrapperInformacion: {
     flex: 3,
-    paddingRight: 30
+    paddingRight: 30,
   },
   workDate: {
     color: colors.primary,
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 15,
   },
   descriptionWrapper: {
-    marginBottom: 13
+    marginBottom: 13,
   },
   titleWork: {
     fontSize: 22,
@@ -80,6 +80,7 @@ export const styles = StyleSheet.create({
   companyWrapper: {
     display: "flex",
     flexDirection: "row",
+    maxWidth: '90%'
   },
   companyName: {
     fontSize: 16,
@@ -87,6 +88,7 @@ export const styles = StyleSheet.create({
   contract: {
     fontSize: 16,
     color: colors.grey_placeholder,
+    maxWidth: "70%",
   },
   workDescription: {},
 });

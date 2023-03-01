@@ -6,15 +6,17 @@ import { colors } from "../../constants";
 import { styles } from "./style";
 
 const CardInfoProfesional = ({
-  route,
+  routeToAdd,
+  routeToSeeAll,
   cardTitle,
   aniadir,
   workExp,
   education,
+  dataToSee
 }) => {
   const navigation = useNavigation();
   return (
-    <View style={styles.container} onPress={() => navigation.navigate(route)}>
+    <View style={styles.container} onPress={() => navigation.navigate(routeToAdd)}>
       <View
         style={{
           flexDirection: "row",
@@ -24,12 +26,14 @@ const CardInfoProfesional = ({
       >
         <Text style={styles.titleCard}>{cardTitle}</Text>
         <View style={styles.iconWrapper}>
-          {workExp && (
-            <TouchableOpacity onPress={() => navigation.navigate(route)}>
+          {(workExp || education) && (
+            <TouchableOpacity onPress={() => navigation.navigate(routeToAdd)}>
               <Ionicons name="add" size={30} color={colors.primary} />
             </TouchableOpacity>
           )}
-          <TouchableOpacity>
+          <TouchableOpacity
+          onPress={() => navigation.navigate(routeToSeeAll, dataToSee)}
+          >
             <Feather
               name="edit-3"
               size={22}
@@ -40,10 +44,10 @@ const CardInfoProfesional = ({
         </View>
       </View>
 
-      {(!workExp && !education) && (
+      {(workExp?.length === 0) && (
         <TouchableOpacity
           style={styles.txtcontainer}
-          onPress={() => navigation.navigate(route)}
+          onPress={() => navigation.navigate(routeToAdd)}
         >
           <View style={styles.aniadirWrapper}>
             <Text style={styles.text}>{aniadir}</Text>
@@ -54,7 +58,7 @@ const CardInfoProfesional = ({
       {workExp &&
         workExp.map((work) => {
           return (
-            <View style={styles.wrapperInformation}>
+            <View style={styles.wrapperInformation} key={work._id}>
               <View style={styles.wrapperImagen}>
                 <Image
                   source={require("../../../assets/workExpImg.png")}
@@ -80,7 +84,7 @@ const CardInfoProfesional = ({
         {education && 
         education.map(edu => {
           return(
-            <View style={styles.wrapperInformation}>
+            <View style={styles.wrapperInformation} key={edu._id}>
               <View style={styles.wrapperImagen}>
                 <Image
                   source={require("../../../assets/EducationImg.png")}

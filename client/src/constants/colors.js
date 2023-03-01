@@ -10,7 +10,7 @@ export const colors = {
     input_background: '#EEEEEE',
     grey_placeholder: '#626A6D',
     grey_line: '#B4B4B4',
-    lightGrey: '#F9F9F9',
+    lightGrey: '#E3E1E1',
     danger: '#F01212',
     transparent: 'transparent',
     text_grey: '#D9D9D9',

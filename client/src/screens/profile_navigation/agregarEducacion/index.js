@@ -3,7 +3,6 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import InputComponent from "../../../components/input/index.js";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,18 +11,18 @@ import * as yup from "yup";
 import InputComponentSelectList from "../../../components/inputSelectList/index.js";
 import { EvilIcons } from "@expo/vector-icons";
 import { colors } from "../../../constants/colors.js";
-import { tipoContrato } from "../../../utils/dataTipoContrato.js";
 import CheckBox from "expo-checkbox";
 import InputTextArea from "../../../components/inputTextArea/Index.js";
 import { styles } from "./style.js";
 import { estadoEstudio } from "../../../utils/dataEstadoEstudio.js";
 import { nivelEstudio } from "../../../utils/dataNivelEstudio.js";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   editPersonalInfo,
   getUserData,
 } from "../../../redux/actions/personalActions";
+import { Cambiador } from "../../../redux/actions/actions.js";
 
 const AgregarEducacion = () => {
   const navigation = useNavigation();
@@ -73,6 +72,8 @@ const AgregarEducacion = () => {
     getUserData(setUserInfo);
   }, []);
 
+  const activador = useSelector((state) => state.login.variable);
+
   const onSubmit = (data) => {
     dispatch(
       editPersonalInfo(
@@ -82,7 +83,7 @@ const AgregarEducacion = () => {
         userInfo?.token
       )
     )
-      .then((res) => console.log(res))
+      .then(() => dispatch(Cambiador(!activador)))
       .then(navigation.goBack)
       .catch((error) => console.log(error));
   };
