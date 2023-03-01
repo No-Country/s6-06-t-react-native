@@ -134,7 +134,7 @@ export const styles = StyleSheet.create({
     },
     containReaction: {
         flexDirection : 'row',
-        justifyContent : 'space-evenly',
+        // justifyContent : 'space-evenly',
         minWidth : 80
     },
     TextAmountComment : {

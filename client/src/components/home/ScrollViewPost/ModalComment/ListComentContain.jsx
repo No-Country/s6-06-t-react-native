@@ -13,7 +13,7 @@ const ListComentContain = ({ListComent, Load}) => {
           numColumns={1}
           showsVerticalScrollIndicator={false}
           keyExtractor={(Coment, i)=> String(i) }
-          renderItem={({item})=> (<CardComent />)}
+          renderItem={({item})=> (<CardComent item={item} />)}
           //  refreshing={refreshBool}
           //  onRefresh={refresh}
           onEndReachedThreshold={0.1}
