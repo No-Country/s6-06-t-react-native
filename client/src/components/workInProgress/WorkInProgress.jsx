@@ -6,7 +6,7 @@ import BackButton from "../BackButton";
 const WorkInProgress = ({ color }) => {
   return (
     <View style={[styles.container, { backgroundColor: color }]}>
-      <View style={styles.back}>
+      <View style={{position: "absolute", top: 15, left: 15}}>
         <BackButton />
       </View>
       <Animatable.Image

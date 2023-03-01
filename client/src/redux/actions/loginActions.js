@@ -5,6 +5,7 @@ import {
   LOGOUT_USER,
   LOGOUT_USER_PENDING,
 } from "../types/loginTypes";
+import { UPDATE_IMG_USER } from '../types/loginTypes'
 import axios from "axios";
 import { URL_BACK } from "../../config";
 import { AsyncStorage } from "react-native";
@@ -30,3 +31,12 @@ export const logoutUser = () => {
     dispatch({ type: LOGOUT_USER });
   };
 };
+
+export const updateImgUser = (payload)=>{
+  return (dispatch) =>{
+    dispatch({
+      type: UPDATE_IMG_USER,
+      payload,
+    })
+  }
+}

@@ -1,6 +1,10 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { URL_BACK } from "../config";
 import { reqResApi } from '../config/axiosConfig'
-
+import { Platform } from 'react-native'
+import { useDispatch } from "react-redux";
+import { updateImgUser } from "../redux/actions/loginActions";
 
 export const usePost = ()=>{
     let getPosts = async (url, token, setList)=>{
@@ -95,3 +99,32 @@ export const useComment = ()=>{
     }
     
 }
+
+export const useUpdatePic= ()=>{
+    const dispatch = useDispatch();
+    let updatePic = async ( token, fileUri)=>{
+        let filename = fileUri.split('/').pop();
+        let match = /\.(\w+)$/.exec(filename);
+        let type = match ? `image/${match[1]}` : `image`;
+        let formData = new FormData();
+        formData.append('pic', {uri : fileUri, name: filename, type})
+        
+  
+        try {
+            let response = await reqResApi.put('/profile/edit/profile-pic', formData, {
+                headers : {
+                    'content-type' : 'multipart/form-data',
+                    'x-token' : token
+                }
+            })
+            console.log(response.data.data.img_avatar)
+            dispatch(updateImgUser(response.data.data.img_avatar))
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    return {
+        updatePic
+        }
+    }
+

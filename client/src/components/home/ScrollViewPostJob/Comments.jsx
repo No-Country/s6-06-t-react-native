@@ -23,9 +23,9 @@ export default function Comments() {
                     </TouchableOpacity>
                 </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback >
                 <View style={[styles.ActionPost, styles.borderRight]} onPress={()=> setFocus(!Focus)}>
-                    <TouchableOpacity style={{alignItems: 'center'}} onPress= {() => {}}>
+                    <TouchableOpacity style={{alignItems: 'center'}} onPress={() => {navigation.navigate("DirectMessages")}}>
                         <MaterialCommunityIcons name="comment-text-outline" size={24} color="black" />
                         <Text style={styles.descriptionComment}>Comentar</Text>
                     </TouchableOpacity>

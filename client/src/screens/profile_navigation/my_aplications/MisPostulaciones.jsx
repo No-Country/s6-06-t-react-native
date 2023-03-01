@@ -1,7 +1,13 @@
 import { View, Text, StyleSheet } from 'react-native'
+import { styles } from './styles';
+import BackButton from '../../../components/BackButton';
 const MisPostulaciones = () =>{
   return (
-    <View>
+    <View style={styles.container}>
+
+      <View style={{position: "absolute", top: 15, left: 15}}>
+        <BackButton />
+      </View>
         <Text>Hola soy el canal MisPostulaciones 7</Text>
         
         <View style={styles.tab}>
@@ -15,12 +21,5 @@ const MisPostulaciones = () =>{
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});
 
 export default MisPostulaciones;
