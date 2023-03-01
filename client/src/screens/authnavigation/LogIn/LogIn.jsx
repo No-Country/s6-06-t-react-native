@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     alignSelf: "center",
     lineHeight: 20,
+    marginHorizontal:20
   },
   title: {
     fontWeight: "700",
