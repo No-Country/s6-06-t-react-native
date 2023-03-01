@@ -252,7 +252,7 @@ const DatosPersonales = () => {
           </View>
         </View>
 
-        <PrimaryButton text="Guardar" />
+        <PrimaryButton text="Guardar" handler={handleSave}/>
       </SafeAreaView>
     );
   }
