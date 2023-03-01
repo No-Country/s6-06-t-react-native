@@ -51,12 +51,6 @@ const PerfilProfesional = () => {
               source={{ uri: profileImg }}
               style={{ width: 100, height: 100 }}
             />
-            <TouchableOpacity
-              style={styles.ppButton}
-              
-            >
-              <Feather name="edit" size={20} color="blue" />
-            </TouchableOpacity>
           </View>
           <TouchableOpacity style={styles.editButton} onPress={() => setIsModalVisible(true)}>
             <AntDesign name="edit" size={25} color="black" />
