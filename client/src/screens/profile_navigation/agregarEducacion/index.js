@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import InputComponent from "../../../components/input/index.js";
 import PrimaryButton from "../../../components/PrimaryButton.jsx";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -26,6 +26,7 @@ import { Cambiador } from "../../../redux/actions/actions.js";
 
 const AgregarEducacion = () => {
   const navigation = useNavigation();
+  const { params } = useRoute();
 
   const schema = yup
     .object({
@@ -34,6 +35,7 @@ const AgregarEducacion = () => {
         .min(5, "Ingresa al menos 5 carácteres.")
         .max(30, "Ingresa como máximo 30 carácteres.")
         .required("Campo requerido."),
+      educationalLevel: yup.string().required("Campo requerido."),
       institute: yup.string().max(50, "Ingresa hasta 50 carácteres."),
       educationStatus: yup.string().required(),
       year_in: yup
@@ -58,7 +60,18 @@ const AgregarEducacion = () => {
     formState: { errors, isValid },
     setValue,
     watch,
-  } = useForm({ resolver: yupResolver(schema) }, { mode: "onBlur" });
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      educationTitle: params ? params.educationTitle : "",
+      educationalLevel: params ? params.educationalLevel : "",
+      institute: params ? params.institute : "",
+      educationStatus: params ? params.educationStatus : "",
+      year_in: params ? params.year_in : undefined,
+      inCourse: params ? params.inCourse : "",
+      description: params ? params.description : "",
+    },
+  });
 
   const handleOnChange = () => {
     setErrorMessage(null);
@@ -75,17 +88,46 @@ const AgregarEducacion = () => {
   const activador = useSelector((state) => state.login.variable);
 
   const onSubmit = (data) => {
-    dispatch(
-      editPersonalInfo(
-        {
-          education: [...userInfo?.education, data],
-        },
-        userInfo?.token
+    if (params) {
+      let updatedEducation = userInfo?.education.map((edu) => {
+        if (edu._id === params._id) {
+          return {
+            educationTitle: data.educationTitle,
+            educationTitle: data.educationTitle,
+            institute: data.institute,
+            educationStatus: data.educationStatus,
+            year_in: data.year_in,
+            year_out: data.year_out,
+            inCourse: data.inCourse,
+            description: data.description,
+          };
+        }
+        return edu;
+      });
+      dispatch(
+        editPersonalInfo(
+          {
+            education: [...updatedEducation],
+          },
+          userInfo?.token
+        )
       )
-    )
-      .then(() => dispatch(Cambiador(!activador)))
-      .then(navigation.goBack)
-      .catch((error) => console.log(error));
+        .then(() => dispatch(Cambiador(!activador)))
+        .then(navigation.goBack)
+        .catch((error) => console.log(error));
+    } else {
+      dispatch(
+        editPersonalInfo(
+          {
+            education: [...userInfo?.education, data],
+          },
+          userInfo?.token
+        )
+      )
+        .then(() => dispatch(Cambiador(!activador)))
+        .then(navigation.goBack)
+        .catch((error) => console.log(error));
+    }
   };
   return (
     <View style={styles.whiteContainer}>
@@ -95,7 +137,9 @@ const AgregarEducacion = () => {
             <EvilIcons name="close" size={30} color={colors.primary} />
           </Text>
         </TouchableOpacity>
-        <Text style={styles.header}>Agregar Educación</Text>
+        <Text style={styles.header}>
+          {params ? "Editar" : "Agregar Educación"}
+        </Text>
         <Text style={styles.requeridas}>*Filas requeridas</Text>
         <Controller
           control={control}
@@ -107,6 +151,7 @@ const AgregarEducacion = () => {
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               error={errors.educationTitle}
+              defaultValue={params ? params.educationTitle : ""}
             />
           )}
           name="educationTitle"
@@ -115,11 +160,12 @@ const AgregarEducacion = () => {
         <InputComponentSelectList
           label="Nivel de estudios*"
           data={nivelEstudio}
-          name="level"
+          name="educationalLevel"
           control={control}
-          error={errors.level}
+          error={errors.educationalLevel}
           setValue={setValue}
           placeholder="Ejemplo: Autodidacta"
+          defaultValue={params ? params.educationalLevel : ""}
         />
 
         <Controller
@@ -133,6 +179,7 @@ const AgregarEducacion = () => {
               onChangeText={(value) => onChange(value)}
               value={value}
               error={errors.institute}
+              defaultValue={params ? params.institute : ""}
             />
           )}
           name="institute"
@@ -145,6 +192,7 @@ const AgregarEducacion = () => {
           control={control}
           error={errors.educationStatus}
           setValue={setValue}
+          defaultValue={params ? params.educationStatus : ""}
         />
 
         <Controller
@@ -159,6 +207,7 @@ const AgregarEducacion = () => {
               onChangeText={(value) => onChange(value)}
               value={value}
               error={errors.year_in}
+              defaultValue={params ? params.year_in : ""}
             />
           )}
           name="year_in"
@@ -177,6 +226,7 @@ const AgregarEducacion = () => {
               value={value}
               error={errors.year_out}
               editable={!isEditable}
+              defaultValue={params ? params.year_out : ""}
             />
           )}
           name="year_out"
@@ -212,6 +262,7 @@ const AgregarEducacion = () => {
               value={value}
               error={errors.description}
               requerimiento="- Máximo 120 carácteres"
+              defaultValue={params ? params.description : ""}
             />
           )}
           name="description"
