@@ -1,41 +1,54 @@
 import React from 'react';
 import {View, StyleSheet, Modal, Alert, Text, Pressable} from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
 const ModalSelect = ({modalVisible, setModalVisible, select}) => {
 
     return (
         <View style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-            setModalVisible(!modalVisible);
-          }}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Selecciona una opcion</Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => select('galery')}>
-                <Text style={styles.textStyle}>Galeria</Text>
-              </Pressable>
-                <Text></Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => select('cam')}>
-                <Text style={styles.textStyle}>Camara</Text>
-              </Pressable>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              setModalVisible(!modalVisible);
+            }}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Selecciona una opción: </Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => select('galery')}>
+                    
+                  <View style={{flexDirection : 'row', alignItems: 'center'}}>
+                    <Feather name="image" size={24} color="white" />
+                    <Text style={styles.textStyle}>Galeria</Text>
+                  </View>
+                </Pressable>
+                  <Text></Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => select('cam')}>
+                  <View style={{flexDirection : 'row', alignItems: 'center'}}>
+                    <Feather name="camera" size={24} color="white" />
+                    <Text style={styles.textStyle}>Galeria</Text>
+                  </View>
+                </Pressable>
+              </View>
             </View>
-          </View>
-        </Modal>
+          </Modal>
       </View>
     );
   };
   
   const styles = StyleSheet.create({
-
+    centeredView:{
+      flex: 1,
+      position : 'absolute',
+      width : '100%',
+      height : '100%',
+      justifyContent : 'center',
+    },
     modalView: {
       margin: 20,
       backgroundColor: 'white',
@@ -63,6 +76,7 @@ const ModalSelect = ({modalVisible, setModalVisible, select}) => {
       backgroundColor: '#2196F3',
     },
     textStyle: {
+      paddingLeft : 10,
       color: 'white',
       fontWeight: 'bold',
       textAlign: 'center',

@@ -13,7 +13,7 @@ const Home = ({ navigation }) => {
   let Channel= "Canal General"
   let idChannelGeneral = "63e3dc46a5dd297fac1ca2a2";
   let { getPosts } = usePost();
-
+  console.log(state)
   const [Posts, setPosts] = useState([]);
   if (!state) {
     return (
