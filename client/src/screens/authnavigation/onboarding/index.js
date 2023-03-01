@@ -5,12 +5,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  StatusBar,
 } from "react-native";
 import Logo from "../../../../assets/sinfronteras.png";
 import PrimaryButton from "../../../components/PrimaryButton";
 const OnBoarding = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.capo}>
+      <StatusBar barStyle="light-content" backgroundColor="#1E1E1E" />
       <View style={styles.container}>
         <Image source={Logo} style={{ resizeMode: "contain", height: 350 }} />
         <Text style={styles.title}>
@@ -37,6 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   container: {
+    position: "absolute",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     width: "100%",
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     height: "95%",
     paddingHorizontal: 30,
-    bottom: -30,
+    bottom: 0,
   },
   title: {
     fontSize: 24,
