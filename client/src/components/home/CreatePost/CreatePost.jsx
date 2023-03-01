@@ -1,10 +1,10 @@
 import { Feather, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import {View, StyleSheet, Text, TextInput} from 'react-native';
+import {View, StyleSheet, Text, TextInput, Pressable} from 'react-native';
 import { colors } from '../../../constants';
 import { usePost, usePostCreate } from '../../../hooks/usePost';
 import { ScreenWidth } from '../../../utils/ScreenDimesions';
-
+import ModalSelect from '../../Modal/ModalSelect'
 const CreatePost = ({token,uidChannel, setAll, Posts, setPosts, user, activador, setActivador}) => {
     let {create, Response} = usePostCreate();
     let { Post, getPosts} = usePost();
@@ -14,6 +14,7 @@ const CreatePost = ({token,uidChannel, setAll, Posts, setPosts, user, activador,
         description: '',
         attached : ''
     })
+    const [ModalVisible, setModalVisible] = useState(false);
     let handlerChangeInput = (e)=>{
         setForm({
             ...Form,
@@ -63,10 +64,15 @@ const CreatePost = ({token,uidChannel, setAll, Posts, setPosts, user, activador,
         setActivador(!activador)
     }
 
+
+
     return (
         <View style={styles.shadow}>
            <View style={styles.CreatePostContainer}>
-                <View><Text style={[styles.radius,styles.plusUsers]} >+</Text></View>
+                <Pressable>
+                    <Text style={[styles.radius,styles.plusUsers]} >+</Text>
+                </Pressable>
+                {/* <ModalSelect modalVisible={ModalVisible} setModalVisible={setModalVisible}  /> */}
                 <View><Text style={[styles.radius, {flexGrow : 0.15}]}><MaterialIcons name="insert-emoticon" size={24} color={colors.facebook} /></Text></View>
                 <View style={styles.inputContain} >
                     <TextInput 
@@ -76,6 +82,8 @@ const CreatePost = ({token,uidChannel, setAll, Posts, setPosts, user, activador,
                         onChangeText={handlerChangeInput}
                         value={Form.description}
                         onFocus={()=> setFocus(true)}
+                        onBlur={()=> setFocus(false)}
+                        multiline={true}
                         
                     />
                     <View style={styles.iconsContain}>
@@ -83,7 +91,6 @@ const CreatePost = ({token,uidChannel, setAll, Posts, setPosts, user, activador,
                         <Feather name="send" size={20} color={colors.facebook} onPress={handlerSend}/>
                     </View>
                 </View>
-
            </View>
         </View>
     );

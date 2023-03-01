@@ -5,27 +5,27 @@ import { Feather, EvilIcons } from "@expo/vector-icons";
 import { colors } from "../../../constants";
 import { useNavigation } from "@react-navigation/native";
 import { AsyncStorage } from "react-native";
-
+import { useSelector } from "react-redux"
 export default function NavMenu({ pathImgUser }) {
   const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState(null);
-
-  const getImgProfile = async () => {
-    try {
-      let userData = await AsyncStorage.getItem("userData");
-      userData = JSON.parse(userData);
-      if (userData) {
-        setUserInfo(userData);
-      }
-    } catch (e) {
-      console.log("NavMenu - getImgProfile error: " + e);
-    }
-  };
+  const state = useSelector(state => state.login.user);
+  // const getImgProfile = async () => {
+  //   try {
+  //     let userData = await AsyncStorage.getItem("userData");
+  //     userData = JSON.parse(userData);
+  //     if (userData) {
+  //       setUserInfo(userData);
+  //     }
+  //   } catch (e) {
+  //     console.log("NavMenu - getImgProfile error: " + e);
+  //   }
+  // };
 
   useEffect(() => {
-    getImgProfile();
-  }, []);
-
+    // getImgProfile();
+    setUserInfo(state)
+  }, [state]);
   const img = userInfo ? userInfo.img_avatar : pathImgUser;
 
   return (
