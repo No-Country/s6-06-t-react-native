@@ -27,6 +27,7 @@ import { Cambiador } from "../../../redux/actions/actions.js";
 const AgregarExperiencia = () => {
   const navigation = useNavigation();
   const { params } = useRoute();
+
   const schema = yup
     .object({
       jobTitle: yup

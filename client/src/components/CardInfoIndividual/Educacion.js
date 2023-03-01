@@ -21,7 +21,6 @@ const CardIndividualEducation = ({
   year_in,
   year_out,
   _id,
-
 }) => {
   const navigation = useNavigation();
 
@@ -95,7 +94,23 @@ const CardIndividualEducation = ({
             onPress={() => handleDelete(_id)}
           />
           <View style={styles.separador}></View>
-          <Feather name="edit-3" size={22} style={styles.icono} />
+          <Feather
+            name="edit-3"
+            size={22}
+            style={styles.icono}
+            onPress={() =>
+              navigation.navigate("AddEducation", {
+                educationalLevel,
+                educationTitle,
+                institute,
+                educationStatus,
+                inCourse,
+                year_in,
+                year_out,
+                _id,
+              })
+            }
+          />
         </View>
       </View>
     </View>
