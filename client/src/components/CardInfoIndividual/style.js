@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
     color: colors.primary,
   },
   separador: {
-   height: 10,
-   width:10
+   height:20,
+   width: 20
   },
 });

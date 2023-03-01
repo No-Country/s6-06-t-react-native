@@ -68,7 +68,7 @@ const AgregarEducacion = () => {
       institute: params ? params.institute : "",
       educationStatus: params ? params.educationStatus : "",
       year_in: params ? params.year_in : undefined,
-      inCourse: params ? params.inCourse : "",
+      inCourse: params ? params.inCourse : false,
       description: params ? params.description : "",
     },
   });
@@ -92,6 +92,7 @@ const AgregarEducacion = () => {
       let updatedEducation = userInfo?.education.map((edu) => {
         if (edu._id === params._id) {
           return {
+            id_: data._id,
             educationTitle: data.educationTitle,
             educationTitle: data.educationTitle,
             institute: data.institute,

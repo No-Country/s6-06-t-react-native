@@ -77,6 +77,7 @@ const CardIndividualInfo = ({
           <Text style={styles.dates}>
             {yearIn} - {current ? "Actualidad" : yearOut}
           </Text>
+         {location && <Text style={styles.secondaryData}>{location}</Text>}
           <View style={styles.descriptionWrapper}>
             <Text style={styles.title}>{jobTitle}</Text>
             <View style={styles.institutionWrapper}>
@@ -84,7 +85,6 @@ const CardIndividualInfo = ({
               <Text style={styles.secondaryData}>{jobType}</Text>
             </View>
           </View>
-          <Text>{location}</Text>
           <Text style={styles.description}>{description}</Text>
         </View>
         <View style={styles.iconsWrappers}>
