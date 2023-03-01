@@ -32,6 +32,7 @@
 * ##### [Miguel Ernesto Bazzarelli - Desarrollador Back End](http://www.linkedin.com/in/miguel-ernesto-bazzarelli-8b5029247) #####
 * ##### [Lucas Emanuel Zarate - Desarrollador Back End](https://www.linkedin.com/in/lucas-zarate-b77b2b3b/) #####
 * ##### [César Herrera - Desarrollador Back End](https://www.linkedin.com/in/herrera-cesar/) #####
+* ##### [Carlos Raul Diaz Figuera](https://www.linkedin.com/in/carlosdiazdeveloper) #####
 
 ## Tecnologias:
 ### _Front_
