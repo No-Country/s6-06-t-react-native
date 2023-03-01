@@ -14,7 +14,7 @@ const OnBoarding = ({ navigation }) => {
     <SafeAreaView style={styles.capo}>
       <StatusBar barStyle="light-content" backgroundColor="#1E1E1E" />
       <View style={styles.container}>
-        <Image source={Logo} style={{ resizeMode: "contain", height: 350 }} />
+        <Image source={Logo} style={{ resizeMode: "contain", height: 350, marginTop:10 }} />
         <Text style={styles.title}>
           Viví tu primer experiencia IT en un entorno laboral real.
         </Text>
