@@ -23,7 +23,7 @@ const Community = ({ navigation }) => {
   }
   return (
     <SafeAreaView>
-      <WorkInProgress />
+      <WorkInProgress color="#6264BC"/>
     </SafeAreaView>
   );
 };

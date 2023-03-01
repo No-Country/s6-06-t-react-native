@@ -2,9 +2,9 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import progreso from "../../../assets/progreso.png";
 
-const WorkInProgress = () => {
+const WorkInProgress = ({ color }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: color }]}>
       <Animatable.Image
         source={progreso}
         style={styles.image}
@@ -12,11 +12,24 @@ const WorkInProgress = () => {
         easing="ease-out"
         iterationCount="infinite"
       />
-      <Text style={styles.title}>¡Pantalla en progreso!</Text>
-      <Text style={styles.subtitle}>
-        Estamos trabajando para que pronto puedas acceder a grupos privados de
-        trabajo, y brindes lo mejor de vos.
-      </Text>
+      {color === "#6264BC" ? (
+        <Text style={[styles.title, { color: "white" }]}>
+          ¡Pantalla en progreso!
+        </Text>
+      ) : (
+        <Text style={[styles.title]}>¡Pantalla en progreso!</Text>
+      )}
+      {color === "#6264BC" ? (
+        <Text style={styles.subtitle2}>
+          Estamos trabajando para que pronto puedas acceder a grupos privados de
+          trabajo, y brindes lo mejor de vos.
+        </Text>
+      ) : (
+        <Text style={styles.subtitle}>
+          Pronto podrás formar parte de comunidades en las cuales vas a poder
+          compartir información e interactuar con colegas.
+        </Text>
+      )}
     </View>
   );
 };
@@ -31,8 +44,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+    height:"100%"
   },
-  image: { height: 300, resizeMode: "contain", marginTop: 40 },
+  image: { height: 300, resizeMode: "contain", marginTop: 20, marginBottom:30 },
   title: {
     color: "#4245E5",
     fontSize: 34,
@@ -43,6 +57,15 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: "#4245E5",
+    fontSize: 15,
+    marginHorizontal: 30,
+    lineHeight: 30,
+    marginVertical: 20,
+    fontWeight: "600",
+    letterSpacing: 1,
+  },
+  subtitle2: {
+    color: "white",
     fontSize: 15,
     marginHorizontal: 30,
     lineHeight: 30,
