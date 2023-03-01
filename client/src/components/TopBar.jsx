@@ -1,16 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 import GoBackArrow from "./goBackArrow";
 
 const Profile = ({ tabname }) => {
-  const navigation = useNavigation();
 
   return (
     <View style={styles.Topcontainer}>
       <GoBackArrow/>
       <Text style={styles.title}>{tabname}</Text>
+      <View style={styles.invisibleBox}></View>
     </View>
   );
 };
@@ -41,6 +39,10 @@ const styles = StyleSheet.create({
     zIndex: 1,
     left: 25,
   },
+  invisibleBox:{
+    height:40,
+    width:40
+  }
 });
 
 export default Profile;

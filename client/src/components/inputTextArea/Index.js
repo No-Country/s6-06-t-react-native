@@ -6,7 +6,7 @@ import {
 import { colors } from "../../constants";
 import { styles } from "./style";
 
-const InputTextArea = ({label, error, requerimiento}) => {
+const InputTextArea = ({label, error, requerimiento, defaultValue}) => {
   return (
     <View style={styles.wrapperTextArea}>
       <Text style={styles.label}>{label}</Text>
@@ -15,10 +15,11 @@ const InputTextArea = ({label, error, requerimiento}) => {
         numberOfLines={6}
         style={styles.textArea}
         selectionColor={colors.primary}
+        defaultValue={defaultValue}
       />
       {error && <Text style={styles.error}>{error.message}</Text>}
       {requerimiento && (
-        <Text style={styles.requerimiento}>{requerimiento}</Text>
+        <Text style={styles.requerimiento} >{requerimiento}</Text>
       )}
     </View>
   )

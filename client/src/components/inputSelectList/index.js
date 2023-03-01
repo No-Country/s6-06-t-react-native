@@ -18,6 +18,7 @@ const InputComponentSelectList = ({
   error,
   setValue,
   lastList,
+  defaultValue
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -82,6 +83,7 @@ const InputComponentSelectList = ({
               return isOpened ? <AntDesign name="close" size={24} color="black" /> : <Ionicons name="md-chevron-down-outline" size={24} color="black" />;
             }}
             onBlur={() => handleOnBlur(onBlur)}
+            defaultValue={defaultValue}
           />
         )}
         name={name}
