@@ -10,6 +10,11 @@ import Perfil from "../../screens/profile_navigation/profile/Profile";
 import Guardados from "../../screens/profile_navigation/saved/Guardados";
 import Configuracion from "../../screens/profile_navigation/setting/Configuracion";
 
+import Designer from "../../screens/profile_navigation/Postulaciones/Designer";
+import Designer2 from "../../screens/profile_navigation/Postulaciones/Designer2";
+import FrontEnd from "../../screens/profile_navigation/Postulaciones/FrontEnd";
+import FullStack from "../../screens/profile_navigation/Postulaciones/FullStack";
+
 const ProfileNavigation = ({ navigation }) => {
   const Stack = createNativeStackNavigator();
   return (
@@ -29,6 +34,11 @@ const ProfileNavigation = ({ navigation }) => {
       <Stack.Screen name="AddEducation" component={AgregarEducacion} />
       <Stack.Screen name="SeeAllWorkExp" component={ListaInfoLaboral} />
       <Stack.Screen name="SeeAllEducation" component={ListaInfoEducacion} />
+
+      <Stack.Screen name="Designer1" component={Designer} />
+      <Stack.Screen name="FrontEnd" component={FrontEnd} />
+      <Stack.Screen name="FullStack" component={FullStack} />
+      <Stack.Screen name="Designer2" component={Designer2} />
     </Stack.Navigator>
   );
 };

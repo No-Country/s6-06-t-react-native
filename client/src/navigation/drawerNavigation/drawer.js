@@ -29,7 +29,7 @@ import backDrawer from "../../../assets/backDrawer.png";
 import { styles } from "./styles";
 import { useDispatch } from "react-redux";
 import { colors } from "../../constants";
-
+import drawerCandado from "../../../assets/drawerCandado.png"
 const Drawer = createDrawerNavigator();
 
 const DrawerNavegation = () => {
@@ -126,12 +126,15 @@ export const MenuInterno = ({ props }) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={styles.channels}
+              style={[styles.channels, {color: "#B8B8B8"}]}
               onPress={() => {
-                props.navigation.navigate("Shortlisted");
+                // props.navigation.navigate("Shortlisted");
               }}
             >
-              <Text style={styles.menuTextChannels}>#Preseleccionado 7</Text>
+              <View style={{flexDirection: 'row', alignContent: 'center', alignItems: 'center'}}>
+                <Text style={[styles.menuTextChannels, {marginRight: 5}]}>#Preseleccionado 7</Text>
+                <Image source={drawerCandado} />
+              </View>
             </TouchableOpacity>
 
             <TouchableOpacity

@@ -45,7 +45,7 @@ const Tabs = () => {
 
       <TouchableOpacity
         style={styles.tab}
-        onPress={() => navigation.navigate("Guardados")}
+        onPress={() => navigation.navigate("DirectMessages")}
       >
         <View style={styles.tabinfo}>
           <FontAwesome5 name="user" style={styles.icon} />
@@ -56,7 +56,7 @@ const Tabs = () => {
 
       <TouchableOpacity
         style={styles.tab}
-        onPress={() => navigation.navigate("Configuracion")}
+        onPress={() => navigation.navigate("DirectMessages")}
       >
         <View style={styles.tabinfo}>
           <FontAwesome5 name="user" style={styles.icon} />
