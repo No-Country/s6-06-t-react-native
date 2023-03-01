@@ -1,4 +1,6 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { URL_BACK } from "../config";
 import { reqResApi } from '../config/axiosConfig'
 
 
@@ -98,18 +100,28 @@ export const useComment = ()=>{
 
 export const useUpdatePic= ()=>{
     let updatePic = async ( token, image)=>{
-        const data = new FormData;
-        data.append("pic", image);
-        console.log(data)
-        let response
-        try {
-            response = await reqResApi.put('/profile/edit/profile-pic', data,{
-                headers : {'x-token' : token, "Content-Type": "multipart/form-data"}
-            })
-        } catch (error) {
-            console.log(error)
-        }
-        console.log(response)
+        const profile_pic = {
+            name: 'image',
+            type: 'image',
+            path: image,
+            uri: image,
+          }
+          const formData = new FormData()
+          formData.append('profile_pic', profile_pic);
+        // let response
+        // formData.append('profile_pic', profile_pic);
+        fetch(URL_BACK + '/profile/', {
+            method: "PUT",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data",
+              'x-token' : token
+        
+            },
+            body: formData
+          })
+          .then(response => console.log(response.json()))
+          .catch(error => console.log(error))
     }
     return {
         updatePic
