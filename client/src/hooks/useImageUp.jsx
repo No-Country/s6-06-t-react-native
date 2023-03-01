@@ -14,11 +14,11 @@ export function useImageUp() {
         aspect: [7, 8],
         quality: 1,
       });
-      console.log(result)
+      // console.log(result)
       if (!result.canceled) {
         setImageFather(result.assets[0].uri);
         setImage(result.assets[0].uri);
-        updatePic(token, result.assets[0].uri)
+        updatePic(token, result.assets[0])
       }
       
     };
