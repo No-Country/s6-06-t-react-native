@@ -15,7 +15,7 @@ import Designer2 from "../../screens/profile_navigation/Postulaciones/Designer2"
 import FrontEnd from "../../screens/profile_navigation/Postulaciones/FrontEnd";
 import FullStack from "../../screens/profile_navigation/Postulaciones/FullStack";
 
-const ProfileNavigation = ({ navigation }) => {
+const ProfileNavigation = () => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator

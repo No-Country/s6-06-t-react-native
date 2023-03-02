@@ -45,11 +45,11 @@ export const styles = StyleSheet.create({
   descriptionStep: {
     position: "absolute",
     bottom: -34,
-    width: '250%',
-    textAlign: 'center',
-    color: colors.primary
+    width: "250%",
+    textAlign: "center",
+    color: colors.primary,
   },
   descriptionStepInactive: {
-    color: "#504E4E"
+    color: "#504E4E",
   },
 });

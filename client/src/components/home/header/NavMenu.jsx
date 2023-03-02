@@ -4,34 +4,28 @@ import { styles } from "./styles";
 import { Feather, EvilIcons } from "@expo/vector-icons";
 import { colors } from "../../../constants";
 import { useNavigation } from "@react-navigation/native";
-import { AsyncStorage } from "react-native";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 export default function NavMenu({ pathImgUser }) {
   const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState(null);
-  const state = useSelector(state => state.login.user);
-  // const getImgProfile = async () => {
-  //   try {
-  //     let userData = await AsyncStorage.getItem("userData");
-  //     userData = JSON.parse(userData);
-  //     if (userData) {
-  //       setUserInfo(userData);
-  //     }
-  //   } catch (e) {
-  //     console.log("NavMenu - getImgProfile error: " + e);
-  //   }
-  // };
+  const state = useSelector((state) => state.login.user);
 
   useEffect(() => {
-    // getImgProfile();
-    setUserInfo(state)
+    setUserInfo(state);
   }, [state]);
   const img = userInfo ? userInfo.img_avatar : pathImgUser;
 
   return (
     <View style={styles.header}>
       <View>
-        <Feather name="menu" size={24} color="black" onPress={() => {navigation.openDrawer()}}/>
+        <Feather
+          name="menu"
+          size={24}
+          color="black"
+          onPress={() => {
+            navigation.openDrawer();
+          }}
+        />
       </View>
       <View style={styles.inputContain}>
         <EvilIcons name="search" size={24} color={colors.lightGrey} />

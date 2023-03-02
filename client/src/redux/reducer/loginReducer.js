@@ -5,7 +5,7 @@ import {
   LOGOUT_USER,
   CAMBIADOR,
 } from "../types/loginTypes";
-import {UPDATE_IMG_USER} from "../types/loginTypes";
+import { UPDATE_IMG_USER } from "../types/loginTypes";
 
 const initialState = {
   isLoading: false,
@@ -14,7 +14,6 @@ const initialState = {
   error: null,
   variable: false,
 };
-
 
 export const loginReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -51,19 +50,19 @@ export const loginReducer = (state = initialState, { type, payload }) => {
         token: null,
         error: null,
       };
-      case UPDATE_IMG_USER:
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            img_avatar : payload
-          },
-        };
+    case UPDATE_IMG_USER:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          img_avatar: payload,
+        },
+      };
     case CAMBIADOR:
       return {
         ...state,
         variable: payload,
-      }
+      };
     default:
       return { ...state };
   }

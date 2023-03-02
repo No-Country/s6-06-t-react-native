@@ -2,36 +2,35 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import { StyleSheet } from "react-native";
 import { useImageUp } from "../../../hooks/useImageUp";
-import { getUserInfo } from "../../../redux/actions/personalActions";
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 import ModalSelect from "../../../components/Modal/ModalSelect";
 const ProfilePicture = () => {
   const [userInfo, setUserInfo] = useState(null);
-  const [profileImage, setProfileImage] = useState("https://www.pngitem.com/pimgs/m/421-4212341_default-avatar-svg-hd-png-download.png");
+  const [profileImage, setProfileImage] = useState(
+    "https://www.pngitem.com/pimgs/m/421-4212341_default-avatar-svg-hd-png-download.png"
+  );
   const [ModalVisible, setModalVisible] = useState(false);
-  const state = useSelector(state => state.login.user)
+  const state = useSelector((state) => state.login.user);
   const { pickCam, pickImage } = useImageUp();
   useEffect(() => {
-    setUserInfo(state)
-    setProfileImage(state.img_avatar)
+    setUserInfo(state);
+    setProfileImage(state.img_avatar);
   }, []);
-  let handleSendPic = async ()=>{
-    setModalVisible(!ModalVisible)
-    // await pickImage(setProfileImage, state.token)
-    // dispatch(updateImgUser(profileImage))
-  }
+  let handleSendPic = async () => {
+    setModalVisible(!ModalVisible);
+  };
 
-  let select = async(type)=>{
-    if (type=== 'galery') {
-      await pickImage(setProfileImage, state.token)
-      setModalVisible(!ModalVisible)
+  let select = async (type) => {
+    if (type === "galery") {
+      await pickImage(setProfileImage, state.token);
+      setModalVisible(!ModalVisible);
     }
-    if (type=== 'cam') {
-      await pickCam(setProfileImage, state.token)
-      setModalVisible(!ModalVisible)
+    if (type === "cam") {
+      await pickCam(setProfileImage, state.token);
+      setModalVisible(!ModalVisible);
     }
-    setModalVisible(!ModalVisible)
-  }
+    setModalVisible(!ModalVisible);
+  };
   return (
     <View style={styles.ppContainer}>
       <View>
@@ -45,12 +44,19 @@ const ProfilePicture = () => {
             style={{ width: 30, height: 30 }}
           />
         </Pressable>
-        <ModalSelect modalVisible={ModalVisible} setModalVisible={setModalVisible} select={select} />
+        <ModalSelect
+          modalVisible={ModalVisible}
+          setModalVisible={setModalVisible}
+          select={select}
+        />
       </View>
       <Text style={styles.name}>
         {userInfo ? userInfo.fullName : "Usuario"}
       </Text>
-      <Text style={styles.profession}> {userInfo ? userInfo.position : "Dev"}</Text>
+      <Text style={styles.profession}>
+        {" "}
+        {userInfo ? userInfo.position : "Dev"}
+      </Text>
     </View>
   );
 };

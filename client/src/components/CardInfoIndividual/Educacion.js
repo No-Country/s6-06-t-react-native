@@ -54,7 +54,7 @@ const CardIndividualEducation = ({
           )
         )
           .then(() => dispatch(Cambiador(!activador)))
-          .catch((error) => console.log(error));
+          .catch((error) => console.warn(error));
         Popup.hide();
       },
       cancelCallback: () => {

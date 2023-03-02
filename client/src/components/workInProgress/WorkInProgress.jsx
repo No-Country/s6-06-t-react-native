@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 import progreso from "../../../assets/progreso.png";
 import BackButton from "../BackButton";
@@ -6,7 +6,7 @@ import BackButton from "../BackButton";
 const WorkInProgress = ({ color }) => {
   return (
     <View style={[styles.container, { backgroundColor: color }]}>
-      <View style={{position: "absolute", top: 15, left: 15}}>
+      <View style={{ position: "absolute", top: 15, left: 15 }}>
         <BackButton />
       </View>
       <Animatable.Image

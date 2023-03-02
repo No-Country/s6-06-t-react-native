@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "700",
     color: "#06087E",
-    fontSize:27
+    fontSize: 27,
   },
   p: {
     marginTop: 25,
@@ -52,17 +52,17 @@ export const styles = StyleSheet.create({
   },
   confirmation: {
     alignItems: "center",
-    marginTop: Dimensions.get("screen").height -600,
+    marginTop: Dimensions.get("screen").height - 600,
   },
   email: {
     fontSize: 12,
     fontWeight: "500",
   },
-  click:{
-    color:colors.primary,
-    textDecorationLine:"underline",
-    fontWeight:"700",
-    fontSize:16,
-    marginBottom:10
-  }
+  click: {
+    color: colors.primary,
+    textDecorationLine: "underline",
+    fontWeight: "700",
+    fontSize: 16,
+    marginBottom: 10,
+  },
 });

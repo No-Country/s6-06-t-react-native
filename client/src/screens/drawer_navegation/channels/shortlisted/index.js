@@ -1,12 +1,12 @@
-import styles from './styles.js'
-import { View, Text } from 'react-native'
+import styles from "./styles.js";
+import { View, Text } from "react-native";
 
-const ShortlistedChannel = () =>{
+const ShortlistedChannel = () => {
   return (
     <View>
-        <Text>Hola soy el canal ShortlistedChannel 7</Text>
+      <Text>Hola soy el canal ShortlistedChannel 7</Text>
     </View>
-  )
-}
+  );
+};
 
 export default ShortlistedChannel;

@@ -31,7 +31,7 @@ const ListaInfoLaboral = () => {
         <View style={styles.line}></View>
         <View style={styles.secondaryContainer}>
           <View style={styles.titleAndIcon}>
-              <Text style={styles.titleList}>Experiencia laboral</Text>
+            <Text style={styles.titleList}>Experiencia laboral</Text>
             <TouchableOpacity>
               <Ionicons
                 name="add"

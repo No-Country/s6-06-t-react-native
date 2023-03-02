@@ -7,13 +7,14 @@ import { useState } from "react";
 import AmountCommentsAndReactions from "./AmountCommentsAndReactions";
 
 export default function CardPost({ data }) {
-  
-  let shorDataBody = data?.description?.length >= 150 ? data.description.slice(0,150) : data.description
-    
-    
+  let shorDataBody =
+    data?.description?.length >= 150
+      ? data.description.slice(0, 150)
+      : data.description;
+
   const [short, setShort] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  
+
   return (
     <View style={styles.PostCard}>
       {data.important && <Pinned data={data.author} />}
@@ -32,25 +33,29 @@ export default function CardPost({ data }) {
             </Text>
           </Text>
         ) : (
-          <Text style={styles.TextBody}>{data.description ? data.description : 'No description available'}</Text>
+          <Text style={styles.TextBody}>
+            {data.description ? data.description : "No description available"}
+          </Text>
         )}
       </View>
-      <AmountCommentsAndReactions 
-                countComments={data.countComments}
-                apoyar={data.apoyar}
-                hacergracia={data.hacergracia}
-                important={data.important}
-                like={data.megusta}
-                meinteresa={data.meinteresa}
-                isModalVisible={isModalVisible}
-                setIsModalVisible={setIsModalVisible}
-
-        /> 
-      <Comments data={data} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} />
+      <AmountCommentsAndReactions
+        countComments={data.countComments}
+        apoyar={data.apoyar}
+        hacergracia={data.hacergracia}
+        important={data.important}
+        like={data.megusta}
+        meinteresa={data.meinteresa}
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+      />
+      <Comments
+        data={data}
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+      />
     </View>
   );
 }
 
-
-/* 
-*/
+/*
+ */

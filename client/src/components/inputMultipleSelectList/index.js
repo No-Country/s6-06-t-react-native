@@ -17,9 +17,7 @@ const InputMultipleComponentSelectList = ({
   name,
   error,
   setValue,
-  lastList,
 }) => {
-  const [isFocused, setIsFocused] = useState(false);
 
   const [selected, setSelected] = useState([]);
 
@@ -31,11 +29,6 @@ const InputMultipleComponentSelectList = ({
 
   const handleOnChange = () => {
     setErrorMessage(null);
-  };
-
-  const handleOnBlur = (onBlur) => {
-    onBlur;
-    setIsFocused(false);
   };
 
   const [fontsLoaded] = useFonts({
@@ -62,7 +55,10 @@ const InputMultipleComponentSelectList = ({
             data={data}
             setSelected={(val) => setSelected(val)}
             placeholder={placeholder}
-            boxStyles={[styles.input, selected.length > 1 && styles.inputWithSelected]}
+            boxStyles={[
+              styles.input,
+              selected.length > 1 && styles.inputWithSelected,
+            ]}
             inputStyles={styles.inputStyles}
             badgeStyles={styles.badgeStyles}
             dropdownStyles={styles.dropdownStyles}

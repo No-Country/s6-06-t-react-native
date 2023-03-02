@@ -12,7 +12,7 @@ const Tabs = () => {
     <SafeAreaView style={styles.tabContainer}>
       <TouchableOpacity
         style={styles.tab}
-        onPress={() => navigation.navigate('DatosPersonales')}
+        onPress={() => navigation.navigate("DatosPersonales")}
       >
         <View style={styles.tabinfo}>
           <FontAwesome5 name="user" style={styles.icon} />
@@ -23,7 +23,7 @@ const Tabs = () => {
 
       <TouchableOpacity
         style={styles.tab}
-        onPress={() => navigation.navigate('PerfilProfesional')}
+        onPress={() => navigation.navigate("PerfilProfesional")}
       >
         <View style={styles.tabinfo}>
           <FontAwesome5 name="user" style={styles.icon} />
@@ -34,7 +34,7 @@ const Tabs = () => {
 
       <TouchableOpacity
         style={styles.tab}
-        onPress={() => navigation.navigate('MisPostulaciones')}
+        onPress={() => navigation.navigate("MisPostulaciones")}
       >
         <View style={styles.tabinfo}>
           <FontAwesome5 name="user" style={styles.icon} />

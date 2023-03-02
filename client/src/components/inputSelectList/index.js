@@ -5,8 +5,8 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import SelectDropdown from "react-native-select-dropdown";
 import { Controller } from "react-hook-form";
-import { Ionicons } from '@expo/vector-icons'; 
-import { AntDesign } from '@expo/vector-icons'; 
+import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const InputComponentSelectList = ({
   label,
@@ -18,7 +18,7 @@ const InputComponentSelectList = ({
   error,
   setValue,
   lastList,
-  defaultValue
+  defaultValue,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -80,7 +80,15 @@ const InputComponentSelectList = ({
             onFocus={() => setIsFocused(!isFocused)}
             onChangeSearchInputText={(value) => onChange(value)}
             renderDropdownIcon={(isOpened) => {
-              return isOpened ? <AntDesign name="close" size={24} color="black" /> : <Ionicons name="md-chevron-down-outline" size={24} color="black" />;
+              return isOpened ? (
+                <AntDesign name="close" size={24} color="black" />
+              ) : (
+                <Ionicons
+                  name="md-chevron-down-outline"
+                  size={24}
+                  color="black"
+                />
+              );
             }}
             onBlur={() => handleOnBlur(onBlur)}
             defaultValue={defaultValue}

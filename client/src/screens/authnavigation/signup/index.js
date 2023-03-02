@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import ButtonRegistro from "../../../components/buttonRegistro/Index.js";
 import InputComponent from "../../../components/input/index.js";
 import InputMobileNumber from "../../../components/inputMobileNumber/index.js";
@@ -59,7 +59,19 @@ const Registro = () => {
     control,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm({ resolver: yupResolver(schema) },{ defaultValues: {fullName: '', email:'', prefix:'', phone:'',password:'', confirmPass:''}});
+  } = useForm(
+    { resolver: yupResolver(schema) },
+    {
+      defaultValues: {
+        fullName: "",
+        email: "",
+        prefix: "",
+        phone: "",
+        password: "",
+        confirmPass: "",
+      },
+    }
+  );
 
   const onSubmit = (data) => {
     navigation.navigate("SignUpStepTwo", data);

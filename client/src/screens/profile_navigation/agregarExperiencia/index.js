@@ -15,7 +15,6 @@ import { colors } from "../../../constants/colors.js";
 import { tipoContrato } from "../../../utils/dataTipoContrato.js";
 import CheckBox from "expo-checkbox";
 import InputTextArea from "../../../components/inputTextArea/Index.js";
-// import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -84,7 +83,7 @@ const AgregarExperiencia = () => {
   useEffect(() => {
     getUserData(setUserInfo);
   }, []);
-  
+
   const activador = useSelector((state) => state.login.variable);
 
   const onSubmit = (data) => {
@@ -115,7 +114,7 @@ const AgregarExperiencia = () => {
       )
         .then(() => dispatch(Cambiador(!activador)))
         .then(navigation.goBack())
-        .catch((error) => console.log(error));
+        .catch((error) => console.warn(error));
     } else {
       dispatch(
         editPersonalInfo(
@@ -127,7 +126,7 @@ const AgregarExperiencia = () => {
       )
         .then(() => dispatch(Cambiador(!activador)))
         .then(navigation.goBack())
-        .catch((error) => console.log(error));
+        .catch((error) => console.warn(error));
     }
   };
 
@@ -203,34 +202,7 @@ const AgregarExperiencia = () => {
           )}
           name="location"
         />
-        {/* <View>
-          <GooglePlacesAutocomplete
-            placeholder="Selecciona la ubicación de tu empleo."
-            onPress={(data, details = null) => {
-              // 'details' is provided when fetchDetails = true
-              setData(data)
-              console.log(data, details);
-            }}
-            // keyboardShouldPersistTaps="never"
-            // fetchDetails={true}
-            enablePoweredByContainer={false}
-            styles={{
-              textInput: {
-                backgroundColor: colors.input_background,
-                borderRadius: 15,
-                paddingHorizontal: 15,
-                paddingVertical: 16,
-                height: "auto",
-                fontSize: 17,
-                color: colors.grey_placeholder,
-              },
-            }}
-            query={{
-              key: "AIzaSyAtOh7oKl9bNbK3E0gSB8xV6wX7JCBUVeE",
-              language: "es",
-            }}
-          />
-        </View> */}
+
         <Controller
           control={control}
           onChange={handleOnChange}

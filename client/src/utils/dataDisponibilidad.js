@@ -1,5 +1,1 @@
-export const disponibilidad = [
-  "Mañana",
-  "Tarde",
-  "Full-Time",
-];
+export const disponibilidad = ["Mañana", "Tarde", "Full-Time"];

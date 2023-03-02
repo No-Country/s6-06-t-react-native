@@ -8,9 +8,6 @@ import {
 import { colors } from "../constants/colors";
 
 const SecondaryButton = ({ text, handler }) => {
-  const HandleLogin = () => {
-    /*LOGICA LOGIN*/
-  };
 
   return (
     <View>

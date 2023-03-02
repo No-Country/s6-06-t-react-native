@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text } from "react-native";
 import { styles } from "./styles";
 import Pinned from "./Pinned";
 import HeaderCard from "./HeaderCard";
@@ -7,19 +7,20 @@ import { useState } from "react";
 import AmountCommentsAndReactions from "./AmountCommentsAndReactions";
 
 export default function CardPost({ data }) {
-  let shorDataBody = data?.description?.length >= 150 ? data.description.slice(0,150) : data.description
+  let shorDataBody =
+    data?.description?.length >= 150
+      ? data.description.slice(0, 150)
+      : data.description;
   const [short, setShort] = useState(false);
 
-  // console.log("<<<<---------------------------->>>>>");
-  // console.log("candidatos: ", data.candidates);
-  
   let author = {
     _id: data.id,
     fullName: data.title,
     isOnline: data.active,
     position: data.type,
-    img_avatar: "https://res.cloudinary.com/dv2elz7mk/image/upload/v1677369212/nnthghri1e3kv4lu7b13.jpg"
-  }
+    img_avatar:
+      "https://res.cloudinary.com/dv2elz7mk/image/upload/v1677369212/nnthghri1e3kv4lu7b13.jpg",
+  };
   return (
     <View style={styles.PostCard}>
       {data.important && <Pinned data={author} />}
@@ -38,18 +39,19 @@ export default function CardPost({ data }) {
             </Text>
           </Text>
         ) : (
-          <Text style={styles.TextBody}>{data.description ? data.description : 'No description available'}</Text>
+          <Text style={styles.TextBody}>
+            {data.description ? data.description : "No description available"}
+          </Text>
         )}
       </View>
-      <AmountCommentsAndReactions 
-                countComments={data.countComments}
-                countCandidates={data.candidates ? data.candidates.length : 0}
-        /> 
+      <AmountCommentsAndReactions
+        countComments={data.countComments}
+        countCandidates={data.candidates ? data.candidates.length : 0}
+      />
       <Comments data={data} />
     </View>
   );
 }
 
-
-/* 
-*/
+/*
+ */

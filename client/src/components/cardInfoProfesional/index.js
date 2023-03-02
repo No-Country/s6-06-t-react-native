@@ -12,11 +12,14 @@ const CardInfoProfesional = ({
   aniadir,
   workExp,
   education,
-  dataToSee
+  dataToSee,
 }) => {
   const navigation = useNavigation();
   return (
-    <View style={styles.container} onPress={() => navigation.navigate(routeToAdd)}>
+    <View
+      style={styles.container}
+      onPress={() => navigation.navigate(routeToAdd)}
+    >
       <View
         style={{
           flexDirection: "row",
@@ -32,7 +35,7 @@ const CardInfoProfesional = ({
             </TouchableOpacity>
           )}
           <TouchableOpacity
-          onPress={() => navigation.navigate(routeToSeeAll, dataToSee)}
+            onPress={() => navigation.navigate(routeToSeeAll, dataToSee)}
           >
             <Feather
               name="edit-3"
@@ -44,7 +47,7 @@ const CardInfoProfesional = ({
         </View>
       </View>
 
-      {(workExp?.length === 0) && (
+      {workExp?.length === 0 && (
         <TouchableOpacity
           style={styles.txtcontainer}
           onPress={() => navigation.navigate(routeToAdd)}
@@ -81,9 +84,9 @@ const CardInfoProfesional = ({
             </View>
           );
         })}
-        {education && 
-        education.map(edu => {
-          return(
+      {education &&
+        education.map((edu) => {
+          return (
             <View style={styles.wrapperInformation} key={edu._id}>
               <View style={styles.wrapperImagen}>
                 <Image
@@ -104,7 +107,7 @@ const CardInfoProfesional = ({
                 <Text style={styles.workDescription}>{edu.description}</Text>
               </View>
             </View>
-          )
+          );
         })}
     </View>
   );

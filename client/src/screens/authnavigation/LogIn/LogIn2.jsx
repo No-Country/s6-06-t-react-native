@@ -34,7 +34,6 @@ const LogIn2 = () => {
       isValid = false;
       alert("Email es un campo requerido.");
     } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(data.email)) {
-      console.log(typeof data.email);
       isValid = false;
       alert("Email no válido.");
     }

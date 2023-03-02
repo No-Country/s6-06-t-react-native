@@ -46,7 +46,10 @@ const PerfilProfesional = () => {
               style={{ width: 100, height: 100, borderRadius: 100 }}
             />
           </View>
-          <TouchableOpacity style={styles.editButton} onPress={() => setIsModalVisible(true)}>
+          <TouchableOpacity
+            style={styles.editButton}
+            onPress={() => setIsModalVisible(true)}
+          >
             <AntDesign name="edit" size={25} color="black" />
           </TouchableOpacity>
           <Text style={styles.name}>

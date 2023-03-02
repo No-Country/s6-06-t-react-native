@@ -1,12 +1,8 @@
-import {
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Text, TextInput, View } from "react-native";
 import { colors } from "../../constants";
 import { styles } from "./style";
 
-const InputTextArea = ({label, error, requerimiento, defaultValue}) => {
+const InputTextArea = ({ label, error, requerimiento, defaultValue }) => {
   return (
     <View style={styles.wrapperTextArea}>
       <Text style={styles.label}>{label}</Text>
@@ -19,10 +15,10 @@ const InputTextArea = ({label, error, requerimiento, defaultValue}) => {
       />
       {error && <Text style={styles.error}>{error.message}</Text>}
       {requerimiento && (
-        <Text style={styles.requerimiento} >{requerimiento}</Text>
+        <Text style={styles.requerimiento}>{requerimiento}</Text>
       )}
     </View>
-  )
-}
+  );
+};
 
-export default InputTextArea
+export default InputTextArea;

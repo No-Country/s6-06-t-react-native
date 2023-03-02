@@ -1,18 +1,15 @@
-import { View, Text, Pressable } from "react-native";
+import { Text, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
 import { logoutUser } from "../../../redux/actions/loginActions";
 
 const LogOut = () => {
   const dispatch = useDispatch();
-  // const navigation = useNavigation();
 
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logoutUser());
-    // navigation.navigate("LogIn");
   };
   return (
     <Pressable style={styles.container} onPress={(e) => handleLogout(e)}>

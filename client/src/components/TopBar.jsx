@@ -3,10 +3,9 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import GoBackArrow from "./goBackArrow";
 
 const Profile = ({ tabname }) => {
-
   return (
     <View style={styles.Topcontainer}>
-      <GoBackArrow/>
+      <GoBackArrow />
       <Text style={styles.title}>{tabname}</Text>
       <View style={styles.invisibleBox}></View>
     </View>
@@ -39,10 +38,10 @@ const styles = StyleSheet.create({
     zIndex: 1,
     left: 25,
   },
-  invisibleBox:{
-    height:40,
-    width:40
-  }
+  invisibleBox: {
+    height: 40,
+    width: 40,
+  },
 });
 
 export default Profile;

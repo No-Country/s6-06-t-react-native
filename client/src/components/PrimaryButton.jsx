@@ -3,7 +3,6 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
 import { colors } from "../constants/colors";
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary_light,
   },
   text: {
-    color: '#fff',
+    color: "#fff",
     fontWeight: "600",
     fontSize: 23,
   },

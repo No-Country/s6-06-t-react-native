@@ -75,7 +75,7 @@ const RegistroStepTwo = () => {
       });
       navigation.navigate("SignUpStepThree");
     } catch (error) {
-      console.log(error);
+      console.warn(error);
     }
   };
 
@@ -116,7 +116,7 @@ const RegistroStepTwo = () => {
             control={control}
             error={errors.jobArea}
             setValue={setValue}
-            />
+          />
           <InputComponentSelectList
             label="Puesto laboral"
             data={dataPuestoLaboral}
