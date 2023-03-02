@@ -23,7 +23,7 @@ import CardInfoProfesional from "../../../components/cardInfoProfesional";
 
 const PerfilProfesional = () => {
   const [userInfo, setUserInfo] = useState(null);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(80);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const activador = useSelector((state) => state.login.variable);
 
