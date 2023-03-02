@@ -23,7 +23,7 @@ import CardInfoProfesional from "../../../components/cardInfoProfesional";
 
 const PerfilProfesional = () => {
   const [userInfo, setUserInfo] = useState(null);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(80);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const activador = useSelector((state) => state.login.variable);
 
@@ -40,10 +40,10 @@ const PerfilProfesional = () => {
       <TopBar tabname="Perfil profesional" />
       <ScrollView>
         <View style={styles.ppContainer}>
-          <View>
+          <View style={styles.imagenAvatar}>
             <Image
               source={{ uri: profileImg }}
-              style={{ width: 100, height: 100 }}
+              style={{ width: 100, height: 100, borderRadius: 100 }}
             />
           </View>
           <TouchableOpacity style={styles.editButton} onPress={() => setIsModalVisible(true)}>

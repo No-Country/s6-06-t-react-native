@@ -173,7 +173,6 @@ const Registro = () => {
             text="Siguiente"
             width="width: 100%"
             handler={handleSubmit(onSubmit)}
-            disabledColor={!isValid}
           />
         </View>
       </View>
