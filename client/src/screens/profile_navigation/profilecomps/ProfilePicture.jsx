@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import { StyleSheet } from "react-native";
 import { useImageUp } from "../../../hooks/useImageUp";
-import { getUserData } from "../../../redux/actions/personalActions";
+import { getUserInfo } from "../../../redux/actions/personalActions";
 import { useSelector } from 'react-redux'
 import ModalSelect from "../../../components/Modal/ModalSelect";
 const ProfilePicture = () => {
