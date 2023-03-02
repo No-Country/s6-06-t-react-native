@@ -84,7 +84,7 @@ const AgregarExperiencia = () => {
   useEffect(() => {
     getUserData(setUserInfo);
   }, []);
-
+  
   const activador = useSelector((state) => state.login.variable);
 
   const onSubmit = (data) => {

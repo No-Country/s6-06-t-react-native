@@ -31,13 +31,26 @@ export const editPersonalInfo = (payload, token) => {
 };
 
 //                GET USER DATA
-export const getUserData = async (setState, setImage) => {
+export const getUserInfo = async (setState, setImage) => {
   const state = useSelector(state => state.login.user)
   try {
     let userData = state
     if (userData) {
       setState(userData);
       setImage(state.img_avatar)
+    }
+  } catch (e) {
+    console.log(`getUserData Error: ${e}`);
+  }
+};
+
+export const getUserData = async (setState) => {
+  try {
+    let userData = await AsyncStorage.getItem("userData");
+    userData = JSON.parse(userData);
+    if (userData) {
+      setState(userData);
+      
     }
   } catch (e) {
     console.log(`getUserData Error: ${e}`);
