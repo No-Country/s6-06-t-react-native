@@ -134,6 +134,9 @@ const userSchema = new Schema(
                 },
                 year_out: {
                     type: String
+                },
+                description:{
+                    type:String
                 }
             }
         ],
