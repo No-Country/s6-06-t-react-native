@@ -80,7 +80,7 @@ export const styles = StyleSheet.create({
   companyWrapper: {
     display: "flex",
     flexDirection: "row",
-    maxWidth: '90%'
+    maxWidth: "90%",
   },
   companyName: {
     fontSize: 16,

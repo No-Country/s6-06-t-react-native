@@ -6,5 +6,5 @@ export const dataPuestoLaboral = [
   "Project Manager",
   "Team Leader",
   "Tester",
-  "Otro"
+  "Otro",
 ];

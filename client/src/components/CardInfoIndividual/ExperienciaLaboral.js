@@ -55,7 +55,7 @@ const CardIndividualInfo = ({
           )
         )
           .then(() => dispatch(Cambiador(!activador)))
-          .catch((error) => console.log(error));
+          .catch((error) => console.warn(error));
         Popup.hide();
       },
       cancelCallback: () => {
@@ -77,7 +77,7 @@ const CardIndividualInfo = ({
           <Text style={styles.dates}>
             {yearIn} - {current ? "Actualidad" : yearOut}
           </Text>
-         {location && <Text style={styles.secondaryData}>{location}</Text>}
+          {location && <Text style={styles.secondaryData}>{location}</Text>}
           <View style={styles.descriptionWrapper}>
             <Text style={styles.title}>{jobTitle}</Text>
             <View style={styles.institutionWrapper}>

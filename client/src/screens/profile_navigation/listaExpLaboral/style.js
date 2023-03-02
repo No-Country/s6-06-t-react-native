@@ -4,26 +4,26 @@ import { colors } from "../../../constants";
 export const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: "#fff",
-    display: 'flex',
+    display: "flex",
   },
   secondaryContainer: {
     padding: 19,
   },
-  line:{
+  line: {
     height: 1,
-    width: '100%',
-    backgroundColor: colors.lightGrey
+    width: "100%",
+    backgroundColor: colors.lightGrey,
   },
-  containerList:{
-    padding: 19
+  containerList: {
+    padding: 19,
   },
-  titleAndIcon:{
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+  titleAndIcon: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
-  titleList:{
+  titleList: {
     fontSize: 25,
-    fontWeight: 'bold'
-  }
+    fontWeight: "bold",
+  },
 });

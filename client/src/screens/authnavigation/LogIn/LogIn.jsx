@@ -1,4 +1,3 @@
-import { AsyncStorage } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
   Image,
@@ -76,7 +75,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     alignSelf: "center",
     lineHeight: 20,
-    marginHorizontal:20
+    marginHorizontal: 20,
   },
   title: {
     fontWeight: "700",

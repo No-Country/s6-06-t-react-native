@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Modal,
   TouchableOpacity,
-  TextInput,
   Dimensions,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
@@ -18,8 +17,7 @@ const Idiomas = ({ data }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [idiomas, setIdiomas] = useState([]);
   const [nivel, setNivel] = useState("");
-  // FALTA LÓGICA
-  // RUTA BACK
+
   const handleChange = (e) => {
     e.preventDefault();
   };

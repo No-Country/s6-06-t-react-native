@@ -27,12 +27,12 @@ export const styles = StyleSheet.create({
     flex: 3,
     marginBottom: 5,
     color: "#000",
-    textAlign: 'center',
-    fontSize: 17
+    textAlign: "center",
+    fontSize: 17,
   },
   inputRegionalNumber: {
     marginRight: 11,
-    flex:1
+    flex: 1,
   },
   outLine: {
     borderColor: colors.primary,
@@ -46,13 +46,13 @@ export const styles = StyleSheet.create({
     color: colors.danger,
   },
   wrapperErrors: {
-    display: 'flex',
-    flexDirection: 'row'
+    display: "flex",
+    flexDirection: "row",
   },
   wrapperErrorPrefix: {
-    flex: 4
+    flex: 4,
   },
-  wrapperErrorPhone:{
-    flex: 8
-  }
+  wrapperErrorPhone: {
+    flex: 8,
+  },
 });

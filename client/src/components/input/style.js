@@ -13,8 +13,8 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     marginBottom: 4,
   },
-  mutedText:{
-    color: colors.text_grey
+  mutedText: {
+    color: colors.text_grey,
   },
   input: {
     outlineColor: colors.primary,
@@ -27,21 +27,21 @@ export const styles = StyleSheet.create({
     color: "#000",
     zIndex: -1,
     elevation: -1,
-    fontSize: 17
+    fontSize: 17,
   },
   icon: {
-    position: 'absolute',
+    position: "absolute",
     right: 0,
     top: 0,
-    padding: 20
+    padding: 20,
   },
-  dropdown:{
-    position: 'absolute',
+  dropdown: {
+    position: "absolute",
     width: 100,
-    top: '90%',
+    top: "90%",
     zIndex: 100010112,
     elevation: 3333,
-    backgroundColor: '#DEE3E5'
+    backgroundColor: "#DEE3E5",
   },
   outLine: {
     borderColor: colors.primary,
@@ -50,9 +50,9 @@ export const styles = StyleSheet.create({
   requerimiento: {
     color: "#37474F",
     fontSize: 12,
-    padding: 0
+    padding: 0,
   },
-  error:{
-    color: colors.danger
-  }
+  error: {
+    color: colors.danger,
+  },
 });

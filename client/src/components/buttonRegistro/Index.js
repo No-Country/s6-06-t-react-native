@@ -2,7 +2,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./style";
 
-const ButtonRegistro = ({onPress}) => {
+const ButtonRegistro = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.mainWrapper} onPress={onPress}>
       <View style={styles.secondaryWrapper}>

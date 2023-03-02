@@ -1,15 +1,10 @@
-import { View, Text, StyleSheet, Pressable, Image, Button } from "react-native";
-import Icon from "react-native-vector-icons/AntDesign";
-import { AntDesign } from "@expo/vector-icons";
+import { View, Text, StyleSheet } from "react-native";
 import BackButton from "../../../components/BackButton";
 
 const TopBar = () => {
   return (
     <View style={styles.Topcontainer}>
       <BackButton />
-      {/* <View style={styles.backButton} >
-                <AntDesign name="left" size={20} color="black" onPress={() => navigation.goBack()} />
-            </View> */}
       <Text style={styles.tittle}>Perfil</Text>
       <View>
         <Text style={styles.hidden}>aaaaa</Text>

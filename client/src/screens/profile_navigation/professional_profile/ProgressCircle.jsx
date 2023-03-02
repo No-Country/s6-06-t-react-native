@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Animated, Easing, StyleSheet } from 'react-native';
-import { Svg, Circle, Text } from 'react-native-svg';
+import React, { useEffect, useRef } from "react";
+import { View, Animated, Easing, StyleSheet } from "react-native";
+import { Svg, Circle, Text } from "react-native-svg";
 
-const ProgressCircle = ({progress}) => {
-
+const ProgressCircle = ({ progress }) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -23,7 +22,7 @@ const ProgressCircle = ({progress}) => {
     outputRange: [circumference, 0],
   });
 
-  const completionStatus = progress === 100 ? 'Completed' : 'Not completed';
+  const completionStatus = progress === 100 ? "Completed" : "Not completed";
 
   return (
     <View style={styles.container}>
@@ -65,9 +64,7 @@ const ProgressCircle = ({progress}) => {
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const styles = StyleSheet.create({
-    container: {
-
-    },
+  container: {},
 });
 
 export default ProgressCircle;

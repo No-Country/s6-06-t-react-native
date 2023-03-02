@@ -1,8 +1,6 @@
 import { AntDesign, Feather } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Modal, TouchableOpacity } from "react-native";
-import symbolicateStackTrace from "react-native/Libraries/Core/Devtools/symbolicateStackTrace";
-import { colors } from "../../../../constants";
 import TechTab from "./TechTab";
 
 const Herramientas = () => {
@@ -134,9 +132,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop:10
+    paddingTop: 10,
   },
-  plustitle: { color: "#8284FF", fontSize:14, paddingHorizontal:5 },
+  plustitle: { color: "#8284FF", fontSize: 14, paddingHorizontal: 5 },
   modalContainer: {
     marginTop: 10,
     marginHorizontal: 10,

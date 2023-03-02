@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import Community from "../../screens/drawer_navegation/community";
 import GeneralChannel from "../../screens/drawer_navegation/channels/general";
 import ShortlistedChannel from "../../screens/drawer_navegation/channels/shortlisted";
-// import ShortlistedChannel from '../../screens/authnavigation/home' ESTE NO ERA SOLO PARA PRENSETACION (MARCOS NECESITA TRANSLADAR SU COMPONENTE AL DE SCREENS/DRAWER_NAVEGATION)
 import JobsChannel from "../../screens/drawer_navegation/channels/jobs";
 import AmazonTeamChannel from "../../screens/drawer_navegation/channels/amazon_team";
 import ProjectsChannel from "../../screens/drawer_navegation/channels/projects";
@@ -24,16 +23,14 @@ import logOutIcon from "../../../assets/logOutIcon.png";
 import helpIcon from "../../../assets/helpIcon.png";
 import rightDrawer from "../../../assets/rightDrawer.png";
 import downDrawer from "../../../assets/downDrawer.png";
-import Face from "../../../assets/Face.png";
 import backDrawer from "../../../assets/backDrawer.png";
 import { styles } from "./styles";
 import { useDispatch } from "react-redux";
 import { colors } from "../../constants";
-import drawerCandado from "../../../assets/drawerCandado.png"
+import drawerCandado from "../../../assets/drawerCandado.png";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavegation = () => {
-  
   return (
     <Drawer.Navigator
       initialRouteName="GeneralChannel"
@@ -57,27 +54,24 @@ const DrawerNavegation = () => {
 export default DrawerNavegation;
 
 export const MenuInterno = ({ props }) => {
-  const user = useSelector(state => state.login.user)
+  const user = useSelector((state) => state.login.user);
   const [state, setState] = useState(true);
   const dispatch = useDispatch();
 
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logoutUser());
-    // navigation.navigate("LogIn");
   };
   return (
     <DrawerContentScrollView>
-      {/* Parte del avatar */}
       <View style={styles.avatarContainer}>
         <TouchableOpacity onPress={() => props.navigation.closeDrawer()}>
           <Image source={backDrawer} style={styles.backDrawerIcon} />
         </TouchableOpacity>
-        <Image source={{uri : user.img_avatar}} style={styles.avatar} />
+        <Image source={{ uri: user.img_avatar }} style={styles.avatar} />
         <Text style={styles.name}>{user.fullName}</Text>
         <Text style={styles.rol}>`{user.position.toUpperCase()}`</Text>
       </View>
-      {/* Opciones de menú */}
       <View style={styles.menuContainer}>
         <TouchableOpacity
           style={styles.menuBottom}
@@ -111,7 +105,6 @@ export const MenuInterno = ({ props }) => {
           </TouchableOpacity>
         </View>
 
-        {/* CANALES DESPLEGABLES */}
         {state && (
           <View>
             <TouchableOpacity
@@ -120,19 +113,28 @@ export const MenuInterno = ({ props }) => {
                 props.navigation.navigate("GeneralChannel");
               }}
             >
-              <Text style={[styles.menuTextChannels, { color: colors.primary }]}>
+              <Text
+                style={[styles.menuTextChannels, { color: colors.primary }]}
+              >
                 #General
               </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={[styles.channels, {color: "#B8B8B8"}]}
+              style={[styles.channels, { color: "#B8B8B8" }]}
               onPress={() => {
-                // props.navigation.navigate("Shortlisted");
               }}
             >
-              <View style={{flexDirection: 'row', alignContent: 'center', alignItems: 'center'}}>
-                <Text style={[styles.menuTextChannels, {marginRight: 5}]}>#Preseleccionado 7</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={[styles.menuTextChannels, { marginRight: 5 }]}>
+                  #Preseleccionado 7
+                </Text>
                 <Image source={drawerCandado} />
               </View>
             </TouchableOpacity>
@@ -167,7 +169,6 @@ export const MenuInterno = ({ props }) => {
             </TouchableOpacity>
           </View>
         )}
-        {/* FIN CANALES DESPLEGABLES */}
         <TouchableOpacity
           style={styles.menuBottom}
           onPress={() => {
@@ -182,7 +183,10 @@ export const MenuInterno = ({ props }) => {
         </TouchableOpacity>
       </View>
       <View style={[styles.extra, state ? { bottom: 15 } : { marginTop: 154 }]}>
-        <TouchableOpacity style={styles.menuBottom} onPress={(e) => handleLogout(e)}>
+        <TouchableOpacity
+          style={styles.menuBottom}
+          onPress={(e) => handleLogout(e)}
+        >
           <View style={styles.menuBottomOption}>
             <Image source={logOutIcon} />
             <Text style={styles.menuTextExtra}>Cerrar sesión</Text>

@@ -25,18 +25,18 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
     color: "#000",
     borderWidth: 0,
-    fontSize: 19
+    fontSize: 19,
   },
-  inputWithSelected:{
-    paddingTop: 0
+  inputWithSelected: {
+    paddingTop: 0,
   },
-  inputStyles:{
+  inputStyles: {
     fontSize: 18,
-    color: '#626A6D',
-    marginLeft: 5
+    color: "#626A6D",
+    marginLeft: 5,
   },
-  badgeStyles:{
-    backgroundColor: colors.primary
+  badgeStyles: {
+    backgroundColor: colors.primary,
   },
   inputSelected: {
     width: "100%",
@@ -78,7 +78,7 @@ export const styles = StyleSheet.create({
   },
   dropdownStyles: {
     position: "relative",
-    marginTop:0,
+    marginTop: 0,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
     borderBottomLeftRadius: 15,
@@ -86,7 +86,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderTopWidth: 0,
     borderColor: colors.primary,
-    backgroundColor: "#fff",   
+    backgroundColor: "#fff",
   },
   lastDropdownStyles: {
     position: "relative",

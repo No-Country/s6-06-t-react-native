@@ -4,8 +4,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Image,
-  Pressable,
   TextInput,
   Modal,
   Dimensions,
@@ -13,10 +11,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BackButton from "../../../components/BackButton";
-import { AntDesign, Fontisto } from "@expo/vector-icons";
-import { AsyncStorage } from "react-native";
+import { Fontisto } from "@expo/vector-icons";
 import PrimaryButton from "../../../components/PrimaryButton";
-import SecondaryButton from "../../../components/SecondaryButton";
 import { useDispatch } from "react-redux";
 import {
   editPersonalInfo,
@@ -30,7 +26,6 @@ import { Picker } from "@react-native-picker/picker";
 
 const DatosPersonales = () => {
   const [userInfo, setUserInfo] = useState(null);
-  console.log(userInfo)
   const [name, setName] = useState("");
   const [area, setArea] = useState("+54");
   const [pais, setPais] = useState("Argentina");
@@ -84,7 +79,7 @@ const DatosPersonales = () => {
         setEmail(parsedUserData.email);
       }
     } catch (e) {
-      console.log("Is logged in error : " + e);
+      console.warn("Is logged in error : " + e);
     }
   };
 
@@ -97,7 +92,6 @@ const DatosPersonales = () => {
       setEmail(email);
     }
   }, []);
-  console.log(phone)
   {
     return (
       <SafeAreaView style={styles.container}>
@@ -253,7 +247,7 @@ const DatosPersonales = () => {
           </View>
         </View>
 
-        <PrimaryButton text="Guardar" handler={handleSave}/>
+        <PrimaryButton text="Guardar" handler={handleSave} />
       </SafeAreaView>
     );
   }

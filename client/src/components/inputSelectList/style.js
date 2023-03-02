@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   },
   input: {
     outlineColor: colors.primary,
-    backgroundColor:colors.input_background,
+    backgroundColor: colors.input_background,
     paddingHorizontal: 15,
     paddingVertical: 16,
     borderRadius: 15,
@@ -50,8 +50,8 @@ export const styles = StyleSheet.create({
     color: "#626A6D",
     fontSize: 15,
     textAlign: "left",
-    padding:0
-  }, 
+    padding: 0,
+  },
   optionText: {
     textAlign: "left",
     fontSize: 18,

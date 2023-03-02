@@ -16,11 +16,10 @@ const AppNavigator = () => {
         setUserInfo(userData);
       }
     } catch (error) {
-      console.log(`AppNavigator getToken error: ${error}`);
+      console.warn(`AppNavigator getToken error: ${error}`);
     }
   };
   const asyncToken = userInfo ? userInfo.token : null;
-  //  const isAuthenticated = useSelector(state => state.stateGlobal);
   const { token } = useSelector((state) => state.login);
   return (
     <NavigationContainer>

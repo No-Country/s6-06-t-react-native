@@ -33,7 +33,12 @@ const ListaInfoEducacion = () => {
         <View style={styles.secondaryContainer}>
           <View style={styles.titleAndIcon}>
             <Text style={styles.titleList}>Educación </Text>
-            <Ionicons name="add" size={30} color={colors.primary}  onPress={() => navigation.navigate('AddEducation')}/>
+            <Ionicons
+              name="add"
+              size={30}
+              color={colors.primary}
+              onPress={() => navigation.navigate("AddEducation")}
+            />
           </View>
           {education?.map((data) => {
             return <CardIndividualEducation key={data._id} {...data} />;

@@ -115,7 +115,7 @@ const AgregarEducacion = () => {
       )
         .then(() => dispatch(Cambiador(!activador)))
         .then(navigation.goBack)
-        .catch((error) => console.log(error));
+        .catch((error) => console.warn(error));
     } else {
       dispatch(
         editPersonalInfo(
@@ -127,7 +127,7 @@ const AgregarEducacion = () => {
       )
         .then(() => dispatch(Cambiador(!activador)))
         .then(navigation.goBack)
-        .catch((error) => console.log(error));
+        .catch((error) => console.warn(error));
     }
   };
   return (

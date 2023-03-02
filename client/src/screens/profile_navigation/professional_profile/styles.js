@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     marginLeft: 2,
   },
   tab: {
-    flex: 1, 
+    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -84,25 +84,24 @@ const styles = StyleSheet.create({
     marginHorizontal: 25,
   },
   leftTab: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
-  separadorTab:{
+  separadorTab: {
     height: 20,
     width: 1,
     backgroundColor: colors.primary_light,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
-  datoUser:{
-    textDecorationLine: 'underline',
+  datoUser: {
+    textDecorationLine: "underline",
   },
   infoTabs: {
     paddingHorizontal: 10,
     marginTop: 25,
     marginBottom: 10,
   },
-
 });
 
 export default styles;

@@ -1,14 +1,9 @@
 import React from "react";
 import {
-  View,
-  Text,
   StyleSheet,
   TouchableOpacity,
-  Image,
-  Pressable,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
 
 const BackButton = () => {

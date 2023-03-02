@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, SafeAreaView, Text, ActivityIndicator } from "react-native";
+import { View, SafeAreaView, ActivityIndicator } from "react-native";
 import ScrollViewPost from "../../../../components/home/ScrollViewPost/ScrollViewPost";
 import HeaderHome from "../../../../components/home/header/Index";
 import { styles } from "./styles";
@@ -9,11 +9,10 @@ import { usePost } from "../../../../hooks/usePost";
 
 const Home = ({ navigation }) => {
   const state = useSelector((state) => state.login.user);
-  const [ activador, setActivador ] = useState(false);
-  let Channel= "Canal General"
+  const [activador, setActivador] = useState(false);
+  let Channel = "Canal General";
   let idChannelGeneral = "63e3dc46a5dd297fac1ca2a2";
   let { getPosts } = usePost();
-  console.log(state)
   const [Posts, setPosts] = useState([]);
   if (!state) {
     return (
@@ -24,7 +23,9 @@ const Home = ({ navigation }) => {
   }
 
   useEffect(() => {
-    ( async ()=> { await getPosts(`/channel/${idChannelGeneral}`, state.token, setPosts)} )()
+    (async () => {
+      await getPosts(`/channel/${idChannelGeneral}`, state.token, setPosts);
+    })();
   }, [activador]);
   return (
     <SafeAreaView style={styles.homeContain}>
@@ -32,10 +33,26 @@ const Home = ({ navigation }) => {
         <HeaderHome Channel={Channel} />
       </View>
       <View style={styles.ScrollContain}>
-        <ScrollViewPost post={Posts} token={state.token} getPost={getPosts} load={true} setList={setPosts} activador={activador} setActivador={setActivador} />
+        <ScrollViewPost
+          post={Posts}
+          token={state.token}
+          getPost={getPosts}
+          load={true}
+          setList={setPosts}
+          activador={activador}
+          setActivador={setActivador}
+        />
       </View>
       <View>
-        <CreatePost token={state.token} uidChannel={idChannelGeneral} activador={activador} setActivador={setActivador} post={Posts} setPosts={setPosts} user={state}/>
+        <CreatePost
+          token={state.token}
+          uidChannel={idChannelGeneral}
+          activador={activador}
+          setActivador={setActivador}
+          post={Posts}
+          setPosts={setPosts}
+          user={state}
+        />
       </View>
     </SafeAreaView>
   );

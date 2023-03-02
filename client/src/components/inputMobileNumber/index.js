@@ -64,10 +64,7 @@ const InputMobileNumber = ({
           control={control}
           render={({ field: { onChange, onBlur } }) => (
             <TextInput
-              style={[
-                styles.input,                
-                isFocused && styles.outLine,
-              ]}
+              style={[styles.input, isFocused && styles.outLine]}
               placeholder={placeholderPhoneNumber}
               placeholderTextColor="#626A6D"
               selectionColor={colors.primary}
@@ -80,14 +77,18 @@ const InputMobileNumber = ({
           name="phone"
         />
       </View>
-        <View style={styles.wrapperErrors}>
-          {errors?.prefix && (
-            <Text style={[styles.error, styles.wrapperErrorPrefix]}>{errors?.prefix?.message}</Text>
-          )}
-          {errors?.phone && (
-            <Text style={[styles.error, styles.wrapperErrorPhone]}>{errors?.phone?.message}</Text>
-          )}
-        </View>
+      <View style={styles.wrapperErrors}>
+        {errors?.prefix && (
+          <Text style={[styles.error, styles.wrapperErrorPrefix]}>
+            {errors?.prefix?.message}
+          </Text>
+        )}
+        {errors?.phone && (
+          <Text style={[styles.error, styles.wrapperErrorPhone]}>
+            {errors?.phone?.message}
+          </Text>
+        )}
+      </View>
       {requerimiento && (
         <Text style={styles.requerimiento}>{requerimiento}</Text>
       )}

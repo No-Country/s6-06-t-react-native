@@ -17,7 +17,7 @@ const InputComponent = ({
   value,
   error,
   editable = true,
-  defaultValue
+  defaultValue,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [showPassState, setShowPassState] = useState(false);
@@ -36,20 +36,25 @@ const InputComponent = ({
     return null;
   }
 
-  const handleOnBlur = () => { 
-    onBlur
-    setIsFocused(false)
-   }
+  const handleOnBlur = () => {
+    onBlur;
+    setIsFocused(false);
+  };
 
   return (
     <View style={styles.containerInput} onLayout={onLayoutRootView}>
-      {label && <Text style={[styles.label, !editable && styles.mutedText]}>{label}</Text>}
+      {label && (
+        <Text style={[styles.label, !editable && styles.mutedText]}>
+          {label}
+        </Text>
+      )}
       <View style={styles.inputWrapper}>
         <TextInput
           style={[styles.input, isFocused && styles.outLine]}
           placeholder={placeholder}
           placeholderTextColor={
-           editable ? colors.grey_placeholder : colors.text_grey}
+            editable ? colors.grey_placeholder : colors.text_grey
+          }
           selectionColor={colors.primary}
           keyboardType={keyboardType}
           secureTextEntry={showPass ? !showPassState : false}

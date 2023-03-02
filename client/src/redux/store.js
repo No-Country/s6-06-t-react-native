@@ -6,7 +6,4 @@ const rootReducer = combineReducers({
   login: loginReducer,
 });
 
-export const store = createStore(
-  rootReducer,
-  (applyMiddleware(thunk))
-);
+export const store = createStore(rootReducer, applyMiddleware(thunk));

@@ -13,12 +13,12 @@ export const styles = StyleSheet.create({
   wrapperInformation: {
     display: "flex",
     flexDirection: "row",
-    justifyContent:'space-between'
+    justifyContent: "space-between",
   },
   wrapperImagen: {
     top: -35,
     left: 12,
-    width: 80
+    width: 80,
   },
   img: {
     width: "60%",
@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
     color: colors.primary,
   },
   separador: {
-   height:20,
-   width: 20
+    height: 20,
+    width: 20,
   },
 });

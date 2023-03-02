@@ -1,6 +1,6 @@
-import {CAMBIADOR} from '../types/loginTypes';
+import { CAMBIADOR } from "../types/loginTypes";
 
 const Cambiador = (payload) => {
-    return({type: CAMBIADOR, payload: payload})
-}
-export {Cambiador}
+  return { type: CAMBIADOR, payload: payload };
+};
+export { Cambiador };
