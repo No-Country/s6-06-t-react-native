@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
+const path=require("path")
 const handlebars = require('express-handlebars');
 const fileUpload = require('express-fileupload');
 const {
@@ -47,24 +48,25 @@ app.use(
     })
 );
 
-app.use(express.static(__dirname + '/src/public'));
-app.use('/api/user', user);
-app.use('/api/auth', auth);
-app.use('/api/post', post);
-app.use('/api/channel', channel);
-app.use('/api/comment', comment);
-app.use('/api/profile', profile);
-app.use('/api/job-offer', jobOffer);
-app.use('/api/reaction', reaction);
-app.use('/api/search', search);
-app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
+app.use(express.static(__dirname + '/src/public'))
+app.use("/api/user", user)
+app.use("/api/auth",auth )
+app.use("/api/post", post)
+app.use("/api/channel", channel)
+app.use("/api/comment", comment)
+app.use("/api/profile", profile)
+app.use("/api/job-offer", jobOffer)
+app.use("/api/reaction", reaction)
+app.use("/api/search", search)
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));
 
-app.engine(
-    'handlebars',
-    handlebars.engine({
-        layoutsDir: __dirname + '/src/views/layouts'
-    })
-);
+app.get("/admin",(req,res)=>{
+    res.sendFile(path.join(__dirname, "src","public", "admin.html"))
+})
+
+app.engine('handlebars', handlebars.engine({
+layoutsDir: __dirname + '/src/views/layouts',
+}));
 
 //FOR GLOBAL ACCESS
 Sockets(io);
