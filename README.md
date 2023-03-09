@@ -18,12 +18,12 @@
 <p>Esta aplicacion esta desarrollada con las tecnologias React native para su uso en entornos mobile, Express y MongoDB para su servidor implementado</p>
 <h4>Deployment</h4>
 
-- [Android] - [Descargar Apk de la aplicación para Android]() 
-- [IOS] - [Descargar Simulacion de la aplicación para IOS]() 
-- [API] - [Api deployada]()
+- [Android] - [Descargar Apk de la aplicación para Android](https://github.com/No-Country/s6-06-t-react-native/releases/download/v1.0.0/application-d9bd2d47-94a1-4b13-abbc-b878c0cd3e24.apk) 
+- [API] - [Api deployada](https://sin-fronteras-api-production.up.railway.app)
+- [API] - [Documentación](https://sin-fronteras-api-production.up.railway.app/docs)
 
 <h4>Colaboradores</h4>
-<p>Esta aplicacion esta desarrolada por el grupo <span>s4-06-t-react-native</span> de No Country</p>
+<p>Esta aplicacion esta desarrolada por el grupo <span>s6-06-t-react-native</span> de No Country</p>
 
 ## _Integrantes del equipo:_
 * ##### [Luciana Mansilla - Diseñadora UX/UI](https://www.linkedin.com/in/maria-luciana-mansilla/) #####
